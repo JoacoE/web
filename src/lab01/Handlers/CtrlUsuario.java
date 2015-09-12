@@ -38,17 +38,13 @@ public class CtrlUsuario implements ICtrlUsuario {
     private Map Cat;
     
     
-    public CtrlUsuario(){
-        this.Cat = new HashMap();
-    }
+    public CtrlUsuario(){}
     
     public void setCat(Map cate){
-        this.Cat.putAll(cate);
+        this.Cat=cate;
         //JOptionPane.showMessageDialog(null, "Categoria recordada","EXITO",JOptionPane.INFORMATION_MESSAGE);
     }
-    public void limpiarMapCat(){
-        this.Cat.clear();
-    }
+    
     public Map getLstCat(){
         return this.Cat;
     }

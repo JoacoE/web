@@ -19,17 +19,18 @@ import javax.swing.JOptionPane;
  */
 public class SeleccionarCatReg extends javax.swing.JInternalFrame {
     private ICtrlUsuario ICU;
-    private Map catMap = new HashMap();
-    private DefaultListModel model= new DefaultListModel();
-    
-    public SeleccionarCatReg(Map map) {
+
+    /**
+     * Creates new form SeleccionarCat
+     */
+    public SeleccionarCatReg() {
         initComponents();
-        this.catMap = map;
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
         this.cargarCBbox();
+        model = new DefaultListModel();
     }
-
+    DefaultListModel model;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,12 +45,7 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
         jLista = new javax.swing.JList();
         jbListo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Seleccione las Categorias del Restaurante");
 
         jcbSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select..." }));
@@ -80,13 +76,6 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Seleccione las Categorias del Restaurante");
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,17 +83,18 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnCancelar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbListo))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jcbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(62, 62, 62)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbListo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(62, 62, 62)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGap(0, 54, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,34 +106,19 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
                     .addComponent(jcbSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbListo)
-                    .addComponent(btnCancelar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jbListo)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSelectItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbSelectItemStateChanged
-        if (!this.catMap.isEmpty()){
-            DefaultListModel modelaux = new DefaultListModel();
-            Iterator it = this.catMap.entrySet().iterator();
-            while (it.hasNext()){
-                Map.Entry map = (Map.Entry)it.next();
-                String cat = (String)map.getValue();
-                modelaux.addElement(cat);
-                jLista.setModel(modelaux);
-            }
-        }
         if(evt.getStateChange()==ItemEvent.SELECTED)
-            if (!model.contains(evt.getItem().toString())){
-                model.addElement(evt.getItem().toString());
-                this.catMap.put(evt.getItem().toString(), evt.getItem().toString());
+            model.addElement(evt.getItem().toString());
             //jcbSelect.removeItem(evt.getItem());
-                ICU.setCat(this.catMap);
-                jLista.setModel(model);
-            }
+        jLista.setModel(model);
+        
 
 //String s = (String) jcbSelect.getSelectedItem();
 // TODO add your handling code here:
@@ -151,23 +126,26 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
 
     private void jcbSelectMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbSelectMouseDragged
 
+
+
+
+// TODO add your handling code here:
     }//GEN-LAST:event_jcbSelectMouseDragged
 
     private void jbListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListoActionPerformed
           if (model.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe ingresar al menos una categoria.", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            //Map ret = new HashMap();
-            
-              int i = 0;
+            Map ret = new HashMap();
+            int i = 0;
             while (i < model.size()) {
-                this.catMap.put(model.getElementAt(i), model.getElementAt(i));
+                ret.put(model.getElementAt(i), model.getElementAt(i));
                 i++;
             }
+            ICU.setCat(ret);
             
         }
         this.dispose();
-        
         
 
 
@@ -177,10 +155,6 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
     private void jcbSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbSelectActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
     public void cargarCBbox(){
         Map cats; 
         cats=ICU.retColCat();
@@ -194,7 +168,6 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jLista;
     private javax.swing.JScrollPane jScrollPane1;

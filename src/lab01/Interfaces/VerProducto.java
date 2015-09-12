@@ -14,7 +14,11 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPromocional;
+import lab01.Clases.Individual;
 import lab01.Clases.Producto;
+import lab01.Clases.Promocional;
 import lab01.Clases.Restaurante;
 
 
@@ -120,14 +124,17 @@ public class VerProducto extends javax.swing.JInternalFrame {
         }
         
         prod = res.getProducto(nomProd);
-        //dp = prod.ProductoADP();
-        
-        VerInfoProd verinfop = new VerInfoProd(prod);
-        verinfop.setVisible(true);
-        
-        
-        
-        
+        if(prod instanceof Individual){
+            Individual ind = (Individual)prod;
+            DataIndividual di = ind.getDataIndividual();
+            VerInfoProd verinfop = new VerInfoProd(di);
+            verinfop.setVisible(true);
+        }else{
+            Promocional prom = (Promocional)prod;
+            DataPromocional dprom = prom.getDataPromo();
+            VerInfoProd verinfop = new VerInfoProd(dprom, res);
+            verinfop.setVisible(true);
+        }
     }//GEN-LAST:event_jTablaMousePressed
 //
 //      try {

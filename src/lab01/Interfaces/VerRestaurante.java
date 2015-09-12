@@ -12,7 +12,11 @@ import lab01.Handlers.Fabrica;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPromocional;
+import lab01.Clases.Individual;
 import lab01.Clases.Producto;
+import lab01.Clases.Promocional;
 
 /**
  *
@@ -250,11 +254,17 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         Restaurante c = ICU.getRestauranteByNickname(client);
         String prod = jListProd.getSelectedValue().toString();
         Producto p =CP.getProdNombre(prod,c);
-        VerInfoProd verProd = new VerInfoProd(p);
-        verProd.setVisible(true);
-        //String prod = evt.getClickCount();
-        
-        
+        if(p instanceof Individual){
+            Individual ind = (Individual)p;
+            DataIndividual di = ind.getDataIndividual();
+            VerInfoProd verProd = new VerInfoProd(di);
+            verProd.show();
+        }else{
+            Promocional prom = (Promocional)p;
+            DataPromocional dp = prom.getDataPromo();
+            VerInfoProd verProd = new VerInfoProd(dp, c);
+            verProd.show();
+        } 
     }//GEN-LAST:event_jListProdMouseClicked
 
 

@@ -57,6 +57,8 @@ public class Console extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        EscritorioMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         smnuSalir.setText("Inicio");
 
         jMenuItem5.setText("Cargar datos");

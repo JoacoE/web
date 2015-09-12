@@ -9,7 +9,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import lab01.Clases.Categoria;
@@ -25,7 +24,6 @@ import java.util.regex.Pattern;
  */
 public class RegUsuario extends javax.swing.JInternalFrame {
 private ICtrlUsuario ICU;
-private HashMap mapCat = new HashMap();
     /**
      * Creates new form RegCliente
      */
@@ -365,7 +363,7 @@ private HashMap mapCat = new HashMap();
             }
             else
                 JOptionPane.showMessageDialog(null, "El Nickname y/o el E-Mail ya existen.","ERROR",JOptionPane.ERROR_MESSAGE);
-        ICU.limpiarMapCat();
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSelImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelImagenActionPerformed
@@ -407,7 +405,7 @@ private HashMap mapCat = new HashMap();
     }//GEN-LAST:event_rbClienteMouseClicked
  
     private void jbSelCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelCategoriaActionPerformed
-    SeleccionarCatReg selCat = new SeleccionarCatReg(mapCat);
+    SeleccionarCatReg selCat = new SeleccionarCatReg();
     Console.EscritorioMenu.add(selCat);
     selCat.toFront();
     selCat.show();

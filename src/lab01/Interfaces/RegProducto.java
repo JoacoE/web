@@ -31,7 +31,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica f = Fabrica.getInstance();
         CP = f.getICtrlProducto();
-        ICU=f.getICtrlUsuario();
+        ICU = f.getICtrlUsuario();
     }
 
     /**
@@ -57,7 +57,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
         lblExaminar = new javax.swing.JLabel();
         tbCantidad = new javax.swing.JTextField();
         lblDesc1 = new javax.swing.JLabel();
-        btnNuevo = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
 
@@ -76,15 +75,8 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
         lblRest.setText("Restaurante: ");
 
-        tbNombre.setEnabled(false);
-
-        tbDesc.setEnabled(false);
-
-        tbRest.setEnabled(false);
-
         btngProducto.add(rbIndividual);
         rbIndividual.setText("Individual");
-        rbIndividual.setEnabled(false);
         rbIndividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbIndividualActionPerformed(evt);
@@ -93,7 +85,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
         btngProducto.add(rbPromocional);
         rbPromocional.setText("Promocional");
-        rbPromocional.setEnabled(false);
         rbPromocional.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 rbPromocionalItemStateChanged(evt);
@@ -190,15 +181,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnNuevo.setText("Nuevo");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
         btnRegistro.setText("Registrar");
-        btnRegistro.setEnabled(false);
         btnRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistroActionPerformed(evt);
@@ -206,7 +189,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
         });
 
         btnCancel.setText("Cancelar");
-        btnCancel.setEnabled(false);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -219,24 +201,22 @@ public class RegProducto extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(btnRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
                     .addComponent(btnRegistro)
                     .addComponent(btnCancel))
                 .addGap(32, 32, 32))
@@ -245,19 +225,12 @@ public class RegProducto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
-        habilitarCampos();
-
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         boolean Promocional = false;
         String p;
         double precio;
         double descuento;
         int cantidad;
-        
 
         if (evt.getSource() == btnRegistro) {
             if (CP.existeRestaurante(tbRest.getText())) { // si el restaurante se encuentra registrado
@@ -266,8 +239,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
                     precio = Double.parseDouble(p);    // ingreso el precio                
                     cantidad = Integer.parseInt(tbCantidad.getText()); // me guardo la cantidad de productos para ese producto particular
                     DataIndividual di = new DataIndividual(tbNombre.getText(), tbDesc.getText(), precio, cantidad); // me guardo los datos en el dataproducto
-                    
-                   
+
                     CP.registrarProducto(di, tbRest.getText(), Promocional); // registro producto
                     JOptionPane.showMessageDialog(null, "Producto registrado con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 
@@ -275,17 +247,17 @@ public class RegProducto extends javax.swing.JInternalFrame {
                     if (rbPromocional.isSelected()) {
                         /*Iterator it = CP.listarIndividuales(tbRest.getText()).entrySet().iterator();
 
-                        while (it.hasNext()) {
-                            Map.Entry map = (Map.Entry) it.next();
+                         while (it.hasNext()) {
+                         Map.Entry map = (Map.Entry) it.next();
                             
-                            DataIndividual di = (DataIndividual) map.getValue();
-                            JOptionPane.showMessageDialog(null, "Nombre: " + di.getDataNombre() + "cantidad:"+  di.getCantidad(), "aviso", JOptionPane.INFORMATION_MESSAGE);    
-                        }*/
+                         DataIndividual di = (DataIndividual) map.getValue();
+                         JOptionPane.showMessageDialog(null, "Nombre: " + di.getDataNombre() + "cantidad:"+  di.getCantidad(), "aviso", JOptionPane.INFORMATION_MESSAGE);    
+                         }*/
                         p = JOptionPane.showInputDialog(null, "Ingrese descuento:", "Ingreso de descuento", JOptionPane.INFORMATION_MESSAGE);
                         descuento = Double.parseDouble(p);
-                        CP.armarPromo(tbRest.getText(),tbNombre.getText(),tbDesc.getText(), descuento);
+                        CP.armarPromo(tbRest.getText(), tbNombre.getText(), tbDesc.getText(), descuento);
                         JOptionPane.showMessageDialog(null, "Promocion registrada con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                        
+
                     }
 
                 }
@@ -305,19 +277,19 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
     private void rbPromocionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPromocionalActionPerformed
         tbCantidad.setEnabled(false);
-        
+
     }//GEN-LAST:event_rbPromocionalActionPerformed
 
     private void rbPromocionalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbPromocionalItemStateChanged
 // TODO add your handling code here:
-        if(evt.getStateChange()==ItemEvent.SELECTED){
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             //ICU.setNickname(tbRest.getText());
             ElegirProductos ep = new ElegirProductos(tbRest.getText());
-             Console.EscritorioMenu.add(ep);
-             ep.show();
+            Console.EscritorioMenu.add(ep);
+            ep.show();
         }
-           
-        
+
+
     }//GEN-LAST:event_rbPromocionalItemStateChanged
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -325,21 +297,9 @@ public class RegProducto extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    public void habilitarCampos() {
-        tbNombre.setEnabled(true);
-        tbDesc.setEnabled(true);
-        tbRest.setEnabled(true);
-        rbIndividual.setEnabled(true);
-        rbPromocional.setEnabled(true);
-        btnRegistro.setEnabled(true);
-        btnCancel.setEnabled(true);
-
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnRegistro;
     private javax.swing.ButtonGroup btngProducto;
     private javax.swing.JPanel jp1;

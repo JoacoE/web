@@ -33,7 +33,6 @@ public interface ICtrlUsuario {
     public abstract Map retColCat();
     public abstract Map listaUsuPorCategoria(String cate);
     public abstract void setCat(Map cate);
-    public abstract void limpiarMapCat();
     public abstract Map getLstCat();
     public abstract Map listaProductosStock(String r);
     public abstract Map listarPedidos();

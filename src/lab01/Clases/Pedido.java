@@ -66,22 +66,23 @@ public class Pedido {
     }
 
     public void setEstado(estados estado){
-        if(this.getEstado() == PREPARACION){
-            if(estado == ENVIADO || estado == RECIBIDO){
+        if("PREPARACION".equals(this.getEstado().toString())){
+            if("ENVIADO".equals(estado.toString()) || "RECIBIDO".equals(estado.toString())){
                 this.estado = estado;
                 this.getDataPedido().setEstado(estado);
             }
-            JOptionPane.showMessageDialog(null, "El pedido esta en Preparacion", "Conflicto de Estado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se cambio el estado del pedido ", "Exito", JOptionPane.INFORMATION_MESSAGE);
         }
-        if(this.getEstado() == ENVIADO){
-            if(estado == RECIBIDO){
-                this.estado = estado;
-                this.getDataPedido().setEstado(estado);
-            }
-            JOptionPane.showMessageDialog(null, "El pedido esta siendo Enviado", "Conflicto de Estado", JOptionPane.INFORMATION_MESSAGE);
+        if("RECIBIDO".equals(estado.toString())){
+            this.estado = estado;
+            this.getDataPedido().setEstado(estado);
+            JOptionPane.showMessageDialog(null, "Se cambio el estado del pedido ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
         }
+            //JOptionPane.showMessageDialog(null, "El pedido esta siendo Enviado", "Conflicto de Estado", JOptionPane.INFORMATION_MESSAGE);
+        
         if(this.getEstado() == RECIBIDO){
-            JOptionPane.showMessageDialog(null, "El pedido fue Recibido", "Conflicto de Estado", JOptionPane.INFORMATION_MESSAGE);
+           //JOptionPane.showMessageDialog(null, "El pedido fue Recibido", "Conflicto de Estado", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     

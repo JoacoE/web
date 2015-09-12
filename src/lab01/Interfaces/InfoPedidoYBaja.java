@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCarrito;
 import lab01.Clases.DataPedido;
-import lab01.Clases.estados;
 import lab01.Handlers.Fabrica;
+import javax.swing.ComboBoxEditor;
+import lab01.Clases.estados;
 
 /**
  *
@@ -35,10 +36,15 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         lblIDpedido.setText(id);
         lblNickCliente.setText(dp.getNickUsr());
         lblNIckRestaurant.setText(dp.getNickRest());
+        lblEstado.setText(dp.getEstado().toString());
         modelo = (DefaultTableModel)jTable.getModel();
         cargarTabla(this.datped);
         String PTotal = Double.toString(dp.getPrecio_total());
         lblPrecioTotal.setText(PTotal);
+        jComboBox1.setVisible(false);
+        if("RECIBIDO".equals(datped.getEstado().toString())){
+            jbActualizar.disable();
+        }
     }
     DefaultTableModel modelo;
 
@@ -78,21 +84,23 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jPanel1 = new javax.swing.JPanel();
+        lstEstado = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblIDpedido = new javax.swing.JLabel();
         lblNickCliente = new javax.swing.JLabel();
         lblNIckRestaurant = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnActEstado = new javax.swing.JButton();
+        lblIDpedido = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         lblPrecioTotal = new javax.swing.JLabel();
+        jbActualizar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -102,17 +110,11 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
             }
         });
 
-        jInternalFrame1.setClosable(true);
-        jInternalFrame1.setIconifiable(true);
-        jInternalFrame1.setMaximizable(true);
-        jInternalFrame1.setResizable(true);
-        jInternalFrame1.setVisible(true);
-
         jLabel1.setText("Id Pedido:");
 
         jLabel2.setText("Cliente:");
 
-        jLabel3.setText("Restaurant:");
+        jLabel3.setText("Restaurante:");
 
         btnEliminar.setText("Dar de Baja");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,61 +129,6 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-
-        btnActEstado.setText("Estado");
-        btnActEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActEstadoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblIDpedido))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNIckRestaurant))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNickCliente))
-                    .addComponent(btnEliminar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnActEstado))
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblIDpedido))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblNickCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblNIckRestaurant))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnActEstado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancelar)
-                .addContainerGap())
-        );
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,50 +157,109 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
         jLabel4.setText("Total:");
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPrecioTotal)))
-                .addContainerGap())
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+        jbActualizar.setText("Actualizar");
+        jbActualizar.setFocusable(false);
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Estado de Pedido:");
+
+        lblEstado.setText("jLabel6");
+
+        jComboBox1.setEditable(true);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleciconar" }));
+        jComboBox1.setToolTipText("");
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lstEstadoLayout = new javax.swing.GroupLayout(lstEstado);
+        lstEstado.setLayout(lstEstadoLayout);
+        lstEstadoLayout.setHorizontalGroup(
+            lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lstEstadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblPrecioTotal))
+                .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(lstEstadoLayout.createSequentialGroup()
+                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnCancelar)
+                            .addComponent(jbActualizar)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIDpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(lstEstadoLayout.createSequentialGroup()
+                                .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNickCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNIckRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(lstEstadoLayout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        lstEstadoLayout.setVerticalGroup(
+            lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lstEstadoLayout.createSequentialGroup()
+                .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblIDpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lstEstadoLayout.createSequentialGroup()
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(lblPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(lstEstadoLayout.createSequentialGroup()
+                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblNickCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblNIckRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lblEstado))
+                        .addGap(21, 21, 21)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar)))
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jInternalFrame1)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(lstEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jInternalFrame1)
-                .addContainerGap())
+            .addComponent(lstEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -274,20 +280,34 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnActEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActEstadoActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    // TODO add your handling code here:
+        estados es = null;
+        
+        if("ENVIADO".equals(jComboBox1.getSelectedItem().toString())){
+            es = estados.ENVIADO;
+        }
+        if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
+            es =  estados.RECIBIDO;
+        }
+        ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(),es);
+       
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
-        String p;
-        p = JOptionPane.showInputDialog(null, "Ingrese estado:", "Ingreso de estado", JOptionPane.INFORMATION_MESSAGE);
-        if(p.toLowerCase() == "preparacion"){
-            ICP.actualizarEPedido(this.datped.getNickUsr(), this.datped.getId(), estados.PREPARACION);
-        }
-        if(p.toLowerCase() == "enviado"){
-            ICP.actualizarEPedido(this.datped.getNickUsr(), this.datped.getId(), estados.ENVIADO);
-        }
-        if(p.toLowerCase() == "recibido"){
-            ICP.actualizarEPedido(this.datped.getNickUsr(), this.datped.getId(), estados.RECIBIDO);
-        }
-    }//GEN-LAST:event_btnActEstadoActionPerformed
+        jComboBox1.setVisible(true);
+        if ("PREPARACION".equals(this.datped.getEstado().toString())){
+            jComboBox1.addItem("ENVIADO");
+            jComboBox1.addItem("RECIBIDO");
+            
+        }else{
+             if("ENVIADO".equals(this.datped.getEstado().toString())){
+                 jComboBox1.addItem("RECIBIDO");
+             }
+         }
+         
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,20 +345,22 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActEstado;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JTable jTable;
+    private javax.swing.JButton jbActualizar;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblIDpedido;
     private javax.swing.JLabel lblNIckRestaurant;
     private javax.swing.JLabel lblNickCliente;
     private javax.swing.JLabel lblPrecioTotal;
+    private javax.swing.JPanel lstEstado;
     // End of variables declaration//GEN-END:variables
 }

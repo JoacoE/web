@@ -42,7 +42,11 @@ public class Pedido {
 
     public void setId() {
         Random randomid = new Random();
-        this.id = randomid.nextLong();
+        String aux = String.valueOf(randomid.nextLong());
+        if(aux.startsWith("-")){
+            aux = aux.replaceFirst("-", "");
+        }
+        this.id = Long.valueOf(aux);
     }
 
     public String getFecha() {

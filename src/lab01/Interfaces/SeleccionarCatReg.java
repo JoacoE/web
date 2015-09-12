@@ -48,7 +48,7 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
 
         setTitle("Seleccione las Categorias del Restaurante");
 
-        jcbSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select..." }));
+        jcbSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elija categoría..." }));
         jcbSelect.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jcbSelectMouseDragged(evt);

@@ -1,2 +1,2 @@
-# Aplicaciones
-GIL
+# ProgAplicaciones
+Repositorio para Programacion de Aplicaciones

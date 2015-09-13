@@ -127,7 +127,7 @@ public class VerProducto extends javax.swing.JInternalFrame {
         if(prod instanceof Individual){
             Individual ind = (Individual)prod;
             DataIndividual di = ind.getDataIndividual();
-            VerInfoProd verinfop = new VerInfoProd(di);
+            VerInfoProd verinfop = new VerInfoProd(res,di);
             verinfop.setVisible(true);
         }else{
             Promocional prom = (Promocional)prod;

@@ -108,4 +108,10 @@ public class Restaurante extends Usuario{
         Producto prod = this.getProducto(nombre);
         return prod.getProdStock();
     }
+    public void ModificarProductoIndividual(DataIndividual ind, String nombreOld){
+        Producto p = this.getProducto(nombreOld);
+        p.setNombre(ind.getDataNombre());
+       
+    
+}
 }

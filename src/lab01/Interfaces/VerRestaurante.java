@@ -257,7 +257,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         if(p instanceof Individual){
             Individual ind = (Individual)p;
             DataIndividual di = ind.getDataIndividual();
-            VerInfoProd verProd = new VerInfoProd(di);
+            VerInfoProd verProd = new VerInfoProd(c,di);
             verProd.show();
         }else{
             Promocional prom = (Promocional)p;

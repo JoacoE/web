@@ -23,4 +23,5 @@ public interface ICtrlProducto {
     public abstract void setPromo(Map promo);
     public abstract void armarPromo(String rest, String nombre, String desc, double descuento);
     public abstract Producto getProdNombre(String Nprod, Restaurante res);
+    public void actualizarIndividual(DataIndividual ind, String nombre,Restaurante res);
 }

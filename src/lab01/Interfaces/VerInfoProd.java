@@ -26,13 +26,19 @@ public class VerInfoProd extends javax.swing.JFrame {
     /**
      * Creates new form VerIndoProd
      */
-    public VerInfoProd(DataIndividual individual) {
+    private DataIndividual di = new DataIndividual();
+    private DataPromocional dp = new DataPromocional();
+    private Restaurante res;
+    String nombre;
+    
+    public VerInfoProd(Restaurante r,DataIndividual individual) {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICP = fabrica.getICtrlProducto();
         modelo = (DefaultTableModel) jTabla.getModel();
         this.txtNomProd.setText(individual.getDataNombre());
         this.txtDescProd.setText(individual.getDataDescripcion());
+        this.nombre = this.txtNomProd.getText();
         String precio = Double.toString(individual.getDataPrecio());
         this.txtPrecioProd.setText(precio);
         String stock = String.valueOf(individual.getCantidad());
@@ -42,7 +48,8 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.jPanel3.setVisible(false);
         this.tbDescuento.setVisible(false);
         this.lblDescuento.setVisible(false);
-        
+        this.di = individual;
+        this.res = r;
     }
 
     public VerInfoProd(DataPromocional promo, Restaurante r){
@@ -50,14 +57,18 @@ public class VerInfoProd extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICP = fabrica.getICtrlProducto();
         modelo = (DefaultTableModel) jTabla.getModel();
+        this.res = r;
         //this.txtNomProd.enable(false);
         this.txtNomProd.setText(promo.getDataNombre());
         this.txtDescProd.setText(promo.getDataDescripcion());
+        this.nombre = this.txtNomProd.getText();
+
         String precio = Double.toString(promo.getDataPrecio());
         this.txtPrecioProd.setText(precio);
         this.lblCant.setVisible(false);
         this.txtCantidad.setVisible(false);
         this.tbDescuento.setVisible(true);
+        this.btnGuardar.setVisible(false);
         this.lblDescuento.setVisible(true);
         this.tbDescuento.setText(String.valueOf(promo.getDescuento()));
         if (promo.getActiva()) {
@@ -70,6 +81,7 @@ public class VerInfoProd extends javax.swing.JFrame {
     DefaultTableModel modelo;
     private Producto p;
     ICtrlProducto ICP;
+    
 
     private VerInfoProd() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -102,6 +114,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         lblDescuento = new javax.swing.JLabel();
         tbDescuento = new javax.swing.JTextField();
         jcEstado = new javax.swing.JComboBox();
+        btnGuardar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
@@ -183,19 +196,24 @@ public class VerInfoProd extends javax.swing.JFrame {
         jcEstado.setToolTipText("");
         jcEstado.setEnabled(false);
 
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 321, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(130, 130, 130))))
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -255,7 +273,8 @@ public class VerInfoProd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(btnEditar))
+                    .addComponent(btnEditar)
+                    .addComponent(btnGuardar))
                 .addGap(32, 32, 32))
         );
 
@@ -368,12 +387,25 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.jcEstado.enable();
         this.jcEstado.setEditable(true);
         this.jcEstado.addItem("INACTIVA");
+        this.btnGuardar.setVisible(true);
+        this.btnEditar.setEnabled(false);
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tbDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbDescuentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tbDescuentoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        //String nombre = this.txtNomProd.getText();
+        this.di.setDataNombre(this.txtNomProd.getText());
+        this.di.setDataDescripcion(this.txtDescProd.getText());
+        this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
+        this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+        ICP.actualizarIndividual(di,this.nombre , res);
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,6 +445,7 @@ public class VerInfoProd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

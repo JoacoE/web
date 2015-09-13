@@ -9,6 +9,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import lab01.Clases.Categoria;
@@ -17,6 +19,7 @@ import lab01.Clases.DataRestaurante;
 import lab01.Handlers.Fabrica;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -24,13 +27,14 @@ import java.util.regex.Pattern;
  */
 public class RegUsuario extends javax.swing.JInternalFrame {
 private ICtrlUsuario ICU;
-    /**
-     * Creates new form RegCliente
-     */
+private HashMap mapCat = new HashMap();
+DefaultListModel model;
+
     public RegUsuario() {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
+        model = new DefaultListModel();
     }
     
     //ButtonGroup buttonGroup1 = new ButtonGroup();
@@ -278,17 +282,15 @@ private ICtrlUsuario ICU;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegistrar)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 30, Short.MAX_VALUE))))
+                        .addGap(359, 359, 359)
+                        .addComponent(btnRegistrar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,15 +330,18 @@ private ICtrlUsuario ICU;
         
         
         DataRestaurante dt = new DataRestaurante(nickname, nombre, mail, direccion, lstImagen, null,ICU.getLstCat());
-        if(nickname.isEmpty()||mail.isEmpty()||nombre.isEmpty()||apellido.isEmpty()||direccion.isEmpty())
+        if(nickname.isEmpty()||mail.isEmpty()||nombre.isEmpty()||direccion.isEmpty())
             JOptionPane.showMessageDialog(null, "No debe haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
-        if (!mailok){
+        else if (!mailok){
             JOptionPane.showMessageDialog(null, "Mail no válido","ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else
             if(ICU.ingresarDatos(nickname,mail,nombre,direccion)){
                 if(rbCliente.isSelected()){
-                    
+                    if (apellido.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No debe haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
                     ICU.registrarCliente(apellido, img, fecha);
                     JOptionPane.showMessageDialog(null, "El cliente ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
                     this.tbNickname.setText("");
@@ -345,7 +350,7 @@ private ICtrlUsuario ICU;
                     this.tbApellido.setText("");
                     this.tbDireccion.setText("");
                     this.lblSelImg.setText("");
-                }
+                }}
                 else
                     if(rbRestaurante.isSelected()){
                         //dt.setColCategoria(ICU.getLstCat());
@@ -405,7 +410,7 @@ private ICtrlUsuario ICU;
     }//GEN-LAST:event_rbClienteMouseClicked
  
     private void jbSelCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelCategoriaActionPerformed
-    SeleccionarCatReg selCat = new SeleccionarCatReg();
+    SeleccionarCatReg selCat = new SeleccionarCatReg(mapCat);
     Console.EscritorioMenu.add(selCat);
     selCat.toFront();
     selCat.show();

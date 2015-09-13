@@ -5,6 +5,7 @@
  */
 package lab01.Interfaces;
 
+import java.applet.AudioClip;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.Restaurante;
 import lab01.Handlers.Fabrica;
-
+import java.applet.AudioClip;
 /**
  *
  * @author gera
@@ -81,6 +82,11 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblProductosRes);
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -99,12 +105,12 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAgregar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -132,6 +138,12 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
             ICP.limpiarCtrl();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        AudioClip sonido;
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("../Helpers/BELL1.mp3"));
+        sonido.play();
+    }//GEN-LAST:event_btnAgregarMouseClicked
     
     private void LoadTableProductRest(String res){
         Restaurante r = null;

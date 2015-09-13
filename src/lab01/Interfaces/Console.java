@@ -7,17 +7,22 @@ package lab01.Interfaces;
 
 //import lab01.Interfaces.RegUsuario;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
+
+
 /**
  *
  * @author gera
  */
 public class Console extends javax.swing.JFrame {
-
     /**
      * Creates new form Console
      */
     public Console() {
         initComponents();
+        
     }
 
     /**
@@ -61,6 +66,7 @@ public class Console extends javax.swing.JFrame {
 
         smnuSalir.setText("Inicio");
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/arrow68.png"))); // NOI18N
         jMenuItem5.setText("Cargar datos");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +75,7 @@ public class Console extends javax.swing.JFrame {
         });
         smnuSalir.add(jMenuItem5);
 
+        mnuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/door9.png"))); // NOI18N
         mnuSalir.setText("Salir");
         mnuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +88,7 @@ public class Console extends javax.swing.JFrame {
 
         jMenu2.setText("Registros");
 
+        mnuRegUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/add40.png"))); // NOI18N
         mnuRegUsuario.setText("Registrar Usuario");
         mnuRegUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +97,7 @@ public class Console extends javax.swing.JFrame {
         });
         jMenu2.add(mnuRegUsuario);
 
+        smnuRegCat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/address22.png"))); // NOI18N
         smnuRegCat.setText("Registrar Categoria");
         smnuRegCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +106,7 @@ public class Console extends javax.swing.JFrame {
         });
         jMenu2.add(smnuRegCat);
 
+        mnuRegProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/new105.png"))); // NOI18N
         mnuRegProducto.setText("Registrar Producto");
         mnuRegProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +119,7 @@ public class Console extends javax.swing.JFrame {
 
         ver.setText("Informacion");
 
+        VerClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/business12.png"))); // NOI18N
         VerClientes.setText("Ver Clientes");
         VerClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +128,7 @@ public class Console extends javax.swing.JFrame {
         });
         ver.add(VerClientes);
 
+        VerRestaurantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/cutlery6.png"))); // NOI18N
         VerRestaurantes.setText("Ver Restaurantes");
         VerRestaurantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +137,7 @@ public class Console extends javax.swing.JFrame {
         });
         ver.add(VerRestaurantes);
 
+        jMVerinfoProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/menu21.png"))); // NOI18N
         jMVerinfoProd.setText("Ver informacion producto");
         jMVerinfoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +146,7 @@ public class Console extends javax.swing.JFrame {
         });
         ver.add(jMVerinfoProd);
 
+        jMenuVerPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/marker20.png"))); // NOI18N
         jMenuVerPedidos.setText("Ver Pedidos");
         jMenuVerPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +164,7 @@ public class Console extends javax.swing.JFrame {
             }
         });
 
+        genPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/covered16.png"))); // NOI18N
         genPedido.setText("Generar Pedido");
         genPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

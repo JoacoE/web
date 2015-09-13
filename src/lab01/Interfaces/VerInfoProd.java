@@ -38,7 +38,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         String stock = String.valueOf(individual.getCantidad());
         this.txtCantidad.setText(stock);
         this.lblEstadoPromo.setVisible(false);
-        this.txtEstadoPromo.setVisible(false);
+        this.jcEstado.setVisible(false);
         this.jPanel3.setVisible(false);
         this.tbDescuento.setVisible(false);
         this.lblDescuento.setVisible(false);
@@ -50,6 +50,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICP = fabrica.getICtrlProducto();
         modelo = (DefaultTableModel) jTabla.getModel();
+        //this.txtNomProd.enable(false);
         this.txtNomProd.setText(promo.getDataNombre());
         this.txtDescProd.setText(promo.getDataDescripcion());
         String precio = Double.toString(promo.getDataPrecio());
@@ -60,9 +61,9 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.lblDescuento.setVisible(true);
         this.tbDescuento.setText(String.valueOf(promo.getDescuento()));
         if (promo.getActiva()) {
-            this.txtEstadoPromo.setText("ACTIVA");
+            this.jcEstado.addItem("ACTIVA");
         } else {
-            this.txtEstadoPromo.setText("INACTIVA");
+            this.jcEstado.addItem("INACTIVA");
         }
         cargartabla(promo, r);
     }
@@ -95,21 +96,24 @@ public class VerInfoProd extends javax.swing.JFrame {
         lblPrecioProd = new javax.swing.JLabel();
         lblCant = new javax.swing.JLabel();
         lblEstadoPromo = new javax.swing.JLabel();
-        txtEstadoPromo = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lblDescuento = new javax.swing.JLabel();
         tbDescuento = new javax.swing.JTextField();
+        jcEstado = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setForeground(new java.awt.Color(1, 1, 1));
+
         lblNomProd.setText("Nombre: ");
 
         txtNomProd.setEditable(false);
+        txtNomProd.setEnabled(false);
         txtNomProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomProdActionPerformed(evt);
@@ -135,9 +139,11 @@ public class VerInfoProd extends javax.swing.JFrame {
         txtDescProd.setColumns(20);
         txtDescProd.setLineWrap(true);
         txtDescProd.setRows(5);
+        txtDescProd.setEnabled(false);
         jScrollPane2.setViewportView(txtDescProd);
 
         txtPrecioProd.setEditable(false);
+        txtPrecioProd.setEnabled(false);
 
         lblPrecioProd.setText("Precio: ");
 
@@ -145,10 +151,9 @@ public class VerInfoProd extends javax.swing.JFrame {
 
         lblEstadoPromo.setText("Estado: ");
 
-        txtEstadoPromo.setEditable(false);
-
         txtCantidad.setEditable(false);
         txtCantidad.setAutoscrolls(false);
+        txtCantidad.setEnabled(false);
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,11 +172,16 @@ public class VerInfoProd extends javax.swing.JFrame {
         lblDescuento.setText("Descuento:");
 
         tbDescuento.setEditable(false);
+        tbDescuento.setEnabled(false);
         tbDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbDescuentoActionPerformed(evt);
             }
         });
+
+        jcEstado.setForeground(new java.awt.Color(1, 1, 1));
+        jcEstado.setToolTipText("");
+        jcEstado.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,11 +215,11 @@ public class VerInfoProd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEstadoPromo, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNomProd, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPrecioProd, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                    .addComponent(tbDescuento))
+                    .addComponent(tbDescuento)
+                    .addComponent(jcEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -232,8 +242,8 @@ public class VerInfoProd extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEstadoPromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEstadoPromo))
+                    .addComponent(lblEstadoPromo)
+                    .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,6 +354,21 @@ public class VerInfoProd extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        
+        this.txtNomProd.enable(true);
+        this.txtNomProd.setEditable(true);
+        this.txtDescProd.enable(true);
+        this.txtDescProd.setEditable(true);
+        this.txtPrecioProd.enable();
+        this.txtPrecioProd.setEditable(true);
+        this.txtCantidad.enable();
+        this.txtCantidad.setEditable(true);
+        this.tbDescuento.enable();
+        this.tbDescuento.setEditable(true);
+        this.jcEstado.enable();
+        this.jcEstado.setEditable(true);
+        this.jcEstado.addItem("INACTIVA");
+        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tbDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbDescuentoActionPerformed
@@ -395,6 +420,7 @@ public class VerInfoProd extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTabla;
+    private javax.swing.JComboBox jcEstado;
     private javax.swing.JLabel lblCant;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescuento;
@@ -405,7 +431,6 @@ public class VerInfoProd extends javax.swing.JFrame {
     private javax.swing.JTextField tbDescuento;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextArea txtDescProd;
-    private javax.swing.JTextField txtEstadoPromo;
     private javax.swing.JTextField txtNomProd;
     private javax.swing.JTextField txtPrecioProd;
     // End of variables declaration//GEN-END:variables

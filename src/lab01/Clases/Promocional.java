@@ -79,7 +79,7 @@ public class Promocional extends Producto {
             di.setCantidad(ci.getCantidad());
             ColDatIndividual.put(di.getDataNombre(), di);
         }
-        DataPromocional dPromo = new DataPromocional(this.isActiva(), this.getDescuento(), this.getDescripcion(), this.getNombre(), this.getPrecio(), this.getImagen(), ColDatIndividual);
+        DataPromocional dPromo = new DataPromocional(this.isActiva(), this.getDescuento(), this.getNombre(), this.getDescripcion(), this.getPrecio(), this.getImagen(), ColDatIndividual);
         return dPromo;
     }
     

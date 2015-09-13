@@ -332,7 +332,7 @@ DefaultListModel model;
         DataRestaurante dt = new DataRestaurante(nickname, nombre, mail, direccion, lstImagen, null,ICU.getLstCat());
         if(nickname.isEmpty()||mail.isEmpty()||nombre.isEmpty()||direccion.isEmpty())
             JOptionPane.showMessageDialog(null, "No debe haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
-        if (!mailok){
+        else if (!mailok){
             JOptionPane.showMessageDialog(null, "Mail no válido","ERROR",JOptionPane.ERROR_MESSAGE);
         }
         else
@@ -342,16 +342,15 @@ DefaultListModel model;
                         JOptionPane.showMessageDialog(null, "No debe haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
-                        ICU.registrarCliente(apellido, img, fecha);
-                        JOptionPane.showMessageDialog(null, "El cliente ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
-                        this.tbNickname.setText("");
-                        this.tbMail.setText("");
-                        this.tbNombre.setText("");
-                        this.tbApellido.setText("");
-                        this.tbDireccion.setText("");
-                        this.lblSelImg.setText("");
-                    }
-                }
+                    ICU.registrarCliente(apellido, img, fecha);
+                    JOptionPane.showMessageDialog(null, "El cliente ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
+                    this.tbNickname.setText("");
+                    this.tbMail.setText("");
+                    this.tbNombre.setText("");
+                    this.tbApellido.setText("");
+                    this.tbDireccion.setText("");
+                    this.lblSelImg.setText("");
+                }}
                 else
                     if(rbRestaurante.isSelected()){
                         //dt.setColCategoria(ICU.getLstCat());

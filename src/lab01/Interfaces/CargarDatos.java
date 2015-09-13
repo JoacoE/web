@@ -14,8 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPedido;
 import lab01.Clases.DataPromocional;
 import lab01.Clases.DataRestaurante;
+import lab01.Clases.Pedido;
+import lab01.Clases.estados;
+import lab01.Handlers.HUsuario;
 
 /**
  *
@@ -25,6 +29,7 @@ public class CargarDatos extends javax.swing.JFrame {
     private ICtrlUsuario ICU;
     private ICtrlPedido ICPed;
     private ICtrlProducto ICProd;
+    private HUsuario HU;
     /**
      * Creates new form CargarDatos
      */
@@ -33,7 +38,8 @@ public class CargarDatos extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
         ICPed = fabrica.getICtrlPedido();
-        ICProd = fabrica.getICtrlProducto();     
+        ICProd = fabrica.getICtrlProducto();
+        HU = HUsuario.getinstance();
         CrearDatosPorDefecto();
     }
 
@@ -254,6 +260,80 @@ public class CargarDatos extends javax.swing.JFrame {
       indivProm3.put(nomProd2Prom3, cantProd2Prom3);
       ICProd.setPromo(indivProm3);
       ICProd.armarPromo("rossell", dprom3.getDataNombre(), dprom3.getDataDescripcion(), dprom3.getDescuento());
+      
+      // Pedidos
+      
+      ICPed.setNickname("costas");
+      ICPed.setMemCliente();
+      ICPed.setMailCliente("gcostas@gmail.com");
+      ICPed.setMemRestaurante("bocatti");
+      boolean prod1ped1 = ICPed.selectProductos("Empanada de carne", 1);
+      boolean prod2ped1 = ICPed.selectProductos("Empanada Americana", 2);
+      boolean prod3ped1 = ICPed.selectProductos("Empanada QyC", 2);
+      DataPedido ped1 = ICPed.altaPedido();
+      ICPed.limpiarCtrl();
+      
+      Cliente c1 = HU.obtenerUsuario(ped1.getNickUsr());
+      Pedido p1 = c1.getPedido(ped1.getId());
+      p1.setId(0000000000000000001);
+      p1.setFecha("12/8/2014");
+      
+      ICPed.setNickname("roro");
+      ICPed.setMemCliente();
+      ICPed.setMailCliente("rcotelo@yahoo.com");
+      ICPed.setMemRestaurante("mera");
+      boolean prod1ped2 = ICPed.selectProductos("Asado", 3);
+      DataPedido ped2 = ICPed.altaPedido();
+      ICPed.limpiarCtrl();
+      
+      Cliente c2 = HU.obtenerUsuario(ped2.getNickUsr());
+      Pedido p2 = c2.getPedido(ped2.getId());
+      p2.setId(0000000000000000002);
+      p2.setFecha("19/8/2014");
+      ICPed.actualizarEPedido(ped2.getNickUsr(), 0000000000000000002, estados.ENVIADO);
+      
+      ICPed.setNickname("chechi");
+      ICPed.setMemCliente();
+      ICPed.setMailCliente("cgarrido@hotmail.com");
+      ICPed.setMemRestaurante("winb");
+      boolean prod1ped3 = ICPed.selectProductos("Thai wok", 2);
+      boolean prod2ped3 = ICPed.selectProductos("China wok", 3);
+      DataPedido ped3 = ICPed.altaPedido();
+      ICPed.limpiarCtrl();
+      
+      Cliente c3 = HU.obtenerUsuario(ped3.getNickUsr());
+      Pedido p3 = c3.getPedido(ped3.getId());
+      p3.setId(0000000000000000003);
+      p3.setFecha("19/8/2014");
+      ICPed.actualizarEPedido(ped3.getNickUsr(), 0000000000000000003, estados.RECIBIDO);
+      
+      ICPed.setNickname("andy");
+      ICPed.setMemCliente();
+      ICPed.setMailCliente("agarcia@gmail.com");
+      ICPed.setMemRestaurante("mera");
+      boolean prod1ped4 = ICPed.selectProductos("Chivito canadiense", 4);
+      DataPedido ped4 = ICPed.altaPedido();
+      ICPed.limpiarCtrl();
+      
+      Cliente c4 = HU.obtenerUsuario(ped4.getNickUsr());
+      Pedido p4 = c4.getPedido(ped4.getId());
+      p4.setId(0000000000000000004);
+      p4.setFecha("22/8/2014");
+      ICPed.actualizarEPedido(ped4.getNickUsr(), 0000000000000000004, estados.RECIBIDO);
+      
+      ICPed.setNickname("weiss");
+      ICPed.setMemCliente();
+      ICPed.setMailCliente("aweiss@gmail.com");
+      ICPed.setMemRestaurante("rossell");
+      boolean prod1ped5= ICPed.selectProductos("Agnolotis", 1);
+      DataPedido ped5 = ICPed.altaPedido();
+      ICPed.limpiarCtrl();
+      
+      Cliente c5 = HU.obtenerUsuario(ped5.getNickUsr());
+      Pedido p5 = c5.getPedido(ped5.getId());
+      p5.setId(0000000000000000005);
+      p5.setFecha("25/8/2014");
+      ICPed.actualizarEPedido(ped5.getNickUsr(), 0000000000000000005, estados.RECIBIDO);
       
         JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
     }

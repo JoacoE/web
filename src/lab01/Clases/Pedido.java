@@ -40,6 +40,11 @@ public class Pedido {
         return id;
     }
 
+    public void setId(long id){
+        this.id = id;
+        this.getDataPedido().setId(id);
+    }
+    
     public void setId() {
         Random randomid = new Random();
         String aux = String.valueOf(randomid.nextLong());
@@ -52,7 +57,12 @@ public class Pedido {
     public String getFecha() {
         return fecha;
     }
-
+    
+    public void setFecha(String fecha){
+        this.fecha = fecha;
+        this.getDataPedido().setFecha(fecha);
+    }
+    
     public void setFecha() {
         this.fecha = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
     }
@@ -75,12 +85,12 @@ public class Pedido {
                 this.estado = estado;
                 this.getDataPedido().setEstado(estado);
             }
-            JOptionPane.showMessageDialog(null, "Se cambio el estado del pedido ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Se cambio el estado del pedido ", "Exito", JOptionPane.INFORMATION_MESSAGE);
         }
         if("RECIBIDO".equals(estado.toString())){
             this.estado = estado;
             this.getDataPedido().setEstado(estado);
-            JOptionPane.showMessageDialog(null, "Se cambio el estado del pedido ", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Se cambio el estado del pedido ", "Exito", JOptionPane.INFORMATION_MESSAGE);
 
         }
             //JOptionPane.showMessageDialog(null, "El pedido esta siendo Enviado", "Conflicto de Estado", JOptionPane.INFORMATION_MESSAGE);

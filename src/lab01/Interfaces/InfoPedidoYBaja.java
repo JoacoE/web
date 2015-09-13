@@ -13,6 +13,8 @@ import lab01.Clases.DataCarrito;
 import lab01.Clases.DataPedido;
 import lab01.Handlers.Fabrica;
 import javax.swing.ComboBoxEditor;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import lab01.Clases.estados;
 
 /**
@@ -116,14 +118,14 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
         jLabel3.setText("Restaurante:");
 
-        btnEliminar.setText("Dar de Baja");
+        btnEliminar.setText("Dar de Baja el pedido");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Cancelar el pedido");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -157,7 +159,7 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
         jLabel4.setText("Total:");
 
-        jbActualizar.setText("Actualizar");
+        jbActualizar.setText("Actualizar el pedido");
         jbActualizar.setFocusable(false);
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,8 +168,6 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Estado de Pedido:");
-
-        lblEstado.setText("jLabel6");
 
         jComboBox1.setEditable(true);
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "seleciconar" }));
@@ -290,13 +290,31 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
             es =  estados.RECIBIDO;
         }
-        ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(),es);
-       
+        int n = JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION);
+        if(n == JOptionPane.YES_OPTION){
+            ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(),es);
+            lblEstado.setText(datped.getEstado().toString());
+
+        }else{
+            JOptionPane.showMessageDialog(null, "El pedido no se a actualizado","Informacion",JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+        if(jComboBox1.getItemCount() !=1){
+            jComboBox1.removeAllItems();
+        } 
+        actualizarEstado();
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         jComboBox1.setVisible(true);
+        actualizarEstado();
+        
+         
+    }//GEN-LAST:event_jbActualizarActionPerformed
+    public void actualizarEstado(){
         if ("PREPARACION".equals(this.datped.getEstado().toString())){
             jComboBox1.addItem("ENVIADO");
             jComboBox1.addItem("RECIBIDO");
@@ -306,9 +324,8 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
                  jComboBox1.addItem("RECIBIDO");
              }
          }
-         
-    }//GEN-LAST:event_jbActualizarActionPerformed
-
+    }
+        
     /**
      * @param args the command line arguments
      */

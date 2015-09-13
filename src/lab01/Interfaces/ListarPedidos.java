@@ -43,6 +43,7 @@ public class ListarPedidos extends javax.swing.JInternalFrame {
         ICP = fabrica.getICtrlPedido();
         model = (DefaultTableModel)jTabla.getModel();
         CargarTabla();
+        this.setVisible(true);
     }
 
     /**
@@ -132,6 +133,7 @@ public class ListarPedidos extends javax.swing.JInternalFrame {
         }
         InfoPedidoYBaja infoPed = new InfoPedidoYBaja(ped);
         infoPed.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jTablaMouseClicked
     
     public void CargarTabla(){

@@ -125,7 +125,7 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setText("Cancelar el pedido");
+        btnCancelar.setText("Cerrar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -185,32 +185,39 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
             .addGroup(lstEstadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(lstEstadoLayout.createSequentialGroup()
                         .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminar)
-                            .addComponent(btnCancelar)
-                            .addComponent(jbActualizar)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIDpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
                             .addGroup(lstEstadoLayout.createSequentialGroup()
                                 .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNickCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNIckRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEliminar)
+                                    .addComponent(jbActualizar)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIDpedido, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(lstEstadoLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
+                                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNickCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblNIckRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(lstEstadoLayout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(lstEstadoLayout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lstEstadoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addContainerGap())
         );
         lstEstadoLayout.setVerticalGroup(
             lstEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,12 +248,12 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar)))
+                        .addComponent(jbActualizar)))
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,16 +283,25 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        ICP.cancelarPedido(this.datped.getId());
+        int n = JOptionPane.showConfirmDialog(null,"Desea cancelar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION);
+        if(n == JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(null, "El pedido se ha cancelado con éxito", "Éxito",JOptionPane.WARNING_MESSAGE);
+            ICP.cancelarPedido(this.datped.getId());
+        }else{
+            JOptionPane.showMessageDialog(null, "El pedido no ha sido cancelado","Informacion",JOptionPane.ERROR_MESSAGE);
+        }
+        
         this.dispose();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
     // TODO add your handling code here:
         estados es = null;
+        jComboBox1.setEditable(false);
         
         if("ENVIADO".equals(jComboBox1.getSelectedItem().toString())){
             es = estados.ENVIADO;
+            
         }
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
             es =  estados.RECIBIDO;
@@ -296,12 +312,13 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
             lblEstado.setText(datped.getEstado().toString());
 
         }else{
-            JOptionPane.showMessageDialog(null, "El pedido no se a actualizado","Informacion",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El pedido no se ha actualizado","Informacion",JOptionPane.WARNING_MESSAGE);
         }
         
         
         if(jComboBox1.getItemCount() !=1){
             jComboBox1.removeAllItems();
+            jComboBox1.setEditable(false);
         } 
         actualizarEstado();
         
@@ -309,6 +326,7 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
+        jComboBox1.setEditable(false);
         jComboBox1.setVisible(true);
         actualizarEstado();
         

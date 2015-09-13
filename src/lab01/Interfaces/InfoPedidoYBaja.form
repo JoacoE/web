@@ -50,40 +50,51 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" pref="85" max="-2" attributes="0"/>
-                              <Component id="btnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbActualizar" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblIDpedido" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblNickCliente" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
-                                      <Component id="lblNIckRestaurant" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
-                                      <Component id="lblEstado" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="btnEliminar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jbActualizar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblIDpedido" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblNickCliente" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
+                                              <Component id="lblNIckRestaurant" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                                              <Component id="lblEstado" min="-2" pref="102" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="lblPrecioTotal" min="-2" pref="37" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="lblPrecioTotal" min="-2" pref="37" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="jScrollPane" min="-2" pref="452" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Component id="jScrollPane" min="-2" pref="452" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jComboBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="57" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -123,13 +134,13 @@
                           <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jbActualizar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="52" max="32767" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -164,7 +175,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar el pedido"/>
+            <Property name="text" type="java.lang.String" value="Cerrar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>

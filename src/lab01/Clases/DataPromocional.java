@@ -20,6 +20,8 @@ public class DataPromocional {
     private String DataImagen;
     private Map ColDatIndividual;
     
+    public DataPromocional(){}
+    
     public DataPromocional(boolean activa, double descuento, String nombre, String descripcion, double precio, String imagen, Map ColDatIndividual){
         this.DataActiva = activa;
         this.DataDescuento = descuento;

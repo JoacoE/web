@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPromocional;
 import lab01.Clases.DataRestaurante;
 
 /**
@@ -209,6 +210,50 @@ public class CargarDatos extends javax.swing.JFrame {
      
       DataIndividual di16 = new DataIndividual("Classic wok de cerdo", "Cerdo, vegetales mixtos, jengibre, salsa de ostras y ralladura de lima, acompañado de tallarines o arroz.", 230.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 65);
       ICProd.registrarProducto(di16, "winb", false);
+      
+      // Productos Promocionales
+      
+      Map indivProm1 = new HashMap();
+      DataPromocional dprom1 = new DataPromocional();
+      dprom1.setDataNombre("ChiviPizza");
+      dprom1.setDataDescripcion("Chivito y Pizza");
+      dprom1.setDescuento(20);
+      String nomProd1Prom1 = "Chivito canadiense";
+      int cantProd1Prom1 = 1;
+      indivProm1.put(nomProd1Prom1, cantProd1Prom1);
+      String nomProd2Prom1 = "Pizza 2 gustos";
+      int cantProd2Prom1 = 1;
+      indivProm1.put(nomProd2Prom1, cantProd2Prom1);
+      ICProd.setPromo(indivProm1);
+      ICProd.armarPromo("mera", dprom1.getDataNombre(), dprom1.getDataDescripcion(), dprom1.getDescuento());
+      
+      Map indivProm2 = new HashMap();
+      DataPromocional dprom2 = new DataPromocional();
+      dprom2.setDataNombre("MilaAsado");
+      dprom2.setDataDescripcion("3 Milanesas + 1 Asado para compartir");
+      dprom2.setDescuento(30);
+      String nomProd1Prom2 = "Milanesa de Carne";
+      int cantProd1Prom2 = 3;
+      indivProm2.put(nomProd1Prom2, cantProd1Prom2);
+      String nomProd2Prom2 = "Asado";
+      int cantProd2Prom2 = 1;
+      indivProm2.put(nomProd2Prom2, cantProd2Prom2);
+      ICProd.setPromo(indivProm2);
+      ICProd.armarPromo("mera", dprom2.getDataNombre(), dprom2.getDataDescripcion(), dprom2.getDescuento());
+      
+      Map indivProm3 = new HashMap();
+      DataPromocional dprom3 = new DataPromocional();
+      dprom3.setDataNombre("MilaPizza");
+      dprom3.setDataDescripcion("2 Milanesas a caballo + 1 Pizzas 2 gustos");
+      dprom3.setDescuento(30);
+      String nomProd1Prom3 = "Milanesa a caballo";
+      int cantProd1Prom3 = 2;
+      indivProm3.put(nomProd1Prom3, cantProd1Prom3);
+      String nomProd2Prom3 = "Pizza 2 gustos";
+      int cantProd2Prom3 = 1;
+      indivProm3.put(nomProd2Prom3, cantProd2Prom3);
+      ICProd.setPromo(indivProm3);
+      ICProd.armarPromo("rossell", dprom3.getDataNombre(), dprom3.getDataDescripcion(), dprom3.getDescuento());
       
         JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
     }

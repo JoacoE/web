@@ -15,6 +15,7 @@ import lab01.Clases.DataCliente;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataProducto;
 import lab01.Clases.Cantidad_Individual;
+import lab01.Clases.DataPromocional;
 //import lab01.Clases.DataProducto_Stock;
 import lab01.Clases.Individual;
 import lab01.Clases.Promocional;
@@ -115,5 +116,14 @@ public class CtrlProducto implements ICtrlProducto {
         //prod.setImagen(nombre); falta ver lo de la imagen.
        // res.ModificarProductoIndividual(ind, nombre);
         
+    }
+    
+    public void actualizarPromocional(DataPromocional prom, String nombre, Restaurante res){
+        Promocional promo = (Promocional) this.getProdNombre(nombre, res);
+        promo.setNombre(prom.getDataNombre());
+        promo.setDescripcion(prom.getDataDescripcion());
+        promo.setActiva(prom.getActiva());
+        promo.setDescuento(prom.getDescuento());
+        promo.setPrecioPromo(promo.getDescuento());
     }
 }

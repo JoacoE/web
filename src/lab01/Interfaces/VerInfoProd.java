@@ -32,6 +32,7 @@ public class VerInfoProd extends javax.swing.JFrame {
     private DataPromocional dp = new DataPromocional();
     private Restaurante res;
     String nombre;
+    boolean promo;
     
     public VerInfoProd(Restaurante r,DataIndividual individual) {
         initComponents();
@@ -54,6 +55,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.lblDescuento.setVisible(false);
         this.di = individual;
         this.res = r;
+        this.promo = false;
     }
 
     public VerInfoProd(DataPromocional promo, Restaurante r){
@@ -76,6 +78,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.btnGuardar.setEnabled(false);
         this.lblDescuento.setVisible(true);
         this.tbDescuento.setText(String.valueOf(promo.getDescuento()));
+        this.promo = true;
         if (promo.getActiva()) {
             this.jcEstado.addItem("ACTIVA");
         } else {
@@ -406,15 +409,33 @@ public class VerInfoProd extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         //String nombre = this.txtNomProd.getText();
-        this.di.setDataNombre(this.txtNomProd.getText());
-        this.di.setDataDescripcion(this.txtDescProd.getText());
-        this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
-        this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
-        if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-            ICP.actualizarIndividual(di,this.nombre , res);
-            JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        if(!this.promo){
+            this.di.setDataNombre(this.txtNomProd.getText());
+            this.di.setDataDescripcion(this.txtDescProd.getText());
+            this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
+            this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+            if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                ICP.actualizarIndividual(di,this.nombre , res);
+                JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+              JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dp.setDataNombre(this.txtNomProd.getText());
+            this.dp.setDataDescripcion(this.txtDescProd.getText());
+            this.dp.setDescuento(Double.parseDouble(this.tbDescuento.getText()));
+            String activa = jcEstado.getSelectedItem().toString();
+            if(activa.equals("ACTIVA")){
+                this.dp.setActiva(true);
+            }else{
+                this.dp.setActiva(false);
+            }
+            if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                ICP.actualizarPromocional(dp,this.nombre , res);
+                JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+              JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

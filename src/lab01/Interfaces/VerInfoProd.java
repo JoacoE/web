@@ -382,24 +382,32 @@ public class VerInfoProd extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        
-        this.txtNomProd.enable(true);
-        this.txtNomProd.setEditable(true);
-        this.txtDescProd.enable(true);
-        this.txtDescProd.setEditable(true);
-        this.txtPrecioProd.enable();
-        this.txtPrecioProd.setEditable(true);
-        this.txtCantidad.enable();
-        this.txtCantidad.setEditable(true);
-        this.tbDescuento.enable();
-        this.tbDescuento.setEditable(true);
-        this.jcEstado.enable();
-        this.jcEstado.setEditable(true);
-        this.jcEstado.addItem("INACTIVA");
-        this.btnGuardar.setVisible(true);
-        this.btnGuardar.setEnabled(true);
-        this.btnEditar.setEnabled(false);
-        
+        if(!this.promo){
+            this.txtNomProd.enable(true);
+            this.txtNomProd.setEditable(true);
+            this.txtDescProd.enable(true);
+            this.txtDescProd.setEditable(true);
+            this.txtPrecioProd.enable();
+            this.txtPrecioProd.setEditable(true);
+            this.txtCantidad.enable();
+            this.txtCantidad.setEditable(true);
+            this.btnGuardar.setVisible(true);
+            this.btnGuardar.setEnabled(true);
+            this.btnEditar.setEnabled(false);
+        }else{
+            this.txtNomProd.enable(true);
+            this.txtNomProd.setEditable(true);
+            this.txtDescProd.enable(true);
+            this.txtDescProd.setEditable(true);
+            this.tbDescuento.enable();
+            this.tbDescuento.setEditable(true);
+            this.jcEstado.enable();
+            this.jcEstado.setEditable(true);
+            this.jcEstado.addItem("INACTIVA");
+            this.btnGuardar.setVisible(true);
+            this.btnGuardar.setEnabled(true);
+            this.btnEditar.setEnabled(false);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tbDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbDescuentoActionPerformed

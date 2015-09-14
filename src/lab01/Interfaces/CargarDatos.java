@@ -168,7 +168,7 @@ public class CargarDatos extends javax.swing.JFrame {
      
       //PRODUCTOS INDIVIDUALES
      
-      DataIndividual di1 = new DataIndividual("Asado", "Asado a la parrilla", 225.0, null, 3);
+      DataIndividual di1 = new DataIndividual("Asado", "Asado a la parrilla", 225.0, null, 300);
       ICProd.registrarProducto(di1, "mera", false);
      
       DataIndividual di2 = new DataIndividual("Milanesa de Carne", "Con lechuga, tomate, mayonesa y fritas", 180.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/milanesa-de-carne.jpg", 150);

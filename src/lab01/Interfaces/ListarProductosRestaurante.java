@@ -134,9 +134,9 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int j = tblProductosRes.getRowCount();
         for(int i=0; i<tblProductosRes.getRowCount(); i++){
-            if(!modelo.getValueAt(i,1).toString().equals("0")){
+            if(!modelo.getValueAt(i,2).toString().equals("0")){
                 String nom = modelo.getValueAt(i,0).toString();
-                int cant = (int)modelo.getValueAt(i,1);
+                int cant = (int)modelo.getValueAt(i,2);
                 stock = ICP.selectProductos(nom, cant);
                 
             }

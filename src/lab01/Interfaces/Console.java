@@ -65,6 +65,7 @@ public class Console extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        EscritorioMenu.setBackground(new java.awt.Color(255, 255, 255));
         EscritorioMenu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         smnuSalir.setText("Inicio");

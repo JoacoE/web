@@ -7,6 +7,8 @@ package lab01.Interfaces;
 
 import java.util.Iterator;
 import java.util.Map;
+import javax.print.event.PrintJobEvent;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
 import lab01.Clases.Producto;
@@ -44,6 +46,8 @@ public class VerInfoProd extends javax.swing.JFrame {
         String stock = String.valueOf(individual.getCantidad());
         this.txtCantidad.setText(stock);
         this.lblEstadoPromo.setVisible(false);
+        this.btnGuardar.setVisible(false);
+        this.btnGuardar.setEnabled(false);
         this.jcEstado.setVisible(false);
         this.jPanel3.setVisible(false);
         this.tbDescuento.setVisible(false);
@@ -69,6 +73,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.txtCantidad.setVisible(false);
         this.tbDescuento.setVisible(true);
         this.btnGuardar.setVisible(false);
+        this.btnGuardar.setEnabled(false);
         this.lblDescuento.setVisible(true);
         this.tbDescuento.setText(String.valueOf(promo.getDescuento()));
         if (promo.getActiva()) {
@@ -369,6 +374,7 @@ public class VerInfoProd extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -388,6 +394,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.jcEstado.setEditable(true);
         this.jcEstado.addItem("INACTIVA");
         this.btnGuardar.setVisible(true);
+        this.btnGuardar.setEnabled(true);
         this.btnEditar.setEnabled(false);
         
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -403,8 +410,13 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.di.setDataDescripcion(this.txtDescProd.getText());
         this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
         this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
-        ICP.actualizarIndividual(di,this.nombre , res);
-        
+        int n = JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION);
+        if(n == JOptionPane.YES_OPTION){
+            ICP.actualizarIndividual(di,this.nombre , res);
+            JOptionPane.showMessageDialog(null, "El pedido se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

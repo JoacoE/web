@@ -107,13 +107,13 @@ public class CtrlProducto implements ICtrlProducto {
     
     }
     public void actualizarIndividual(DataIndividual ind, String nombre,Restaurante res){
-        Producto prod = this.getProdNombre(nombre, res);
-        prod.setNombre(ind.getDataNombre());
-        prod.setDescripcion(ind.getDataDescripcion());
-        prod.setCantidad(ind.getCantidad());
-        prod.setPrecio(ind.getDataPrecio());
+        Individual individual = (Individual) this.getProdNombre(nombre, res);
+        individual.setNombre(ind.getDataNombre());
+        individual.setDescripcion(ind.getDataDescripcion());
+        individual.setCantidad(ind.getCantidad());
+        individual.setPrecio(ind.getDataPrecio());
         //prod.setImagen(nombre); falta ver lo de la imagen.
-        res.ModificarProductoIndividual(ind, nombre);
+       // res.ModificarProductoIndividual(ind, nombre);
         
     }
 }

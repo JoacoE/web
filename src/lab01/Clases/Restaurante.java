@@ -58,7 +58,7 @@ public class Restaurante extends Usuario{
         return ret;
     }
     public DataRestaurante RestauranteADR(){
-        DataRestaurante DR = new DataRestaurante(this.nickname, this.nombre, this.mail, this.direccion, this.lstImagen, this.ColProducto, this.ColCategoria);
+        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, this.ColProducto, this.ColCategoria);
         return DR;
     }
     

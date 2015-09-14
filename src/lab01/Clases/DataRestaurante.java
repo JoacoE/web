@@ -18,8 +18,8 @@ public class DataRestaurante {
     private String email;
     private String direccion;
     private ArrayList<String> lstImagen;
-    private Map ColCategoria;
-    private Map ColProducto;
+    private Map ColCategoria = new HashMap();
+    private Map ColProducto = new HashMap();
 
     
     public DataRestaurante(){}
@@ -30,8 +30,8 @@ public class DataRestaurante {
         this.email=mail;
         this.direccion=direccion;
         this.lstImagen=lstImagen;
-        this.ColProducto=colProd;
-        this.ColCategoria=colCategoria;
+        this.ColProducto = colProd;
+        this.ColCategoria = colCategoria;
     }
 
     public Usuario dataResAres(){

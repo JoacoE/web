@@ -96,6 +96,11 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
         btngProducto.add(rbIndividual);
         rbIndividual.setText("Individual");
+        rbIndividual.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rbIndividualItemStateChanged(evt);
+            }
+        });
         rbIndividual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbIndividualActionPerformed(evt);
@@ -121,6 +126,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
         lblPrecio.setText("Precio:");
 
+        tbPrecio.setEnabled(false);
         tbPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbPrecioActionPerformed(evt);
@@ -275,37 +281,28 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         boolean Promocional = false;
-        String p;
         double precio;
         double descuento;
         int cantidad;
 
         if (evt.getSource() == btnRegistro) {
             if (CP.existeRestaurante(restaurante)) { // si el restaurante se encuentra registrado
-                if (rbIndividual.isSelected()) { // si quiero registar producto individual
-//                    p = JOptionPane.showInputDialog(null, "Ingrese el precio", "Ingreso de precio", JOptionPane.INFORMATION_MESSAGE);
+                if (rbIndividual.isSelected()) { // si quiero registar producto individual                    
+
                     precio = Double.parseDouble(tbPrecio.getText());
-                    // ingreso el precio                
                     cantidad = Integer.parseInt(tbCantidad.getText()); // me guardo la cantidad de productos para ese producto particular
                     DataIndividual di = new DataIndividual(tbNombre.getText(), tbDesc.getText(), precio, cantidad); // me guardo los datos en el dataproducto
-
                     CP.registrarProducto(di, restaurante, Promocional); // registro producto
                     JOptionPane.showMessageDialog(null, "Producto registrado con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarCampos();
 
                 } else { // si es promocional
                     if (rbPromocional.isSelected()) {
-                        /*Iterator it = CP.listarIndividuales(tbRest.getText()).entrySet().iterator();
-
-                         while (it.hasNext()) {
-                         Map.Entry map = (Map.Entry) it.next();
-                            
-                         DataIndividual di = (DataIndividual) map.getValue();
-                         JOptionPane.showMessageDialog(null, "Nombre: " + di.getDataNombre() + "cantidad:"+  di.getCantidad(), "aviso", JOptionPane.INFORMATION_MESSAGE);    
-                         }*/
-                        p = JOptionPane.showInputDialog(null, "Ingrese descuento:", "Ingreso de descuento", JOptionPane.INFORMATION_MESSAGE);
+                        String rest = (String) jcbRest.getSelectedItem();
                         descuento = Double.parseDouble(tbDescuento.getText());
-                        CP.armarPromo(jcbRest.getName(), tbNombre.getText(), tbDesc.getText(), descuento);
+                        CP.armarPromo(rest, tbNombre.getText(), tbDesc.getText(), descuento);
                         JOptionPane.showMessageDialog(null, "Promocion registrada con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarCampos();
 
                     }
 
@@ -321,22 +318,29 @@ public class RegProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void rbIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbIndividualActionPerformed
-        tbCantidad.setEnabled(true);
-        tbDescuento.setEnabled(false);
+//        tbCantidad.setEnabled(true);
+//        tbDescuento.setEnabled(false);
+//        tbPrecio.setEnabled(true);
     }//GEN-LAST:event_rbIndividualActionPerformed
 
     private void rbPromocionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPromocionalActionPerformed
-        tbCantidad.setEnabled(false);
-        tbDescuento.setEnabled(true);
+
     }//GEN-LAST:event_rbPromocionalActionPerformed
 
     private void rbPromocionalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbPromocionalItemStateChanged
-// TODO add your handling code here:
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            //ICU.setNickname(tbRest.getText());
-            ElegirProductos ep = new ElegirProductos(jcbRest.getName());
-            Console.EscritorioMenu.add(ep);
-            ep.show();
+        // TODO add your handling code here:
+        try {
+            if (evt.getStateChange() == ItemEvent.SELECTED) {
+
+                tbCantidad.setEnabled(false);
+                tbDescuento.setEnabled(true);
+                String restoran = (String) jcbRest.getSelectedItem();
+                ElegirProductos ep = new ElegirProductos(restoran);
+                Console.EscritorioMenu.add(ep);
+                ep.show();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado restaurante", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -348,7 +352,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void tbPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbPrecioActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_tbPrecioActionPerformed
 
     private void btnSelImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelImagenActionPerformed
@@ -367,12 +371,37 @@ public class RegProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tbDescuentoActionPerformed
 
-    public void cargarCBbox(){
+    private void rbIndividualItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbIndividualItemStateChanged
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String rest = (String) jcbRest.getSelectedItem();
+            if (rest.equals("Elija un restaurante...")) {
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado restaurante", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            tbCantidad.setEnabled(true);
+            tbDescuento.setEnabled(false);
+            //tbPrecio.setEnabled(true);
+
+        }
+
+    }//GEN-LAST:event_rbIndividualItemStateChanged
+
+    public void limpiarCampos() {
+        tbNombre.setText(" ");
+        tbDesc.setText(" ");
+        tbPrecio.setText(" ");
+        tbDescuento.setText(" ");
+        tbCantidad.setText(" ");
+    }
+
+    public void cargarCBbox() {
         Map rest = ICU.listaDataRestaurantes();
         Iterator it = rest.entrySet().iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Map.Entry map = (Map.Entry) it.next();
-            DataRestaurante res = (DataRestaurante)map.getValue();
+            DataRestaurante res = (DataRestaurante) map.getValue();
             String restau = res.getNickname();
             this.jcbRest.addItem(restau);
         }

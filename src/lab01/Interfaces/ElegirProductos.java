@@ -53,6 +53,7 @@ public class ElegirProductos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setVisible(true);
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -223,6 +223,7 @@
             <Property name="text" type="java.lang.String" value="Individual"/>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="rbIndividualItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbIndividualActionPerformed"/>
           </Events>
         </Component>
@@ -254,6 +255,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tbPrecio">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbPrecioActionPerformed"/>
           </Events>

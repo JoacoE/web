@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import lab01.Clases.Cliente;
 import lab01.Clases.DataCarrito;
 import lab01.Clases.DataCliente;
@@ -276,22 +277,26 @@ public class CtrlPedido implements ICtrlPedido {
                 if(client.existePedido(id)){
                     ped = client.getPedido(id);
                     DataPedido dp = ped.getDataPedido();
-                    Restaurante r = hu.obtenerRestaurante(dp.getNickRest());
-                    Iterator it = dp.getColCarrito().entrySet().iterator();
-                    while(it.hasNext()){
-                        Map.Entry map = (Map.Entry)it.next();
-                        DataCarrito dc = (DataCarrito)map.getValue();
-                        Producto prod = r.getProducto(dc.getNomProd());
-                        prod.sumarStock(dc.getCantidad());
+                    if(ped.getEstado() == estados.PREPARACION){
+                        Restaurante r = hu.obtenerRestaurante(dp.getNickRest());
+                        Iterator it = dp.getColCarrito().entrySet().iterator();
+                        while(it.hasNext()){
+                            Map.Entry map = (Map.Entry)it.next();
+                            DataCarrito dc = (DataCarrito)map.getValue();
+                            Producto prod = r.getProducto(dc.getNomProd());
+                            prod.sumarStock(dc.getCantidad());
+                        }
+                        client.quitarPedido(id);
+                        ped.vaciarPedido();
+                        ped = null;
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El pedido fue recibido y no puede eliminarse", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                     }
-                    client.quitarPedido(id);
-                    ped.vaciarPedido();
-                    ped = null;
-                }
-            }
+                }        
+            }    
         }
     }
-    
+        
     @Override
     public void limpiarCtrl(){
         this.getCarrito().clear();

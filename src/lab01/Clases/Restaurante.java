@@ -40,11 +40,18 @@ public class Restaurante extends Usuario{
     
     public void addProducto(Producto p){
         ColProducto.put(p.getNombre(), p);
-        
     }
     
     public Producto getProducto(String nombre){
-        return (Producto)this.ColProducto.get(nombre);
+        Iterator it = this.ColProducto.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry mprod = (Map.Entry) it.next();
+            Producto prod = (Producto) mprod.getValue();
+            if(prod.getNombre().equals(nombre)){
+                return prod;
+            }
+        }
+        throw new NullPointerException();
     }
     
     public Map obtenerColeccion(){

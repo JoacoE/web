@@ -410,10 +410,9 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.di.setDataDescripcion(this.txtDescProd.getText());
         this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
         this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
-        int n = JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION);
-        if(n == JOptionPane.YES_OPTION){
+        if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
             ICP.actualizarIndividual(di,this.nombre , res);
-            JOptionPane.showMessageDialog(null, "El pedido se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
         }

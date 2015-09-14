@@ -5,6 +5,7 @@
  */
 package lab01.Interfaces;
 
+import java.applet.AudioClip;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,7 +14,8 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.Restaurante;
 import lab01.Handlers.Fabrica;
-
+import java.applet.AudioClip;
+import lab01.Clases.Producto;
 /**
  *
  * @author gera
@@ -49,6 +51,7 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductosRes = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -60,14 +63,14 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Productos", "Cantidad"
+                "Productos", "Precio", "Indique cantidad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,9 +84,21 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblProductosRes);
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -93,19 +108,24 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnAgregar)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jButton1))
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -114,9 +134,9 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int j = tblProductosRes.getRowCount();
         for(int i=0; i<tblProductosRes.getRowCount(); i++){
-            if(!modelo.getValueAt(i,1).toString().equals("0")){
+            if(!modelo.getValueAt(i,2).toString().equals("0")){
                 String nom = modelo.getValueAt(i,0).toString();
-                int cant = (int)modelo.getValueAt(i,1);
+                int cant = (int)modelo.getValueAt(i,2);
                 stock = ICP.selectProductos(nom, cant);
                 
             }
@@ -132,19 +152,30 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
             ICP.limpiarCtrl();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        AudioClip sonido;
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("../Helpers/BELL1.mp3"));
+        sonido.play();
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void LoadTableProductRest(String res){
         Restaurante r = null;
-        String lista[]=new String[2];
+        String lista[]=new String[3];
         r = ICU.getRestauranteByNickname(res);
         ICP.setMemRestaurante(res);
         Map lstProd = r.obtenerListaProductos();
         Iterator it = lstProd.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry mapcol = (Map.Entry) it.next();
-            String nomProd = mapcol.getKey().toString();
-            lista[0]=nomProd;
-            lista[1]= "0";
+            Producto producto = (Producto)mapcol.getValue();            
+            lista[0]= producto.getNombre();
+            lista[1]= Double.toString(producto.getPrecio());
+            lista[2]= "0";
             modelo.insertRow((int)fila, lista);
             fila++;
         }
@@ -152,6 +183,7 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductosRes;
     // End of variables declaration//GEN-END:variables

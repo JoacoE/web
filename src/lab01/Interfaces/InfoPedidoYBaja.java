@@ -45,7 +45,7 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         lblPrecioTotal.setText(PTotal);
         jComboBox1.setVisible(false);
         if("RECIBIDO".equals(datped.getEstado().toString())){
-            jbActualizar.disable();
+            jbActualizar.setEnabled(false);
         }
     }
     DefaultTableModel modelo;
@@ -278,7 +278,7 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -288,7 +288,7 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El pedido se ha cancelado con éxito", "Éxito",JOptionPane.WARNING_MESSAGE);
             ICP.cancelarPedido(this.datped.getId());
         }else{
-            JOptionPane.showMessageDialog(null, "El pedido no ha sido cancelado","Informacion",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El pedido no ha sido cancelado","Informacion",JOptionPane.INFORMATION_MESSAGE);
         }
         
         this.dispose();
@@ -306,20 +306,25 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
             es =  estados.RECIBIDO;
         }
-        int n = JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION);
-        if(n == JOptionPane.YES_OPTION){
+        if(JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
             ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(),es);
+            jComboBox1.removeAllItems();
+            jComboBox1.setVisible(false);
+            jbActualizar.setEnabled(false);
             lblEstado.setText(datped.getEstado().toString());
 
         }else{
-            JOptionPane.showMessageDialog(null, "El pedido no se ha actualizado","Informacion",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El pedido no se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
         }
         
         
         if(jComboBox1.getItemCount() !=1){
             jComboBox1.removeAllItems();
-            jComboBox1.setEditable(false);
-        } 
+            jComboBox1.setEnabled(false);
+        }
+        SwingUtilities.updateComponentTreeUI(this);
+        this.revalidate();
+        this.repaint();
         actualizarEstado();
         
     }//GEN-LAST:event_jComboBox1ActionPerformed

@@ -127,7 +127,7 @@ public class VerProducto extends javax.swing.JInternalFrame {
         if(prod instanceof Individual){
             Individual ind = (Individual)prod;
             DataIndividual di = ind.getDataIndividual();
-            VerInfoProd verinfop = new VerInfoProd(di);
+            VerInfoProd verinfop = new VerInfoProd(res,di);
             verinfop.setVisible(true);
         }else{
             Promocional prom = (Promocional)prod;
@@ -149,7 +149,7 @@ public class VerProducto extends javax.swing.JInternalFrame {
     
      private void cargarTabla(){
         Map Datas = new HashMap(); 
-        Datas = ICU.listaDataRestaurantes();
+        Datas.putAll(ICU.listaDataRestaurantes());
         Iterator it = Datas.entrySet().iterator();
         String lista[]=new String[2];
         while(it.hasNext()){
@@ -161,8 +161,8 @@ public class VerProducto extends javax.swing.JInternalFrame {
             Iterator it2 = colProd.entrySet().iterator();
             while(it2.hasNext()){
                 Map.Entry mapcol = (Map.Entry) it2.next();
-                String nomProd = mapcol.getKey().toString();
-                lista[0]=nomProd;
+                Producto nomProd = (Producto) mapcol.getValue();
+                lista[0]=nomProd.getNombre();
                 modelo.insertRow((int)jTabla.getRowCount(), lista);
                 
             }

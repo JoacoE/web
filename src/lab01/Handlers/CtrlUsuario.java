@@ -207,6 +207,20 @@ public class CtrlUsuario implements ICtrlUsuario {
 //    public void registrarRestaurante(DataRestaurante dt) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
-    
+    public Map pedidosUsuario(String nickname){
+        HUsuario hu = HUsuario.getinstance();
+        Cliente user = (Cliente) hu.obtenerUsuario(nickname);
+        Map pedidos = new HashMap();
+        Map datPeds = new HashMap();
+        pedidos.putAll(user.getPedidos());
+        Iterator it = pedidos.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry p = (Map.Entry) it.next();
+            Pedido ped = (Pedido) p.getValue();
+            DataPedido dp = ped.getDataPedido();
+            datPeds.put(dp.getId(), dp);
+        }
+        return datPeds;
+    }
 
 }

@@ -132,6 +132,8 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        AudioClip sonido;
+        sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Helpers/sonido.wav"));        
         int j = tblProductosRes.getRowCount();
         for(int i=0; i<tblProductosRes.getRowCount(); i++){
             if(!modelo.getValueAt(i,2).toString().equals("0")){
@@ -146,6 +148,7 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
             ICP.setDp(ICP.altaPedido());
             AltaPedido ap = new AltaPedido();
             Console.EscritorioMenu.add(ap);
+            sonido.play();
             ap.show();
         }
         else{
@@ -154,9 +157,7 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        AudioClip sonido;
-        sonido = java.applet.Applet.newAudioClip(getClass().getResource("../Helpers/BELL1.mp3"));
-        sonido.play();
+        
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -9,6 +9,7 @@ package lab01.Interfaces;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import lab01.Clases.ImagenFondo;
 
 
 
@@ -22,6 +23,8 @@ public class Console extends javax.swing.JFrame {
      */
     public Console() {
         initComponents();
+        EscritorioMenu.setBorder(new ImagenFondo());
+        this.setExtendedState(Console.MAXIMIZED_BOTH);
         
     }
 

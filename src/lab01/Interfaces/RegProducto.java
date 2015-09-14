@@ -338,6 +338,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
                 ElegirProductos ep = new ElegirProductos(restoran);
                 Console.EscritorioMenu.add(ep);
                 ep.show();
+                ep.toFront();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado restaurante", "Error", JOptionPane.ERROR_MESSAGE);

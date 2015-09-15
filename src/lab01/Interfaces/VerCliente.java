@@ -6,6 +6,7 @@
 
 package lab01.Interfaces;
 
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,9 +15,11 @@ import lab01.Clases.Cliente;
 import lab01.Handlers.Fabrica;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
+import lab01.Clases.Pedido;
 
 
 /**
@@ -73,7 +76,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(110, 300));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(830, 350));
+        setPreferredSize(new java.awt.Dimension(840, 350));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
@@ -202,6 +205,11 @@ public class VerCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,6 +248,26 @@ public class VerCliente extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTablePMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePMouseClicked
+        // TODO add your handling code here:
+        JTable tab = (JTable)evt.getSource();
+        Point point = evt.getPoint();
+        int fila = tab.rowAtPoint(point);
+        Iterator it = ICU.pedidosUsuario(this.nickname).entrySet().iterator();
+        int cont = 0;
+        while(it.hasNext()){
+            Map.Entry map = (Map.Entry) it.next();
+            if(cont == fila){
+                this.dp = (DataPedido) map.getValue();
+                break;
+            }else{
+                cont++;
+            }
+        }
+        InfoPedidoYBaja infoPed = new InfoPedidoYBaja(this.dp);
+        infoPed.setVisible(true);
+    }//GEN-LAST:event_jTablePMouseClicked
     private void cargarDatos(){
        DataCliente c = ICU.getUsuarioByNickname(ICU.getNickname());
        this.nickname = c.getNickname();

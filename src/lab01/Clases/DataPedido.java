@@ -6,6 +6,7 @@
 package lab01.Clases;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -102,5 +103,17 @@ public class DataPedido {
     
     public void setDatCarrito(DataCarrito dc){
         this.ColCarrito.put(dc.getNomProd(), dc);
+    }
+    
+    public boolean existeProducto(String nombre){
+        Iterator it = this.getColCarrito().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry dcarr = (Map.Entry) it.next();
+            DataCarrito dc = (DataCarrito)dcarr.getValue();
+            if(dc.getNomProd().equals(nombre)){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -16,6 +16,7 @@ import lab01.Clases.Individual;
 import lab01.Clases.Promocional;
 import lab01.Handlers.Fabrica;
 import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPedido;
 import lab01.Clases.DataPromocional;
 import lab01.Clases.Restaurante;
 
@@ -31,14 +32,19 @@ public class VerInfoProd extends javax.swing.JFrame {
     private DataIndividual di = new DataIndividual();
     private DataPromocional dp = new DataPromocional();
     private Restaurante res;
+    private ICtrlPedido ICPed;
+    String nomprod;
     String nombre;
     boolean promo;
     
     public VerInfoProd(Restaurante r,DataIndividual individual) {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
+        ICPed = fabrica.getICtrlPedido();
         ICP = fabrica.getICtrlProducto();
         modelo = (DefaultTableModel) jTabla.getModel();
+        modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
+        this.nomprod = individual.getDataNombre();
         this.txtNomProd.setText(individual.getDataNombre());
         this.txtDescProd.setText(individual.getDataDescripcion());
         this.nombre = this.txtNomProd.getText();
@@ -56,15 +62,21 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.di = individual;
         this.res = r;
         this.promo = false;
+        if(!cargarTablaPedidos()){
+            this.jTablaPedidos.setEnabled(false);
+        }
     }
 
     public VerInfoProd(DataPromocional promo, Restaurante r){
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
+        ICPed = fabrica.getICtrlPedido();
         ICP = fabrica.getICtrlProducto();
         modelo = (DefaultTableModel) jTabla.getModel();
+        modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
         this.res = r;
         //this.txtNomProd.enable(false);
+        this.nomprod = promo.getDataNombre();
         this.txtNomProd.setText(promo.getDataNombre());
         this.txtDescProd.setText(promo.getDataDescripcion());
         this.nombre = this.txtNomProd.getText();
@@ -85,8 +97,12 @@ public class VerInfoProd extends javax.swing.JFrame {
             this.jcEstado.addItem("INACTIVA");
         }
         cargartabla(promo, r);
+        if(!cargarTablaPedidos()){
+            this.jTablaPedidos.setEnabled(false);
+        }
     }
     DefaultTableModel modelo;
+    DefaultTableModel modelo2;
     private Producto p;
     ICtrlProducto ICP;
     
@@ -126,10 +142,11 @@ public class VerInfoProd extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTablaPedidos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(759, 393));
-        setPreferredSize(new java.awt.Dimension(775, 393));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(1, 1, 1));
@@ -320,22 +337,53 @@ public class VerInfoProd extends javax.swing.JFrame {
             }
         });
 
+        jTablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Usuario", "Precio Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTablaPedidos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(77, 77, 77)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -343,18 +391,19 @@ public class VerInfoProd extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnEditar)
                     .addComponent(btnGuardar)
-                    .addComponent(btnEditar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         pack();
@@ -375,7 +424,24 @@ public class VerInfoProd extends javax.swing.JFrame {
             lista[2] = String.valueOf(stock);
             modelo.insertRow((int) jTabla.getRowCount(), lista);
         }
-
+    }
+    
+    public boolean cargarTablaPedidos(){
+        Iterator dpedidos = ICPed.listDataPedidos().entrySet().iterator();
+        String list[] = new String[3];
+        while(dpedidos.hasNext()){
+            Map.Entry dpeds = (Map.Entry) dpedidos.next();
+            DataPedido datp = (DataPedido) dpeds.getValue();
+            if(datp.existeProducto(this.nomprod)){
+                list[0] = datp.getFecha();
+                list[1] = datp.getNickUsr();
+                String ptotal = Double.toString(datp.getPrecio_total());
+                list[2] = ptotal;
+                modelo2.insertRow((int) jTablaPedidos.getRowCount(), list);
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -502,7 +568,9 @@ public class VerInfoProd extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTabla;
+    private javax.swing.JTable jTablaPedidos;
     private javax.swing.JComboBox jcEstado;
     private javax.swing.JLabel lblCant;
     private javax.swing.JLabel lblDescripcion;

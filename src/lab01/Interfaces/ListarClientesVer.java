@@ -54,7 +54,7 @@ public class ListarClientesVer extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(320, 415));
 
         jbListo.setText("Ver Información");
         jbListo.addActionListener(new java.awt.event.ActionListener() {

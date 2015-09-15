@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -167,12 +168,16 @@ public class SelRestauranteListarUsuario extends javax.swing.JInternalFrame {
 
     private void treeCatValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_treeCatValueChanged
         // TODO add your handling code here:
+        try{
         DefaultMutableTreeNode sel = (DefaultMutableTreeNode)treeCat.getLastSelectedPathComponent();
         String rest = (String)sel.getUserObject(); 
         ListarProductosRestaurante verP = new ListarProductosRestaurante(rest);
             Console.EscritorioMenu.add(verP);
             verP.show();
             this.dispose();
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La categoria seleccionada no tiene restaurantes", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_treeCatValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

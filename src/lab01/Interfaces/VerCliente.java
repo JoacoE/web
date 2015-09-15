@@ -76,7 +76,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
         setResizable(true);
         setMinimumSize(new java.awt.Dimension(110, 300));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(840, 350));
+        setPreferredSize(new java.awt.Dimension(850, 350));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 

@@ -128,6 +128,8 @@ public class VerInfoProd extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(759, 393));
+        setPreferredSize(new java.awt.Dimension(775, 393));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del producto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(1, 1, 1));

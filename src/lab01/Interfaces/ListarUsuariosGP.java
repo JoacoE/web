@@ -56,7 +56,7 @@ public class ListarUsuariosGP extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(new java.awt.Dimension(320, 340));
 
         jbListo.setText("Seleccionar");
         jbListo.addActionListener(new java.awt.event.ActionListener() {

@@ -65,7 +65,7 @@ public class ListarPedidos extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione el pedido")));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione el pedido"), "Seleccione el pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

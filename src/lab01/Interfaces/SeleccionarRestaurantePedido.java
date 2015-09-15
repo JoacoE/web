@@ -47,7 +47,10 @@ public class SeleccionarRestaurantePedido extends javax.swing.JInternalFrame {
         jcbSelect = new javax.swing.JComboBox();
         jtxtRestaurante = new javax.swing.JTextField();
 
-        setTitle("Seleccione un Restaurante");
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jbListo.setText("Listo");
         jbListo.addActionListener(new java.awt.event.ActionListener() {
@@ -56,9 +59,9 @@ public class SeleccionarRestaurantePedido extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione un restaurante"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione un restaurante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
-        jcbSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select..." }));
+        jcbSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar..." }));
         jcbSelect.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jcbSelectMouseDragged(evt);
@@ -101,8 +104,7 @@ public class SeleccionarRestaurantePedido extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbListo)
-                        .addGap(16, 16, 16)))
+                        .addComponent(jbListo)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,7 +112,7 @@ public class SeleccionarRestaurantePedido extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbListo)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

@@ -58,10 +58,11 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder>
+            <TitledBorder title="Seleccione el pedido">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Seleccione el pedido"/>
               </Border>
+              <Font PropertyName="font" name="URW Gothic L" size="14" style="1"/>
             </TitledBorder>
           </Border>
         </Property>

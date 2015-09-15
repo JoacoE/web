@@ -50,7 +50,7 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Seleccione las Categorias del Restaurante");
+        setToolTipText("");
 
         jbListo.setText("Listo");
         jbListo.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +59,7 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione las Categorias del Restaurante"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccione las Categorias del Restaurante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
         jScrollPane1.setViewportView(jLista);
 

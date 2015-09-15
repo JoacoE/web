@@ -127,7 +127,7 @@ public class AltaPedido extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Se ha registrado correctamente su pedido"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Se ha registrado correctamente su pedido", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
         lblNickUser.setText("Nombre de cliente:");
 

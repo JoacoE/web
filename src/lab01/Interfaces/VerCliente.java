@@ -61,7 +61,6 @@ public class VerCliente extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Ver informacion del cliente");
         setMinimumSize(new java.awt.Dimension(110, 300));
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(650, 350));

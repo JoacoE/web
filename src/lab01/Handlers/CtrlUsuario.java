@@ -22,6 +22,7 @@ import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 import lab01.Clases.Pedido;
 import lab01.Clases.Usuario;
+import java.lang.NullPointerException;
 
 /**
  *
@@ -212,7 +213,10 @@ public class CtrlUsuario implements ICtrlUsuario {
         Cliente user = (Cliente) hu.obtenerUsuario(nickname);
         Map pedidos = new HashMap();
         Map datPeds = new HashMap();
-        pedidos.putAll(user.getPedidos());
+        pedidos = user.getPedidos();
+        //if(pedidos.isEmpty()){
+        //    throw ( new NullPointerException());
+        //}
         Iterator it = pedidos.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry p = (Map.Entry) it.next();

@@ -6,12 +6,17 @@
 
 package lab01.Interfaces;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import lab01.Clases.Cliente;
 import lab01.Handlers.Fabrica;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataPedido;
 
 
 /**
@@ -20,6 +25,9 @@ import lab01.Clases.DataCliente;
  */
 public class VerCliente extends javax.swing.JInternalFrame {
     private ICtrlUsuario ICU; 
+    private DataPedido dp;
+    private String nickname;
+    DefaultTableModel modelo;
     /**
      * Creates new form VerCliente
      */
@@ -27,8 +35,8 @@ public class VerCliente extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
+        modelo = (DefaultTableModel)jTableP.getModel();
         cargarDatos();
-      
     }
 
     /**
@@ -56,6 +64,8 @@ public class VerCliente extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         lblVerImagenUsr = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableP = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -64,7 +74,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
         setTitle("Ver informacion del cliente");
         setMinimumSize(new java.awt.Dimension(110, 300));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(650, 350));
+        setPreferredSize(new java.awt.Dimension(830, 350));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
@@ -170,6 +180,31 @@ public class VerCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        jTableP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Restaurante"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableP);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,19 +215,21 @@ public class VerCliente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -206,6 +243,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     private void cargarDatos(){
        DataCliente c = ICU.getUsuarioByNickname(ICU.getNickname());
+       this.nickname = c.getNickname();
        this.tbNickNameCliente.setVisible(true);
        this.tbNickNameCliente.setText(c.getNickname());
        this.tbapellidoClente.setVisible(true);
@@ -227,13 +265,32 @@ public class VerCliente extends javax.swing.JInternalFrame {
        ImageIcon icon = new ImageIcon(c.getImagen());
        lblVerImagenUsr.setIcon(icon);
        this.lblVerImagenUsr.setVisible(true);
+       cargarTabla();
     }                                   
+    public void cargarTabla(){
+        if(!ICU.pedidosUsuario(this.nickname).isEmpty()){
+            Iterator it = ICU.pedidosUsuario(this.nickname).entrySet().iterator();
+            String lista[] = new String[2];
+            while(it.hasNext()){
+                Map.Entry datp = (Map.Entry) it.next();
+                DataPedido datped = (DataPedido) datp.getValue();
+                lista[0] = datped.getFecha();
+                lista[1] = datped.getNickRest();
+                modelo.insertRow((int) jTableP.getRowCount(), lista);
+            }
+        }
+        else{
+            this.jTableP.setEnabled(false);
+        }
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableP;
     private javax.swing.JLabel lblNicknameCliente;
     private javax.swing.JLabel lblVerImagenUsr;
     private javax.swing.JLabel lblapellidoCliente;

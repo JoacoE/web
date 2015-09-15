@@ -275,7 +275,6 @@ public class CargarDatos extends javax.swing.JFrame {
       
       Cliente c1 = HU.obtenerUsuario(ped1.getNickUsr());
       Pedido p1 = c1.getPedido(ped1.getId());
-      p1.setId(0000000000000000001);
       p1.setFecha("12/8/2014");
       
       ICPed.setNickname("roro");
@@ -288,9 +287,8 @@ public class CargarDatos extends javax.swing.JFrame {
       
       Cliente c2 = HU.obtenerUsuario(ped2.getNickUsr());
       Pedido p2 = c2.getPedido(ped2.getId());
-      p2.setId(0000000000000000002);
       p2.setFecha("19/8/2014");
-      ICPed.actualizarEPedido(ped2.getNickUsr(), 0000000000000000002, estados.ENVIADO);
+      ICPed.actualizarEPedido(ped2.getNickUsr(), p2.getId(), estados.ENVIADO);
       
       ICPed.setNickname("chechi");
       ICPed.setMemCliente();
@@ -303,9 +301,8 @@ public class CargarDatos extends javax.swing.JFrame {
       
       Cliente c3 = HU.obtenerUsuario(ped3.getNickUsr());
       Pedido p3 = c3.getPedido(ped3.getId());
-      p3.setId(0000000000000000003);
       p3.setFecha("19/8/2014");
-      ICPed.actualizarEPedido(ped3.getNickUsr(), 0000000000000000003, estados.RECIBIDO);
+      ICPed.actualizarEPedido(ped3.getNickUsr(), p3.getId(), estados.RECIBIDO);
       
       ICPed.setNickname("andy");
       ICPed.setMemCliente();
@@ -317,9 +314,8 @@ public class CargarDatos extends javax.swing.JFrame {
       
       Cliente c4 = HU.obtenerUsuario(ped4.getNickUsr());
       Pedido p4 = c4.getPedido(ped4.getId());
-      p4.setId(0000000000000000004);
       p4.setFecha("22/8/2014");
-      ICPed.actualizarEPedido(ped4.getNickUsr(), 0000000000000000004, estados.RECIBIDO);
+      ICPed.actualizarEPedido(ped4.getNickUsr(), p4.getId(), estados.RECIBIDO);
       
       ICPed.setNickname("weiss");
       ICPed.setMemCliente();
@@ -331,9 +327,8 @@ public class CargarDatos extends javax.swing.JFrame {
       
       Cliente c5 = HU.obtenerUsuario(ped5.getNickUsr());
       Pedido p5 = c5.getPedido(ped5.getId());
-      p5.setId(0000000000000000005);
       p5.setFecha("25/8/2014");
-      ICPed.actualizarEPedido(ped5.getNickUsr(), 0000000000000000005, estados.RECIBIDO);
+      ICPed.actualizarEPedido(ped5.getNickUsr(), p5.getId(), estados.RECIBIDO);
       
         JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
     }

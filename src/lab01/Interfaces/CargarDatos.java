@@ -5,14 +5,15 @@
  */
 package lab01.Interfaces;
 
-import java.text.SimpleDateFormat;
 import lab01.Handlers.Fabrica;
-import lab01.Clases.DataCliente;
 import lab01.Clases.Cliente;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import lab01.Clases.DTOArmarPromo;
+import lab01.Clases.DTOIngresarDatos;
+import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataPromocional;
@@ -74,21 +75,30 @@ public class CargarDatos extends javax.swing.JFrame {
     public void CrearDatosPorDefecto(){
 
       //CLIENTES
+      DTOIngresarDatos datos1 = new DTOIngresarDatos("costas", "gcostas@gmail.com","Gerardo",  "Av. Italia 2078");
+      ICU.ingresarDatos(datos1);
+      DTORegistrarCliente dreg1 = new DTORegistrarCliente("Costas", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\costas.jpeg", "15/11/1983");
+      ICU.registrarCliente(dreg1);
       
-      ICU.ingresarDatos("costas", "gcostas@gmail.com","Gerardo",  "Av. Italia 2078");
-      ICU.registrarCliente("Costas", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\costas.jpeg", "15/11/1983");
+      DTOIngresarDatos datos2 = new DTOIngresarDatos("roro", "rcotelo@yahoo.com","Rodrigo", "Pdte. Berro 1548");
+      ICU.ingresarDatos(datos2);
+      DTORegistrarCliente dreg2 = new DTORegistrarCliente("Cotelo", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\roro.jpeg", "02/08/1975");
+      ICU.registrarCliente(dreg2);
+      
+      DTOIngresarDatos datos3 = new DTOIngresarDatos("chechi", "cgarrido@hotmail.com","Cecilia", "Gral. Urquiza 1548");
+      ICU.ingresarDatos(datos3);
+      DTORegistrarCliente dreg3 = new DTORegistrarCliente("Garrido", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\chechi.jpeg", "12/09/1987");
+      ICU.registrarCliente(dreg3);
      
-      ICU.ingresarDatos("roro", "rcotelo@yahoo.com","Rodrigo", "Pdte. Berro 1548");
-      ICU.registrarCliente("Cotelo", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\roro.jpeg", "02/08/1975");
+      DTOIngresarDatos datos4 = new DTOIngresarDatos("andy", "agarcia@gmail.com","Andrea", "Dr. Manuel Albo 4512");
+      ICU.ingresarDatos(datos4);
+      DTORegistrarCliente dreg4 = new DTORegistrarCliente("García", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\imagesandy.jpeg", "28/07/1951");      
+      ICU.registrarCliente(dreg4);
 
-      ICU.ingresarDatos("chechi", "cgarrido@hotmail.com","Cecilia", "Gral. Urquiza 1548");
-      ICU.registrarCliente("Garrido", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\chechi.jpeg", "12/09/1987");
-     
-      ICU.ingresarDatos("andy", "agarcia@gmail.com","Andrea", "Dr. Manuel Albo 4512");
-      ICU.registrarCliente("García", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\imagesandy.jpeg", "28/07/1951");
-
-      ICU.ingresarDatos("weiss", "aweiss@gmail.com","Adrián", "Monte Caseros 5615");
-      ICU.registrarCliente("Weiss", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\generico.jpeg", "23/12/1978");
+      DTOIngresarDatos datos5 = new DTOIngresarDatos("weiss", "aweiss@gmail.com","Adrián", "Monte Caseros 5615");
+      ICU.ingresarDatos(datos5);
+      DTORegistrarCliente dreg5 = new DTORegistrarCliente("Weiss", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\generico.jpeg", "23/12/1978");
+      ICU.registrarCliente(dreg5);
  
       //CATEGORÍAS
      
@@ -117,10 +127,8 @@ public class CargarDatos extends javax.swing.JFrame {
       Categorias1.put("Pizzas", ICU.retColCat().get("Pizzas"));
       DataRestaurante res1 = new DataRestaurante();
       res1.setColCategoria(Categorias1);
-      res1.setColProducto(null);
       res1.setDireccion("Av 8 de octubre 2704");
       res1.setEmail("mera@hotmail.com");
-      res1.setLstImagen(null);
       res1.setNickname("mera");
       res1.setNombre("Pizzería Mera");
       ICU.registrarRestaurante(res1);
@@ -132,10 +140,8 @@ public class CargarDatos extends javax.swing.JFrame {
       Categorias2.put("Pizzas", ICU.retColCat().get("Pizzas"));
       DataRestaurante res2 = new DataRestaurante();
       res2.setColCategoria(Categorias2);
-      res2.setColProducto(null);
       res2.setDireccion("Bvar. Artigas 1601");
       res2.setEmail("bar.rossel@gmail.com");
-      res2.setLstImagen(null);
       res2.setNickname("rossell");
       res2.setNombre("Bar Rossell");
       ICU.registrarRestaurante(res2);
@@ -144,10 +150,8 @@ public class CargarDatos extends javax.swing.JFrame {
       Categorias3.put("Empanadas", ICU.retColCat().get("Empanadas"));
       DataRestaurante res3 = new DataRestaurante();
       res3.setColCategoria(Categorias3);
-      res3.setColProducto(null);
       res3.setDireccion("18 de julio 2138");
       res3.setEmail("bocatti@gmail.com");
-      res3.setLstImagen(null);
       res3.setNickname("bocatti");
       res3.setNombre("Empanadas Bocatti");
       ICU.registrarRestaurante(res3);
@@ -158,10 +162,8 @@ public class CargarDatos extends javax.swing.JFrame {
       Categorias4.put("Comida China", ICU.retColCat().get("Comida China"));
       DataRestaurante res4 = new DataRestaurante();
       res4.setColCategoria(Categorias4);
-      res4.setColProducto(null);
       res4.setDireccion("Libertad 2535");
       res4.setEmail("wok.in.box@hotmail.com");
-      res4.setLstImagen(null);
       res4.setNickname("winb");
       res4.setNombre("Wok in Box");
       ICU.registrarRestaurante(res4);
@@ -169,53 +171,69 @@ public class CargarDatos extends javax.swing.JFrame {
       //PRODUCTOS INDIVIDUALES
      
       DataIndividual di1 = new DataIndividual("Asado", "Asado a la parrilla", 225.0, null, 300);
-      ICProd.registrarProducto(di1, "mera", false);
+      DTORegistrarProducto prod1 = new DTORegistrarProducto(di1, "mera", false);
+      ICProd.registrarProducto(prod1);
      
       DataIndividual di2 = new DataIndividual("Milanesa de Carne", "Con lechuga, tomate, mayonesa y fritas", 180.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/milanesa-de-carne.jpg", 150);
-      ICProd.registrarProducto(di2, "mera", false);
+      DTORegistrarProducto prod2 = new DTORegistrarProducto(di2, "mera", false);
+      ICProd.registrarProducto(prod2);
      
       DataIndividual di3 = new DataIndividual("Chivito canadiense", "Lomito, jamón, muzza, tomate, aceitunas, panceta, huevo, morrón y fritas", 305.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/chivito-canadiense.jpg", 49);
-      ICProd.registrarProducto(di3, "mera", false);
+      DTORegistrarProducto prod3 = new DTORegistrarProducto(di3, "mera", false);
+      ICProd.registrarProducto(prod3);
      
       DataIndividual di4 = new DataIndividual("Pizza 2 gustos", "Pizza con dos gustos a elección", 130.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 100);
-      ICProd.registrarProducto(di4, "mera", false);
+      DTORegistrarProducto prod4 = new DTORegistrarProducto(di4, "mera", false);
+      ICProd.registrarProducto(prod4);
 
       DataIndividual di5 = new DataIndividual("Chivito al plato", "Ensalada rusa, mixta, huevo, jamón, muzza, panceta, aceitunas y fritas", 324.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 115);
-      ICProd.registrarProducto(di5, "rossell", false);
+      DTORegistrarProducto prod5 = new DTORegistrarProducto(di5, "rossell", false);
+      ICProd.registrarProducto(prod5);
      
       DataIndividual di6 = new DataIndividual("Milanesa a caballo", "Milanesa con dos huevos fritos acompañado de fritas", 270.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/milanesa-a-caballo.jpg", 35);
-      ICProd.registrarProducto(di6, "rossell", false);
+      DTORegistrarProducto prod6 = new DTORegistrarProducto(di6, "rossell", false);
+      ICProd.registrarProducto(prod6);
      
       DataIndividual di7 = new DataIndividual("Pizza 2 gustos", "Pizza con dos gustos a elección", 103.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 45);
-      ICProd.registrarProducto(di7, "rossell", false);
+      DTORegistrarProducto prod7 = new DTORegistrarProducto(di7, "rossell", false);
+      ICProd.registrarProducto(prod7);
      
       DataIndividual di8 = new DataIndividual("Agnolotis", "Agnolotis de jamón y queso", 225.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/agnolotis.jpg", 50);
-      ICProd.registrarProducto(di8, "rossell", false);
+      DTORegistrarProducto prod8 = new DTORegistrarProducto(di8, "rossell", false);
+      ICProd.registrarProducto(prod8);
      
       DataIndividual di9 = new DataIndividual("Empanada de carne", "Carne, aceitunas, huevo duro, condimentos", 44.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/empanada-de-carne.jpg", 65);
-      ICProd.registrarProducto(di9, "bocatti", false);     
+      DTORegistrarProducto prod9 = new DTORegistrarProducto(di9, "bocatti", false);
+      ICProd.registrarProducto(prod9);     
 
       DataIndividual di10 = new DataIndividual("Empanada Americana", "Carne, panceta y huevo duro", 44.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 70);
-      ICProd.registrarProducto(di10, "bocatti", false);
+      DTORegistrarProducto prod10 = new DTORegistrarProducto(di10, "bocatti", false);
+      ICProd.registrarProducto(prod10);
      
       DataIndividual di11 = new DataIndividual("Empanada QyC", "Empanada de Queso y Cebolla", 44.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/empanada-qyc.jpg", 333);
-      ICProd.registrarProducto(di11, "bocatti", false);
+      DTORegistrarProducto prod11 = new DTORegistrarProducto(di11, "bocatti", false);      
+      ICProd.registrarProducto(prod11);
      
       
       DataIndividual di12 = new DataIndividual("Empanada Capresse", "Queso, tomate y albahaca", 44.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/empanada-capresse.jpg", 230);
-      ICProd.registrarProducto(di12, "bocatti", false);     
+      DTORegistrarProducto prod12 = new DTORegistrarProducto(di12, "bocatti", false);
+      ICProd.registrarProducto(prod12);     
      
       DataIndividual di13 = new DataIndividual("Thai wok", "Cerdo, calamares, sweet chili, salsa de ostras, maní y jugo de lima, acompañado de tallarines o arroz.", 240.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/tahi-wok.jpg", 222);
-      ICProd.registrarProducto(di13, "winb", false);
+      DTORegistrarProducto prod13 = new DTORegistrarProducto(di13, "winb", false);
+      ICProd.registrarProducto(prod13);
      
       DataIndividual di14 = new DataIndividual("China wok", "Tempura de cerdo, vegetales mixtos, almendras, salsa de soja y naranja, acompañado de tallarines o arroz.", 240.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 38);
-      ICProd.registrarProducto(di14, "winb", false); 
+      DTORegistrarProducto prod14 = new DTORegistrarProducto(di14, "winb", false);
+      ICProd.registrarProducto(prod14);
      
       DataIndividual di15 = new DataIndividual("Classic wok de pollo", "Pollo, vegetales mixtos, salsa agridulce, salsa de soja y cebollita de verdeo, acompañado de tallarines o arroz.", 230.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/classic-wok-de-pollo.jpg", 44);
-      ICProd.registrarProducto(di15, "winb", false);
+      DTORegistrarProducto prod15 = new DTORegistrarProducto(di15, "winb", false);
+      ICProd.registrarProducto(prod15);
      
       DataIndividual di16 = new DataIndividual("Classic wok de cerdo", "Cerdo, vegetales mixtos, jengibre, salsa de ostras y ralladura de lima, acompañado de tallarines o arroz.", 230.0, "/home/martin/NetBeansProjects/ProgAplicaciones/images/productos/generico.jpg", 65);
-      ICProd.registrarProducto(di16, "winb", false);
+      DTORegistrarProducto prod16 = new DTORegistrarProducto(di16, "winb", false);
+      ICProd.registrarProducto(prod16);
       
       // Productos Promocionales
       
@@ -231,7 +249,8 @@ public class CargarDatos extends javax.swing.JFrame {
       int cantProd2Prom1 = 1;
       indivProm1.put(nomProd2Prom1, cantProd2Prom1);
       ICProd.setPromo(indivProm1);
-      ICProd.armarPromo("mera", dprom1.getDataNombre(), dprom1.getDataDescripcion(), dprom1.getDescuento());
+      DTOArmarPromo promo1 = new DTOArmarPromo("mera", dprom1.getDataNombre(), dprom1.getDataDescripcion(), dprom1.getDescuento());
+      ICProd.armarPromo(promo1);
       
       Map indivProm2 = new HashMap();
       DataPromocional dprom2 = new DataPromocional();
@@ -245,7 +264,8 @@ public class CargarDatos extends javax.swing.JFrame {
       int cantProd2Prom2 = 1;
       indivProm2.put(nomProd2Prom2, cantProd2Prom2);
       ICProd.setPromo(indivProm2);
-      ICProd.armarPromo("mera", dprom2.getDataNombre(), dprom2.getDataDescripcion(), dprom2.getDescuento());
+      DTOArmarPromo promo2 = new DTOArmarPromo("mera", dprom2.getDataNombre(), dprom2.getDataDescripcion(), dprom2.getDescuento());
+      ICProd.armarPromo(promo2);
       
       Map indivProm3 = new HashMap();
       DataPromocional dprom3 = new DataPromocional();
@@ -259,7 +279,8 @@ public class CargarDatos extends javax.swing.JFrame {
       int cantProd2Prom3 = 1;
       indivProm3.put(nomProd2Prom3, cantProd2Prom3);
       ICProd.setPromo(indivProm3);
-      ICProd.armarPromo("rossell", dprom3.getDataNombre(), dprom3.getDataDescripcion(), dprom3.getDescuento());
+      DTOArmarPromo promo3 = new DTOArmarPromo("rossell", dprom3.getDataNombre(), dprom3.getDataDescripcion(), dprom3.getDescuento());
+      ICProd.armarPromo(promo3);
       
       // Pedidos
       

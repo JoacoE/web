@@ -10,13 +10,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import lab01.Clases.Cliente;
-import lab01.Clases.DataCliente;
 import lab01.Clases.DataIndividual;
-import lab01.Clases.DataProducto;
 import lab01.Clases.Cantidad_Individual;
-import lab01.Clases.DataPromocional;
-//import lab01.Clases.DataProducto_Stock;
+import lab01.Clases.DTOActualizarIndividual;
+import lab01.Clases.DTOActualizarPromocional;
+import lab01.Clases.DTOArmarPromo;
+import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.Individual;
 import lab01.Clases.Promocional;
 import lab01.Clases.Producto;
@@ -31,26 +30,23 @@ public class CtrlProducto implements ICtrlProducto {
 
     private Map Promo;
 
-    public void registrarProducto(DataIndividual di, String nomRest, boolean promocional) {
-
+    @Override
+    public void registrarProducto(DTORegistrarProducto datos) {
         //primero obtengo el restaurante, si existe
         HUsuario HU = HUsuario.getinstance();
-        Restaurante restoran = HU.obtenerRestaurante(nomRest);
+        Restaurante restoran = HU.obtenerRestaurante(datos.getNickRest());
         if (restoran == null) {
             JOptionPane.showMessageDialog(null, "El restaurante no esta registrado en el sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
-            if (!promocional) { // si el producto es individual
-                Producto i = new Individual(di.getDataNombre(), di.getDataDescripcion(), di.getDataPrecio(), di.getCantidad());
+            if (!datos.isPromo()) { // si el producto es individual
+                Producto i = new Individual(datos.getDi().getDataNombre(), datos.getDi().getDataDescripcion(), datos.getDi().getDataPrecio(), datos.getDi().getCantidad());
                 restoran.addProducto(i); //agrego el producto a la coleccion de productos de ese restoran
-
-            } else {
-
             }
         }
-
     }
 
+    @Override
     public boolean existeRestaurante(String nomRest) {
         HUsuario HU = HUsuario.getinstance();
         Restaurante restoran = HU.obtenerRestaurante(nomRest);
@@ -63,10 +59,12 @@ public class CtrlProducto implements ICtrlProducto {
 
     }
 
+    @Override
     public void setPromo(Map promo) {
         this.Promo = promo;
     }
 
+    @Override
     public Map listarIndividuales(String nomRest) {
 
         Map ret = new HashMap();
@@ -85,10 +83,11 @@ public class CtrlProducto implements ICtrlProducto {
         return ret;
     }
 
-    public void armarPromo(String rest, String nombre, String desc, double descuento) {
+    @Override
+    public void armarPromo(DTOArmarPromo datos) {
         Iterator it = this.Promo.entrySet().iterator();
         HUsuario HU = HUsuario.getinstance();
-        Restaurante r = HU.obtenerRestaurante(rest);
+        Restaurante r = HU.obtenerRestaurante(datos.getNickRest());
         ArrayList<Cantidad_Individual> ColCantIndividual = new ArrayList<Cantidad_Individual>();
         //Promocional pro = 
         while (it.hasNext()) {
@@ -99,31 +98,34 @@ public class CtrlProducto implements ICtrlProducto {
             Cantidad_Individual CI = new Cantidad_Individual(i, cantidad);
             ColCantIndividual.add(CI);
         }
-        Promocional pro = new Promocional(nombre, desc, true, descuento, ColCantIndividual);
-        pro.setPrecioPromo(descuento);
+        Promocional pro = new Promocional(datos.getNombre(), datos.getDescripcion(), true, datos.getDescuento(), ColCantIndividual);
+        pro.setPrecioPromo(datos.getDescuento());
         r.addProducto(pro);
     }
-    public Producto getProdNombre(String Nprod, Restaurante res){
+    
+    public Producto getProdNombre(String Nprod, String nickRes){
+        HUsuario hu = HUsuario.getinstance();
+        Restaurante res = hu.obtenerRestaurante(nickRes);
         return res.getProducto(Nprod);
-    
-    }
-    public void actualizarIndividual(DataIndividual ind, String nombre,Restaurante res){
-        Individual individual = (Individual) this.getProdNombre(nombre, res);
-        individual.setNombre(ind.getDataNombre());
-        individual.setDescripcion(ind.getDataDescripcion());
-        individual.setCantidad(ind.getCantidad());
-        individual.setPrecio(ind.getDataPrecio());
-        //prod.setImagen(nombre); falta ver lo de la imagen.
-       // res.ModificarProductoIndividual(ind, nombre);
-        
     }
     
-    public void actualizarPromocional(DataPromocional prom, String nombre, Restaurante res){
-        Promocional promo = (Promocional) this.getProdNombre(nombre, res);
-        promo.setNombre(prom.getDataNombre());
-        promo.setDescripcion(prom.getDataDescripcion());
-        promo.setActiva(prom.getActiva());
-        promo.setDescuento(prom.getDescuento());
+    @Override
+    public void actualizarIndividual(DTOActualizarIndividual datos){
+        Individual individual = (Individual) this.getProdNombre(datos.getNombre(), datos.getNickRest());
+        individual.setNombre(datos.getDi().getDataNombre());
+        individual.setDescripcion(datos.getDi().getDataDescripcion());
+        individual.setCantidad(datos.getDi().getCantidad());
+        individual.setPrecio(datos.getDi().getDataPrecio());
+        individual.setImagen(datos.getImagen()); //falta ver lo de la imagen.
+    }
+    
+    @Override
+    public void actualizarPromocional(DTOActualizarPromocional datos){
+        Promocional promo = (Promocional) this.getProdNombre(datos.getNombre(), datos.getNickRest());
+        promo.setNombre(datos.getDp().getDataNombre());
+        promo.setDescripcion(datos.getDp().getDataDescripcion());
+        promo.setActiva(datos.getDp().getActiva());
+        promo.setDescuento(datos.getDp().getDescuento());
         promo.setPrecioPromo(promo.getDescuento());
     }
 }

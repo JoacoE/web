@@ -7,6 +7,7 @@ package lab01.Clases;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -29,17 +30,36 @@ public class DataRestaurante {
         this.nombre=nombre;
         this.email=mail;
         this.direccion=direccion;
-        this.lstImagen=lstImagen;
-        this.ColProducto = colProd;
-        this.ColCategoria = colCategoria;
+        if(lstImagen == null){
+            this.lstImagen = null;
+        }else{
+            this.lstImagen = new ArrayList<>();
+            this.lstImagen.addAll(lstImagen);
+        }
+        if(colProd == null){
+            this.ColProducto = null;
+        }else{
+            this.ColProducto = new HashMap();
+            this.ColProducto.putAll(colProd);
+        }
+        if(colCategoria == null){
+            this.ColCategoria = null;
+        }else{
+            this.ColCategoria = new HashMap();
+            this.ColCategoria.putAll(colCategoria);
+        }
     }
 
-    public Usuario dataResAres(){
-        Usuario r = new Restaurante(this.nickname, this.nombre, this.email, this.direccion, this.lstImagen, this.ColProducto, this.ColCategoria);
-        return r;
-    }
     public boolean member(String nombre){
-        return ColCategoria.containsKey(nombre);
+        Iterator dcats = getColCategoria().entrySet().iterator();
+        while(dcats.hasNext()){
+            Map.Entry dcat = (Map.Entry) dcats.next();
+            DataCategoria dc = (DataCategoria)dcat.getValue();
+            if(dc.getNombre().equals(nombre)){
+                return true;
+            }
+        }
+        return false;
     }
     
     public void setNickname(String nickname){
@@ -75,7 +95,7 @@ public class DataRestaurante {
     }
     
     public void setLstImagen(ArrayList<String> lstImagen){
-        this.lstImagen = lstImagen;
+        this.lstImagen.addAll(lstImagen);
     }
     
     public ArrayList<String> getLstImagen(){
@@ -83,7 +103,7 @@ public class DataRestaurante {
     }
     
     public void setColCategoria(Map colCategoria){
-        this.ColCategoria = colCategoria;
+        this.ColCategoria.putAll(colCategoria);
     }
     
     public Map getColCategoria(){
@@ -95,8 +115,7 @@ public class DataRestaurante {
     }
     
     public void setColProducto(Map colProd){
-        this.ColProducto = colProd;
-        
+        this.ColProducto.putAll(colProd);
     }
     
     public Map listarCategorias(){

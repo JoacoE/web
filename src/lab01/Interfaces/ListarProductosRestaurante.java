@@ -5,17 +5,14 @@
  */
 package lab01.Interfaces;
 
-import java.applet.AudioClip;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.Restaurante;
 import lab01.Handlers.Fabrica;
 import java.applet.AudioClip;
-import lab01.Clases.Producto;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPromocional;
+import lab01.Clases.DataRestaurante;
 /**
  *
  * @author gera
@@ -187,18 +184,25 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void LoadTableProductRest(String res){
-        Restaurante r = null;
         String lista[]=new String[3];
-        r = ICU.getRestauranteByNickname(res);
+        DataRestaurante r = ICU.getRestauranteByNickname(res);
         ICP.setMemRestaurante(res);
-        Map lstProd = r.obtenerListaProductos();
+        Map lstProd = r.getColProducto();
         Iterator it = lstProd.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry mapcol = (Map.Entry) it.next();
-            Producto producto = (Producto)mapcol.getValue();            
-            lista[0]= producto.getNombre();
-            lista[1]= Double.toString(producto.getPrecio());
-            lista[2]= "0";
+            if(mapcol.getValue() instanceof DataIndividual){
+                DataIndividual dproducto = (DataIndividual)mapcol.getValue();            
+                lista[0]= dproducto.getDataNombre();
+                lista[1]= Double.toString(dproducto.getDataPrecio());
+                lista[2]= "0";
+            }
+            if(mapcol.getValue() instanceof DataPromocional){
+                DataPromocional dproducto = (DataPromocional)mapcol.getValue();            
+                lista[0]= dproducto.getDataNombre();
+                lista[1]= Double.toString(dproducto.getDataPrecio());
+                lista[2]= "0";
+            }
             modelo.insertRow((int)fila, lista);
             fila++;
         }

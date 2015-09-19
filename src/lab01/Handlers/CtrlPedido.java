@@ -87,9 +87,9 @@ public class CtrlPedido implements ICtrlPedido {
             this.memCliente = mu.obtenerUsuario(this.getNickname());
         }
     }
-    public void setMemoriaCliente(Cliente c){
-            this.memCliente = c;
-        
+    public void setMemoriaCliente(String nickname){
+            HUsuario hu = HUsuario.getinstance();
+            this.memCliente = hu.obtenerUsuario(nickname);
     }
     public void setCat(String nombre){
         this.categoria=nombre;

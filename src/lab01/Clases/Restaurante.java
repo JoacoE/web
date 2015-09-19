@@ -23,9 +23,19 @@ public class Restaurante extends Usuario{
 
     public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, Map colProd, Map categorias) {
         super(nickname,nombre,email,direccion);
-        ColCategoria = categorias;
-        ColProducto = new HashMap();
-        //this.lstImagen = new ArrayList<String>(); //Esto puede ser cualquera
+        if(categorias == null){
+            this.ColCategoria = null;
+        }else{
+            this.ColCategoria = new HashMap();
+            this.ColCategoria.putAll(categorias);
+        }
+        this.ColProducto = new HashMap();
+        if(lstImagenes == null){
+            this.lstImagen = null;
+        }else{
+            this.lstImagen = new ArrayList<>(); //Esto puede ser cualquera
+            this.lstImagen.addAll(lstImagenes);
+        }
     }
     
     public void addCategoria(Categoria c){
@@ -39,7 +49,12 @@ public class Restaurante extends Usuario{
     }
     
     public void addProducto(Producto p){
-        ColProducto.put(p.getNombre(), p);
+        if(this.ColProducto == null){
+            this.ColProducto = new HashMap();
+            this.ColProducto.put(p.getNombre(), p);
+        }else{
+            ColProducto.put(p.getNombre(), p);
+        }
     }
     
     public Producto getProducto(String nombre){
@@ -65,7 +80,30 @@ public class Restaurante extends Usuario{
         return ret;
     }
     public DataRestaurante RestauranteADR(){
-        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, this.ColProducto, this.ColCategoria);
+        Map dataProductos = new HashMap();
+        Map dataCategorias = new HashMap();
+        Iterator prods = this.ColProducto.entrySet().iterator();
+        while(prods.hasNext()){
+            Map.Entry prod = (Map.Entry) prods.next();
+            if(prod.getValue() instanceof Individual){
+                Individual i = (Individual) prod.getValue();
+                DataIndividual di = i.getDataIndividual();
+                dataProductos.put(di.getDataNombre(), di);
+            }
+            if(prod.getValue() instanceof Promocional){
+                Promocional p = (Promocional) prod.getValue();
+                DataPromocional dp = p.getDataPromo();
+                dataProductos.put(dp.getDataNombre(), dp);
+            }
+        }
+        Iterator categs = this.ColCategoria.entrySet().iterator();
+        while(categs.hasNext()){
+            Map.Entry cat = (Map.Entry) categs.next();
+            Categoria c = (Categoria) cat.getValue();
+            DataCategoria dc = c.CatADC();
+            dataCategorias.put(dc.getNombre(), dc);
+        }
+        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataProductos, dataCategorias);
         return DR;
     }
     
@@ -90,12 +128,11 @@ public class Restaurante extends Usuario{
             Map.Entry map = (Map.Entry) it.next();
             if(map.getValue() instanceof Individual){
                 Individual i = (Individual) map.getValue();
-                int cant=i.getCantidad();
-                ret.put(map.getKey(),cant);
+                DataIndividual di = i.getDataIndividual();
+                ret.put(di.getDataNombre(),di.getCantidad());
             }
         }
         return ret;
-    
     }
     
     public DataCarrito agregarProducto(String nombre, int cantidad){
@@ -115,10 +152,9 @@ public class Restaurante extends Usuario{
         Producto prod = this.getProducto(nombre);
         return prod.getProdStock();
     }
+    
     public void ModificarProductoIndividual(DataIndividual ind, String nombreOld){
         Producto p = this.getProducto(nombreOld);
         p.setNombre(ind.getDataNombre());
-       
-    
-}
+    }
 }

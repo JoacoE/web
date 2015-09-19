@@ -7,17 +7,16 @@ package lab01.Interfaces;
 
 import java.util.Iterator;
 import java.util.Map;
-import javax.print.event.PrintJobEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataCliente;
+import lab01.Clases.DTOActualizarIndividual;
+import lab01.Clases.DTOActualizarPromocional;
 import lab01.Clases.Producto;
-import lab01.Clases.Individual;
-import lab01.Clases.Promocional;
 import lab01.Handlers.Fabrica;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataPromocional;
+import lab01.Clases.DataRestaurante;
 import lab01.Clases.Restaurante;
 
 /**
@@ -31,13 +30,13 @@ public class VerInfoProd extends javax.swing.JFrame {
      */
     private DataIndividual di = new DataIndividual();
     private DataPromocional dp = new DataPromocional();
-    private Restaurante res;
+    private DataRestaurante res;
     private ICtrlPedido ICPed;
     String nomprod;
     String nombre;
     boolean promo;
     
-    public VerInfoProd(Restaurante r,DataIndividual individual) {
+    public VerInfoProd(DataIndividual individual, DataRestaurante dr) {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICPed = fabrica.getICtrlPedido();
@@ -60,21 +59,21 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.tbDescuento.setVisible(false);
         this.lblDescuento.setVisible(false);
         this.di = individual;
-        this.res = r;
+        this.res = dr;
         this.promo = false;
         if(!cargarTablaPedidos()){
             this.jTablaPedidos.setEnabled(false);
         }
     }
 
-    public VerInfoProd(DataPromocional promo, Restaurante r){
+    public VerInfoProd(DataPromocional promo, DataRestaurante dr){
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICPed = fabrica.getICtrlPedido();
         ICP = fabrica.getICtrlProducto();
         modelo = (DefaultTableModel) jTabla.getModel();
         modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
-        this.res = r;
+        this.res = dr;
         //this.txtNomProd.enable(false);
         this.nomprod = promo.getDataNombre();
         this.txtNomProd.setText(promo.getDataNombre());
@@ -96,7 +95,7 @@ public class VerInfoProd extends javax.swing.JFrame {
         } else {
             this.jcEstado.addItem("INACTIVA");
         }
-        cargartabla(promo, r);
+        cargartabla(promo, dr);
         if(!cargarTablaPedidos()){
             this.jTablaPedidos.setEnabled(false);
         }
@@ -409,19 +408,26 @@ public class VerInfoProd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cargartabla(DataPromocional promo, Restaurante r) {
+    private void cargartabla(DataPromocional promo, DataRestaurante r) {
         Iterator it = promo.getColDatIndividual().entrySet().iterator();
         String lista[] = new String[3];
         while (it.hasNext()) {
             Map.Entry map = (Map.Entry) it.next();
             DataIndividual di = (DataIndividual) map.getValue();
-            //lista[0]=model.getSize()-1;
             lista[0] = di.getDataNombre();
             int cant = di.getCantidad();
             String st = Integer.toString(cant);
             lista[1] = st;
-            int stock = r.getProducto(di.getDataNombre()).getCantidad();
-            lista[2] = String.valueOf(stock);
+            Iterator dprods = r.getColProducto().entrySet().iterator();
+            while(dprods.hasNext()){
+                Map.Entry dprod = (Map.Entry) dprods.next();
+                if(dprod.getValue() instanceof DataIndividual){
+                    DataIndividual dind = (DataIndividual)dprod.getValue();
+                    if(dind.getDataNombre().equals(di.getDataNombre())){
+                        lista[2] = String.valueOf(dind.getCantidad());
+                    }
+                }
+            }
             modelo.insertRow((int) jTabla.getRowCount(), lista);
         }
     }
@@ -499,7 +505,8 @@ public class VerInfoProd extends javax.swing.JFrame {
             this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
             this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
             if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-                ICP.actualizarIndividual(di,this.nombre , res);
+                DTOActualizarIndividual datosi = new DTOActualizarIndividual(di, this.nombre, res.getNickname());
+                ICP.actualizarIndividual(datosi);
                 JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             }else{
               JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -515,7 +522,8 @@ public class VerInfoProd extends javax.swing.JFrame {
                 this.dp.setActiva(false);
             }
             if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-                ICP.actualizarPromocional(dp,this.nombre , res);
+                DTOActualizarPromocional datosp = new DTOActualizarPromocional(dp,this.nombre , res.getNickname());
+                ICP.actualizarPromocional(datosp);
                 JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             }else{
               JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);

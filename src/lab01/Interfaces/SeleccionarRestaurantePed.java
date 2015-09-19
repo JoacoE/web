@@ -8,17 +8,10 @@ package lab01.Interfaces;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.DefaultListModel;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.JTree;
-import lab01.Clases.DataRestaurante;
-import lab01.Clases.Restaurante;
-import lab01.Clases.Usuario;
 import lab01.Handlers.Fabrica;
-import lab01.Clases.Categoria;
 import lab01.Clases.DataCategoria;
 
 /**
@@ -49,9 +42,8 @@ public class SeleccionarRestaurantePed extends javax.swing.JInternalFrame {
 
     
     public void cargarTree(){
-        Map Ccat=ICU.retColCat();    
         if (Raiz != null){
-            Iterator itC = Ccat.entrySet().iterator();
+            Iterator itC = ICU.retColCat().entrySet().iterator();
             while(itC.hasNext()){
                 Map.Entry mapC = (Map.Entry) itC.next();
                 DataCategoria cat= (DataCategoria)mapC.getValue();

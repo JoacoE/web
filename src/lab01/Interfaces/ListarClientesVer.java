@@ -5,14 +5,9 @@
  */
 
 package lab01.Interfaces;
-import java.util.Vector;
-import java.awt.event.ItemEvent;
 import java.util.Iterator;
-import lab01.Clases.Restaurante;
-import lab01.Clases.Cliente;
 import lab01.Handlers.Fabrica;
 import java.util.Map;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
 

@@ -5,14 +5,9 @@
  */
 
 package lab01.Interfaces;
-import java.util.Vector;
-import java.awt.event.ItemEvent;
 import java.util.Iterator;
-import lab01.Clases.Restaurante;
-import lab01.Clases.Cliente;
 import lab01.Handlers.Fabrica;
 import java.util.Map;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
 
@@ -141,8 +136,8 @@ public class ListarUsuariosGP extends javax.swing.JInternalFrame {
     private void jbListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListoActionPerformed
         String nick=String.valueOf(modelo.getValueAt(jtabla.getSelectedRow(),1));
         ICPed.setNickname(nick);
-        Cliente clie = ICU.getUsuNick(nick);
-        ICPed.setMemoriaCliente(clie);
+        DataCliente clie = ICU.getUsuarioByNickname(nick);
+        ICPed.setMemoriaCliente(clie.getNickname());
         String mail=String.valueOf(modelo.getValueAt(jtabla.getSelectedRow(), 0));
         ICPed.setMailCliente(mail);
         this.dispose();

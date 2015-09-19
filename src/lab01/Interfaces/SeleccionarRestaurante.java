@@ -8,18 +8,12 @@ package lab01.Interfaces;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.DefaultListModel;
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.JTree;
 import lab01.Clases.DataRestaurante;
-import lab01.Clases.Restaurante;
-import lab01.Clases.Usuario;
 import lab01.Handlers.Fabrica;
-import lab01.Clases.Categoria;
 import lab01.Clases.DataCategoria;
 
 /**
@@ -55,19 +49,20 @@ public class SeleccionarRestaurante extends javax.swing.JInternalFrame {
             Iterator itC = Ccat.entrySet().iterator();
             while(itC.hasNext()){
                 Map.Entry mapC = (Map.Entry) itC.next();
-                DataCategoria cat= (DataCategoria)mapC.getValue();
-                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(cat.getNombre());
+                DataCategoria dcat= (DataCategoria)mapC.getValue();
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(dcat.getNombre());
                 modelo.insertNodeInto(nodo, Raiz, 0);
-                Map Crest = ICU.listaUsuPorCategoria(cat.getNombre());
+                Map Crest = ICU.listaUsuPorCategoria(dcat.getNombre());
                 if(Crest.isEmpty()){
                     DefaultMutableTreeNode vacio = new DefaultMutableTreeNode("Sin restaurantes");
                     modelo.insertNodeInto(vacio, nodo, 0);
-                    }
+                }
                 else{
                     Iterator itR = Crest.entrySet().iterator();
                     while(itR.hasNext()){
                         Map.Entry mapR = (Map.Entry) itR.next();
-                        String c= (String)mapR.getKey();
+                        DataRestaurante dr = (DataRestaurante)mapR.getValue();
+                        String c = dr.getNickname();
                         DefaultMutableTreeNode Res = new DefaultMutableTreeNode(c);
                         modelo.insertNodeInto(Res, nodo, 0);
                     }

@@ -4,22 +4,20 @@
  * and open the template in the editor.
  */
 package lab01.Interfaces;
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lab01.Clases.Categoria;
 import lab01.Clases.DataRestaurante;
-//import lab01.Interfaces.ICtrlUsuario;
 import lab01.Handlers.Fabrica;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import lab01.Clases.DTOIngresarDatos;
+import lab01.Clases.DTORegistrarCliente;
+import lab01.Handlers.HImagenes;
 
 /**
  *
@@ -27,13 +25,20 @@ import javax.swing.DefaultListModel;
  */
 public class RegUsuario extends javax.swing.JInternalFrame {
 private ICtrlUsuario ICU;
+private HImagenes HI;
 private HashMap mapCat = new HashMap();
 DefaultListModel model;
+private boolean clientOrRestaurant;
+private ArrayList<File> lstImagen = new ArrayList<>();
+private ArrayList<String>  nombresImagenes = new ArrayList<>();
+private String nombreImagen = null;
+private File img = null;
 
     public RegUsuario() {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
+        HI = HImagenes.getInstance();
         model = new DefaultListModel();
     }
     
@@ -321,28 +326,28 @@ DefaultListModel model;
         String nombre = this.tbNombre.getText();
         String apellido = (this.tbApellido.getText());
         String direccion = this.tbDireccion.getText();
-        String img = this.lblSelImg.getText();
         int dia = this.tbDia.getValue();
         int mes = this.tbMes.getMonth() + 1;
         int anio = this.tbAnio.getValue();
         String fecha = dia + "/" + mes + "/" + anio;
-        ArrayList<String> lstImagen = null;
+        DTOIngresarDatos dingresar = new DTOIngresarDatos(nickname, mail, nombre, direccion);
+        DTORegistrarCliente dregcliente = new DTORegistrarCliente(apellido, nombreImagen, fecha);
         
         
-        DataRestaurante dt = new DataRestaurante(nickname, nombre, mail, direccion, lstImagen, null,ICU.getLstCat());
+        
         if(nickname.isEmpty()||mail.isEmpty()||nombre.isEmpty()||direccion.isEmpty())
             JOptionPane.showMessageDialog(null, "No debe haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
         else if (!mailok){
             JOptionPane.showMessageDialog(null, "Mail no válido","ERROR",JOptionPane.ERROR_MESSAGE);
         }
-        else
-            if(ICU.ingresarDatos(nickname,mail,nombre,direccion)){
+        else 
+            if(ICU.ingresarDatos(dingresar)){
                 if(rbCliente.isSelected()){
                     if (apellido.isEmpty()){
                         JOptionPane.showMessageDialog(null, "No debe haber campos vacios","ERROR",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
-                    ICU.registrarCliente(apellido, img, fecha);
+                    ICU.registrarCliente(dregcliente);
                     JOptionPane.showMessageDialog(null, "El cliente ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
                     this.tbNickname.setText("");
                     this.tbMail.setText("");
@@ -353,15 +358,19 @@ DefaultListModel model;
                 }}
                 else
                     if(rbRestaurante.isSelected()){
-                        //dt.setColCategoria(ICU.getLstCat());
-                        ICU.registrarRestaurante(dt);
-                        JOptionPane.showMessageDialog(null, "El restaurante ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
-                        this.tbNickname.setText("");
-                        this.tbMail.setText("");
-                        this.tbNombre.setText("");
-                        this.tbApellido.setText("");
-                        this.tbDireccion.setText("");
-                        this.lblSelImg.setText("");
+                        DataRestaurante dt = new DataRestaurante(nickname, nombre, mail, direccion, nombresImagenes, null, ICU.getLstCat());
+                        if(dt.getColCategoria() != null){
+                            ICU.registrarRestaurante(dt);
+                            JOptionPane.showMessageDialog(null, "El restaurante ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
+                            this.tbNickname.setText("");
+                            this.tbMail.setText("");
+                            this.tbNombre.setText("");
+                            this.tbApellido.setText("");
+                            this.tbDireccion.setText("");
+                            this.lblSelImg.setText("");
+                        }else{
+                            JOptionPane.showMessageDialog(rootPane, "Debe ingresar al menos una categoria", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                     else
                         JOptionPane.showMessageDialog(null, "Seleccione Cliente o Restaurante","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -372,11 +381,33 @@ DefaultListModel model;
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnSelImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelImagenActionPerformed
-        JFileChooser selector = new JFileChooser();
-        selector.showOpenDialog(null);
-        File archivo = selector.getSelectedFile();
-        String filename = archivo.getAbsolutePath();
-        lblSelImg.setText(filename);
+        if(rbRestaurante.isSelected()){
+            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, PNG & GIF", "jpeg", "png", "gif");
+            JFileChooser selector = new JFileChooser();
+            selector.setMultiSelectionEnabled(true);
+            selector.setFileFilter(filtroImagen);
+            int r = selector.showOpenDialog(null);
+            if (r == JFileChooser.APPROVE_OPTION) {
+                File archivos[] = selector.getSelectedFiles();
+                for (int i = 0; i < archivos.length; i++) {
+                    String indice = String.valueOf(i);
+                    String nuevoNombre = tbNickname.getText().concat(indice);
+                    File agregar = archivos[i];
+                    lstImagen.add(agregar);
+                    nombresImagenes.add(nuevoNombre);
+                }
+                HI.guardarArrayImg(lstImagen, tbNickname.getText());
+            }
+        } 
+        if(rbCliente.isSelected()){
+            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, PNG & GIF", "jpeg", "png", "gif");
+            JFileChooser selector = new JFileChooser();
+            selector.setFileFilter(filtroImagen);
+            selector.showOpenDialog(null);
+            img = selector.getSelectedFile();
+            nombreImagen = tbNickname.getText();
+            HI.guardarImagen(img, nombreImagen);
+        }
     }//GEN-LAST:event_btnSelImagenActionPerformed
 
     private void tbNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbNicknameActionPerformed
@@ -384,15 +415,14 @@ DefaultListModel model;
     }//GEN-LAST:event_tbNicknameActionPerformed
 
     private void rbRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbRestauranteActionPerformed
+       //TODO add your handling code here:
        this.jbSelCategoria.setVisible(true);
-    //TODO add your handling code here:
     }//GEN-LAST:event_rbRestauranteActionPerformed
 
     private void rbClienteActionPerformed(java.awt.event.ActionEvent evt) {                                              
-    // TODO add your handling code here:
+        // TODO add your handling code here:
         this.jbSelCategoria.setVisible(false);
-    }                                             
-    
+    }   
     private void tbMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbMailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tbMailActionPerformed
@@ -433,6 +463,7 @@ DefaultListModel model;
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    
 //public class ValidatorUtil {
     
     public static boolean validateEmail(String email){

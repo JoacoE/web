@@ -6,23 +6,20 @@
 package lab01.Handlers;
 import lab01.Clases.Cliente;
 import lab01.Clases.Restaurante;
-//import static lab01.Handlers.tipoU.cliente;
-import java.util.Date;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import lab01.Interfaces.ICtrlUsuario;
-import lab01.Clases.DataCliente;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 import lab01.Clases.Categoria;
+import lab01.Clases.DTODatosAdicionales;
+import lab01.Clases.DTOIngresarDatos;
+import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 import lab01.Clases.Pedido;
-import lab01.Clases.Usuario;
-import java.lang.NullPointerException;
 
 /**
  *
@@ -42,8 +39,23 @@ public class CtrlUsuario implements ICtrlUsuario {
     public CtrlUsuario(){}
     
     public void setCat(Map cate){
-        this.Cat=cate;
-        //JOptionPane.showMessageDialog(null, "Categoria recordada","EXITO",JOptionPane.INFORMATION_MESSAGE);
+        HCategoria hc = HCategoria.getinstance();
+        Map aux = new HashMap();
+        Iterator cats = hc.obtenerColeccion().entrySet().iterator();
+        while(cats.hasNext()){
+            Map.Entry cat = (Map.Entry) cats.next();
+            Categoria c = (Categoria)cat.getValue();
+            Iterator scats = cate.entrySet().iterator();
+            while(scats.hasNext()){
+                Map.Entry scat = (Map.Entry) scats.next();
+                String selectedcat = (String) scat.getValue();
+                if(c.getNombre().equals(selectedcat)){
+                    DataCategoria dc = c.CatADC();
+                    aux.put(dc.getNombre(), dc);
+                }
+            }
+        }
+        this.Cat = aux;
     }
     
     public Map getLstCat(){
@@ -57,34 +69,55 @@ public class CtrlUsuario implements ICtrlUsuario {
     }
 
     @Override
-    public boolean ingresarDatos(String nickname, String nombre, String email, String direccion){
-        this.nickname=nickname;
-        this.direccion=direccion;
-        this.nombre=nombre;
-        this.email=email;
+    public boolean ingresarDatos(DTOIngresarDatos datos){
+        this.nickname= datos.getNickname();
+        this.direccion=datos.getDireccion();
+        this.nombre=datos.getNombre();
+        this.email=datos.getEmail();
         HUsuario HU = HUsuario.getinstance();
         return !(HU.find(nickname, email));
     }
 
     @Override
-    public void registrarCliente(String apellido, String img, String fecha){
-        Cliente c = new Cliente(this.nickname, this.nombre, this.email, this.direccion, apellido, img, fecha);
+    public void registrarCliente(DTORegistrarCliente datos){
+        Cliente c = new Cliente(this.nickname, this.nombre, this.email, this.direccion, datos.getApellido(), datos.getImagen(), datos.getFecha());
         HUsuario HU = HUsuario.getinstance();
         HU.addUsuario(c);
     }
 
    
     public void registrarRestaurante(DataRestaurante dt){
-        Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), dt.getColProducto(), dt.getColCategoria());
-        HUsuario HU = HUsuario.getinstance();
-        HU.addUsuario(r);
+        if(!dt.getColCategoria().isEmpty()){
+            HCategoria hc = HCategoria.getinstance();
+            Map categorias = new HashMap();
+            Iterator cats = hc.obtenerColeccion().entrySet().iterator();
+            while(cats.hasNext()){
+                Map.Entry cat = (Map.Entry) cats.next();
+                Categoria c = (Categoria)cat.getValue();
+                Iterator dcats = dt.getColCategoria().entrySet().iterator();
+                while(dcats.hasNext()){
+                    Map.Entry dcat = (Map.Entry) dcats.next();
+                    DataCategoria dc = (DataCategoria)dcat.getValue();
+                    if(c.getNombre().equals(dc.getNombre())){
+                        categorias.put(c.getNombre(), c);
+                    }
+                }                
+            }
+            Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), dt.getColProducto(), categorias);
+            HUsuario HU = HUsuario.getinstance();
+            HU.addUsuario(r);
+        }else{
+            JOptionPane.showMessageDialog(null, "No se ingresaron categorias", "Error", JOptionPane.ERROR_MESSAGE);
+            throw new NullPointerException();
+        }
     }
     
-    public void datosAdicionales(String apellido, String img){
+    @Override
+    public void datosAdicionales(DTODatosAdicionales datos){
         HUsuario mu = HUsuario.getinstance();
         Cliente c = mu.obtenerUsuario(this.nickname);
-        c.setApellido(apellido);
-        c.setImagen(img);
+        c.setApellido(datos.getApellido());
+        c.setImagen(datos.getImagen());
     }
 
     @Override
@@ -92,15 +125,13 @@ public class CtrlUsuario implements ICtrlUsuario {
         HUsuario mu = HUsuario.getinstance();
         return (mu.obtenerUsuario(nickname)).ClienteADC();
     }
-    public Cliente getUsuNick(String nickname){
-        HUsuario mu = HUsuario.getinstance();
-        return mu.obtenerUsuario(nickname);
-    }
 
     @Override
-    public Restaurante getRestauranteByNickname(String nickname){
+    public DataRestaurante getRestauranteByNickname(String nickname){
         HUsuario mu = HUsuario.getinstance();
-        return (Restaurante)(mu.obtenerRestaurante(nickname));
+        Restaurante r = mu.obtenerRestaurante(nickname);
+        DataRestaurante dr = r.RestauranteADR();
+        return dr;
     }
 
     public Map devListaDC(){
@@ -137,21 +168,23 @@ public class CtrlUsuario implements ICtrlUsuario {
     
     public Map listaUsuPorCategoria(String cate){
         HUsuario mu = HUsuario.getinstance();
-        Map Ldr = listaDataRestaurantes();
         Map ret = new HashMap();
-        Iterator it = Ldr.entrySet().iterator();
+        Iterator it = listaDataRestaurantes().entrySet().iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
-            DataRestaurante r = (DataRestaurante)map.getValue();
-            if(r.member(cate))
-                ret.put(r.getNickname(),r);
+            DataRestaurante dr = (DataRestaurante)map.getValue();
+            Iterator dcats = dr.getColCategoria().entrySet().iterator();
+            while(dcats.hasNext()){
+                Map.Entry dcat = (Map.Entry) dcats.next();
+                DataCategoria dc = (DataCategoria)dcat.getValue();
+                if(dc.getNombre().equals(cate)){
+                    ret.put(dr.getNickname(),dr);
+                }
             }
+        }
         return ret;
-    
     }
             
-    
-    
     public void registrarCat(String nombre){
         HCategoria hu = HCategoria.getinstance();
         if(hu.member(nombre))
@@ -166,19 +199,20 @@ public class CtrlUsuario implements ICtrlUsuario {
     public Map retColCat(){
         Map ret  = new HashMap();        
         HCategoria hc = HCategoria.getinstance();
-        ret=hc.obtenerColeccion();
-        return (Map)ret;
+        Iterator it = hc.obtenerColeccion().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry cat = (Map.Entry) it.next();
+            Categoria c = (Categoria)cat.getValue();
+            DataCategoria dc = c.CatADC();
+            ret.put(dc.getNombre(), dc);
+        }
+        return ret;
     }
-
-    @Override
-    public void datosAdicionales(String apellido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } 
     
     public Map listaProductosStock(String r){
-        Restaurante rest = getRestauranteByNickname(r);
+        HUsuario hu = HUsuario.getinstance();
+        Restaurante rest = hu.obtenerRestaurante(r);
         Map lProd = rest.obtenerListaIndividualesStock();
-        
         return lProd;
     }
 

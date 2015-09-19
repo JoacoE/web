@@ -16,10 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
-import lab01.Clases.Individual;
 import lab01.Clases.Producto;
-import lab01.Clases.Promocional;
-import lab01.Clases.Restaurante;
 
 
 /**
@@ -136,11 +133,9 @@ public class VerProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String nick = null;
         String nomProd = null;
-        DataRestaurante dr;
-        Restaurante res= null;
-        Producto prod = null;
+        DataRestaurante res = null;
+        DataProducto prod;
         Map colProd = null;
-        DataProducto dp;
         JTable tab = (JTable)evt.getSource();
         Point point = evt.getPoint();
         int fila = tab.rowAtPoint(point);
@@ -155,17 +150,23 @@ public class VerProducto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El restaurante no está en el sistema","Error",JOptionPane.ERROR_MESSAGE);
         }
         
-        prod = res.getProducto(nomProd);
-        if(prod instanceof Individual){
-            Individual ind = (Individual)prod;
-            DataIndividual di = ind.getDataIndividual();
-            VerInfoProd verinfop = new VerInfoProd(res,di);
-            verinfop.setVisible(true);
-        }else{
-            Promocional prom = (Promocional)prod;
-            DataPromocional dprom = prom.getDataPromo();
-            VerInfoProd verinfop = new VerInfoProd(dprom, res);
-            verinfop.setVisible(true);
+        Iterator dprods = res.getColProducto().entrySet().iterator();
+        while(dprods.hasNext()){
+            Map.Entry dprod = (Map.Entry) dprods.next();
+            if(dprod.getValue() instanceof DataIndividual){
+                DataIndividual di = (DataIndividual)dprod.getValue();
+                if(di.getDataNombre().equals(nomProd)){
+                    VerInfoProd verinfop = new VerInfoProd(di, res);
+                    verinfop.setVisible(true);
+                }
+            }
+            if(dprod.getValue() instanceof DataPromocional){
+                DataPromocional dp = (DataPromocional)dprod.getValue();
+                if(dp.getDataNombre().equals(nomProd)){
+                    VerInfoProd verinfop = new VerInfoProd(dp, res);
+                    verinfop.setVisible(true);
+                }
+            }
         }
     }//GEN-LAST:event_jTablaMousePressed
 
@@ -184,25 +185,26 @@ public class VerProducto extends javax.swing.JInternalFrame {
 //       }
     
      private void cargarTabla(){
-        Map Datas = new HashMap(); 
-        Datas.putAll(ICU.listaDataRestaurantes());
-        Iterator it = Datas.entrySet().iterator();
+        Iterator it = ICU.listaDataRestaurantes().entrySet().iterator();
         String lista[]=new String[2];
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
             DataRestaurante dr = (DataRestaurante) map.getValue();
-            //lista[0]=model.getSize()-1;
             lista[1]=dr.getNickname();
             Map colProd = dr.getColProducto();
             Iterator it2 = colProd.entrySet().iterator();
             while(it2.hasNext()){
                 Map.Entry mapcol = (Map.Entry) it2.next();
-                Producto nomProd = (Producto) mapcol.getValue();
-                lista[0]=nomProd.getNombre();
+                if(mapcol.getValue() instanceof DataIndividual){
+                    DataIndividual di = (DataIndividual) mapcol.getValue();
+                    lista[0] = di.getDataNombre();
+                }
+                if(mapcol.getValue() instanceof DataPromocional){
+                    DataPromocional dp = (DataPromocional) mapcol.getValue();
+                    lista[0] = dp.getDataNombre();
+                }
                 modelo.insertRow((int)jTabla.getRowCount(), lista);
-                
             }
-                        
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

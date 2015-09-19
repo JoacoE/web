@@ -7,16 +7,13 @@
 package lab01.Interfaces;
 
 import javax.swing.DefaultListModel;
-import lab01.Clases.Restaurante;
 import lab01.Handlers.Fabrica;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Iterator;
+import lab01.Clases.DataCategoria;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
-import lab01.Clases.Individual;
-import lab01.Clases.Producto;
-import lab01.Clases.Promocional;
+import lab01.Clases.DataRestaurante;
 
 /**
  *
@@ -49,7 +46,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
        model = new DefaultListModel();
        modelProd = new DefaultListModel();
        this.client=restau;
-       Restaurante c = ICU.getRestauranteByNickname(client);
+       DataRestaurante c = ICU.getRestauranteByNickname(client);
        verRest();
        CargarLista(c);
        
@@ -67,7 +64,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     
     
     public void verRest(){
-    Restaurante c = ICU.getRestauranteByNickname(client);
+    DataRestaurante c = ICU.getRestauranteByNickname(client);
        this.tbNickNameCliente.setVisible(true);
        this.tbNickNameCliente.setText(c.getNickname());
        
@@ -76,7 +73,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
        
        
        this.tbmailCliente.setVisible(true);
-       this.tbmailCliente.setText(c.getMail());
+       this.tbmailCliente.setText(c.getEmail());
        this.tbnombreCliente.setVisible(true);
        this.tbnombreCliente.setText(c.getNombre());
        
@@ -88,28 +85,35 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
        this.lblmailCliente.setVisible(true);
        this.lblnombreCliente.setVisible(true);
        model.clear();
-       Map cats = c.obtenerColeccion();
+       Map cats = c.getColCategoria();
        Iterator it = cats.entrySet().iterator();
         //Iterator itret = ret.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
-            model.addElement(map.getKey());
+            DataCategoria dc = (DataCategoria)map.getValue();
+            model.addElement(dc.getNombre());
         }
         this.jlCat.setModel(model);
     }
     
-    public void CargarLista(Restaurante c){
-       //Restaurante c = ICU.getRestauranteByNickname(client);
-        Map ColProd=c.obtenerListaProductos();
-        Iterator it = ColProd.entrySet().iterator();
-        //Iterator itret = ret.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            modelProd.addElement(map.getKey());
+    public void CargarLista(DataRestaurante c){
+        if(!c.getColProducto().isEmpty()){
+            Iterator it = c.getColProducto().entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry map = (Map.Entry) it.next();
+                if(map.getValue() instanceof DataIndividual){
+                    DataIndividual di = (DataIndividual)map.getValue();
+                    modelProd.addElement(di.getDataNombre());
+                }
+                if(map.getValue() instanceof DataPromocional){
+                    DataPromocional dp = (DataPromocional)map.getValue();
+                    modelProd.addElement(dp.getDataNombre());
+                }
+            }
+            this.jListProd.setModel(modelProd);
+        }else{
+            this.jListProd.setEnabled(false);
         }
-        this.jListProd.setModel(modelProd);
-        
-        
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -287,20 +291,26 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
 
     private void jListProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListProdMouseClicked
         // TODO add your handling code here:
-        Restaurante c = ICU.getRestauranteByNickname(client);
+        DataRestaurante c = ICU.getRestauranteByNickname(client);
         String prod = jListProd.getSelectedValue().toString();
-        Producto p =CP.getProdNombre(prod,c);
-        if(p instanceof Individual){
-            Individual ind = (Individual)p;
-            DataIndividual di = ind.getDataIndividual();
-            VerInfoProd verProd = new VerInfoProd(c,di);
-            verProd.show();
-        }else{
-            Promocional prom = (Promocional)p;
-            DataPromocional dp = prom.getDataPromo();
-            VerInfoProd verProd = new VerInfoProd(dp, c);
-            verProd.show();
-        } 
+        Iterator dprods = c.getColProducto().entrySet().iterator();
+        while(dprods.hasNext()){
+            Map.Entry dprod = (Map.Entry) dprods.next();
+            if(dprod.getValue() instanceof DataIndividual){
+                DataIndividual di = (DataIndividual)dprod.getValue();
+                if(di.getDataNombre().equals(prod)){
+                    VerInfoProd verProd = new VerInfoProd(di, c);
+                    verProd.show();
+                }
+            }
+            if(dprod.getValue() instanceof DataPromocional){
+                DataPromocional dp = (DataPromocional)dprod.getValue();
+                if(dp.getDataNombre().equals(prod)){
+                    VerInfoProd verProd = new VerInfoProd(dp, c);
+                    verProd.show();
+                }
+            }
+        }
     }//GEN-LAST:event_jListProdMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

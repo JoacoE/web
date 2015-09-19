@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import lab01.Clases.Categoria;
-import lab01.Clases.DataCategoria;
 /**
  *
  * @author gera
@@ -38,15 +37,11 @@ public class HCategoria {
     public Map obtenerColeccion(){
         Map ret = new HashMap();
         Iterator it = ColCategoria.entrySet().iterator();
-        //Iterator itret = ret.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
-            DataCategoria dc = new DataCategoria(map.getKey().toString());
-            ret.put(map.getKey(), dc);        
+            Categoria c = (Categoria)map.getValue();
+            ret.put(c.getNombre(), c);
         }
         return ret;
-        
-        
-        //return col;
     }
 }    

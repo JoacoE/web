@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataCliente;
 import lab01.Handlers.Fabrica;
 
 /**
@@ -142,12 +141,13 @@ public class ElegirProductos extends javax.swing.JInternalFrame {
         Map prodPromo = new HashMap();
         for(int i=0; i<jTabla.getRowCount(); i++){
             if(!modelo.getValueAt(i,2).toString().equals("0")){
-            String nom = modelo.getValueAt(i,0).toString();
-            String cant = modelo.getValueAt(i,2).toString();
-            prodPromo.put(nom, cant);}
+                String nom = modelo.getValueAt(i,0).toString();
+                String cant = modelo.getValueAt(i,2).toString();
+                prodPromo.put(nom, cant);
+            }
         }
-    CP.setPromo(prodPromo);
-    this.dispose();
+        CP.setPromo(prodPromo);
+        this.dispose();
     }//GEN-LAST:event_jblistoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -164,13 +164,11 @@ public class ElegirProductos extends javax.swing.JInternalFrame {
             Map.Entry map = (Map.Entry) it.next();
             String nomprod = (String) map.getKey();
             String cant = (String)map.getValue().toString();
-            //lista[0]=model.getSize()-1;
             lista[0]=nomprod;
             lista[1]=cant;
             lista[2]="0";
             modelo.insertRow((int)jTabla.getRowCount(), lista);
-        }
-    
+        }    
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -21,7 +21,7 @@ public class DataIndividual {
     }
     
     public DataIndividual(String nombre, String descripcion, double precio, int cantidad){
-         this.DataNombre = nombre;
+        this.DataNombre = nombre;
         this.DataDescripcion = descripcion;
         this.DataPrecio = precio;
        

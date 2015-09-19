@@ -9,8 +9,6 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCarrito;
-import lab01.Clases.DataPedido;
-import lab01.Clases.Restaurante;
 import lab01.Handlers.Fabrica;
 
 /**

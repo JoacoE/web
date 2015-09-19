@@ -5,12 +5,11 @@
  */
 package lab01.Interfaces;
 import java.util.Map;
-
-import lab01.Clases.DataProducto;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataPromocional;
+import lab01.Clases.DTOActualizarIndividual;
+import lab01.Clases.DTOActualizarPromocional;
+import lab01.Clases.DTOArmarPromo;
+import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.Producto;
-import lab01.Clases.Restaurante;
 
 /**
  *
@@ -18,12 +17,12 @@ import lab01.Clases.Restaurante;
  */
 public interface ICtrlProducto {
     
-    public abstract void registrarProducto(DataIndividual di, String nomRest, boolean promocional);
+    public abstract void registrarProducto(DTORegistrarProducto datos);
     public abstract boolean existeRestaurante(String nomRest);
     public abstract Map listarIndividuales(String nomRest);
     public abstract void setPromo(Map promo);
-    public abstract void armarPromo(String rest, String nombre, String desc, double descuento);
-    public abstract Producto getProdNombre(String Nprod, Restaurante res);
-    public abstract void actualizarIndividual(DataIndividual ind, String nombre,Restaurante res);
-    public abstract void actualizarPromocional(DataPromocional prom, String nombre, Restaurante res);
+    public abstract void armarPromo(DTOArmarPromo datos);
+    public abstract Producto getProdNombre(String Nprod, String nickRes);
+    public abstract void actualizarIndividual(DTOActualizarIndividual datos);
+    public abstract void actualizarPromocional(DTOActualizarPromocional datos);
 }

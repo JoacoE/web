@@ -12,8 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCarrito;
 import lab01.Clases.DataPedido;
 import lab01.Handlers.Fabrica;
-import javax.swing.ComboBoxEditor;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import lab01.Clases.estados;
 

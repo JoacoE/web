@@ -6,7 +6,6 @@
 package lab01.Interfaces;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -14,13 +13,6 @@ import javax.swing.JTable;
 import lab01.Handlers.Fabrica;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataPedido;
-import lab01.Clases.DataProducto;
-import lab01.Clases.DataRestaurante;
-import lab01.Clases.Pedido;
-import lab01.Clases.Producto;
-import lab01.Clases.Producto_Stock;
-import lab01.Clases.estados;
-import lab01.Handlers.HUsuario;
 
 
 /**

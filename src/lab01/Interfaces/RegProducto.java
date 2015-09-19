@@ -8,20 +8,14 @@ package lab01.Interfaces;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lab01.Clases.Cliente;
-import lab01.Clases.DataCant_Individual;
-import lab01.Clases.DataCliente;
+import lab01.Clases.DTOArmarPromo;
+import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.DataIndividual;
-import lab01.Clases.DataProducto;
 import lab01.Clases.DataRestaurante;
-import lab01.Clases.Restaurante;
-//import lab01.Clases.DataProducto_Stock;
 import lab01.Handlers.Fabrica;
-import lab01.Handlers.HUsuario;
 
 /**
  *
@@ -285,21 +279,24 @@ public class RegProducto extends javax.swing.JInternalFrame {
         int cantidad;
 
         if (evt.getSource() == btnRegistro) {
+            this.restaurante = (String) jcbRest.getSelectedItem();
             if (CP.existeRestaurante(restaurante)) { // si el restaurante se encuentra registrado
                 if (rbIndividual.isSelected()) { // si quiero registar producto individual                    
 
                     precio = Double.parseDouble(tbPrecio.getText());
                     cantidad = Integer.parseInt(tbCantidad.getText()); // me guardo la cantidad de productos para ese producto particular
                     DataIndividual di = new DataIndividual(tbNombre.getText(), tbDesc.getText(), precio, cantidad); // me guardo los datos en el dataproducto
-                    CP.registrarProducto(di, restaurante, Promocional); // registro producto
+                    DTORegistrarProducto datosi = new DTORegistrarProducto(di, restaurante, Promocional);
+                    CP.registrarProducto(datosi); // registro producto
                     JOptionPane.showMessageDialog(null, "Producto registrado con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     limpiarCampos();
 
                 } else { // si es promocional
                     if (rbPromocional.isSelected()) {
-                        String rest = (String) jcbRest.getSelectedItem();
+                        //String rest = (String) jcbRest.getSelectedItem();
                         descuento = Double.parseDouble(tbDescuento.getText());
-                        CP.armarPromo(rest, tbNombre.getText(), tbDesc.getText(), descuento);
+                        DTOArmarPromo datosp = new DTOArmarPromo(restaurante, tbNombre.getText(), tbDesc.getText(), descuento);
+                        CP.armarPromo(datosp);
                         JOptionPane.showMessageDialog(null, "Promocion registrada con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                         limpiarCampos();
 
@@ -317,13 +314,15 @@ public class RegProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void rbIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbIndividualActionPerformed
-//        tbCantidad.setEnabled(true);
-//        tbDescuento.setEnabled(false);
-//        tbPrecio.setEnabled(true);
+        tbCantidad.setEnabled(true);
+        tbDescuento.setEnabled(false);
+        tbPrecio.setEnabled(true);
     }//GEN-LAST:event_rbIndividualActionPerformed
 
     private void rbPromocionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPromocionalActionPerformed
-
+        tbCantidad.setEnabled(false);
+        tbDescuento.setEnabled(true);
+        tbPrecio.setEnabled(false);
     }//GEN-LAST:event_rbPromocionalActionPerformed
 
     private void rbPromocionalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rbPromocionalItemStateChanged
@@ -397,16 +396,15 @@ public class RegProducto extends javax.swing.JInternalFrame {
     }
 
     public void cargarCBbox() {
-        Map rest = ICU.listaDataRestaurantes();
-        Iterator it = rest.entrySet().iterator();
+        Iterator it = ICU.listaDataRestaurantes().entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry map = (Map.Entry) it.next();
             DataRestaurante res = (DataRestaurante) map.getValue();
-            String restau = res.getNickname();
-            this.jcbRest.addItem(restau);
+            this.jcbRest.addItem(res.getNickname());
         }
-        String res = (String) jcbRest.getItemAt(WIDTH);
-        this.restaurante = res;
+        //String res = (String) jcbRest.getItemAt(WIDTH);
+        //this.restaurante = res;
+        //this.restaurante = (String)jcbRest.getSelectedItem();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

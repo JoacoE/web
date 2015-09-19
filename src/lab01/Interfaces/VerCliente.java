@@ -7,19 +7,14 @@
 package lab01.Interfaces;
 
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import javax.swing.JOptionPane;
-import lab01.Clases.Cliente;
 import lab01.Handlers.Fabrica;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
-import lab01.Clases.Pedido;
 
 
 /**

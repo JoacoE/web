@@ -25,7 +25,7 @@ public class Categoria {
         this.nombre = nombre;
     }  
     public DataCategoria CatADC(){
-        DataCategoria dc = new DataCategoria(this.nombre);
+        DataCategoria dc = new DataCategoria(this.getNombre());
         return dc;
     }
     

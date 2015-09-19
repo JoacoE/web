@@ -8,8 +8,6 @@ package lab01.Clases;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +18,7 @@ public class Promocional extends Producto {
     private double descuento; //ver como se hace JoacoP(me imagino yo que seria un entero % y lo q se hace despues es a precio_total calcularsele ese descuento)
     private ArrayList<Cantidad_Individual> ColCantIndividual;
     
-    public Promocional(String nombre, String descripcion, /*double precio,*/ boolean activa, double descuento, ArrayList<Cantidad_Individual> ColCantIndividual) {
+    public Promocional(String nombre, String descripcion, boolean activa, double descuento, ArrayList<Cantidad_Individual> ColCantIndividual) {
         super(nombre, descripcion, /*precio,*/1);
         this.activa = activa;
         this.descuento = descuento;

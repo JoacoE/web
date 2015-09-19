@@ -35,7 +35,7 @@ public interface ICtrlPedido {
     public abstract void actualizarEPedido(String nickname, long id, estados estado);
     public abstract void setDp(DataPedido dp);
     public abstract DataPedido getDp();
-    public abstract void setMemoriaCliente(Cliente c);
+    public abstract void setMemoriaCliente(String nickname);
     public abstract void limpiarCtrl();
     public abstract void cancelarPedido(long id);
 }

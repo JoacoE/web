@@ -8,8 +8,14 @@ package lab01.Interfaces;
 //import lab01.Interfaces.RegUsuario;
 
 import java.awt.BorderLayout;
+import java.io.File;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import lab01.Clases.ImagenFondo;
+import lab01.Handlers.HImagenes;
 
 
 

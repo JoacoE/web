@@ -62,8 +62,6 @@ public class Console extends javax.swing.JFrame {
         VerRestaurantes = new javax.swing.JMenuItem();
         jMVerinfoProd = new javax.swing.JMenuItem();
         jMenuVerPedidos = new javax.swing.JMenuItem();
-        menuGenerarPedido = new javax.swing.JMenu();
-        genPedido = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -169,24 +167,6 @@ public class Console extends javax.swing.JFrame {
 
         jMenuBar1.add(ver);
 
-        menuGenerarPedido.setText("Pedidos");
-        menuGenerarPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuGenerarPedidoActionPerformed(evt);
-            }
-        });
-
-        genPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/covered16.png"))); // NOI18N
-        genPedido.setText("Generar Pedido");
-        genPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genPedidoActionPerformed(evt);
-            }
-        });
-        menuGenerarPedido.add(genPedido);
-
-        jMenuBar1.add(menuGenerarPedido);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,26 +223,11 @@ public class Console extends javax.swing.JFrame {
         selecCat.show();
     }//GEN-LAST:event_VerRestaurantesActionPerformed
 
-    private void menuGenerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGenerarPedidoActionPerformed
-
-    // TODO add your handling code here:
-    }//GEN-LAST:event_menuGenerarPedidoActionPerformed
-
     private void mnuRegProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRegProductoActionPerformed
         RegProducto regProd = new RegProducto();
         EscritorioMenu.add(regProd);
         regProd.show();
     }//GEN-LAST:event_mnuRegProductoActionPerformed
-
-    private void genPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genPedidoActionPerformed
-        // TODO add your handling code here:
-         ListarUsuariosGP listar = new ListarUsuariosGP();
-        Console.EscritorioMenu.add(listar);
-        listar.show();
-        //GenerarPedido generar = new GenerarPedido();
-        //EscritorioMenu.add(generar);
-        //generar.show();
-    }//GEN-LAST:event_genPedidoActionPerformed
 
     private void jMVerinfoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMVerinfoProdActionPerformed
         VerProducto verprod;
@@ -322,7 +287,6 @@ public class Console extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane EscritorioMenu;
     private javax.swing.JMenuItem VerClientes;
     private javax.swing.JMenuItem VerRestaurantes;
-    private javax.swing.JMenuItem genPedido;
     private javax.swing.JMenuItem jMVerinfoProd;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -331,7 +295,6 @@ public class Console extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuVerPedidos;
-    private javax.swing.JMenu menuGenerarPedido;
     private javax.swing.JMenuItem mnuRegProducto;
     private javax.swing.JMenuItem mnuRegUsuario;
     private javax.swing.JMenuItem mnuSalir;

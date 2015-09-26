@@ -169,41 +169,33 @@
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                  <Component id="tbAnio" min="-2" pref="63" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="lblSelImg" alignment="0" min="-2" pref="295" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblSelImg" min="-2" pref="295" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblNombre" max="32767" attributes="0"/>
-                              <Component id="lblMail" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblNickname" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
-                              <Component id="lblFechaNacimiento" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lblNombre" max="32767" attributes="0"/>
+                                  <Component id="lblMail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblNickname" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                  <Component id="lblFechaNacimiento" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tbApellido" min="-2" pref="299" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tbNickname" pref="299" max="32767" attributes="0"/>
-                                          <Component id="tbMail" max="32767" attributes="0"/>
-                                          <Component id="tbNombre" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="tbDireccion" alignment="0" min="-2" pref="299" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="tbDia" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                   <Component id="tbMes" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="tbAnio" min="-2" pref="63" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="tbApellido" pref="299" max="32767" attributes="0"/>
+                              <Component id="tbNickname" max="32767" attributes="0"/>
+                              <Component id="tbMail" max="32767" attributes="0"/>
+                              <Component id="tbNombre" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tbDireccion" alignment="0" pref="299" max="32767" attributes="0"/>
+                              <Component id="tbPasswd" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -239,24 +231,33 @@
                       <Component id="tbDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblFechaNacimiento" min="-2" max="-2" attributes="0"/>
-                      <Component id="tbDia" min="-2" max="-2" attributes="0"/>
-                      <Component id="tbAnio" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="tbMes" alignment="0" min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tbPasswd" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btnSelImagen" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="btnSelImagen" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="tbAnio" min="-2" max="-2" attributes="0"/>
+                              <Component id="tbMes" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Component id="lblFechaNacimiento" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tbDia" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="lblSelImg" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="jbSelCategoria" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -349,6 +350,13 @@
         <Component class="javax.swing.JTextField" name="tbDireccion">
         </Component>
         <Component class="javax.swing.JLabel" name="lblSelImg">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Password:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tbPasswd">
         </Component>
       </SubComponents>
     </Container>

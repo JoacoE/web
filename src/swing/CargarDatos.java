@@ -78,27 +78,27 @@ public class CargarDatos extends javax.swing.JFrame {
       //CLIENTES
       DTOIngresarDatos datos1 = new DTOIngresarDatos("costas", "gcostas@gmail.com","Gerardo",  "Av. Italia 2078");
       ICU.ingresarDatos(datos1);
-      DTORegistrarCliente dreg1 = new DTORegistrarCliente("Costas", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\costas.jpeg", "15/11/1983");
+      DTORegistrarCliente dreg1 = new DTORegistrarCliente("Costas", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\costas.jpeg", "15/11/1983", "costas123");
       ICU.registrarCliente(dreg1);
       
       DTOIngresarDatos datos2 = new DTOIngresarDatos("roro", "rcotelo@yahoo.com","Rodrigo", "Pdte. Berro 1548");
       ICU.ingresarDatos(datos2);
-      DTORegistrarCliente dreg2 = new DTORegistrarCliente("Cotelo", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\roro.jpeg", "02/08/1975");
+      DTORegistrarCliente dreg2 = new DTORegistrarCliente("Cotelo", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\roro.jpeg", "02/08/1975", "12elroro");
       ICU.registrarCliente(dreg2);
       
       DTOIngresarDatos datos3 = new DTOIngresarDatos("chechi", "cgarrido@hotmail.com","Cecilia", "Gral. Urquiza 1548");
       ICU.ingresarDatos(datos3);
-      DTORegistrarCliente dreg3 = new DTORegistrarCliente("Garrido", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\chechi.jpeg", "12/09/1987");
+      DTORegistrarCliente dreg3 = new DTORegistrarCliente("Garrido", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\chechi.jpeg", "12/09/1987", "ch4321");
       ICU.registrarCliente(dreg3);
      
       DTOIngresarDatos datos4 = new DTOIngresarDatos("andy", "agarcia@gmail.com","Andrea", "Dr. Manuel Albo 4512");
       ICU.ingresarDatos(datos4);
-      DTORegistrarCliente dreg4 = new DTORegistrarCliente("García", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\imagesandy.jpeg", "28/07/1951");      
+      DTORegistrarCliente dreg4 = new DTORegistrarCliente("García", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\imagesandy.jpeg", "28/07/1951", "andy_la1");      
       ICU.registrarCliente(dreg4);
 
       DTOIngresarDatos datos5 = new DTOIngresarDatos("weiss", "aweiss@gmail.com","Adrián", "Monte Caseros 5615");
       ICU.ingresarDatos(datos5);
-      DTORegistrarCliente dreg5 = new DTORegistrarCliente("Weiss", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\generico.jpeg", "23/12/1978");
+      DTORegistrarCliente dreg5 = new DTORegistrarCliente("Weiss", "C:\\Users\\mcastro\\Documents\\NetBeansProjects\\ProgramacionDeAplicaciones\\images\\generico.jpeg", "23/12/1978", "223_aweis");
       ICU.registrarCliente(dreg5);
  
       //CATEGORÍAS

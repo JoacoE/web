@@ -10,10 +10,10 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOIngresarDatos {
-    String nickname;
-    String nombre;
-    String email;
-    String direccion;
+    private String nickname;
+    private String nombre;
+    private String email;
+    private String direccion;
 
     public DTOIngresarDatos(){
     }

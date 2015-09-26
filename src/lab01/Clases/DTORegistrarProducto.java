@@ -10,9 +10,9 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTORegistrarProducto {
-    DataIndividual di;
-    String nickRest;
-    boolean promo;
+    private DataIndividual di;
+    private String nickRest;
+    private boolean promo;
     
     public DTORegistrarProducto(){
     }

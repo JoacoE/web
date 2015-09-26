@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-import javax.swing.JOptionPane;
-import static lab01.Clases.estados.ENVIADO;
 import static lab01.Clases.estados.PREPARACION;
 import static lab01.Clases.estados.RECIBIDO;
 
@@ -28,6 +26,7 @@ public class Pedido {
     private estados estado;
     private ArrayList<Producto_Stock> carrito;
     private DataPedido dp;
+    private Evaluacion evaluacion;
 
     public Pedido(double precio_total) {
         this.setId();
@@ -123,5 +122,13 @@ public class Pedido {
     
     public void setDataPedido(DataPedido dp){
         this.dp = dp;
+    }
+    
+    public void setEvaluacion(Evaluacion e){
+        this.evaluacion = e;
+    }
+    
+    public Evaluacion getEvaluacion(){
+        return this.evaluacion;
     }
 }

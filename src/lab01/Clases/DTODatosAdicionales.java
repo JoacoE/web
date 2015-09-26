@@ -10,8 +10,8 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTODatosAdicionales {
-    String apellido;
-    String imagen;
+    private String apellido;
+    private String imagen;
     
     public DTODatosAdicionales(){
     }

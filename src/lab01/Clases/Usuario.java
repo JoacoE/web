@@ -15,17 +15,19 @@ public abstract class Usuario {
     protected String mail;
     protected String direccion;
     protected String imagen; //esto es duda
-    protected String tipoUsuario;
+    //protected String tipoUsuario;
+    protected String contrasenia;
 
     public Usuario() {
     }
     
-    public Usuario(String nickname, String nombre, String email, String direccion) {
+    public Usuario(String nickname, String nombre, String email, String direccion, String contrasenia) {
         this.nickname=nickname;
         this.nombre=nombre;
         this.mail=email;
         this.direccion=direccion;
-        this.tipoUsuario= "";
+        //this.tipoUsuario= "";
+        this.contrasenia = contrasenia;
     }
 
     public String getNickname() {
@@ -44,10 +46,10 @@ public abstract class Usuario {
         return direccion;
     }
 
-    public void getTipoUsuario(String tu)
-    {
-        tipoUsuario = tu;
-    }
+//    public void getTipoUsuario(String tu)
+//    {
+//        tipoUsuario = tu;
+//    }
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -74,6 +76,11 @@ public abstract class Usuario {
         return imagen;
     }
    
-      
+    public void setPwd(String pwd){
+        this.contrasenia = pwd;
+    }
     
+    public String getPwd(){
+        return this.contrasenia;
+    }
 }

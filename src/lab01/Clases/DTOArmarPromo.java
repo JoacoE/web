@@ -10,10 +10,10 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOArmarPromo {
-    String nickRest;
-    String nombre;
-    String descripcion;
-    double descuento;
+    private String nickRest;
+    private String nombre;
+    private String descripcion;
+    private double descuento;
     
     public DTOArmarPromo(){
     }

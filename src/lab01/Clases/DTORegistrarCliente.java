@@ -10,17 +10,19 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTORegistrarCliente {
-    String apellido;
-    String imagen;
-    String fecha;
+    private String apellido;
+    private String imagen;
+    private String fecha;
+    private String pwd;
     
     public DTORegistrarCliente(){
     }
     
-    public DTORegistrarCliente(String apellido, String imagen, String fecha){
+    public DTORegistrarCliente(String apellido, String imagen, String fecha, String pwd){
         this.apellido = apellido;
         this.imagen = imagen;
         this.fecha = fecha;
+        this.pwd = pwd;
     }
 
     public String getApellido() {
@@ -47,5 +49,11 @@ public class DTORegistrarCliente {
         this.fecha = fecha;
     }
     
+    public void setPwd(String pwd){
+        this.pwd = pwd;
+    }
     
+    public String getPwd(){
+        return this.pwd;
+    }
 }

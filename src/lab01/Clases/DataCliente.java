@@ -20,11 +20,12 @@ public class DataCliente{
     private String apellido;
     private String imagen;
     private String fNac;
+    private String pwd;
 
     
     public DataCliente(){}
     
-    public DataCliente(String nickname, String mail, String nombre, String direccion, String apellido, String img, String fecha){
+    public DataCliente(String nickname, String mail, String nombre, String direccion, String apellido, String img, String fecha, String pwd){
         this.nickname=nickname;
         this.nombre=nombre;
         this.email=mail;
@@ -32,6 +33,7 @@ public class DataCliente{
         this.apellido = apellido;
         this.imagen=img;
         this.fNac = fecha;
+        this.pwd = pwd;
     }
     public String getNombre(){
         return this.nombre;
@@ -58,9 +60,17 @@ public class DataCliente{
         return this.fNac;
     }
     
-    public Usuario dataCliACli(){
-        Usuario c = new Cliente(this.nickname, this.nombre, this.email, this.direccion,this.apellido, this.imagen, this.fNac);
-        return c;
+    public void setPwd(String pwd){
+        this.pwd = pwd;
     }
+    
+    public String getPwd(){
+        return this.pwd;
+    }
+    
+//    public Usuario dataCliACli(){
+//        Usuario c = new Cliente(this.nickname, this.nombre, this.email, this.direccion,this.apellido, this.imagen, this.fNac);
+//        return c;
+//    }
     
 }

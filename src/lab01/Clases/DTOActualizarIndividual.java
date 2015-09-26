@@ -10,10 +10,10 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOActualizarIndividual {
-    DataIndividual di;
-    String nombre;
-    String nickRest;
-    String imagen;
+    private DataIndividual di;
+    private String nombre;
+    private String nickRest;
+    private String imagen;
     
     public DTOActualizarIndividual(){
     }

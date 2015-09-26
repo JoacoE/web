@@ -7,6 +7,7 @@ package lab01.Interfaces;
 
 import java.util.Map;
 import lab01.Clases.Cliente;
+import lab01.Clases.DTOEvaluacion;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataProducto;
 import lab01.Clases.estados;
@@ -38,4 +39,8 @@ public interface ICtrlPedido {
     public abstract void setMemoriaCliente(String nickname);
     public abstract void limpiarCtrl();
     public abstract void cancelarPedido(long id);
+    public abstract Map listaPedidosRecibidos(String nickname);
+    public abstract void actualizarPromedioRest(String nickname);
+    public abstract void altaEvaluacion(double id, DTOEvaluacion data);
+    public abstract Map listarEvaluacionesRest(String nickname);
 }

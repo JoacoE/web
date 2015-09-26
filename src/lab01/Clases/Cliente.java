@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package lab01.Clases;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,8 +19,8 @@ public class Cliente extends Usuario{
     private Map pedidos;
    
     //public Cliente(){}
-    public Cliente(String nickname, String nombre, String email, String direccion,String apellido, String img, String fecha) {
-        super(nickname,nombre,email,direccion);
+    public Cliente(String nickname, String nombre, String email, String direccion,String apellido, String img, String fecha, String pwd) {
+        super(nickname,nombre,email,direccion, pwd);
        //setNickname(); poner los valores de los tb
         this.apellido = apellido;
         this.imagen = img;
@@ -95,7 +94,7 @@ public class Cliente extends Usuario{
     }
     
     public DataCliente ClienteADC(){
-        DataCliente DC = new DataCliente(this.nickname, this.nombre, this.mail, this.direccion, this.apellido, this.imagen, this.fNac);
+        DataCliente DC = new DataCliente(this.nickname, this.nombre, this.mail, this.direccion, this.apellido, this.imagen, this.fNac, this.contrasenia);
         return DC;
     }
     

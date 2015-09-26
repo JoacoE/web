@@ -20,6 +20,7 @@ import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 import lab01.Clases.Pedido;
+import lab01.Clases.estados;
 
 /**
  *
@@ -80,7 +81,7 @@ public class CtrlUsuario implements ICtrlUsuario {
 
     @Override
     public void registrarCliente(DTORegistrarCliente datos){
-        Cliente c = new Cliente(this.nickname, this.nombre, this.email, this.direccion, datos.getApellido(), datos.getImagen(), datos.getFecha());
+        Cliente c = new Cliente(this.nickname, this.nombre, this.email, this.direccion, datos.getApellido(), datos.getImagen(), datos.getFecha(), datos.getPwd());
         HUsuario HU = HUsuario.getinstance();
         HU.addUsuario(c);
     }
@@ -103,7 +104,7 @@ public class CtrlUsuario implements ICtrlUsuario {
                     }
                 }                
             }
-            Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), dt.getColProducto(), categorias);
+            Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), dt.getColProducto(), categorias, dt.getPwd());
             HUsuario HU = HUsuario.getinstance();
             HU.addUsuario(r);
         }else{
@@ -260,5 +261,4 @@ public class CtrlUsuario implements ICtrlUsuario {
         }
         return datPeds;
     }
-
 }

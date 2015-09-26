@@ -17,12 +17,13 @@ import javax.swing.JOptionPane;
  * @author gera
  */
 public class Restaurante extends Usuario{
+    private float puntajeProm;
     private ArrayList<String> lstImagen;
     private Map ColCategoria;
     private Map ColProducto;
 
-    public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, Map colProd, Map categorias) {
-        super(nickname,nombre,email,direccion);
+    public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, Map colProd, Map categorias, String pwd) {
+        super(nickname,nombre,email,direccion, pwd);
         if(categorias == null){
             this.ColCategoria = null;
         }else{
@@ -103,7 +104,7 @@ public class Restaurante extends Usuario{
             DataCategoria dc = c.CatADC();
             dataCategorias.put(dc.getNombre(), dc);
         }
-        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataProductos, dataCategorias);
+        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataProductos, dataCategorias, this.contrasenia);
         return DR;
     }
     
@@ -156,5 +157,13 @@ public class Restaurante extends Usuario{
     public void ModificarProductoIndividual(DataIndividual ind, String nombreOld){
         Producto p = this.getProducto(nombreOld);
         p.setNombre(ind.getDataNombre());
+    }
+    
+    public void setPromedio(float prom){
+        this.puntajeProm = prom;
+    }
+    
+    public float getPromedio(){
+        return this.puntajeProm;
     }
 }

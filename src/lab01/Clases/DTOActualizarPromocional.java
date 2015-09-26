@@ -10,9 +10,9 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOActualizarPromocional {
-    DataPromocional dp;
-    String nombre;
-    String nickRest;
+    private DataPromocional dp;
+    private String nombre;
+    private String nickRest;
     
     public DTOActualizarPromocional(){
     }

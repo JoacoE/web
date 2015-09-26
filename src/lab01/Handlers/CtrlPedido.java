@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import lab01.Clases.Cliente;
+import lab01.Clases.DTOEvaluacion;
 import lab01.Clases.DataCarrito;
 import lab01.Clases.DataCliente;
 import lab01.Clases.Restaurante;
@@ -21,6 +22,7 @@ import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataProducto;
 import lab01.Clases.DataPromocional;
+import lab01.Clases.Evaluacion;
 import lab01.Clases.Individual;
 import lab01.Clases.Pedido;
 import lab01.Clases.Producto;
@@ -308,5 +310,110 @@ public class CtrlPedido implements ICtrlPedido {
         HUsuario hu = HUsuario.getinstance();
         Cliente user = hu.obtenerUsuario(nickname);
         user.actualizarEstadoPedido(id, estado);
+    }
+    
+    @Override
+    public Map listaPedidosRecibidos(String nickname){
+        Map aux = new HashMap();
+        HUsuario hu = HUsuario.getinstance();
+        Iterator user = hu.obtenerColeccion().entrySet().iterator();
+        while(user.hasNext()){
+            Map.Entry users = (Map.Entry) user.next();
+            if(users.getValue() instanceof Cliente){
+                Cliente client = (Cliente)users.getValue();
+                if(client.getNickname().equals(nickname)){
+                    Iterator pedidos = client.getPedidos().entrySet().iterator();
+                    while(pedidos.hasNext()){
+                        Map.Entry p = (Map.Entry) pedidos.next();
+                        Pedido ped = (Pedido)p.getValue();
+                        if(ped.getEstado() == estados.RECIBIDO){
+                            aux.put(ped.getDataPedido().getId(), ped.getDataPedido());
+                        }
+                    }
+                }
+            }
+        }
+        return aux;
+    }
+
+    @Override
+    public void actualizarPromedioRest(String nickname){
+        int cantidadPedidos = 0;
+        float sumaPuntajes = 0;
+        HUsuario hu = HUsuario.getinstance();
+        Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
+        while(clientes.hasNext()){
+            Map.Entry cliente = (Map.Entry) clientes.next();
+            if(cliente.getValue() instanceof Cliente){
+                Cliente c = (Cliente)cliente.getValue();
+                Iterator pedidos = c.getPedidos().entrySet().iterator();
+                while(pedidos.hasNext()){
+                    Map.Entry pedido = (Map.Entry)pedidos.next();
+                    Pedido p = (Pedido)pedido.getValue();
+                    if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == estados.RECIBIDO))){
+                        if(p.getEvaluacion() != null){
+                            sumaPuntajes = sumaPuntajes + p.getEvaluacion().getPuntaje();
+                            cantidadPedidos++;
+                        }
+                    }
+                }
+            }
+        }
+        float promedio = sumaPuntajes / cantidadPedidos;
+        hu.obtenerRestaurante(nickname).setPromedio(promedio);
+    }
+
+    @Override
+    public void altaEvaluacion(double id, DTOEvaluacion data){
+        String rest = null;
+        Evaluacion ev = new Evaluacion(data.getComentario(), data.getPuntaje());
+        HUsuario hu = HUsuario.getinstance();
+        Iterator user = hu.obtenerColeccion().entrySet().iterator();
+        while(user.hasNext()){
+            Map.Entry users = (Map.Entry) user.next();
+            if(users.getValue() instanceof Cliente){
+                Cliente client = (Cliente)users.getValue();
+                Iterator peds = client.getPedidos().entrySet().iterator();
+                while(peds.hasNext()){
+                    Map.Entry ped = (Map.Entry) peds.next();
+                    Pedido p = (Pedido)ped.getValue();
+                    if(p.getId() == id){
+                        p.setEvaluacion(ev);
+                        rest = p.getDataPedido().getNickRest();
+                    }
+                }
+            }
+        }
+        if(rest != null){
+            actualizarPromedioRest(rest);
+        }
+        else{
+            throw new NullPointerException();
+        }
+    }
+
+    @Override
+    public Map listarEvaluacionesRest(String nickname){
+        Map aux = new HashMap();
+        HUsuario hu = HUsuario.getinstance();
+        Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
+        while(clientes.hasNext()){
+            Map.Entry cliente = (Map.Entry) clientes.next();
+            if(cliente.getValue() instanceof Cliente){
+                Cliente c = (Cliente)cliente.getValue();
+                Iterator pedidos = c.getPedidos().entrySet().iterator();
+                while(pedidos.hasNext()){
+                    Map.Entry pedido = (Map.Entry)pedidos.next();
+                    Pedido p = (Pedido)pedido.getValue();
+                    if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == estados.RECIBIDO))){
+                        if(p.getEvaluacion() != null){
+                            DTOEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
+                            aux.put(ev.getFecha(), ev);
+                        }
+                    }
+                }
+            }
+        }
+        return aux;
     }
 }

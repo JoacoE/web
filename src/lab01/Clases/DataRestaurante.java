@@ -18,6 +18,7 @@ public class DataRestaurante {
     private String nombre;
     private String email;
     private String direccion;
+    private String pwd;
     private ArrayList<String> lstImagen;
     private Map ColCategoria = new HashMap();
     private Map ColProducto = new HashMap();
@@ -25,11 +26,12 @@ public class DataRestaurante {
     
     public DataRestaurante(){}
     
-    public DataRestaurante(String nickname, String mail, String nombre, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria){
+    public DataRestaurante(String nickname, String mail, String nombre, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria, String pwd){
         this.nickname=nickname;
         this.nombre=nombre;
         this.email=mail;
         this.direccion=direccion;
+        this.pwd = pwd;
         if(lstImagen == null){
             this.lstImagen = null;
         }else{
@@ -120,5 +122,13 @@ public class DataRestaurante {
     
     public Map listarCategorias(){
         return this.ColCategoria;
+    }
+    
+    public void setPwd(String pwd){
+        this.pwd = pwd;
+    }
+    
+    public String getPwd(){
+        return this.pwd;
     }
 }

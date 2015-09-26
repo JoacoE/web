@@ -1,0 +1,54 @@
+body {
+    padding-top: 20px;
+    background: url("../img/Fondo.jpg") no-repeat scroll center center / cover ;
+}
+
+#login-dp .social-buttons{
+    margin:12px;  
+}
+#login-dp .social-buttons a{
+    width: 49%;
+    
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+    
+}
+
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+    margin-top: 10px;
+    margin-right: 5px; 
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+    margin-top: 10px;
+    margin-left: 5px; 
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+
+.btn-gp{
+    color: #fff;
+    background-color:#c32f10;
+    margin-top: 10px;
+    margin-right: 5px; 
+    margin-left: 5px; 
+}
+.btn-gp:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+#jumbo {
+    /*background: rgba(200, 54, 54, 0.5);*/
+    background: rgba(255, 255, 255, 0.3);
+}
+

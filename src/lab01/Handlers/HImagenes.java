@@ -31,11 +31,8 @@ public class HImagenes {
             boolean success = (new File(carpeta).mkdir());
             if(!success){
                 File directorio = new File(carpeta);
-                if(directorio.exists()){
-                    JOptionPane.showMessageDialog(null, "El directorio de imagenes ya existe!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-                }else{
+                if(!directorio.exists()){
                     throw new NullPointerException();
-            
                 }
             }
         } catch (URISyntaxException ex) {

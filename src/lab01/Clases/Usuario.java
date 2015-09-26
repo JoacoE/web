@@ -26,7 +26,6 @@ public abstract class Usuario {
         this.nombre=nombre;
         this.mail=email;
         this.direccion=direccion;
-        //this.tipoUsuario= "";
         this.contrasenia = contrasenia;
     }
 
@@ -46,10 +45,6 @@ public abstract class Usuario {
         return direccion;
     }
 
-//    public void getTipoUsuario(String tu)
-//    {
-//        tipoUsuario = tu;
-//    }
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -70,8 +65,6 @@ public abstract class Usuario {
         this.imagen = imagen;
     }
     
-    
-
     public String getImagen() {
         return imagen;
     }

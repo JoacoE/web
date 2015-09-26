@@ -42,6 +42,7 @@ public class Restaurante extends Usuario{
     public void addCategoria(Categoria c){
         ColCategoria.put(c.getNombre(), c);
     }
+    
     public boolean member(String nombre){
         if(ColCategoria.isEmpty())
             return false;
@@ -165,5 +166,19 @@ public class Restaurante extends Usuario{
     
     public float getPromedio(){
         return this.puntajeProm;
+    }
+    
+    public void setImagenes(ArrayList<String> lstimagen){
+        if(this.lstImagen == null){    
+            this.lstImagen = new ArrayList<>();
+            this.lstImagen.addAll(lstimagen);
+        }
+        else{
+            this.lstImagen = lstimagen;
+        }
+    }
+    
+    public ArrayList<String> getImagenes(){
+        return this.lstImagen;
     }
 }

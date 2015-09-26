@@ -23,7 +23,7 @@ public class Cliente extends Usuario{
         super(nickname,nombre,email,direccion, pwd);
        //setNickname(); poner los valores de los tb
         this.apellido = apellido;
-        this.imagen = img;
+        this.setImagen(img);
         this.fNac = fecha;
         this.pedidos = new HashMap();
     }
@@ -35,14 +35,9 @@ public class Cliente extends Usuario{
     public String getApellido() {
         return apellido;
     }
-    public String getImagen(){
-        return imagen;
-    }
+   
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-    public void setImagen(String img){
-        this.imagen = img;
     }
     
     public String getFecha(){

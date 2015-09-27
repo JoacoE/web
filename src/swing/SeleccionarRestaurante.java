@@ -164,9 +164,9 @@ public class SeleccionarRestaurante extends javax.swing.JInternalFrame {
     private void treeCatValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_treeCatValueChanged
         // TODO add your handling code here:
         try{
-        DefaultMutableTreeNode sel = (DefaultMutableTreeNode)treeCat.getLastSelectedPathComponent();
-        String rest = (String)sel.getUserObject(); 
-        VerRestaurante verR = new VerRestaurante(rest);
+            DefaultMutableTreeNode sel = (DefaultMutableTreeNode)treeCat.getLastSelectedPathComponent();
+            String rest = (String)sel.getUserObject(); 
+            VerRestaurante verR = new VerRestaurante(rest);
             Console.EscritorioMenu.add(verR);
             verR.show();
             this.dispose();

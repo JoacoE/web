@@ -6,14 +6,22 @@
 
 package swing;
 
+import java.io.File;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import lab01.Handlers.Fabrica;
 import java.util.Map;
 import java.util.Iterator;
+import javax.swing.ImageIcon;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.plaf.SliderUI;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
 import lab01.Clases.DataRestaurante;
+import lab01.Handlers.HImagenes;
 import lab01.Interfaces.*;
 /**
  *
@@ -22,6 +30,8 @@ import lab01.Interfaces.*;
 public class VerRestaurante extends javax.swing.JInternalFrame {
     private ICtrlUsuario ICU; 
     private ICtrlProducto CP;
+    private HImagenes HI;
+    private String nickname;
     /**
      * Creates new form VerCliente
      */
@@ -30,26 +40,21 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
         CP = fabrica.getICtrlProducto();
-       this.tbNickNameCliente.setVisible(false);
-       
-       this.tbdireccionCliente.setVisible(false);
-      
-       this.tbmailCliente.setVisible(false);
-       this.tbnombreCliente.setVisible(false);
-      
-       this.lblNicknameCliente.setVisible(false);
-    
-       this.lbldireccionCliente.setVisible(false);
-     
-       this.lblmailCliente.setVisible(false);
-       this.lblnombreCliente.setVisible(false);
-       model = new DefaultListModel();
-       modelProd = new DefaultListModel();
-       this.client=restau;
-       DataRestaurante c = ICU.getRestauranteByNickname(client);
-       verRest();
-       CargarLista(c);
-       
+        HI = HImagenes.getInstance();
+        this.tbNickNameCliente.setVisible(false);
+        this.tbdireccionCliente.setVisible(false);
+        this.tbmailCliente.setVisible(false);
+        this.tbnombreCliente.setVisible(false);
+        this.lblNicknameCliente.setVisible(false);
+        this.lbldireccionCliente.setVisible(false);
+        this.lblmailCliente.setVisible(false);
+        this.lblnombreCliente.setVisible(false);
+        model = new DefaultListModel();
+        modelProd = new DefaultListModel();
+        this.client=restau;
+        DataRestaurante c = ICU.getRestauranteByNickname(client);
+        verRest();
+        CargarLista(c);   
     }
     DefaultListModel model;
     DefaultListModel modelProd;
@@ -67,21 +72,25 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     DataRestaurante c = ICU.getRestauranteByNickname(client);
        this.tbNickNameCliente.setVisible(true);
        this.tbNickNameCliente.setText(c.getNickname());
-       
+       this.nickname = c.getNickname();
        this.tbdireccionCliente.setVisible(true);
        this.tbdireccionCliente.setText(c.getDireccion());
-       
-       
        this.tbmailCliente.setVisible(true);
        this.tbmailCliente.setText(c.getEmail());
        this.tbnombreCliente.setVisible(true);
        this.tbnombreCliente.setText(c.getNombre());
-       
-
        this.lblNicknameCliente.setVisible(true);
-       
-       //this.lbldireccjListProd.ionCliente.setVisible(true);
-       
+       ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
+       int max = imagen.size();
+       this.jSlider = new JSlider();
+       this.jSlider.setExtent(max);
+       this.jSlider.setMaximum(max);
+       this.jSlider.setValue(0);
+       this.jSlider.setPaintTicks(true);
+       this.jSlider.setVisible(true);
+       ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
+       this.lblImagenes.setIcon(icon);
+       this.lblImagenes.setVisible(true);
        this.lblmailCliente.setVisible(true);
        this.lblnombreCliente.setVisible(true);
        model.clear();
@@ -134,6 +143,8 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListProd = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
+        jSlider = new javax.swing.JSlider();
+        lblImagenes = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -258,21 +269,33 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
             }
         });
 
+        jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addGap(82, 82, 82)
+                        .addComponent(lblImagenes, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,8 +305,14 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 170, Short.MAX_VALUE))
+                    .addComponent(lblImagenes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -316,6 +345,22 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+       
+    private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
+        // TODO add your handling code here:
+        ArrayList<File> imagenes = HI.getArrayImg(this.nickname);
+        int max = imagenes.size();
+        this.jSlider.setExtent(max);
+        this.jSlider.setMaximum(max);
+        this.jSlider.setValue(0);
+        this.jSlider.setPaintTicks(true);
+        this.jSlider.setVisible(true);
+        JSlider source = (JSlider)evt.getSource();
+        int posicion = (int)source.getValue();
+        ImageIcon icons = new ImageIcon(imagenes.get(posicion).getAbsolutePath());
+        this.lblImagenes.setIcon(icons);
+        this.lblImagenes.setVisible(true);
+    }//GEN-LAST:event_jSliderStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -325,8 +370,10 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSlider jSlider;
     private javax.swing.JList jlCat;
     private javax.swing.JLabel lblCatRestaurante;
+    private javax.swing.JLabel lblImagenes;
     private javax.swing.JLabel lblNicknameCliente;
     private javax.swing.JLabel lbldireccionCliente;
     private javax.swing.JLabel lblmailCliente;

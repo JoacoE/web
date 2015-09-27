@@ -363,7 +363,8 @@ private File img = null;
                     this.tbDireccion.setText("");
                     this.tbPasswd.setText("");
                     this.lblSelImg.setText("");
-                }}
+                    }
+                }
                 else
                     if(rbRestaurante.isSelected()){
                         DataRestaurante dt = new DataRestaurante(nickname, nombre, mail, direccion, nombresImagenes, null, ICU.getLstCat(), pwd);

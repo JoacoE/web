@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
+import lab01.Handlers.HImagenes;
 import lab01.Interfaces.*;
 
 /**
@@ -22,7 +23,8 @@ import lab01.Interfaces.*;
  * @author gonzalo
  */
 public class VerCliente extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU; 
+    private ICtrlUsuario ICU;
+    private HImagenes HI;
     private DataPedido dp;
     private String nickname;
     DefaultTableModel modelo;
@@ -33,6 +35,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
+        HI = HImagenes.getInstance();
         modelo = (DefaultTableModel)jTableP.getModel();
         cargarDatos();
     }
@@ -166,7 +169,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblVerImagenUsr, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                .addComponent(lblVerImagenUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -284,8 +287,8 @@ public class VerCliente extends javax.swing.JInternalFrame {
        this.lblfechaNacCliente.setVisible(true);
        this.lblmailCliente.setVisible(true);
        this.lblnombreCliente.setVisible(true);
-       ImageIcon icon = new ImageIcon(c.getImagen());
-       lblVerImagenUsr.setIcon(icon);
+       ImageIcon icon = new ImageIcon(HI.getImagen(c.getNickname()).getAbsolutePath());
+       this.lblVerImagenUsr.setIcon(icon);
        this.lblVerImagenUsr.setVisible(true);
        cargarTabla();
     }                                   

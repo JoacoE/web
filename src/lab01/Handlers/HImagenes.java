@@ -6,7 +6,12 @@
 package lab01.Handlers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import static java.nio.file.Files.copy;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -47,8 +52,16 @@ public class HImagenes {
     }
     
     public void guardarImagen(File imagen, String nickname){
-        File nuevo = new File(carpeta, nickname);
-        imagen.renameTo(nuevo);
+        try{
+            File guardar = new File(carpeta, nickname);
+            Path pathcarpeta = Paths.get(guardar.getAbsolutePath());
+            Path pathimagen = Paths.get(imagen.getAbsolutePath());
+            Path img = copy(pathimagen, pathcarpeta, StandardCopyOption.REPLACE_EXISTING);
+            File nuevo = img.toFile();
+            nuevo.renameTo(guardar);
+        }catch(Exception e){
+            e = new IOException();
+        }
     }
     
     public File getImagen(String nickname){
@@ -56,25 +69,44 @@ public class HImagenes {
     }
     
     public void guardarArrayImg(ArrayList<File> imagenes, String nickname){
-        int i = 0;
-        for(File ci: imagenes){
-            String indice = String.valueOf(i);
-            String newName = nickname.concat(indice);
-            File nuevo = new File(carpeta, newName);
-            ci.renameTo(nuevo);
-            i++;
+        try{
+            int i = 0;
+            for(File ci: imagenes){
+                String indice = String.valueOf(i);
+                String newName = nickname.concat(indice);
+                File guardar = new File(carpeta, newName);
+                Path pathcarpeta = Paths.get(guardar.getAbsolutePath());
+                Path pathimagen = Paths.get(ci.getAbsolutePath());
+                Path img = copy(pathimagen, pathcarpeta, StandardCopyOption.REPLACE_EXISTING);
+                File nuevo = img.toFile();
+                nuevo.renameTo(guardar);
+                i++;
+            }
+        }catch(Exception e){
+            e = new IOException();
         }
     }
     
     public ArrayList<File> getArrayImg(String nickname){
         boolean finalizar = false;
         ArrayList<File> imagenes = new ArrayList<>();
-        for(int i = 0; finalizar == true; i++){
+        int i = 0;
+        while(finalizar == false){
             String indice = String.valueOf(i);
             String nombreRetorno = nickname.concat(indice);
             File retorno = new File(carpeta, nombreRetorno);
-            imagenes.add(retorno);
+            if(retorno.exists()){
+                imagenes.add(retorno);
+            }
+            else{
+                finalizar = true;
+            }
+            i++;
         }
         return imagenes;
+    }
+    
+    public String getCarpeta(){//devuelve el path de la carpeta de imagenes como un string
+        return this.carpeta;
     }
 }

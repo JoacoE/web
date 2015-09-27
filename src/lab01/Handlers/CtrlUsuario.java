@@ -20,7 +20,6 @@ import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 import lab01.Clases.Pedido;
-import lab01.Clases.estados;
 
 /**
  *

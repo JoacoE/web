@@ -32,15 +32,17 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     private ICtrlProducto CP;
     private HImagenes HI;
     private String nickname;
+    private int max;
     /**
      * Creates new form VerCliente
      */
     public VerRestaurante(String restau) {
-        initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
         CP = fabrica.getICtrlProducto();
         HI = HImagenes.getInstance();
+        max = (HI.getArrayImg(restau).size()) - 1;
+        initComponents();
         this.tbNickNameCliente.setVisible(false);
         this.tbdireccionCliente.setVisible(false);
         this.tbmailCliente.setVisible(false);
@@ -69,7 +71,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     
     
     public void verRest(){
-    DataRestaurante c = ICU.getRestauranteByNickname(client);
+       DataRestaurante c = ICU.getRestauranteByNickname(client);
        this.tbNickNameCliente.setVisible(true);
        this.tbNickNameCliente.setText(c.getNickname());
        this.nickname = c.getNickname();
@@ -81,11 +83,9 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
        this.tbnombreCliente.setText(c.getNombre());
        this.lblNicknameCliente.setVisible(true);
        ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
-       int max = imagen.size();
+       max = imagen.size();
        this.jSlider = new JSlider();
-       this.jSlider.setExtent(max);
        this.jSlider.setMaximum(max);
-       this.jSlider.setValue(0);
        this.jSlider.setPaintTicks(true);
        this.jSlider.setVisible(true);
        ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
@@ -150,7 +150,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setPreferredSize(new java.awt.Dimension(690, 420));
+        setPreferredSize(new java.awt.Dimension(690, 676));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del restaurante", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("URW Gothic L", 1, 14))); // NOI18N
 
@@ -269,6 +269,12 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
             }
         });
 
+        jSlider.setMajorTickSpacing(1);
+        jSlider.setMaximum(max);
+        jSlider.setPaintTicks(true);
+        jSlider.setSnapToTicks(true);
+        jSlider.setValue(0);
+        jSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderStateChanged(evt);
@@ -281,7 +287,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(228, 228, 228))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -308,10 +314,10 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(0, 170, Short.MAX_VALUE))
+                        .addGap(0, 216, Short.MAX_VALUE))
                     .addComponent(lblImagenes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -349,13 +355,10 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
         // TODO add your handling code here:
         ArrayList<File> imagenes = HI.getArrayImg(this.nickname);
-        int max = imagenes.size();
-        this.jSlider.setExtent(max);
+        JSlider source = (JSlider)evt.getSource();
         this.jSlider.setMaximum(max);
-        this.jSlider.setValue(0);
         this.jSlider.setPaintTicks(true);
         this.jSlider.setVisible(true);
-        JSlider source = (JSlider)evt.getSource();
         int posicion = (int)source.getValue();
         ImageIcon icons = new ImageIcon(imagenes.get(posicion).getAbsolutePath());
         this.lblImagenes.setIcon(icons);

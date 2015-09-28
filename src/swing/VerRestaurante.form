@@ -7,7 +7,7 @@
     <Property name="maximizable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[690, 420]"/>
+      <Dimension value="[690, 676]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -30,7 +30,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jSlider" min="-2" max="-2" attributes="0"/>
+              <Component id="jSlider" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -64,12 +64,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="170" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="216" max="32767" attributes="0"/>
                   </Group>
                   <Component id="lblImagenes" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSlider" min="-2" max="-2" attributes="0"/>
+              <Component id="jSlider" pref="48" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -294,6 +294,18 @@
       </Events>
     </Component>
     <Component class="javax.swing.JSlider" name="jSlider">
+      <Properties>
+        <Property name="majorTickSpacing" type="int" value="1"/>
+        <Property name="maximum" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="max" type="code"/>
+        </Property>
+        <Property name="paintTicks" type="boolean" value="true"/>
+        <Property name="snapToTicks" type="boolean" value="true"/>
+        <Property name="value" type="int" value="0"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Por defecto"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderStateChanged"/>
       </Events>

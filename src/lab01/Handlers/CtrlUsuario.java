@@ -80,6 +80,9 @@ public class CtrlUsuario implements ICtrlUsuario {
 
     @Override
     public void registrarCliente(DTORegistrarCliente datos){
+        if(datos.getImagen() == null){
+            datos.setImagen("");
+        }
         Cliente c = new Cliente(this.nickname, this.nombre, this.email, this.direccion, datos.getApellido(), datos.getImagen(), datos.getFecha(), datos.getPwd());
         HUsuario HU = HUsuario.getinstance();
         HU.addUsuario(c);
@@ -103,6 +106,9 @@ public class CtrlUsuario implements ICtrlUsuario {
                     }
                 }                
             }
+//            if(dt.getLstImagen() == null){
+//                dt.getLstImagen().add("");
+//            }
             Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), dt.getColProducto(), categorias, dt.getPwd());
             HUsuario HU = HUsuario.getinstance();
             HU.addUsuario(r);

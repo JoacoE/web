@@ -7,7 +7,9 @@ package lab01.Handlers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import static java.nio.file.Files.copy;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +18,8 @@ import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -51,16 +55,18 @@ public class HImagenes {
         return instancia;
     }
     
-    public void guardarImagen(File imagen, String nickname){
-        try{
-            File guardar = new File(carpeta, nickname);
-            Path pathcarpeta = Paths.get(guardar.getAbsolutePath());
-            Path pathimagen = Paths.get(imagen.getAbsolutePath());
-            Path img = copy(pathimagen, pathcarpeta, StandardCopyOption.REPLACE_EXISTING);
-            File nuevo = img.toFile();
-            nuevo.renameTo(guardar);
-        }catch(Exception e){
-            e = new IOException();
+    public void guardarImagen(File imagen, String nickname){       
+        if(imagen.exists()){
+            try {
+                File guardar = new File(carpeta, nickname);
+                Path pathcarpeta = Paths.get(guardar.getAbsolutePath());
+                Path pathimagen = Paths.get(imagen.getAbsolutePath());
+                Path img = copy(pathimagen, pathcarpeta, StandardCopyOption.REPLACE_EXISTING);
+                File nuevo = img.toFile();
+                nuevo.renameTo(guardar);
+            } catch (Exception e) {
+                e = new IOException();
+            }
         }
     }
     
@@ -90,6 +96,8 @@ public class HImagenes {
     public ArrayList<File> getArrayImg(String nickname){
         boolean finalizar = false;
         ArrayList<File> imagenes = new ArrayList<>();
+        File planb = null;
+        File aux = new File(carpeta, nickname.concat("0"));
         int i = 0;
         while(finalizar == false){
             String indice = String.valueOf(i);
@@ -108,5 +116,23 @@ public class HImagenes {
     
     public String getCarpeta(){//devuelve el path de la carpeta de imagenes como un string
         return this.carpeta;
+    }
+    
+    public ImageIcon getNoImgeUsuario(){
+        URL imagePath = null;
+        try {
+            imagePath = new URL(getClass().getResource("/Helpers/generico.jpeg").toString());
+        } catch (MalformedURLException ex) {
+        }
+        return new ImageIcon(imagePath);
+    }
+    
+    public ImageIcon getNoImage(){
+        URL imagePath = null;
+        try {
+            imagePath = new URL(getClass().getResource("/Helpers/Noimage.png").toString());
+        } catch (MalformedURLException ex) {
+        }
+        return new ImageIcon(imagePath);
     }
 }

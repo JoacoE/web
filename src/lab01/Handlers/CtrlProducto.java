@@ -41,6 +41,11 @@ public class CtrlProducto implements ICtrlProducto {
         } else {
             if (!datos.isPromo()) { // si el producto es individual
                 Producto i = new Individual(datos.getDi().getDataNombre(), datos.getDi().getDataDescripcion(), datos.getDi().getDataPrecio(), datos.getDi().getCantidad());
+                if(!datos.getDi().getDataImagen().equals("")){
+                    i.setImagen(datos.getDi().getDataImagen());
+                }else{
+                    i.setImagen("");
+                }
                 restoran.addProducto(i); //agrego el producto a la coleccion de productos de ese restoran
             }
         }
@@ -98,9 +103,20 @@ public class CtrlProducto implements ICtrlProducto {
             Cantidad_Individual CI = new Cantidad_Individual(i, cantidad);
             ColCantIndividual.add(CI);
         }
-        Promocional pro = new Promocional(datos.getNombre(), datos.getDescripcion(), true, datos.getDescuento(), ColCantIndividual);
-        pro.setPrecioPromo(datos.getDescuento());
-        r.addProducto(pro);
+        String prueba = String.valueOf(datos.getDescuento());
+        if(prueba.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar el descuento", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            throw new NullPointerException();
+        }else{
+            Promocional pro = new Promocional(datos.getNombre(), datos.getDescripcion(), true, datos.getDescuento(), ColCantIndividual);
+            pro.setPrecioPromo(datos.getDescuento());
+            if(!datos.getImagen().equals("")){
+                pro.setImagen(datos.getImagen());
+            }else{
+                pro.setImagen("");
+            }
+            r.addProducto(pro);
+        }
     }
     
     public Producto getProdNombre(String Nprod, String nickRes){
@@ -116,7 +132,7 @@ public class CtrlProducto implements ICtrlProducto {
         individual.setDescripcion(datos.getDi().getDataDescripcion());
         individual.setCantidad(datos.getDi().getCantidad());
         individual.setPrecio(datos.getDi().getDataPrecio());
-        individual.setImagen(datos.getImagen()); //falta ver lo de la imagen.
+        individual.setImagen(datos.getImagen());
     }
     
     @Override
@@ -127,5 +143,6 @@ public class CtrlProducto implements ICtrlProducto {
         promo.setActiva(datos.getDp().getActiva());
         promo.setDescuento(datos.getDp().getDescuento());
         promo.setPrecioPromo(promo.getDescuento());
+        promo.setImagen(datos.getImagen());
     }
 }

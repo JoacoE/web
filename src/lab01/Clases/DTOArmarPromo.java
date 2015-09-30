@@ -14,6 +14,7 @@ public class DTOArmarPromo {
     private String nombre;
     private String descripcion;
     private double descuento;
+    private String imagen;
     
     public DTOArmarPromo(){
     }
@@ -55,5 +56,13 @@ public class DTOArmarPromo {
 
     public void setDescuento(double descuento) {
         this.descuento = descuento;
+    }
+    
+    public String getImagen(){
+        return this.imagen;
+    }
+    
+    public void setImagen(String imagen){
+        this.imagen = imagen;
     }
 }

@@ -13,6 +13,7 @@ public class DTOActualizarPromocional {
     private DataPromocional dp;
     private String nombre;
     private String nickRest;
+    private String imagen;
     
     public DTOActualizarPromocional(){
     }
@@ -45,5 +46,13 @@ public class DTOActualizarPromocional {
 
     public void setNickRest(String nickRest) {
         this.nickRest = nickRest;
+    }
+    
+    public String getImagen(){
+        return this.imagen;
+    }
+    
+    public void setImagen(String imagen){
+        this.imagen = imagen;
     }
 }

@@ -97,7 +97,7 @@ public class DataRestaurante {
     }
     
     public void setLstImagen(ArrayList<String> lstImagen){
-        this.lstImagen.addAll(lstImagen);
+        this.lstImagen = lstImagen;
     }
     
     public ArrayList<String> getLstImagen(){

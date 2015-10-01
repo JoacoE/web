@@ -11,11 +11,13 @@ import java.util.Map;
 import java.util.Iterator;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import lab01.Clases.DTOArmarPromo;
 import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataRestaurante;
 import lab01.Handlers.Fabrica;
+import lab01.Handlers.HImagenes;
 import lab01.Interfaces.*;
 /**
  *
@@ -25,13 +27,17 @@ public class RegProducto extends javax.swing.JInternalFrame {
 
     private ICtrlProducto CP;
     private ICtrlUsuario ICU;
+    private HImagenes HI;
     private String restaurante;
+    private String nomProd;
+    private String imagen = "";
 
     public RegProducto() {
         initComponents();
         Fabrica f = Fabrica.getInstance();
         CP = f.getICtrlProducto();
         ICU = f.getICtrlUsuario();
+        HI = HImagenes.getInstance();
         cargarCBbox();
     }
 
@@ -60,7 +66,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
         tbPrecio = new javax.swing.JTextField();
         jcbRest = new javax.swing.JComboBox();
         btnSeleccionarImagen = new javax.swing.JButton();
-        lblSeleccionarImagen = new javax.swing.JLabel();
         lblDescuento = new javax.swing.JLabel();
         tbDescuento = new javax.swing.JTextField();
         btnRegistro = new javax.swing.JButton();
@@ -187,8 +192,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
                                 .addGap(111, 111, 111))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp1Layout.createSequentialGroup()
                                 .addComponent(btnSeleccionarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSeleccionarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(305, 305, 305)))))
                 .addContainerGap())
         );
         jp1Layout.setVerticalGroup(
@@ -223,9 +227,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
                     .addComponent(rbIndividual)
                     .addComponent(rbPromocional))
                 .addGap(18, 18, 18)
-                .addGroup(jp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSeleccionarImagen)
-                    .addComponent(lblSeleccionarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSeleccionarImagen)
                 .addContainerGap())
         );
 
@@ -275,42 +277,60 @@ public class RegProducto extends javax.swing.JInternalFrame {
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         boolean Promocional = false;
         double precio;
-        double descuento;
+        double descuento = 0;
         int cantidad;
 
         if (evt.getSource() == btnRegistro) {
             this.restaurante = (String) jcbRest.getSelectedItem();
             if (CP.existeRestaurante(restaurante)) { // si el restaurante se encuentra registrado
-                if (rbIndividual.isSelected()) { // si quiero registar producto individual                    
-
-                    precio = Double.parseDouble(tbPrecio.getText());
-                    cantidad = Integer.parseInt(tbCantidad.getText()); // me guardo la cantidad de productos para ese producto particular
-                    DataIndividual di = new DataIndividual(tbNombre.getText(), tbDesc.getText(), precio, cantidad); // me guardo los datos en el dataproducto
-                    DTORegistrarProducto datosi = new DTORegistrarProducto(di, restaurante, Promocional);
-                    CP.registrarProducto(datosi); // registro producto
-                    JOptionPane.showMessageDialog(null, "Producto registrado con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                    limpiarCampos();
+                if (rbIndividual.isSelected()) { // si quiero registar producto individual 
+                    try{
+                        precio = Double.parseDouble(tbPrecio.getText());
+                        cantidad = Integer.parseInt(tbCantidad.getText()); // me guardo la cantidad de productos para ese producto particular
+                        DataIndividual di = new DataIndividual(tbNombre.getText(), tbDesc.getText(), precio, cantidad); // me guardo los datos en el dataproducto
+                        if(!this.imagen.equals("")){
+                            di.setDataImagen(this.imagen);
+                        }else{
+                            di.setDataImagen("");
+                        }
+                        DTORegistrarProducto datosi = new DTORegistrarProducto(di, restaurante, Promocional);
+                        CP.registrarProducto(datosi); // registro producto
+                        JOptionPane.showMessageDialog(null, "Producto registrado con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarCampos();
+                    }catch(NumberFormatException ex){
+                        JOptionPane.showInternalMessageDialog(rootPane, "Debe ingresar datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+                        this.tbPrecio.setText("");
+                        this.tbCantidad.setText("");
+                    }
 
                 } else { // si es promocional
                     if (rbPromocional.isSelected()) {
-                        //String rest = (String) jcbRest.getSelectedItem();
-                        descuento = Double.parseDouble(tbDescuento.getText());
-                        DTOArmarPromo datosp = new DTOArmarPromo(restaurante, tbNombre.getText(), tbDesc.getText(), descuento);
-                        CP.armarPromo(datosp);
-                        JOptionPane.showMessageDialog(null, "Promocion registrada con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                        limpiarCampos();
-
+                        try{
+                            descuento = Double.parseDouble(tbDescuento.getText());
+                            String control = String.valueOf(descuento);
+                            if(control.isEmpty()){
+                                JOptionPane.showInternalMessageDialog(rootPane, "Ingrese descuento", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            DTOArmarPromo datosp = new DTOArmarPromo(restaurante, tbNombre.getText(), tbDesc.getText(), descuento);
+                            if(!this.imagen.equals("")){
+                                datosp.setImagen(this.imagen);
+                            }else{
+                                datosp.setImagen("");
+                            }
+                            CP.armarPromo(datosp);
+                            JOptionPane.showMessageDialog(null, "Promocion registrada con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            limpiarCampos();
+                        }catch(NumberFormatException ex){
+                            JOptionPane.showInternalMessageDialog(rootPane, "Debe ingresar datos validos", "Error", JOptionPane.ERROR_MESSAGE);
+                            this.tbDesc.setText("");
+                        }
                     }
-
                 }
 
             } else {
                 JOptionPane.showMessageDialog(null, "El restaurante " + jcbRest.getName() + " no se encuentra registrado", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
-
         }
-
-
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void rbIndividualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbIndividualActionPerformed
@@ -329,7 +349,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             if (evt.getStateChange() == ItemEvent.SELECTED) {
-
                 tbCantidad.setEnabled(false);
                 tbDescuento.setEnabled(true);
                 String restoran = (String) jcbRest.getSelectedItem();
@@ -341,8 +360,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado restaurante", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-
     }//GEN-LAST:event_rbPromocionalItemStateChanged
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -359,11 +376,26 @@ public class RegProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSelImagenActionPerformed
 
     private void btnSeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarImagenActionPerformed
-        JFileChooser selector = new JFileChooser();
-        selector.showOpenDialog(null);
-        File archivo = selector.getSelectedFile();
-        String filename = archivo.getAbsolutePath();
-        lblSeleccionarImagen.setText(filename);
+        if(rbIndividual.isSelected()){
+            JFileChooser selector = new JFileChooser();
+            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, JPG, PNG & GIF", "jpeg", "jpg", "png", "gif");
+            selector.setFileFilter(filtroImagen);
+            selector.showOpenDialog(null);
+            File archivo = selector.getSelectedFile();
+            String aux = (String) jcbRest.getSelectedItem();
+            this.imagen = aux.concat(this.tbNombre.getText());
+            HI.guardarImagen(archivo, this.imagen);
+        }
+        if(rbPromocional.isSelected()){
+            JFileChooser selector = new JFileChooser();
+            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, JPG, PNG & GIF", "jpeg", "jpg", "png", "gif");
+            selector.setFileFilter(filtroImagen);
+            selector.showOpenDialog(null);
+            File archivo = selector.getSelectedFile();
+            String aux = (String) jcbRest.getSelectedItem();
+            this.imagen = aux.concat(this.tbNombre.getText());
+            HI.guardarImagen(archivo, this.imagen);
+        }
     }//GEN-LAST:event_btnSeleccionarImagenActionPerformed
 
     private void tbDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbDescuentoActionPerformed
@@ -381,18 +413,15 @@ public class RegProducto extends javax.swing.JInternalFrame {
         } else {
             tbCantidad.setEnabled(true);
             tbDescuento.setEnabled(false);
-            //tbPrecio.setEnabled(true);
-
         }
-
     }//GEN-LAST:event_rbIndividualItemStateChanged
 
     public void limpiarCampos() {
-        tbNombre.setText(" ");
-        tbDesc.setText(" ");
-        tbPrecio.setText(" ");
-        tbDescuento.setText(" ");
-        tbCantidad.setText(" ");
+        tbNombre.setText("");
+        tbDesc.setText("");
+        tbPrecio.setText("");
+        tbDescuento.setText("");
+        tbCantidad.setText("");
     }
 
     public void cargarCBbox() {
@@ -421,7 +450,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblRest;
-    private javax.swing.JLabel lblSeleccionarImagen;
     private javax.swing.JRadioButton rbIndividual;
     private javax.swing.JRadioButton rbPromocional;
     private javax.swing.JTextField tbCantidad;

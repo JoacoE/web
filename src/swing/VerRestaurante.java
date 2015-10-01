@@ -14,19 +14,18 @@ import java.util.Map;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.SliderUI;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
 import lab01.Clases.DataRestaurante;
 import lab01.Handlers.HImagenes;
 import lab01.Interfaces.*;
+
 /**
  *
  * @author admin123
  */
+
 public class VerRestaurante extends javax.swing.JInternalFrame {
     private ICtrlUsuario ICU; 
     private ICtrlProducto CP;
@@ -36,6 +35,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     /**
      * Creates new form VerCliente
      */
+
     public VerRestaurante(String restau) {
         Fabrica fabrica = Fabrica.getInstance();
         ICU = fabrica.getICtrlUsuario();
@@ -71,31 +71,38 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     
     
     public void verRest(){
-       DataRestaurante c = ICU.getRestauranteByNickname(client);
-       this.tbNickNameCliente.setVisible(true);
-       this.tbNickNameCliente.setText(c.getNickname());
-       this.nickname = c.getNickname();
-       this.tbdireccionCliente.setVisible(true);
-       this.tbdireccionCliente.setText(c.getDireccion());
-       this.tbmailCliente.setVisible(true);
-       this.tbmailCliente.setText(c.getEmail());
-       this.tbnombreCliente.setVisible(true);
-       this.tbnombreCliente.setText(c.getNombre());
-       this.lblNicknameCliente.setVisible(true);
-       ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
-       max = imagen.size();
-       this.jSlider = new JSlider();
-       this.jSlider.setMaximum(max);
-       this.jSlider.setPaintTicks(true);
-       this.jSlider.setVisible(true);
-       ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
-       this.lblImagenes.setIcon(icon);
-       this.lblImagenes.setVisible(true);
-       this.lblmailCliente.setVisible(true);
-       this.lblnombreCliente.setVisible(true);
-       model.clear();
-       Map cats = c.getColCategoria();
-       Iterator it = cats.entrySet().iterator();
+        DataRestaurante c = ICU.getRestauranteByNickname(client);
+        this.tbNickNameCliente.setVisible(true);
+        this.tbNickNameCliente.setText(c.getNickname());
+        this.nickname = c.getNickname();
+        this.tbdireccionCliente.setVisible(true);
+        this.tbdireccionCliente.setText(c.getDireccion());
+        this.tbmailCliente.setVisible(true);
+        this.tbmailCliente.setText(c.getEmail());
+        this.tbnombreCliente.setVisible(true);
+        this.tbnombreCliente.setText(c.getNombre());
+        this.lblNicknameCliente.setVisible(true);
+        if(c.getLstImagen() != null){
+            ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
+            max = imagen.size();
+            this.jSlider = new JSlider();
+            this.jSlider.setMaximum(max);
+            this.jSlider.setPaintTicks(true);
+            this.jSlider.setVisible(true);
+            ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
+            this.lblImagenes.setIcon(icon);
+            this.lblImagenes.setVisible(true);
+        }else{
+            this.lblImagenes.setIcon(HI.getNoImage());
+            this.lblImagenes.setVisible(true);
+            this.jSlider.setEnabled(false);
+            this.jSlider.setVisible(false);
+        }
+        this.lblmailCliente.setVisible(true);
+        this.lblnombreCliente.setVisible(true);
+        model.clear();
+        Map cats = c.getColCategoria();
+        Iterator it = cats.entrySet().iterator();
         //Iterator itret = ret.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();

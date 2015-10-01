@@ -22,6 +22,7 @@ import lab01.Interfaces.*;
  *
  * @author gonzalo
  */
+
 public class VerCliente extends javax.swing.JInternalFrame {
     private ICtrlUsuario ICU;
     private HImagenes HI;
@@ -266,32 +267,39 @@ public class VerCliente extends javax.swing.JInternalFrame {
         InfoPedidoYBaja infoPed = new InfoPedidoYBaja(this.dp);
         infoPed.setVisible(true);
     }//GEN-LAST:event_jTablePMouseClicked
+    
     private void cargarDatos(){
-       DataCliente c = ICU.getUsuarioByNickname(ICU.getNickname());
-       this.nickname = c.getNickname();
-       this.tbNickNameCliente.setVisible(true);
-       this.tbNickNameCliente.setText(c.getNickname());
-       this.tbapellidoClente.setVisible(true);
-       this.tbapellidoClente.setText(c.getApellido());
-       this.tbdireccionCliente.setVisible(true);
-       this.tbdireccionCliente.setText(c.getDireccion());
-       this.tbfechaDeNacCliente.setVisible(true);
-       this.tbfechaDeNacCliente.setText(c.getFNac());
-       this.tbmailCliente.setVisible(true);
-       this.tbmailCliente.setText(c.getMail());
-       this.tbnombreCliente.setVisible(true);
-       this.tbnombreCliente.setText(c.getNombre());
-       this.lblNicknameCliente.setVisible(true);
-       this.lblapellidoCliente.setVisible(true);
-       this.lbldireccionCliente.setVisible(true);
-       this.lblfechaNacCliente.setVisible(true);
-       this.lblmailCliente.setVisible(true);
-       this.lblnombreCliente.setVisible(true);
-       ImageIcon icon = new ImageIcon(HI.getImagen(c.getNickname()).getAbsolutePath());
-       this.lblVerImagenUsr.setIcon(icon);
-       this.lblVerImagenUsr.setVisible(true);
-       cargarTabla();
+        DataCliente c = ICU.getUsuarioByNickname(ICU.getNickname());
+        this.nickname = c.getNickname();
+        this.tbNickNameCliente.setVisible(true);
+        this.tbNickNameCliente.setText(c.getNickname());
+        this.tbapellidoClente.setVisible(true);
+        this.tbapellidoClente.setText(c.getApellido());
+        this.tbdireccionCliente.setVisible(true);
+        this.tbdireccionCliente.setText(c.getDireccion());
+        this.tbfechaDeNacCliente.setVisible(true);
+        this.tbfechaDeNacCliente.setText(c.getFNac());
+        this.tbmailCliente.setVisible(true);
+        this.tbmailCliente.setText(c.getMail());
+        this.tbnombreCliente.setVisible(true);
+        this.tbnombreCliente.setText(c.getNombre());
+        this.lblNicknameCliente.setVisible(true);
+        this.lblapellidoCliente.setVisible(true);
+        this.lbldireccionCliente.setVisible(true);
+        this.lblfechaNacCliente.setVisible(true);
+        this.lblmailCliente.setVisible(true);
+        this.lblnombreCliente.setVisible(true);
+        if(!c.getImagen().equals("")){
+            ImageIcon icon = new ImageIcon(HI.getImagen(c.getNickname()).getAbsolutePath());
+            this.lblVerImagenUsr.setIcon(icon);
+            this.lblVerImagenUsr.setVisible(true);
+        }else{
+            this.lblVerImagenUsr.setIcon(HI.getNoImgeUsuario());
+            this.lblVerImagenUsr.setVisible(true);
+        }
+        cargarTabla();
     }                                   
+    
     public void cargarTabla(){
         if(!ICU.pedidosUsuario(this.nickname).isEmpty()){
             Iterator it = ICU.pedidosUsuario(this.nickname).entrySet().iterator();

@@ -5,9 +5,13 @@
  */
 package swing;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import lab01.Clases.DTOActualizarIndividual;
 import lab01.Clases.DTOActualizarPromocional;
@@ -17,7 +21,7 @@ import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataPromocional;
 import lab01.Clases.DataRestaurante;
-import lab01.Clases.Restaurante;
+import lab01.Handlers.HImagenes;
 import lab01.Interfaces.*;
 /**
  *
@@ -32,6 +36,8 @@ public class VerInfoProd extends javax.swing.JFrame {
     private DataPromocional dp = new DataPromocional();
     private DataRestaurante res;
     private ICtrlPedido ICPed;
+    private HImagenes HI;
+    private String imagen = "";
     String nomprod;
     String nombre;
     boolean promo;
@@ -41,8 +47,18 @@ public class VerInfoProd extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICPed = fabrica.getICtrlPedido();
         ICP = fabrica.getICtrlProducto();
+        HI = HImagenes.getInstance();
         modelo = (DefaultTableModel) jTabla.getModel();
         modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
+        imagen = individual.getDataImagen();
+        if(!individual.getDataImagen().equals("")){
+            ImageIcon icon = new ImageIcon(HI.getImagen(individual.getDataImagen()).getAbsolutePath());
+            this.lblImagen.setIcon(icon);
+            this.lblImagen.setVisible(true);
+        }else{
+            this.lblImagen.setIcon(HI.getNoImage());
+            this.lblImagen.setVisible(true);
+        }
         this.nomprod = individual.getDataNombre();
         this.txtNomProd.setText(individual.getDataNombre());
         this.txtDescProd.setText(individual.getDataDescripcion());
@@ -54,6 +70,8 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.lblEstadoPromo.setVisible(false);
         this.btnGuardar.setVisible(false);
         this.btnGuardar.setEnabled(false);
+        this.jbImagen.setEnabled(false);
+        this.jbImagen.setVisible(false);
         this.jcEstado.setVisible(false);
         this.jPanel3.setVisible(false);
         this.tbDescuento.setVisible(false);
@@ -71,10 +89,19 @@ public class VerInfoProd extends javax.swing.JFrame {
         Fabrica fabrica = Fabrica.getInstance();
         ICPed = fabrica.getICtrlPedido();
         ICP = fabrica.getICtrlProducto();
+        HI = HImagenes.getInstance();
         modelo = (DefaultTableModel) jTabla.getModel();
         modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
         this.res = dr;
-        //this.txtNomProd.enable(false);
+        imagen = promo.getDataImagen();
+        if(!promo.getDataImagen().equals("")){
+            ImageIcon icon = new ImageIcon(HI.getImagen(promo.getDataImagen()).getAbsolutePath());
+            this.lblImagen.setIcon(icon);
+            this.lblImagen.setVisible(true);
+        }else{
+            this.lblImagen.setIcon(HI.getNoImage());
+            this.lblImagen.setVisible(true);
+        }
         this.nomprod = promo.getDataNombre();
         this.txtNomProd.setText(promo.getDataNombre());
         this.txtDescProd.setText(promo.getDataDescripcion());
@@ -87,6 +114,8 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.tbDescuento.setVisible(true);
         this.btnGuardar.setVisible(false);
         this.btnGuardar.setEnabled(false);
+        this.jbImagen.setEnabled(false);
+        this.jbImagen.setVisible(false);
         this.lblDescuento.setVisible(true);
         this.tbDescuento.setText(String.valueOf(promo.getDescuento()));
         this.promo = true;
@@ -143,6 +172,8 @@ public class VerInfoProd extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablaPedidos = new javax.swing.JTable();
+        lblImagen = new javax.swing.JLabel();
+        jbImagen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(759, 393));
@@ -361,47 +392,57 @@ public class VerInfoProd extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTablaPedidos);
 
+        jbImagen.setText("Seleccionar Imagen");
+        jbImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbImagenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jbImagen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(77, 77, 77)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(76, 76, 76)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(76, 76, 76)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbImagen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEditar)
+                            .addComponent(btnGuardar)
+                            .addComponent(jButton1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnGuardar)
-                    .addComponent(jButton1))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -418,7 +459,7 @@ public class VerInfoProd extends javax.swing.JFrame {
             int cant = di.getCantidad();
             String st = Integer.toString(cant);
             lista[1] = st;
-            Iterator dprods = r.getColProducto().entrySet().iterator();
+            /*Iterator dprods = r.getColProducto().entrySet().iterator();
             while(dprods.hasNext()){
                 Map.Entry dprod = (Map.Entry) dprods.next();
                 if(dprod.getValue() instanceof DataIndividual){
@@ -427,7 +468,7 @@ public class VerInfoProd extends javax.swing.JFrame {
                         lista[2] = String.valueOf(dind.getCantidad());
                     }
                 }
-            }
+            }*/
             modelo.insertRow((int) jTabla.getRowCount(), lista);
         }
     }
@@ -459,7 +500,6 @@ public class VerInfoProd extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -476,6 +516,8 @@ public class VerInfoProd extends javax.swing.JFrame {
             this.btnGuardar.setVisible(true);
             this.btnGuardar.setEnabled(true);
             this.btnEditar.setEnabled(false);
+            this.jbImagen.setEnabled(true);
+            this.jbImagen.setVisible(true);
         }else{
             this.txtNomProd.enable(true);
             this.txtNomProd.setEditable(true);
@@ -489,6 +531,8 @@ public class VerInfoProd extends javax.swing.JFrame {
             this.btnGuardar.setVisible(true);
             this.btnGuardar.setEnabled(true);
             this.btnEditar.setEnabled(false);
+            this.jbImagen.setEnabled(true);
+            this.jbImagen.setVisible(true);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -500,36 +544,71 @@ public class VerInfoProd extends javax.swing.JFrame {
         // TODO add your handling code here:
         //String nombre = this.txtNomProd.getText();
         if(!this.promo){
-            this.di.setDataNombre(this.txtNomProd.getText());
-            this.di.setDataDescripcion(this.txtDescProd.getText());
-            this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
-            this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
-            if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-                DTOActualizarIndividual datosi = new DTOActualizarIndividual(di, this.nombre, res.getNickname());
-                ICP.actualizarIndividual(datosi);
-                JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-              JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+            try{
+                this.di.setDataNombre(this.txtNomProd.getText());
+                this.di.setDataDescripcion(this.txtDescProd.getText());
+                this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
+                this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+                if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                    DTOActualizarIndividual datosi = new DTOActualizarIndividual(di, this.nombre, res.getNickname());
+                    if(HI.getImagen(imagen).exists()){
+                        datosi.setImagen(imagen);
+                        ICP.actualizarIndividual(datosi);
+                    }else{
+                        datosi.setImagen(imagen);
+                        ICP.actualizarIndividual(datosi);
+                    }
+                    JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }catch(NumberFormatException ex){
+                JOptionPane.showInternalMessageDialog(rootPane, "Debe ingresar datos validos", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }else{
-            this.dp.setDataNombre(this.txtNomProd.getText());
-            this.dp.setDataDescripcion(this.txtDescProd.getText());
-            this.dp.setDescuento(Double.parseDouble(this.tbDescuento.getText()));
-            String activa = jcEstado.getSelectedItem().toString();
-            if(activa.equals("ACTIVA")){
-                this.dp.setActiva(true);
-            }else{
-                this.dp.setActiva(false);
-            }
-            if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-                DTOActualizarPromocional datosp = new DTOActualizarPromocional(dp,this.nombre , res.getNickname());
-                ICP.actualizarPromocional(datosp);
-                JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-              JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+            try{
+                this.dp.setDataNombre(this.txtNomProd.getText());
+                this.dp.setDataDescripcion(this.txtDescProd.getText());
+                this.dp.setDescuento(Double.parseDouble(this.tbDescuento.getText()));
+                String activa = jcEstado.getSelectedItem().toString();
+                if(activa.equals("ACTIVA")){
+                    this.dp.setActiva(true);
+                }else{
+                    this.dp.setActiva(false);
+                }
+                if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                    DTOActualizarPromocional datosp = new DTOActualizarPromocional(dp,this.nombre , res.getNickname());
+                    if(HI.getImagen(imagen).exists()){
+                        datosp.setImagen(imagen);
+                        ICP.actualizarPromocional(datosp);
+                    }else{
+                        datosp.setImagen(imagen);
+                        ICP.actualizarPromocional(datosp);
+                    }
+                    JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }catch(NumberFormatException ex){
+                JOptionPane.showInternalMessageDialog(rootPane, "Debe ingresar datos validos", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jbImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbImagenActionPerformed
+        // TODO add your handling code here:
+        JFileChooser selector = new JFileChooser();
+        FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, JPG, PNG & GIF", "jpeg", "jpg", "png", "gif");
+        selector.setFileFilter(filtroImagen);
+        selector.showOpenDialog(null);
+        File archivo = selector.getSelectedFile();
+        String aux = res.getNickname();
+        this.imagen = aux.concat(this.txtNomProd.getText());
+        HI.guardarImagen(archivo, this.imagen);
+        ImageIcon icon = new ImageIcon(HI.getImagen(imagen).getAbsolutePath());
+        this.lblImagen.setIcon(icon);
+        this.lblImagen.setVisible(true);
+    }//GEN-LAST:event_jbImagenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -579,11 +658,13 @@ public class VerInfoProd extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTabla;
     private javax.swing.JTable jTablaPedidos;
+    private javax.swing.JButton jbImagen;
     private javax.swing.JComboBox jcEstado;
     private javax.swing.JLabel lblCant;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescuento;
     private javax.swing.JLabel lblEstadoPromo;
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblImagenProd;
     private javax.swing.JLabel lblNomProd;
     private javax.swing.JLabel lblPrecioProd;

@@ -1,0 +1,32 @@
+//Configurar path imagenes
+
+//Cliente 1
+imagen1=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/costas.jpeg
+
+//Cliente 2
+imagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/roro.jpeg
+
+//Cliente 3
+imagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/chechi.jpeg
+
+//Cliente 4
+imagen4=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/andy.jpeg
+
+//Cliente 5
+imagen5=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/weiss.jpeg
+
+//Restaurante 1
+//no tiene imagenes
+
+//Restaurante 2
+imagen6=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rlogo.jpeg
+imagen7=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rossell.jpeg
+
+//Restaurante 3
+imagen8=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/blogo.jpg
+imagen9=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/caprese.jpeg
+imagen10=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/cyq.jpeg
+
+//Restaurante 4
+imagen11=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wlogo.jpeg
+imagen12=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wokbox.jpeg

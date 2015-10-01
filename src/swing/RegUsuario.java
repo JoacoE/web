@@ -30,7 +30,7 @@ private HashMap mapCat = new HashMap();
 DefaultListModel model;
 private boolean clientOrRestaurant;
 private ArrayList<File> lstImagen = new ArrayList<>();
-private ArrayList<String>  nombresImagenes = new ArrayList<>();
+private ArrayList<String>  nombresImagenes = null;
 private String nombreImagen = null;
 private File img = null;
 
@@ -392,13 +392,14 @@ private File img = null;
 
     private void btnSelImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelImagenActionPerformed
         if(rbRestaurante.isSelected()){
-            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, PNG & GIF", "jpeg", "png", "gif");
+            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, JPG, PNG & GIF", "jpeg", "jpg", "png", "gif");
             JFileChooser selector = new JFileChooser();
             selector.setMultiSelectionEnabled(true);
             selector.setFileFilter(filtroImagen);
             int r = selector.showOpenDialog(null);
             if (r == JFileChooser.APPROVE_OPTION) {
                 File archivos[] = selector.getSelectedFiles();
+                nombresImagenes = new ArrayList<>();
                 for (int i = 0; i < archivos.length; i++) {
                     String indice = String.valueOf(i);
                     String nuevoNombre = tbNickname.getText().concat(indice);
@@ -410,7 +411,7 @@ private File img = null;
             }
         } 
         if(rbCliente.isSelected()){
-            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, PNG & GIF", "jpeg", "png", "gif");
+            FileNameExtensionFilter filtroImagen = new FileNameExtensionFilter("JPEG, JPG, PNG & GIF", "jpeg", "jpg", "png", "gif");
             JFileChooser selector = new JFileChooser();
             selector.setFileFilter(filtroImagen);
             selector.showOpenDialog(null);

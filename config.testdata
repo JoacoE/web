@@ -1,32 +1,104 @@
-//Configurar path imagenes
+////////////////CONFIGURAR PATH'S IMAGENES////////////////////////////
+///////DEJAR LOS CAMPOS VACIOS SI NO SE ASIGNA IMAGEN/////////////////
 
+//CLIENTES
 //Cliente 1
-imagen1=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/costas.jpeg
+Cimagen1=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/costas.jpeg
 
 //Cliente 2
-imagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/roro.jpeg
+Cimagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/roro.jpeg
 
 //Cliente 3
-imagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/chechi.jpeg
+Cimagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/chechi.jpeg
 
 //Cliente 4
-imagen4=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/andy.jpeg
+Cimagen4=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/andy.jpeg
 
 //Cliente 5
-imagen5=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/weiss.jpeg
+Cimagen5=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/weiss.jpeg
 
+//RESTAURANTES
 //Restaurante 1
 //no tiene imagenes
 
 //Restaurante 2
-imagen6=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rlogo.jpeg
-imagen7=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rossell.jpeg
+Rimagen1=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rlogo.jpeg
+Rimagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rossell.jpeg
 
 //Restaurante 3
-imagen8=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/blogo.jpg
-imagen9=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/caprese.jpeg
-imagen10=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/cyq.jpeg
+Rimagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/blogo.jpeg
+Rimagen4=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/caprese.jpeg
+Rimagen5=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/cyq.jpeg
 
 //Restaurante 4
-imagen11=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wlogo.jpeg
-imagen12=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wokbox.jpeg
+Rimagen6=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wlogo.jpeg
+Rimagen7=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wokbox.jpeg
+
+//PRODUCTOS INDIVIDUALES
+//Producto 1
+Iimagen1=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Producto 2
+Iimagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/milanesacarne.jpeg
+
+//Producto 3
+Iimagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/canadiense.jpeg
+
+//Producto 4
+Iimagen4=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Producto 5
+Iimagen5=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Producto 6
+Iimagen6=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/acaballo.jpeg
+
+//Producto 7
+Iimagen7=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Producto 8
+Iimagen8=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/agnolotis.jpeg
+
+//Producto 9
+Iimagen9=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/empacarne.jpeg
+
+//Producto 10
+Iimagen10=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Producto 11
+Iimagen11=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/cyq.jpeg
+
+//Producto 12
+Iimagen12=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/caprese.jpeg
+
+//Producto 13
+Iimagen13=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/tahiwok.jpeg
+
+//Producto 14
+Iimagen14=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Producto 15
+Iimagen15=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wokpollo.jpeg
+
+//Producto 16
+Iimagen16=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//PRODUCTOS PROMOCIONALES
+//Promocional 1
+Pimagen1=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Promocional 2
+Pimagen2=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+
+//Promocional 3
+Pimagen3=
+//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/

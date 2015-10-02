@@ -94,9 +94,9 @@ public class CargarDatos extends javax.swing.JFrame {
             //CLIENTES                                  //  nickname, nombre,             email,      direccion
             DTOIngresarDatos datos1 = new DTOIngresarDatos("costas", "gcostas@gmail.com","Gerardo",  "Av. Italia 2078");
             ICU.ingresarDatos(datos1);                        // apellido, imagen,                                                                                             fecha,        pwd
-            File uno = new File(prop.getProperty("imagen1"));
-            if(uno.exists()){
-                HI.guardarImagen(uno, datos1.getNickname());
+            File Cuno = new File(prop.getProperty("Cimagen1"));
+            if(Cuno.exists()){
+                HI.guardarImagen(Cuno, datos1.getNickname());
                 DTORegistrarCliente dreg1 = new DTORegistrarCliente("Costas", "costas", "15/11/1983", "costas123");
                 ICU.registrarCliente(dreg1);
             }else{
@@ -106,9 +106,9 @@ public class CargarDatos extends javax.swing.JFrame {
             
             DTOIngresarDatos datos2 = new DTOIngresarDatos("roro", "rcotelo@yahoo.com","Rodrigo", "Pdte. Berro 1548");
             ICU.ingresarDatos(datos2);
-            File dos = new File(prop.getProperty("imagen2"));
-            if(dos.exists()){
-                HI.guardarImagen(dos, datos2.getNickname());
+            File Cdos = new File(prop.getProperty("Cimagen2"));
+            if(Cdos.exists()){
+                HI.guardarImagen(Cdos, datos2.getNickname());
                 DTORegistrarCliente dreg2 = new DTORegistrarCliente("Cotelo", "roro", "02/08/1975", "12elroro");
                 ICU.registrarCliente(dreg2);
             }else{
@@ -119,9 +119,9 @@ public class CargarDatos extends javax.swing.JFrame {
 
             DTOIngresarDatos datos3 = new DTOIngresarDatos("chechi", "cgarrido@hotmail.com","Cecilia", "Gral. Urquiza 1548");
             ICU.ingresarDatos(datos3);
-            File tres = new File(prop.getProperty("imagen3"));
-            if(tres.exists()){    
-                HI.guardarImagen(tres, datos3.getNickname());
+            File Ctres = new File(prop.getProperty("Cimagen3"));
+            if(Ctres.exists()){    
+                HI.guardarImagen(Ctres, datos3.getNickname());
                 DTORegistrarCliente dreg3 = new DTORegistrarCliente("Garrido", "chechi", "12/09/1987", "ch4321");
                 ICU.registrarCliente(dreg3);
             }else{
@@ -132,9 +132,9 @@ public class CargarDatos extends javax.swing.JFrame {
             
             DTOIngresarDatos datos4 = new DTOIngresarDatos("andy", "agarcia@gmail.com","Andrea", "Dr. Manuel Albo 4512");
             ICU.ingresarDatos(datos4);
-            File cuatro = new File(prop.getProperty("imagen4"));
-            if(cuatro.exists()){    
-                HI.guardarImagen(cuatro, datos4.getNickname());
+            File Ccuatro = new File(prop.getProperty("Cimagen4"));
+            if(Ccuatro.exists()){    
+                HI.guardarImagen(Ccuatro, datos4.getNickname());
                 DTORegistrarCliente dreg4 = new DTORegistrarCliente("García", "andy", "28/07/1951", "andy_la1");      
                 ICU.registrarCliente(dreg4);
             }else{
@@ -144,9 +144,9 @@ public class CargarDatos extends javax.swing.JFrame {
             
             DTOIngresarDatos datos5 = new DTOIngresarDatos("weiss", "aweiss@gmail.com","Adrián", "Monte Caseros 5615");
             ICU.ingresarDatos(datos5);
-            File cinco = new File(prop.getProperty("imagen5"));
-            if(cinco.exists()){    
-                HI.guardarImagen(cinco, datos5.getNickname());
+            File Ccinco = new File(prop.getProperty("Cimagen5"));
+            if(Ccinco.exists()){    
+                HI.guardarImagen(Ccinco, datos5.getNickname());
                 DTORegistrarCliente dreg5 = new DTORegistrarCliente("Weiss", "weiss", "23/12/1978", "223_aweis");
                 ICU.registrarCliente(dreg5);
             }else{
@@ -200,15 +200,33 @@ public class CargarDatos extends javax.swing.JFrame {
             res2.setNombre("Bar Rossell");
             ArrayList<File> arrayfile2 = new ArrayList<>();
             ArrayList<String> arraystring2 = new ArrayList<>();
-            File seis = new File(prop.getProperty("imagen6"));
-            File siete = new File(prop.getProperty("imagen7"));
-            arrayfile2.add(seis);
-            arrayfile2.add(siete);
-            HI.guardarArrayImg(arrayfile2, res2.getNickname());
-            arraystring2.add(res2.getNickname().concat("0"));
-            arraystring2.add(res2.getNickname().concat("1"));
-            res2.setLstImagen(arraystring2);
-            ICU.registrarRestaurante(res2);
+            File Runo = new File(prop.getProperty("Rimagen1"));
+            File Rdos = new File(prop.getProperty("Rimagen2"));
+            if(Runo.exists() && Rdos.exists()){
+                arrayfile2.add(Runo);
+                arrayfile2.add(Rdos);
+                HI.guardarArrayImg(arrayfile2, res2.getNickname());
+                arraystring2.add(res2.getNickname().concat("0"));
+                arraystring2.add(res2.getNickname().concat("1"));
+                res2.setLstImagen(arraystring2);
+                ICU.registrarRestaurante(res2);
+            }if(!Runo.exists() || !Rdos.exists()){
+                if(Runo.exists()){
+                    arrayfile2.add(Runo);
+                    HI.guardarArrayImg(arrayfile2, res2.getNickname());
+                    arraystring2.add(res2.getNickname().concat("0"));
+                    res2.setLstImagen(arraystring2);
+                    ICU.registrarRestaurante(res2);
+                }else{
+                    arrayfile2.add(Rdos);
+                    HI.guardarArrayImg(arrayfile2, res2.getNickname());
+                    arraystring2.add(res2.getNickname().concat("0"));
+                    res2.setLstImagen(arraystring2);
+                    ICU.registrarRestaurante(res2);
+                }
+            }if(!Runo.exists() && !Rdos.exists()){
+                ICU.registrarRestaurante(res2);
+            }
             
 
             Map Categorias3 = new HashMap();
@@ -221,18 +239,64 @@ public class CargarDatos extends javax.swing.JFrame {
             res3.setNombre("Empanadas Bocatti");
             ArrayList<File> arrayfile3 = new ArrayList<>();
             ArrayList<String> arraystring3 = new ArrayList<>();
-            File ocho = new File(prop.getProperty("imagen8"));
-            File nueve = new File(prop.getProperty("imagen9"));
-            File diez = new File(prop.getProperty("imagen10"));
-            arrayfile3.add(ocho);
-            arrayfile3.add(nueve);
-            arrayfile3.add(diez);
-            HI.guardarArrayImg(arrayfile3, res3.getNickname());
-            arraystring3.add(res3.getNickname().concat("0"));
-            arraystring3.add(res3.getNickname().concat("1"));
-            arraystring3.add(res3.getNickname().concat("2"));
-            res3.setLstImagen(arraystring3);
-            ICU.registrarRestaurante(res3);
+            File Rtres = new File(prop.getProperty("Rimagen3"));
+            File Rcuatro = new File(prop.getProperty("Rimagen4"));
+            File Rcinco = new File(prop.getProperty("Rimagen5"));
+            if(Rtres.exists() && Rcuatro.exists() && Rcinco.exists()){
+                arrayfile3.add(Rtres);
+                arrayfile3.add(Rcuatro);
+                arrayfile3.add(Rcinco);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                arraystring3.add(res3.getNickname().concat("1"));
+                arraystring3.add(res3.getNickname().concat("2"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(!Rtres.exists() && !Rcuatro.exists() && Rcinco.exists()){
+                arrayfile3.add(Rcinco);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(!Rtres.exists() && Rcuatro.exists() && !Rcinco.exists()){
+                arrayfile3.add(Rcuatro);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(Rtres.exists() && !Rcuatro.exists() && !Rcinco.exists()){
+                arrayfile3.add(Rtres);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(Rtres.exists() && Rcuatro.exists() && !Rcinco.exists()){
+                arrayfile3.add(Rtres);
+                arrayfile3.add(Rcuatro);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                arraystring3.add(res3.getNickname().concat("1"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(Rtres.exists() && !Rcuatro.exists() && Rcinco.exists()){
+                arrayfile3.add(Rtres);
+                arrayfile3.add(Rcinco);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                arraystring3.add(res3.getNickname().concat("1"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(!Rtres.exists() && Rcuatro.exists() && Rcinco.exists()){
+                arrayfile3.add(Rcuatro);
+                arrayfile3.add(Rcinco);
+                HI.guardarArrayImg(arrayfile3, res3.getNickname());
+                arraystring3.add(res3.getNickname().concat("0"));
+                arraystring3.add(res3.getNickname().concat("1"));
+                res3.setLstImagen(arraystring3);
+                ICU.registrarRestaurante(res3);
+            }if(!Rtres.exists() && !Rcuatro.exists() && !Rcinco.exists()){
+                ICU.registrarRestaurante(res3);
+            }
             
 
             Map Categorias4 = new HashMap();
@@ -247,83 +311,212 @@ public class CargarDatos extends javax.swing.JFrame {
             res4.setNombre("Wok in Box");
             ArrayList<File> arrayfile4 = new ArrayList<>();
             ArrayList<String> arraystring4 = new ArrayList<>();
-            File once = new File(prop.getProperty("imagen11"));
-            File doce = new File(prop.getProperty("imagen12"));
-            arrayfile4.add(once);
-            arrayfile4.add(doce);
-            HI.guardarArrayImg(arrayfile4, res4.getNickname());
-            arraystring4.add(res4.getNickname().concat("0"));
-            arraystring4.add(res4.getNickname().concat("1"));
-            res4.setLstImagen(arraystring4);
-            ICU.registrarRestaurante(res4);          
+            File Rseis = new File(prop.getProperty("Rimagen6"));
+            File Rsiete = new File(prop.getProperty("Rimagen7"));
+            if(Rseis.exists() && Rsiete.exists()){
+                arrayfile4.add(Rseis);
+                arrayfile4.add(Rsiete);
+                HI.guardarArrayImg(arrayfile4, res4.getNickname());
+                arraystring4.add(res4.getNickname().concat("0"));
+                arraystring4.add(res4.getNickname().concat("1"));
+                res4.setLstImagen(arraystring4);
+                ICU.registrarRestaurante(res4);
+            }if(!Rseis.exists() || !Rsiete.exists()){
+                if(Rseis.exists()){
+                    arrayfile4.add(Rseis);
+                    HI.guardarArrayImg(arrayfile4, res4.getNickname());
+                    arraystring4.add(res4.getNickname().concat("0"));
+                    res4.setLstImagen(arraystring4);
+                    ICU.registrarRestaurante(res4);
+                }else{
+                    arrayfile4.add(Rsiete);
+                    HI.guardarArrayImg(arrayfile4, res4.getNickname());
+                    arraystring4.add(res4.getNickname().concat("0"));
+                    res4.setLstImagen(arraystring4);
+                    ICU.registrarRestaurante(res4);
+                }
+            }if(!Rseis.exists() && !Rsiete.exists()){
+                ICU.registrarRestaurante(res4);
+            }          
 
             //PRODUCTOS INDIVIDUALES
 
             DataIndividual di1 = new DataIndividual("Asado", "Asado a la parrilla", 225.0, "", 300);
             DTORegistrarProducto prod1 = new DTORegistrarProducto(di1, "mera", false);
-            ICProd.registrarProducto(prod1);
+            File Iuno = new File(prop.getProperty("Iimagen1"));
+            if(Iuno.exists()){
+                HI.guardarImagen(Iuno, prod1.getDi().getDataNombre());
+                prod1.getDi().setDataImagen(prod1.getDi().getDataNombre());
+                ICProd.registrarProducto(prod1);
+            }else{
+                ICProd.registrarProducto(prod1);
+            }
 
             DataIndividual di2 = new DataIndividual("Milanesa de Carne", "Con lechuga, tomate, mayonesa y fritas", 180.0, "", 150);
             DTORegistrarProducto prod2 = new DTORegistrarProducto(di2, "mera", false);
-            ICProd.registrarProducto(prod2);
-
+            File Idos = new File(prop.getProperty("Iimagen2"));
+            if(Idos.exists()){
+                HI.guardarImagen(Idos, prod2.getDi().getDataNombre());
+                prod2.getDi().setDataImagen(prod2.getDi().getDataNombre());
+                ICProd.registrarProducto(prod2);
+            }else{
+                ICProd.registrarProducto(prod2);
+            }
+            
             DataIndividual di3 = new DataIndividual("Chivito canadiense", "Lomito, jamón, muzza, tomate, aceitunas, panceta, huevo, morrón y fritas", 305.0, "", 49);
             DTORegistrarProducto prod3 = new DTORegistrarProducto(di3, "mera", false);
-            ICProd.registrarProducto(prod3);
-
+            File Itres = new File(prop.getProperty("Iimagen3"));
+            if(Itres.exists()){
+                HI.guardarImagen(Itres, prod3.getDi().getDataNombre());
+                prod3.getDi().setDataImagen(prod3.getDi().getDataNombre());
+                ICProd.registrarProducto(prod3);
+            }else{
+                ICProd.registrarProducto(prod3);
+            }
+                
             DataIndividual di4 = new DataIndividual("Pizza 2 gustos", "Pizza con dos gustos a elección", 130.0, "", 100);
             DTORegistrarProducto prod4 = new DTORegistrarProducto(di4, "mera", false);
-            ICProd.registrarProducto(prod4);
-
+            File Icuatro = new File(prop.getProperty("Iimagen4"));
+            if(Icuatro.exists()){
+                HI.guardarImagen(Icuatro, prod4.getDi().getDataNombre());
+                prod4.getDi().setDataImagen(prod4.getDi().getDataNombre());
+                ICProd.registrarProducto(prod4);
+            }else{
+                ICProd.registrarProducto(prod4);
+            }
+            
             DataIndividual di5 = new DataIndividual("Chivito al plato", "Ensalada rusa, mixta, huevo, jamón, muzza, panceta, aceitunas y fritas", 324.0, "", 115);
             DTORegistrarProducto prod5 = new DTORegistrarProducto(di5, "rossell", false);
-            ICProd.registrarProducto(prod5);
-
+            File Icinco = new File(prop.getProperty("Iimagen5"));
+            if(Icinco.exists()){
+                HI.guardarImagen(Icinco, prod5.getDi().getDataNombre());
+                prod5.getDi().setDataImagen(prod5.getDi().getDataNombre());
+                ICProd.registrarProducto(prod5);
+            }else{
+                ICProd.registrarProducto(prod5);
+            }
+            
             DataIndividual di6 = new DataIndividual("Milanesa a caballo", "Milanesa con dos huevos fritos acompañado de fritas", 270.0, "", 35);
             DTORegistrarProducto prod6 = new DTORegistrarProducto(di6, "rossell", false);
-            ICProd.registrarProducto(prod6);
-
+            File Iseis = new File(prop.getProperty("Iimagen6"));
+            if(Iseis.exists()){
+                HI.guardarImagen(Iseis, prod6.getDi().getDataNombre());
+                prod6.getDi().setDataImagen(prod6.getDi().getDataNombre());
+                ICProd.registrarProducto(prod6);
+            }else{
+                ICProd.registrarProducto(prod6);
+            }
+            
             DataIndividual di7 = new DataIndividual("Pizza 2 gustos", "Pizza con dos gustos a elección", 103.0, "", 45);
             DTORegistrarProducto prod7 = new DTORegistrarProducto(di7, "rossell", false);
-            ICProd.registrarProducto(prod7);
-
+            File Isiete = new File(prop.getProperty("Iimagen7"));
+            if(Isiete.exists()){
+                HI.guardarImagen(Isiete, prod7.getDi().getDataNombre());
+                prod7.getDi().setDataImagen(prod7.getDi().getDataNombre());
+                ICProd.registrarProducto(prod7);
+            }else{
+                ICProd.registrarProducto(prod7);
+            }
+            
             DataIndividual di8 = new DataIndividual("Agnolotis", "Agnolotis de jamón y queso", 225.0, "", 50);
             DTORegistrarProducto prod8 = new DTORegistrarProducto(di8, "rossell", false);
-            ICProd.registrarProducto(prod8);
-
+            File Iocho = new File(prop.getProperty("Iimagen8"));
+            if(Iocho.exists()){
+                HI.guardarImagen(Iocho, prod8.getDi().getDataNombre());
+                prod8.getDi().setDataImagen(prod8.getDi().getDataNombre());
+                ICProd.registrarProducto(prod8);
+            }else{
+                ICProd.registrarProducto(prod8);
+            }
+            
             DataIndividual di9 = new DataIndividual("Empanada de carne", "Carne, aceitunas, huevo duro, condimentos", 44.0, "", 65);
             DTORegistrarProducto prod9 = new DTORegistrarProducto(di9, "bocatti", false);
-            ICProd.registrarProducto(prod9);     
-
+            File Inueve = new File(prop.getProperty("Iimagen9"));
+            if(Inueve.exists()){
+                HI.guardarImagen(Inueve, prod9.getDi().getDataNombre());
+                prod9.getDi().setDataImagen(prod9.getDi().getDataNombre());
+                ICProd.registrarProducto(prod9);     
+            }else{
+                ICProd.registrarProducto(prod9);
+            }
+                
             DataIndividual di10 = new DataIndividual("Empanada Americana", "Carne, panceta y huevo duro", 44.0, "", 70);
             DTORegistrarProducto prod10 = new DTORegistrarProducto(di10, "bocatti", false);
-            ICProd.registrarProducto(prod10);
-
+            File Idiez = new File(prop.getProperty("Iimagen10"));
+            if(Idiez.exists()){
+                HI.guardarImagen(Idiez, prod10.getDi().getDataNombre());
+                prod10.getDi().setDataImagen(prod10.getDi().getDataNombre());
+                ICProd.registrarProducto(prod10);
+            }else{
+                ICProd.registrarProducto(prod10);
+            }
+            
             DataIndividual di11 = new DataIndividual("Empanada QyC", "Empanada de Queso y Cebolla", 44.0, "", 333);
             DTORegistrarProducto prod11 = new DTORegistrarProducto(di11, "bocatti", false);      
-            ICProd.registrarProducto(prod11);
-
-
+            File Ionce = new File(prop.getProperty("Iimagen11"));
+            if(Ionce.exists()){
+                HI.guardarImagen(Ionce, prod11.getDi().getDataNombre());
+                prod11.getDi().setDataImagen(prod11.getDi().getDataNombre());
+                ICProd.registrarProducto(prod11);
+            }else{
+                ICProd.registrarProducto(prod11);
+            }
+            
             DataIndividual di12 = new DataIndividual("Empanada Capresse", "Queso, tomate y albahaca", 44.0, "", 230);
             DTORegistrarProducto prod12 = new DTORegistrarProducto(di12, "bocatti", false);
-            ICProd.registrarProducto(prod12);     
-
+            File Idoce = new File(prop.getProperty("Iimagen12"));
+            if(Idoce.exists()){
+                HI.guardarImagen(Idoce, prod12.getDi().getDataNombre());
+                prod12.getDi().setDataImagen(prod12.getDi().getDataNombre());
+                ICProd.registrarProducto(prod12);     
+            }else{
+                ICProd.registrarProducto(prod12);
+            }
+            
             DataIndividual di13 = new DataIndividual("Thai wok", "Cerdo, calamares, sweet chili, salsa de ostras, maní y jugo de lima, acompañado de tallarines o arroz.", 240.0, "", 222);
             DTORegistrarProducto prod13 = new DTORegistrarProducto(di13, "winb", false);
-            ICProd.registrarProducto(prod13);
-
+            File Itrece = new File(prop.getProperty("Iimagen13"));
+            if(Itrece.exists()){
+                HI.guardarImagen(Itrece, prod13.getDi().getDataNombre());
+                prod13.getDi().setDataImagen(prod13.getDi().getDataNombre());
+                ICProd.registrarProducto(prod13);
+            }else{
+                ICProd.registrarProducto(prod13);
+            }
+            
             DataIndividual di14 = new DataIndividual("China wok", "Tempura de cerdo, vegetales mixtos, almendras, salsa de soja y naranja, acompañado de tallarines o arroz.", 240.0, "", 38);
             DTORegistrarProducto prod14 = new DTORegistrarProducto(di14, "winb", false);
-            ICProd.registrarProducto(prod14);
-
+            File Icatorce = new File(prop.getProperty("Iimagen14"));
+            if(Icatorce.exists()){
+                HI.guardarImagen(Icatorce, prod14.getDi().getDataNombre());
+                prod14.getDi().setDataImagen(prod14.getDi().getDataNombre());
+                ICProd.registrarProducto(prod14);
+            }else{
+                ICProd.registrarProducto(prod14);
+            }
+            
             DataIndividual di15 = new DataIndividual("Classic wok de pollo", "Pollo, vegetales mixtos, salsa agridulce, salsa de soja y cebollita de verdeo, acompañado de tallarines o arroz.", 230.0, "", 44);
             DTORegistrarProducto prod15 = new DTORegistrarProducto(di15, "winb", false);
-            ICProd.registrarProducto(prod15);
-
+            File Iquince = new File(prop.getProperty("Iimagen15"));
+            if(Iquince.exists()){
+                HI.guardarImagen(Iquince, prod15.getDi().getDataNombre());
+                prod15.getDi().setDataImagen(prod15.getDi().getDataNombre());
+                ICProd.registrarProducto(prod15);
+            }else{
+                ICProd.registrarProducto(prod15);
+            }
+            
             DataIndividual di16 = new DataIndividual("Classic wok de cerdo", "Cerdo, vegetales mixtos, jengibre, salsa de ostras y ralladura de lima, acompañado de tallarines o arroz.", 230.0, "", 65);
             DTORegistrarProducto prod16 = new DTORegistrarProducto(di16, "winb", false);
-            ICProd.registrarProducto(prod16);
-
+            File Idieciseis = new File(prop.getProperty("Iimagen16"));
+            if(Idieciseis.exists()){
+                HI.guardarImagen(Idieciseis, prod16.getDi().getDataNombre());
+                prod16.getDi().setDataImagen(prod16.getDi().getDataNombre());
+                ICProd.registrarProducto(prod16);
+            }else{
+                ICProd.registrarProducto(prod16);
+            }
+            
             // Productos Promocionales
 
             Map indivProm1 = new HashMap();
@@ -339,9 +532,16 @@ public class CargarDatos extends javax.swing.JFrame {
             indivProm1.put(nomProd2Prom1, cantProd2Prom1);
             ICProd.setPromo(indivProm1);
             DTOArmarPromo promo1 = new DTOArmarPromo("mera", dprom1.getDataNombre(), dprom1.getDataDescripcion(), dprom1.getDescuento());
-            promo1.setImagen("");
-            ICProd.armarPromo(promo1);
-
+            File Puno = new File(prop.getProperty("Pimagen1"));
+            if(Puno.exists()){
+                HI.guardarImagen(Puno, promo1.getNombre());
+                promo1.setImagen(promo1.getNombre());
+                ICProd.armarPromo(promo1);
+            }else{
+                promo1.setImagen("");
+                ICProd.armarPromo(promo1);
+            }
+            
             Map indivProm2 = new HashMap();
             DataPromocional dprom2 = new DataPromocional();
             dprom2.setDataNombre("MilaAsado");
@@ -355,8 +555,15 @@ public class CargarDatos extends javax.swing.JFrame {
             indivProm2.put(nomProd2Prom2, cantProd2Prom2);
             ICProd.setPromo(indivProm2);
             DTOArmarPromo promo2 = new DTOArmarPromo("mera", dprom2.getDataNombre(), dprom2.getDataDescripcion(), dprom2.getDescuento());
-            promo2.setImagen("");
-            ICProd.armarPromo(promo2);
+            File Pdos = new File(prop.getProperty("Pimagen2"));
+            if(Pdos.exists()){
+                HI.guardarImagen(Pdos, promo2.getNombre());
+                promo2.setImagen(promo2.getNombre());
+                ICProd.armarPromo(promo2);
+            }else{
+                promo2.setImagen("");
+                ICProd.armarPromo(promo2);
+            }
 
             Map indivProm3 = new HashMap();
             DataPromocional dprom3 = new DataPromocional();
@@ -371,8 +578,15 @@ public class CargarDatos extends javax.swing.JFrame {
             indivProm3.put(nomProd2Prom3, cantProd2Prom3);
             ICProd.setPromo(indivProm3);
             DTOArmarPromo promo3 = new DTOArmarPromo("rossell", dprom3.getDataNombre(), dprom3.getDataDescripcion(), dprom3.getDescuento());
-            promo3.setImagen("");
-            ICProd.armarPromo(promo3);
+            File Ptres = new File(prop.getProperty("Pimagen3"));
+            if(Ptres.exists()){
+                HI.guardarImagen(Ptres, promo3.getNombre());
+                promo3.setImagen(promo3.getNombre());
+                ICProd.armarPromo(promo3);
+            }else{
+                promo3.setImagen("");
+                ICProd.armarPromo(promo3);
+            }
 
             // Pedidos
 

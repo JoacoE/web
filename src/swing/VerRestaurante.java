@@ -85,10 +85,15 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         if(c.getLstImagen() != null){
             ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
             max = imagen.size();
-            this.jSlider = new JSlider();
-            this.jSlider.setMaximum(max);
-            this.jSlider.setPaintTicks(true);
-            this.jSlider.setVisible(true);
+            if(max > 1){
+                this.jSlider = new JSlider();
+                this.jSlider.setMaximum(max);
+                this.jSlider.setPaintTicks(true);
+                this.jSlider.setVisible(true);
+            }else{
+                this.jSlider.setEnabled(false);
+                this.jSlider.setVisible(false);
+            }
             ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
             this.lblImagenes.setIcon(icon);
             this.lblImagenes.setVisible(true);

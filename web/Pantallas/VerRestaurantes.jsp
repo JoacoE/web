@@ -11,6 +11,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <!--<script type="text/javascript" src="/js/CategoriasTree.js"></script>-->
+        <script type="text/javascript" src="../Branding/js/CategoriasTree.js"></script>
         <title>Ver Restaurantes</title>
     </head>
     <body>
@@ -73,12 +74,6 @@
         </div>
 	</div>
 </div>
-        <script text="text/javascript">
-            $(document).ready(function () {
-    $('label.tree-toggler').click(function () {
-        $(this).parent().children('ul.tree').toggle(300);
-    });
-});
-</script>
+        
     </body>
 </html>

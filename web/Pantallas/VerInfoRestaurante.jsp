@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="map" class="lab01.Clases.DataCategoria"/>
 <html lang="en">
 
 <head>
@@ -69,8 +71,12 @@
             <div class="col-md-3">
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-<!--                    <a href="#" class="list-group-item">Category 2</a>
+                    <c:forEach var="entry" items="${map}">
+                    Key: <c:out value="${entry.key}"/>
+                    Value: <c:out value="${entry.value}"/>
+                    </c:forEach>
+                    <!--<a href="#" class="list-group-item">Category 1</a>-->
+                    <!--<a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>-->
                 </div>
             </div>

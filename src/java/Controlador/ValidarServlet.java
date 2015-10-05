@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-//import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 import lab01.Clases.Cliente;
 import lab01.Clases.DTOArmarPromo;
 import lab01.Clases.DTOIngresarDatos;
@@ -54,60 +51,22 @@ public class ValidarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    if (request.getParameter("ingresar") != null) {
         
-        DAO dao = new DAO();
-        
-        String Mail, pass;
-        
-        Mail = request.getParameter("txtMail");
-        pass = request.getParameter("txtPass");
-        
-        Usuario u = new Usuario(Mail, pass);
-        Usuario u2 = dao.exist(u);
-        
-        HttpSession session = request.getSession();
-        if(u2.existeError()){
-            //Enviar a error.view (Lista de errores)
-            List<Error> errores = u2.getErrores();
-            //HttpSession session = request.getSession();
-            session.setAttribute("errores", errores);
-            request.getRequestDispatcher("error.view").forward(request, response);
-        }
-        else{
-            //Ir al menu
-            //HttpSession session = request.getSession();
-            session.setAttribute("Usuario", u2);
-            request.getRequestDispatcher("menu.view").forward(request, response);
-        }
-    }else if (request.getParameter("cDatos") != null) {
-        ICtrlUsuario ICU;
-     ICtrlPedido ICPed;
-    ICtrlProducto ICProd;
-    HUsuario HU;
-    HImagenes HI;
-    Properties prop;
-    InputStream input;
-    /**
-     * Creates new form CargarDatos
-     */
+        if (request.getParameter("cDatos") != null) {        
         Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
-        ICPed = fabrica.getICtrlPedido();
-        ICProd = fabrica.getICtrlProducto();
-        HU = HUsuario.getinstance();
-        HI = HImagenes.getInstance();
+        ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+        ICtrlPedido ICPed = fabrica.getICtrlPedido();
+        ICtrlProducto ICProd = fabrica.getICtrlProducto();
+        HUsuario HU = HUsuario.getinstance();
+        HImagenes HI = HImagenes.getInstance();
+        Properties prop;
+        InputStream input;
+        
         prop = new Properties();
         input = null;
         
         try{
-            input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/webVersion2/web/config.testdata");
+            input = new FileInputStream("/home/joaco/NetBeansProjects/web/config.testdata");
             prop.load(input);
 
             //CLIENTES                                  //  nickname, nombre,             email,      direccion
@@ -675,7 +634,7 @@ public class ValidarServlet extends HttpServlet {
             Pedido p5 = c5.getPedido(ped5.getId());
             p5.setFecha("25/8/2014");
             ICPed.actualizarEPedido(ped5.getNickUsr(), p5.getId(), estados.RECIBIDO);
-            JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
             
         }catch(IOException ex){
             ex.printStackTrace();
@@ -688,36 +647,75 @@ public class ValidarServlet extends HttpServlet {
                 }
             }
 	}
-                try (PrintWriter out = response.getWriter()) {
-
-                    out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MenuServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MenuServlet at " + request.getContextPath() + "</h1>");
-        if (ICU.retColCat().isEmpty()){
-            out.println("<h1>Sin Categoria</h1>");
-        }else{
-                
-            Iterator it = ICU.retColCat().entrySet().iterator();
-            while (it.hasNext()){
-                Map.Entry cats =(Map.Entry)it.next();
-                DataCategoria cat = (DataCategoria)cats.getValue();
-                out.println("<h1>Servlet MenuServlet at " + cat.getNombre() + "</h1>");
-
-            }
+        
+        Iterator it = ICU.retColCat().entrySet().iterator();
+        ArrayList<DataCategoria> lista = new ArrayList<>();
+        while (it.hasNext()){
+            Map.Entry cats =(Map.Entry)it.next();
+            DataCategoria cat = (DataCategoria)cats.getValue();    
+            lista.add(cat);
         }
+        
+        request.setAttribute("list", lista);
+        request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
             
-            out.println("<a href = 'logout.do'>Cerrar Sesión</a>");
-            out.println("</body>");
-            out.println("</html>");
-                       // request.getRequestDispatcher("index.html").forward(request, response);
+//                try (PrintWriter out = response.getWriter()) {
+//
+//                    out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet MenuServlet</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet MenuServlet at " + request.getContextPath() + "</h1>");
+//        if (ICU.retColCat().isEmpty()){
+//            out.println("<h1>Sin Categoria</h1>");
+//        }else{
+//                
+//            
+//        }
+//            
+//            out.println("<a href = 'logout.do'>Cerrar Sesión</a>");
+//            out.println("</body>");
+//            out.println("</html>");
+//                       
+//
+//    }
+    }
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    if (request.getParameter("ingresar") != null) {
+        
+        DAO dao = new DAO();
+        
+        String Mail, pass;
+        
+        Mail = request.getParameter("txtMail");
+        pass = request.getParameter("txtPass");
+        
+        Usuario u = new Usuario(Mail, pass);
+        Usuario u2 = dao.exist(u);
+        
+        HttpSession session = request.getSession();
+        if(u2.existeError()){
+            //Enviar a error.view (Lista de errores)
+            List<Error> errores = u2.getErrores();
+            //HttpSession session = request.getSession();
+            session.setAttribute("errores", errores);
+            request.getRequestDispatcher("error.view").forward(request, response);
+        }
+        else{
+            //Ir al menu
+            //HttpSession session = request.getSession();
+            session.setAttribute("Usuario", u2);
+            request.getRequestDispatcher("menu.view").forward(request, response);
+        }
     }
-    }
-    
+   
     }
 
     @Override

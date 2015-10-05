@@ -66,7 +66,7 @@ public class ValidarServlet extends HttpServlet {
         input = null;
         
         try{
-            input = new FileInputStream("/home/joaco/NetBeansProjects/web/config.testdata");
+            input = new FileInputStream("/home/martin/NetBeansProjects/web/config.testdata");
             prop.load(input);
 
             //CLIENTES                                  //  nickname, nombre,             email,      direccion
@@ -656,8 +656,16 @@ public class ValidarServlet extends HttpServlet {
             lista.add(cat);
         }
         
+        Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+        ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+        while (it2.hasNext()){
+            Map.Entry res =(Map.Entry)it2.next();
+            DataRestaurante r = (DataRestaurante)res.getValue();    
+            listaRes.add(r);
+        }
         request.setAttribute("list", lista);
-        request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
+        request.setAttribute("listres", listaRes);
+        request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
             
 //                try (PrintWriter out = response.getWriter()) {
 //

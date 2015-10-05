@@ -7,7 +7,33 @@
 <html lang="en">
 
 <head>
-
+<div class="col-md-3">
+                <p class="lead">Categorias</p>
+                    
+                    
+                    <!--<c:forEach items="${Lista}" var="ci">
+                        <c:out value="${ci}"/>
+                        <a href="#" class="list-group-item">${ci.value.getNombre()}</a>
+                    </c:forEach>-->
+                    <%
+                    ArrayList<DataCategoria> Lista = (ArrayList<DataCategoria>)request.getAttribute("list");
+                    for(DataCategoria ci: Lista){
+                    %>
+                    <div class="list-group">
+                    <option value="<%=ci%>">
+                            <a href="#" class="list-group-item"><%=ci.getNombre()%></a>
+                    </option>
+                    </div>
+                    <%
+                    }
+                    %>  
+                    
+                    
+                    <!--<a href="#" class="list-group-item">Category 1</a>
+                    <a href="#" class="list-group-item">Category 2</a>
+                    <a href="#" class="list-group-item">Category 3</a>-->
+                
+            </div>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -4,16 +4,12 @@
  */
 package lab01.Handlers;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import lab01.Clases.Usuario;
 import lab01.Clases.Cliente;
 import lab01.Clases.Restaurante;
 import java.util.Iterator;
-import javax.swing.JOptionPane;
-import lab01.Clases.DataUsuario;
 /**
  *
  * @author Pablo

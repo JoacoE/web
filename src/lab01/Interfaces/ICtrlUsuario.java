@@ -6,11 +6,7 @@
 
 package lab01.Interfaces;
 
-import java.util.Date;
-import lab01.Clases.Cliente;
-import lab01.Clases.Restaurante;
 import java.util.Map;
-import java.util.HashMap;
 import lab01.Clases.DTODatosAdicionales;
 import lab01.Clases.DTOIngresarDatos;
 import lab01.Clases.DTORegistrarCliente;
@@ -40,4 +36,6 @@ public interface ICtrlUsuario {
     public abstract Map listaProductosStock(String r);
     public abstract Map listarPedidos();
     public abstract Map pedidosUsuario(String nickname);
+    public abstract boolean existeUsuario(String nickname, String email);
+    public abstract boolean existeNickname(String nickname);
 }

@@ -70,10 +70,10 @@ public class CtrlUsuario implements ICtrlUsuario {
 
     @Override
     public boolean ingresarDatos(DTOIngresarDatos datos){
-        this.nickname= datos.getNickname();
-        this.direccion=datos.getDireccion();
-        this.nombre=datos.getNombre();
-        this.email=datos.getEmail();
+        this.nickname = datos.getNickname();
+        this.direccion = datos.getDireccion();
+        this.nombre = datos.getNombre();
+        this.email = datos.getEmail();
         HUsuario HU = HUsuario.getinstance();
         return !(HU.find(nickname, email));
     }
@@ -265,5 +265,17 @@ public class CtrlUsuario implements ICtrlUsuario {
             datPeds.put(dp.getId(), dp);
         }
         return datPeds;
+    }
+    
+    @Override
+    public boolean existeUsuario(String nickname, String email){
+        HUsuario HU = HUsuario.getinstance();
+        return HU.find(nickname, email);
+    }
+    
+    @Override
+    public boolean existeNickname(String nickname){
+        HUsuario HU = HUsuario.getinstance();
+        return HU.exists(nickname);
     }
 }

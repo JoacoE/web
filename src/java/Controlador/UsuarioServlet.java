@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
+import lab01.Clases.DTOIngresarDatos;
+import lab01.Clases.DTORegistrarCliente;
 import lab01.Clases.DataCliente;
 import lab01.Handlers.Fabrica;
 import lab01.Handlers.HImagenes;
@@ -111,6 +113,42 @@ public class UsuarioServlet extends HttpServlet {
                 request.setAttribute("noImg", noImage);
             }
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
+        }
+        if(request.getParameter("registrar") != null){//registrar cliente
+            Fabrica fabrica = Fabrica.getInstance();
+            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+            HttpSession session = request.getSession();
+            HImagenes HI = HImagenes.getInstance();
+            File imagen = null;
+            String nickname, email, nombre, apellido, fecha, direccion, pwd;
+            nickname = request.getParameter("txtNickname");
+            email = request.getParameter("txtMail");
+            nombre = request.getParameter("txtNombre");
+            apellido = request.getParameter("txtApellido");
+            fecha = request.getParameter("txtfecha");
+            direccion = request.getParameter("txtDireccion");
+            pwd = request.getParameter("txtPass");
+            imagen = (File)request.getAttribute("imagen");
+            if(!ICU.existeUsuario(nickname, email)){
+                DTOIngresarDatos ingDatos = new DTOIngresarDatos();
+                ingDatos.setNickname(nickname);
+                ingDatos.setEmail(email);
+                ingDatos.setNombre(nombre);
+                ingDatos.setDireccion(direccion);
+                ICU.ingresarDatos(ingDatos);
+                DTORegistrarCliente regCliente = new DTORegistrarCliente();
+                regCliente.setApellido(apellido);
+                regCliente.setFecha(fecha);
+                regCliente.setPwd(pwd);
+                if(imagen.exists()){
+                    HI.guardarImagen(imagen, nickname);
+                    regCliente.setImagen(nickname);
+                }else{
+                    regCliente.setImagen("");
+                }
+                ICU.registrarCliente(regCliente);
+            }
+            request.getRequestDispatcher("").forward(request, response);//deveria mandarlo a iniciar sesion
         }
     }
 

@@ -105,8 +105,8 @@
                         <a href="#" class="list-group-item">${ci.value.getNombre()}</a>
                     </c:forEach>-->
                     <%
-                    ArrayList<DataCategoria> Lista = (ArrayList<DataCategoria>)request.getAttribute("list");
-                    for(DataCategoria ci: Lista){
+                    ArrayList<DataCategoria> Lista2 = (ArrayList<DataCategoria>)request.getAttribute("list");
+                    for(DataCategoria ci: Lista2){
                     %>
                     <div class="list-group">
                     <option value="<%=ci%>">
@@ -118,7 +118,14 @@
                     %>  
                     
                     
-                    <!--<a href="#" class="list-group-item">Category 1</a>
+                    <!--<a href="#"
+Start Bootstrap
+
+    About
+    Services
+    Contact
+
+ class="list-group-item">Category 1</a>
                     <a href="#" class="list-group-item">Category 2</a>
                     <a href="#" class="list-group-item">Category 3</a>-->
                 

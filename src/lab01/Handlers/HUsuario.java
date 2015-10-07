@@ -74,6 +74,24 @@ public class HUsuario {
         
         return false;
     }
+    
+    public boolean existsMail(String Mail){
+        if(Colusuarios.isEmpty()){
+            return false;
+        }else{
+            Iterator it = Colusuarios.entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry usuarios = (Map.Entry)it.next();
+                if(usuarios.getValue() instanceof Cliente){
+                    Cliente c = (Cliente)usuarios.getValue();
+                    if(c.getMail().equals(Mail)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
     
     

@@ -278,4 +278,26 @@ public class CtrlUsuario implements ICtrlUsuario {
         HUsuario HU = HUsuario.getinstance();
         return HU.exists(nickname);
     }
+    
+    @Override
+    public boolean existeMail(String mail){
+        HUsuario HU = HUsuario.getinstance();
+        return HU.existsMail(mail);
+    }
+    
+    @Override
+    public DataCliente getByMail(String mail){
+        HUsuario HU = HUsuario.getinstance();
+        Iterator it = HU.obtenerColeccion().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry usuarios = (Map.Entry)it.next();
+            if(usuarios.getValue() instanceof Cliente){
+                Cliente c = (Cliente)usuarios.getValue();
+                if(c.getMail().equals(mail)){
+                    return c.ClienteADC();
+                }
+            }
+        }
+        throw new NullPointerException();
+    }
 }

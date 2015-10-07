@@ -38,4 +38,6 @@ public interface ICtrlUsuario {
     public abstract Map pedidosUsuario(String nickname);
     public abstract boolean existeUsuario(String nickname, String email);
     public abstract boolean existeNickname(String nickname);
+    public abstract boolean existeMail(String mail);
+    public abstract DataCliente getByMail(String mail);
 }

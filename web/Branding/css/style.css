@@ -4,6 +4,18 @@ body{
     font-size: 16px;
     min-height: 2000px;
 }
+.boton
+{
+    width: 100%;
+}
+
+.img-center{
+    margin: 0 auto;  
+}
+
+.wraper-box{
+    padding: 10px;
+}
 
 .login_modal_footer{margin-top:5px;}
 .login_modal_header .modal-title {text-align: center;font-family:'Philosopher',sans-serif; }
@@ -16,9 +28,20 @@ body{
     transition: all 0.25s ease 0s;
     padding-top: 2%;
 }
+
+.body-content{
+    margin-top: 70px;
+}
+
 .login-modal{
     width:100%;
     padding-bottom:20px;
+}
+
+.box-restaurantes{
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 1px 0px 2px #888;
 }
 .login_modal_header, .login_modal_footer {background: #00BB64 !important;color:#fff;}
 .modal-register-btn{margin: 4% 33% 2% 33% ;width:100%;}

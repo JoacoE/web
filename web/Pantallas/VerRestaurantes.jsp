@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-
+        <link href="./Branding/css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- Optional theme -->
@@ -30,48 +30,10 @@
     </head>
 
     <body>
-    <body>
         <!-- Page Content -->
         <div class="container">
 
-            <!-- Introduction Row -->
-            <div class="row">
-                <div class="col-md-3">
-                    <p class="lead">Categorias</p>
-                    <form action="validar.do" method="GET" accept-charset="UTF-8">
-                    <c:forEach var="listCat" items="${list}">
-                        <div class="list-group">
-                            <option value="list">
-                            <input type="submit" class="list-group-item" name="list-group-item" value="<c:out value="${listCat.getNombre()}"/>"> 
-                            </option>
-                        </div>
-
-                    </c:forEach>
-                    </form>
-                </div>
-                <div class="col-md-9">
-                    <c:forEach var="listRestaurante" items="${listres}">
-
-                        <div class="col-lg-4 col-sm-6 text-center">
-                            <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                            <option value="lista">
-                            <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>
-                            </option>
-                            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-                        </div>
-                    </c:forEach>
-
-                </div>
-
-                <!--<a href="#" class="list-group-item">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>-->
-
-            </div>
-        </div>
-    </body>   
-
-    <!-- Navigation -->
+             <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -102,6 +64,44 @@
         </div>
         <!-- /.container -->
     </nav>
+             
+            <!-- Introduction Row -->
+            <div class="row body-content">
+                <div class="col-md-3">
+                    <p class="lead">Categorias</p>
+                    <form action="validar.do" method="GET" accept-charset="UTF-8">
+                    <c:forEach var="listCat" items="${list}">
+                        <div class="list-group">
+                            <option value="list">
+                            <input type="submit" class="list-group-item boton" name="list-group-item" value="<c:out value="${listCat.getNombre()}"/>"> 
+                            </option>
+                        </div>
+
+                    </c:forEach>
+                    </form>
+                </div>
+                <div class="col-md-9">
+                    <c:forEach var="listRestaurante" items="${listres}">
+                        <div class="col-lg-4 col-sm-6 wraper-box">
+                        <div class="text-center box-restaurantes">
+                            <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
+                            <option value="lista">
+                            <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>
+                            </option>
+                            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                        </div>
+</div>
+                        </c:forEach>
+
+                </div>
+
+                <!--<a href="#" class="list-group-item">Category 1</a>
+                <a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">Category 3</a>-->
+
+            </div>
+        </div>
+    </body>     
 
     <!-- Team Members Row -->
 

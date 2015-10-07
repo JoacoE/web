@@ -58,14 +58,6 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     
-        if(request.getParameter("") != null){
-            Fabrica fabrica = Fabrica.getInstance();
-            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
-            HttpSession session = request.getSession();
-            DataCliente usuario = ICU.getUsuarioByNickname((String)session.getAttribute("nickname"));//esto es chamullo
-            request.setAttribute("usuario", usuario);
-            request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
-        }
     }
 
     /**
@@ -149,6 +141,26 @@ public class UsuarioServlet extends HttpServlet {
                 ICU.registrarCliente(regCliente);
             }
             request.getRequestDispatcher("").forward(request, response);//deveria mandarlo a iniciar sesion
+        }
+        
+        if(request.getParameter("/*parametro*/") != null){
+            Fabrica fabrica = Fabrica.getInstance();
+            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+            String id = (String)request.getAttribute("txtMail");
+            String pwd = (String)request.getAttribute("txtPass");
+            DataCliente dc = null;
+            if(ICU.existeNickname(id) || ICU.existeMail(id)){
+                if(ICU.existeNickname(id)){
+                    dc = ICU.getUsuarioByNickname(id);
+                }if(ICU.existeMail(id)){
+                    dc = ICU.getByMail(id);
+                }
+                if(dc.getPwd().equals(pwd)){
+                    HttpSession session = request.getSession();
+                    request.setAttribute("usuario", dc);
+                    request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
+                }   
+            }
         }
     }
 

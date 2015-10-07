@@ -3,10 +3,9 @@
 <%@page import="lab01.Clases.DataRestaurante"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,64 +28,106 @@
         <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script>
 
     </head>
-    <table width ="100%">
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <td width ="10%"align="left">
-            <div class="container">
 
-                <!-- Introduction Row -->
-                <div class="row">
-                    <div class="col-md-3">
-                        <p class="lead">Categorias</p>
-                        <%
-                            ArrayList<DataCategoria> Lista = (ArrayList<DataCategoria>) request.getAttribute("list");
-                            for (DataCategoria ci : Lista) {
-                        %>
+    <body>
+    <body>
+        <!-- Page Content -->
+        <div class="container">
+
+            <!-- Introduction Row -->
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="lead">Categorias</p>
+                    <form action="validar.do" method="GET" accept-charset="UTF-8">
+                    <c:forEach var="listCat" items="${list}">
                         <div class="list-group">
-                            <option value="<%=ci%>">
-                            <a href="#" class="list-group-item"><%=ci.getNombre()%></a>
+                            <option value="list">
+                            <input type="submit" class="list-group-item" name="list-group-item" value="<c:out value="${listCat.getNombre()}"/>"> 
                             </option>
                         </div>
-                        <%
-                            }
-                        %>  
-                    </div>
+
+                    </c:forEach>
+                    </form>
                 </div>
-            </div>        
-        </td>
-        <td width ="80%" align="left">
-        
-            <%
-                    ArrayList<DataRestaurante> Listares = (ArrayList<DataRestaurante>) request.getAttribute("listres");
-                    for (DataRestaurante ci : Listares) {
-                %>
-                <th>
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <option value="<%=ci%>">
-                    <h3><a><%=ci.getNickname()%></a></h3>
-                </option>
-                </th>
-                <%
-                    }
-                %>  
-            
+                <div class="col-md-9">
+                    <c:forEach var="listRestaurante" items="${listres}">
 
-        </td>
-        <td width ="10%" valign="baseline" align="left">
+                        <div class="col-lg-4 col-sm-6 text-center">
+                            <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
+                            <option value="lista">
+                            <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>
+                            </option>
+                            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                        </div>
+                    </c:forEach>
 
-        </td>
-    </table>
-    <!-- Page Content -->
+                </div>
 
-</body>   
+                <!--<a href="#" class="list-group-item">Category 1</a>
+                <a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">Category 3</a>-->
 
-<!-- jQuery -->
-<script src="/Branding/js/jqueryRestaurante.js.js"></script>
+            </div>
+        </div>
+    </body>   
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/Branding/js/bootstrap.min_1.js.js"></script>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Start Bootstrap</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Team Members Row -->
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Your Website 2014</p>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </footer>
+
+
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="/Branding/js/jqueryRestaurante.js.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Branding/js/bootstrap.min_1.js.js"></script>
+    
+
 
 
 </body>

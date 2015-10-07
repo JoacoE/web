@@ -48,3 +48,48 @@
   left: initial;
   font-size: 14px;
 }
+
+#login-dp .social-buttons{
+    margin:12px;  
+}
+#login-dp .social-buttons a{
+    width: 49%;
+    
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+    
+}
+
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+    margin-top: 10px;
+    margin-right: 9px; 
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+    margin-top: 10px;
+    margin-left: 9px; 
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+
+.btn-gp{
+    color: #fff;
+    background-color:#c32f10;
+    margin-top: 10px;
+    margin-right: 9px; 
+    margin-left: 9px; 
+}
+.btn-gp:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}

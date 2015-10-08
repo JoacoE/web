@@ -8,6 +8,11 @@ body{
 {
     width: 100%;
 }
+.boton:hover
+{
+    color: #fff;
+    background-color:#496ebc 
+}
 
 .img-center{
     margin: 0 auto;  

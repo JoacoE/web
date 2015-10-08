@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
+import lab01.Clases.DTOEvaluacion;
 import lab01.Handlers.HImagenes;
 
 /**
@@ -656,6 +657,65 @@ public class CargarDatos extends javax.swing.JFrame {
             Pedido p5 = c5.getPedido(ped5.getId());
             p5.setFecha("25/8/2014");
             ICPed.actualizarEPedido(ped5.getNickUsr(), p5.getId(), estados.RECIBIDO);
+            
+            
+            ICPed.setNickname("roro");
+            ICPed.setMemCliente();
+            ICPed.setMailCliente("rcotelo@yahoo.com");
+            ICPed.setMemRestaurante("mera");
+            boolean prod1ped6 = ICPed.selectProductos("Milanesa de Carne", 1);
+            boolean prod2ped6 = ICPed.selectProductos("Chivito canadiense", 1);
+            DataPedido ped6 = ICPed.altaPedido();
+            ICPed.limpiarCtrl();
+
+            Cliente c6 = HU.obtenerUsuario(ped6.getNickUsr());
+            Pedido p6 = c6.getPedido(ped6.getId());
+            p6.setFecha("20/9/2014");
+            ICPed.actualizarEPedido(ped6.getNickUsr(), p6.getId(), estados.RECIBIDO);
+            
+            ICPed.setNickname("andy");
+            ICPed.setMemCliente();
+            ICPed.setMailCliente("agarcia@gmail.com");
+            ICPed.setMemRestaurante("rossell");
+            boolean prod1ped7 = ICPed.selectProductos("Chivito al plato", 2);
+            boolean prod2ped7 = ICPed.selectProductos("Milanesa a caballo", 1);
+            DataPedido ped7 = ICPed.altaPedido();
+            ICPed.limpiarCtrl();
+
+            Cliente c7 = HU.obtenerUsuario(ped7.getNickUsr());
+            Pedido p7 = c7.getPedido(ped7.getId());
+            p7.setFecha("2/10/2014");
+            ICPed.actualizarEPedido(ped7.getNickUsr(), p7.getId(), estados.RECIBIDO);
+            
+            //Evaluaciones
+            
+            DTOEvaluacion ev1 = new DTOEvaluacion();
+            ev1.setComentario("Si bien el thai wok y el china wok están ricos, me cobraron 60$ de envío y eso no estaba aclarado y no pueden hacerlo. Me dejó muy molesto.");
+            ev1.setFecha("20/8/2014");
+            ev1.setPuntaje(2);
+            ICPed.altaEvaluacion(p3.getId(), ev1);
+            ICPed.actualizarPromedioRest(res4.getNickname());
+            
+            DTOEvaluacion ev2 = new DTOEvaluacion();
+            ev2.setComentario("Los Agnolotis llegaron un poco fríos y demoraron más de la cuenta. Espero mejoren. De todas formas, muy ricos. ");
+            ev2.setFecha("26/8/2014");
+            ev2.setPuntaje(3);
+            ICPed.altaEvaluacion(p5.getId(), ev2);
+            ICPed.actualizarPromedioRest(res2.getNickname());
+            
+            DTOEvaluacion ev3 = new DTOEvaluacion();
+            ev3.setComentario("Tanto la milanesa como el chivito llegaron 3 horas tarde!, obviamente helados!!, un desastre, nunca más pido ahí.");
+            ev3.setFecha("21/10/2014");
+            ev3.setPuntaje(1);
+            ICPed.altaEvaluacion(p6.getId(), ev3);
+            ICPed.actualizarPromedioRest(res1.getNickname());
+            
+            DTOEvaluacion ev4 = new DTOEvaluacion();
+            ev4.setComentario("Todo llegó en hora. El chivito y la milanesa a caballo estaban un poco aceitosos, pero más allá de eso se comió rico y en abundancia.");
+            ev4.setFecha("3/10/2014");
+            ICPed.altaEvaluacion(p7.getId(), ev4);
+            ICPed.actualizarPromedioRest(res2.getNickname());
+            
             JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
             
         }catch(IOException ex){

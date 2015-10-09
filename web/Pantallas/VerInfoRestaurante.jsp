@@ -1,39 +1,9 @@
-<%@page import="lab01.Clases.DataCategoria"%>
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%--<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--<jsp:useBean id="list" class="ArrayList<DataCategoria>"/>--%>
 <html lang="en">
 
 <head>
-<div class="col-md-3">
-                <p class="lead">Categorias</p>
-                    
-                    
-                    <!--<c:forEach items="${Lista}" var="ci">
-                        <c:out value="${ci}"/>
-                        <a href="#" class="list-group-item">${ci.value.getNombre()}</a>
-                    </c:forEach>-->
-                    <%
-                    ArrayList<DataCategoria> Lista = (ArrayList<DataCategoria>)request.getAttribute("list");
-                    for(DataCategoria ci: Lista){
-                    %>
-                    <div class="list-group">
-                    <option value="<%=ci%>">
-                            <a href="#" class="list-group-item"><%=ci.getNombre()%></a>
-                    </option>
-                    </div>
-                    <%
-                    }
-                    %>  
-                    
-                    
-                    <!--<a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>-->
-                
-            </div>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,8 +13,8 @@
     <title>Shop Homepage - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="./Branding/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="./Branding/css/shop-homepage.css" >
+    <link href="../Branding/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../Branding/css/shop-homepage.css" >
     <!-- Custom CSS -->
     <!--<link href="css/shop-homepage.css" rel="stylesheet">-->
 
@@ -54,82 +24,85 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script type="text/template" id="tmp-pictureItem">
+	<div class="shoppingListItemContent">
+		<a href="image" data-toggle="lightbox">
+			<img src="thumb" class="img-responsive" />
+		</a>
+		<!-- Button trigger modal -->
+		<div class="clearfix">
+			<div class="product-tags pull-left">
+				<span class="label label-danger">= photographer</span>
+				<span class="label label-info"><tag</span>
+			</div>
+			<div class="product-price pull-right">
+				<span class="price">€ = price.toFixed(2)</span>
+			</div>
+		</div>
+		<div class="infos">
+			<h4 class="name text-info">= title</h4>
+			<button id="addCart" class="btn btn-danger btn-sm"><i class="fa fa-shopping-cart"></i> Agregar</button>
+			<button id="moreInfo" class="btn btn-primary btn-sm hidden-md"><i class="fa fa-info-circle"></i> More Info</button>
+		</div>
+	</div>
+	</script>
+
+	<!-- Template for the single picture box in detail view-->
+	<script type="text/template" id="tmp-details">
+	<div class="col-md-6">
+		<a href="<image" data-toggle="lightbox"><img src="= image" class="img-responsive"/></a>
+	</div>
+	<div class="col-md-6">
+		<div class="product-tags">
+			<span class="label label-danger">= photographer</span>
+			<span class="label label-info">= tag</span>
+		</div>
+		<h4>= title</h4>
+		<p class="description">= description</p>
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="product-price">€ = price.toFixed(2)</div>
+			</div>
+			<div class="col-sm-6 col-md-offset-3">
+				<button id="cart" class="btn btn-lg btn-danger"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+			</div>
+		</div>
+	</div>
+	<button id="back" class="btn btn-default"><i class="fa fa-chevron-left"></i> Back</button>
+	</script>
+
+	<!-- Template for the sshopping cart item-->
+	<script type="text/template" id="tmp-shoppingCartItem">
+		<td class="name"><i class="fa fa-times-circle"></i> = title</td>
+		<td class="sub-total">€= total.toFixed(2)</td>
+	</script>
 
 </head>
 
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
+<body class="home">
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a class="btn" href="http://localhost:8080/index.html">SIGN IN / SIGN UP</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div> 
+	<!-- /.navbar -->
     <div class="container">
 
         <div class="row">
-
-            <div class="col-md-3">
-                <p class="lead">Categorias</p>
-                    
-                    
-                    <!--<c:forEach items="${Lista}" var="ci">
-                        <c:out value="${ci}"/>
-                        <a href="#" class="list-group-item">${ci.value.getNombre()}</a>
-                    </c:forEach>-->
-                    <%
-                    ArrayList<DataCategoria> Lista2 = (ArrayList<DataCategoria>)request.getAttribute("list");
-                    for(DataCategoria ci: Lista2){
-                    %>
-                    <div class="list-group">
-                    <option value="<%=ci%>">
-                            <a href="#" class="list-group-item"><%=ci.getNombre()%></a>
-                    </option>
-                    </div>
-                    <%
-                    }
-                    %>  
-                    
-                    
-                    <!--<a href="#"
-Start Bootstrap
-
-    About
-    Services
-    Contact
-
- class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>-->
-                
-            </div>
 
             <div class="col-md-9">
 
@@ -161,158 +134,285 @@ Start Bootstrap
                             </a>
                         </div>
                     </div>
-
                 </div>
+                  <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#1" data-toggle="tab">Menú</a>
+                        </li>
+                        <li>
+                            <a href="#2" data-toggle="tab">Información</a>
+                        </li>
+                        <li>
+                            <a href="#3" data-toggle="tab">Comentarios</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+                            <div class="row">
+                                <br></br>
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
+                                        <img src="http://placehold.it/320x150" alt="">
+                                        <div class="caption">
+                                            <h4 class="pull-right">$24.99</h4>
+                                            <h4><a href="#">First Product</a>
+                                            </h4>
+                                            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                        </div>
+                                        <div class="ratings">
+                                            <p class="pull-right">15 reviews</p>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="row">
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
+                                        <img src="http://placehold.it/320x150" alt="">
+                                        <div class="caption">
+                                            <h4 class="pull-right">$64.99</h4>
+                                            <h4><a href="#">Second Product</a>
+                                            </h4>
+                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                        <div class="ratings">
+                                            <p class="pull-right">12 reviews</p>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$24.99</h4>
-                                <h4><a href="#">First Product</a>
-                                </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
+                                        <img src="http://placehold.it/320x150" alt="">
+                                        <div class="caption">
+                                            <h4 class="pull-right">$74.99</h4>
+                                            <h4><a href="#">Third Product</a>
+                                            </h4>
+                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                        <div class="ratings">
+                                            <p class="pull-right">31 reviews</p>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
+                                        <img src="http://placehold.it/320x150" alt="">
+                                        <div class="caption">
+                                            <h4 class="pull-right">$84.99</h4>
+                                            <h4><a href="#">Fourth Product</a>
+                                            </h4>
+                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                        <div class="ratings">
+                                            <p class="pull-right">6 reviews</p>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
+                                        <img src="http://placehold.it/320x150" alt="">
+                                        <div class="caption">
+                                            <h4 class="pull-right">$94.99</h4>
+                                            <h4><a href="#">Fifth Product</a>
+                                            </h4>
+                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                        <div class="ratings">
+                                            <p class="pull-right">18 reviews</p>
+                                            <p>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$64.99</h4>
-                                <h4><a href="#">Second Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">12 reviews</p>
-                                <p>
+                        <div class="tab-pane fade" id="2">
+                            <br></br>
+                            <h4>ACÁ IRÍA LA INFORMACIÓN DEL RESTAURANTE</h4>
+                        </div>
+                        <div class="tab-pane fade" id="3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <br></br>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
+                                    Anonymous
+                                    <span class="pull-right">10 days ago</span>
+                                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$74.99</h4>
-                                <h4><a href="#">Third Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">31 reviews</p>
-                                <p>
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
+                                    Anonymous
+                                    <span class="pull-right">12 days ago</span>
+                                    <p>I've alredy ordered another one!</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$84.99</h4>
-                                <h4><a href="#">Fourth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">6 reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                            <hr>
 
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4 class="pull-right">$94.99</h4>
-                                <h4><a href="#">Fifth Product</a>
-                                </h4>
-                                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            </div>
-                            <div class="ratings">
-                                <p class="pull-right">18 reviews</p>
-                                <p>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
+                                    Anonymous
+                                    <span class="pull-right">15 days ago</span>
+                                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                                </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
-
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <h4><a href="#">Like this template?</a>
-                        </h4>
-                        <p>If you like this template, then check out <a target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this tutorial</a> on how to build a working review system for your online store!</p>
-                        <a class="btn btn-primary" target="_blank" href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">View Tutorial</a>
-                    </div>
-
-                </div>
-
+                </div>  
             </div>
+            <div class="col-md-3">
+                <div class="navbar navbar-inverse" role="navigation">
+                        <div class="container-fluid">
+                                <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                        <h2 id="basket-message" class="text-centre">You have <span id="basket">0</span> items in your basket</h2>
+                                </div>
+                        </div>
+                </div>
 
+                <div class="container-fluid">
+                        <div class="row">
+
+                                <div class="col-sm-12  col-md-10  main" id="main">
+                                        <div class="">
+                                                <div id="app"></div>
+                                        </div>
+
+                                        <div class="row">
+                                                <ul id="default-item-list" class="col-md-12"></ul>
+                                        </div>
+
+                                        <div class="row">
+                                                <div id="detail"></div>
+                                        </div>
+                                </div>
+
+
+                                <div class="col-sm-3 col-sm-offset-3 col-md-2 col-md-offset-2 sidebar" id="sidebar">
+                                        <table id="shopping-cart" class="table table-responsive">
+                                                <tbody id="shopping-list"></tbody>
+                                                <tfoot>
+                                                        <tr>
+                                                                <td colspan="4" id="total">$ 0.00</td>
+                                                        </tr>
+                                                </tfoot>
+                                        </table>
+                                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="showForm">Check out</a>
+                                </div>
+                        </div>
+                 </div>
+                
+            </div>
         </div>
-
     </div>
     <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Tarea del Orto 2015</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
     <!-- /.container -->
+    
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">GetNombreProducto</h4>
+          </div>
+          <div class="modal-body">
+            <select class="form-control">
+              <label class="col-lg-2 control-label">Cantidad</label>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button id="addCart" class="btn btn-danger btn-sm">
+                <i class="fa fa-shopping-cart"></i>
+                    Agregar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- jQuery -->
-    <script src="./Branding/js/jquery.js"></script>
+    <script src="../Branding/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="./Branding/js/bootstrap.min.js"></script>
+    <script src="../Branding/js/bootstrap.min.js"></script>
+    <script src="../Branding/js/bootstrap.tab.js"></script>
+    <script src="js/libs/underscore-min.js"></script>
+    <script src="js/libs/backbone-min.js"></script>
+    <script src="js/libs/lightbox.js"></script>
+    <script src="js/store.js"></script>
 
 </body>
 

@@ -41,9 +41,13 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>
+                    <input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal">
+
+                    <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Ingresar<b class="caret"></b></a>
+                        <input class="btn btn-link dropdown-toggle" type="submit" value="Ingresar" name="ingresar" data-toggle="modal" data-target="#myModal">
+
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"data-toggle="modal" data-target="#myModal">Ingresar<b class="caret"></b></a>-->
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="row">
@@ -77,9 +81,96 @@
                         </ul>
                     </li>
                 </ul>
-                </nav>
+            </nav>
 
         </div>
         <!-- /.navbar-collapse -->
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center" >Ingresar a mi cuenta</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form action="validar.do" method="POST" accept-charset="UTF-8">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" name="txtMail" placeholder="E-mail" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="password" name="txtPass" placeholder="Contraseña" required="required">
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                                            </label>
+                                        </div>
+                                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Ingresar" name="ingresar">
+
+
+                                        <div class="social-buttons" id="login-dp">
+                                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                                            <a href="#" class="btn btn-gp"><i class="fa fa-google-plus"></i> Google+</a>
+                                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                        </div>
+
+                                    </fieldset>
+                                </form>
+                                <form action="validar.do" method="GET" accept-charset="UTF-8">
+                                    <input class="btn btn-cdatos btn-warning btn-block" type="submit" value="Cargar Datos" name="cDatos">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    <!-- Registrar -->
+
+    <div class="modal fade" id="regmodal" tabindex="-1" role="dialog" aria-labelledby="registrarLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">Registrar</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form action="../Pantallas/RegistrarCliente.jsp" method="POST" accept-charset="UTF-8">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" name="txtMail" placeholder="E-mail" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="txtNickname" placeholder="Nickname" required="required">
+                                        </div>
+                                        <input class="btn btn-info " type="submit" value="Siguiente" name="siguiente">
+
+
+                                    </fieldset>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../Branding/js/jquerylogin.js"></script>
+    <script src="../Branding/js/bootstrap.min.js"></script>
 </div>

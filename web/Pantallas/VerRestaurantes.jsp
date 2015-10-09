@@ -28,7 +28,9 @@
         <!--<script type="text/javascript" src="/js/CategoriasTree.js"></script>-->
         <script type="text/javascript" src="../Branding/js/bootstrapRestauranteRestaurante.js"></script>
         <script type="text/javascript" src="../Branding/js/jqueryRestaurante.js.js"></script>
-        <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script>
+        <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script><script src="../Branding/js/jquerylogin.js"></script>
+        <script src="../Branding/js/bootstrap.min.js"></script>
+        
     </head>
     <body>
         <!-- Page Content -->
@@ -50,18 +52,22 @@
                     </form>
                 </div>
                 <div class="col-md-9">
+               <form action="validar.do" method="GET" accept-charset="UTF-8">
                     <c:forEach var="listRestaurante" items="${listres}">
                         <div class="col-lg-4 col-sm-6 wraper-box">
                             <div class="text-center box-restaurantes">
-                                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                                <option value="lista">
-                                <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>
-                                </option>
-                                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-                            </div>
+                                <button type="submit" name="rest" value="${listRestaurante.getNickname()}">
+                                    <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
+                                    <option value="lista">
+                                    <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>
+                                    </option>
+                                    <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                                </button>
+                            </div>   
                         </div>
                     </c:forEach>
-                </div>
+               </form>
+</div>
             </div>
         </div>
         <!-- Team Members Row -->
@@ -69,7 +75,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Quick Order 2015</p>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

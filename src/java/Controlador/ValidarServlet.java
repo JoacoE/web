@@ -52,6 +52,14 @@ public class ValidarServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
+        
+        if(request.getParameter("rest") !=null){
+            String nombre = (String)request.getParameter("rest");
+            request.setAttribute("list", nombre);
+            request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
+        }
+
+        
         if (request.getParameter("cDatos") != null) {        
         Fabrica fabrica = Fabrica.getInstance();
         ICtrlUsuario ICU = fabrica.getICtrlUsuario();
@@ -66,7 +74,8 @@ public class ValidarServlet extends HttpServlet {
         input = null;
         
         try{
-            input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
+            input = new FileInputStream("/home/martin/NetBeansProjects/web/config.testdata");
+
             prop.load(input);
 
             //CLIENTES                                  //  nickname, nombre,             email,      direccion

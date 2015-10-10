@@ -9,8 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Shop Homepage - Start Bootstrap Template</title>
+        <link href="./Branding/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="/Branding/css/bootstrapverRestaurante.css" >
+        <link rel="stylesheet" type="text/css" href="/Branding/css/round-aboutRestaurante.css">
+        <link rel="stylesheet" type="text/css" href="/Branding/css/bootstrap.minRestaurante.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!--<script type="text/javascript" src="/js/CategoriasTree.js"></script>-->
+        <script type="text/javascript" src="../Branding/js/bootstrapRestauranteRestaurante.js"></script>
+        <script type="text/javascript" src="../Branding/js/jqueryRestaurante.js"></script>
+        <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script><script src="../Branding/js/jquerylogin.js"></script>
+        <script src="../Branding/js/bootstrap.min.js"></script>
+                <!--<script type="text/javascript" src="../Branding/js/head.js"></script>-->
+        <script src="./Branding/js/jquerylogin.js" type="text/javascript"></script>
+    <title>QuickOrder</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../Branding/css/bootstrap.min.css" rel="stylesheet">
@@ -85,21 +101,8 @@
 
 <body class="home">
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
-		<div class="container">
-			<div class="navbar-header">
-				<!-- Button for smallest screens -->
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-right">
-					<li><a class="btn" href="http://localhost:8080/index.html">SIGN IN / SIGN UP</a></li>
-				</ul>
-			</div><!--/.nav-collapse -->
-		</div>
-	</div> 
-	<!-- /.navbar -->
+        <jsp:include page="/layout/head.jsp"/>
+
     <div class="container">
 
         <div class="row">
@@ -135,6 +138,7 @@
                         </div>
                     </div>
                 </div>
+                <div><h1>TITULO</h1></div>
                   <div class="tabbable">
                     <ul class="nav nav-tabs">
                         <li class="active">

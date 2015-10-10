@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import lab01.Clases.DTOIngresarDatos;
 import lab01.Clases.DTORegistrarCliente;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataRestaurante;
 import lab01.Handlers.Fabrica;
 import lab01.Handlers.HImagenes;
 import lab01.Interfaces.ICtrlUsuario;
@@ -58,6 +59,14 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     
+        if(request.getParameter("restaurante") != null){
+            Fabrica f = Fabrica.getInstance();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
+            String nickname = (String)request.getParameter("restaurante");
+            DataRestaurante dr = ICU.getRestauranteByNickname(nickname);
+            request.setAttribute("restaurante", dr);
+            request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
+        }
     }
 
     /**

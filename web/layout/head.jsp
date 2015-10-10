@@ -13,6 +13,11 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
+<%
+HttpSession sesion=request.getSession();
+%> 
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">

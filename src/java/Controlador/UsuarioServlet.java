@@ -30,6 +30,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import lab01.Clases.DTOEvaluacion;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPromocional;
+import lab01.Interfaces.ICtrlPedido;
 
 /**
  *
@@ -94,9 +98,34 @@ public class UsuarioServlet extends HttpServlet {
         if(request.getParameter("restaurante") != null){
             Fabrica f = Fabrica.getInstance();
             ICtrlUsuario ICU = f.getICtrlUsuario();
+            ICtrlPedido ICP = f.getICtrlPedido();
+            ArrayList<DataIndividual> individuales = new ArrayList<>();
+            ArrayList<DataPromocional> promocionales = new ArrayList<>();
+            ArrayList<DTOEvaluacion> evaluaciones = new ArrayList<>();
             String nickname = (String)request.getParameter("restaurante");
             DataRestaurante dr = ICU.getRestauranteByNickname(nickname);
+            Iterator it = dr.getColProducto().entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry productos = (Map.Entry)it.next();
+                if(productos.getValue() instanceof DataIndividual){
+                    DataIndividual di = (DataIndividual)productos.getValue();
+                    individuales.add(di);
+                }
+                if(productos.getValue() instanceof DataPromocional){
+                    DataPromocional dp = (DataPromocional)productos.getValue();
+                    promocionales.add(dp);
+                }
+            }
+            Iterator evs = ICP.listarEvaluacionesRest(nickname).entrySet().iterator();
+            while(evs.hasNext()){
+                Map.Entry evals = (Map.Entry)evs.next();
+                DTOEvaluacion de = (DTOEvaluacion)evals.getValue();
+                evaluaciones.add(de);
+            }
             request.setAttribute("restaurante", dr);
+            request.setAttribute("individuales", individuales);
+            request.setAttribute("promocionales", promocionales);
+            request.setAttribute("evaluaciones", evaluaciones);
             request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
         }
     }

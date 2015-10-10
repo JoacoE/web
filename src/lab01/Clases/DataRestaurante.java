@@ -19,6 +19,7 @@ public class DataRestaurante {
     private String email;
     private String direccion;
     private String pwd;
+    private float promedio;
     private ArrayList<String> lstImagen;
     private Map ColCategoria = new HashMap();
     private Map ColProducto = new HashMap();
@@ -32,6 +33,33 @@ public class DataRestaurante {
         this.email=mail;
         this.direccion=direccion;
         this.pwd = pwd;
+        if(lstImagen == null){
+            this.lstImagen = null;
+        }else{
+            this.lstImagen = new ArrayList<>();
+            this.lstImagen.addAll(lstImagen);
+        }
+        if(colProd == null){
+            this.ColProducto = null;
+        }else{
+            this.ColProducto = new HashMap();
+            this.ColProducto.putAll(colProd);
+        }
+        if(colCategoria == null){
+            this.ColCategoria = null;
+        }else{
+            this.ColCategoria = new HashMap();
+            this.ColCategoria.putAll(colCategoria);
+        }
+    }
+    
+    public DataRestaurante(String nickname, String mail, String nombre, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria, String pwd, float promedio){
+        this.nickname=nickname;
+        this.nombre=nombre;
+        this.email=mail;
+        this.direccion=direccion;
+        this.pwd = pwd;
+        this.promedio = promedio;
         if(lstImagen == null){
             this.lstImagen = null;
         }else{
@@ -130,5 +158,13 @@ public class DataRestaurante {
     
     public String getPwd(){
         return this.pwd;
+    }
+    
+    public void setPromedio(float promedio){
+        this.promedio = promedio;
+    }
+    
+    public float getPromedio(){
+        return this.promedio;
     }
 }

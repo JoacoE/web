@@ -105,7 +105,7 @@ public class Restaurante extends Usuario{
             DataCategoria dc = c.CatADC();
             dataCategorias.put(dc.getNombre(), dc);
         }
-        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataProductos, dataCategorias, this.contrasenia);
+        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataProductos, dataCategorias, this.contrasenia, this.getPromedio());
         return DR;
     }
     

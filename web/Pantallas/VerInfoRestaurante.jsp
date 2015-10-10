@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="lab01.Clases.DataRestaurante"%>
+
 <html lang="en">
 
 <head>
@@ -138,7 +141,11 @@
                         </div>
                     </div>
                 </div>
-                <div><h1>TITULO</h1></div>
+                <div><h1>
+                        <option value="restaurante">
+                                    <h3><a><c:out value="${restaurante.getNickname()}"/></a></h3>
+                        </option>
+                        </h1></div>
                   <div class="tabbable">
                     <ul class="nav nav-tabs">
                         <li class="active">

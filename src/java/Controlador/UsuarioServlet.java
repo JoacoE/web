@@ -174,6 +174,7 @@ public class UsuarioServlet extends HttpServlet {
                 }
                 ICU.registrarCliente(regCliente);
             }
+//            borrar este comentario
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);//deberia mandarlo a iniciar sesion
         }
 //        

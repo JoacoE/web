@@ -7,6 +7,7 @@ package Controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -18,10 +19,17 @@ import javax.servlet.http.HttpSession;
 import javax.swing.ImageIcon;
 import lab01.Clases.DTOIngresarDatos;
 import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataRestaurante;
 import lab01.Handlers.Fabrica;
 import lab01.Handlers.HImagenes;
 import lab01.Interfaces.ICtrlUsuario;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -80,7 +88,7 @@ public class UsuarioServlet extends HttpServlet {
             File imagen = null;
             ImageIcon noImage = null;
             String id, pwd;
-            id = request.getParameter("txtMail");
+            id = request.getParameter("txtCorreo");
             pwd = request.getParameter("txtPass");
             DataCliente usuario = null;
             Iterator it = ICU.devListaDC().entrySet().iterator();
@@ -104,6 +112,24 @@ public class UsuarioServlet extends HttpServlet {
                 noImage = HI.getNoImgeUsuario();
                 request.setAttribute("noImg", noImage);
             }
+        
+            Iterator it3 = ICU.retColCat().entrySet().iterator();
+        ArrayList<DataCategoria> lista = new ArrayList<>();
+        while (it3.hasNext()){
+            Map.Entry cats =(Map.Entry)it3.next();
+            DataCategoria cat = (DataCategoria)cats.getValue();    
+            lista.add(cat);
+        }
+        
+        Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+        ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+        while (it2.hasNext()){
+            Map.Entry res =(Map.Entry)it2.next();
+            DataRestaurante r = (DataRestaurante)res.getValue();    
+            listaRes.add(r);
+        }
+            request.setAttribute("list", lista);
+            request.setAttribute("listres", listaRes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
         if(request.getParameter("registrar") != null){//registrar cliente

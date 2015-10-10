@@ -164,6 +164,8 @@
                         <div class="tab-pane active" id="1">
                             <div class="row">
                                 <br></br>
+                               
+                                
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail" data-toggle="modal" data-target="#myModal">
                                         <img src="http://placehold.it/320x150" alt="">
@@ -277,7 +279,15 @@
                         </div>
                         <div class="tab-pane fade" id="2">
                             <br></br>
-                            <h4>ACÁ IRÍA LA INFORMACIÓN DEL RESTAURANTE</h4>
+                            <div><h1>
+                                <option value="restaurante">
+                                    <h3><a><c:out value="${restaurante.getNickname()}"/></a></h3>
+                                    <h3><a><c:out value="${restaurante.getNombre()}"/></a></h3>
+                                    <h3><a><c:out value="${restaurante.getEmail()}"/></a></h3>
+                                    <h3><a><c:out value="${restaurante.getDireccion()}"/></a></h3>
+                                    <h3><a><c:out value="${restaurante.getPromedio()}"/></a></h3>
+                                </option>
+                        </h1>
                         </div>
                         <div class="tab-pane fade" id="3">
                             <div class="row">

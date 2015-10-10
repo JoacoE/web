@@ -52,11 +52,11 @@
                     </form>
                 </div>
                 <div class="col-md-9">
-               <form action="validar.do" method="GET" accept-charset="UTF-8">
+               <form action="usr" method="GET" accept-charset="UTF-8">
                     <c:forEach var="listRestaurante" items="${listres}">
                         <div class="col-lg-4 col-sm-6 wraper-box">
                             <div class="text-center box-restaurantes">
-                                <button type="submit" name="rest" value="${listRestaurante.getNickname()}">
+                                <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
                                     <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
                                     <option value="lista">
                                     <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>

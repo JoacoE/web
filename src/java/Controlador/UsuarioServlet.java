@@ -66,6 +66,14 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     
+        if(request.getParameter("restaurante") != null){
+            Fabrica f = Fabrica.getInstance();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
+            String nickname = (String)request.getParameter("restaurante");
+            DataRestaurante dr = ICU.getRestauranteByNickname(nickname);
+            request.setAttribute("restaurante", dr);
+            request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
+        }
     }
 
     /**

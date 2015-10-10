@@ -41,7 +41,7 @@
             <div class="row body-content">
                 <div class="col-md-3">
                     <p class="lead">Categorias</p>
-                    <form action="validar.do" method="GET" accept-charset="UTF-8">
+                    <form action="usr" method="GET" accept-charset="UTF-8">
                         <c:forEach var="listCat" items="${list}">
                             <div class="list-group">
                                 <option value="list">

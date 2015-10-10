@@ -10,8 +10,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./Branding/js/head.js"></script>
-
+<script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -41,13 +40,12 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal">
-
+                    <li><input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
                     <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
                     <li class="dropdown">
-                        <input class="btn btn-link dropdown-toggle" type="submit" value="Ingresar" name="ingresar" data-toggle="modal" data-target="#myModal">
+                        <!--<input class="btn btn-link dropdown-toggle" type="submit" value="Ingresar" name="ingresar" data-toggle="modal" data-target="#myModal">-->
 
-                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"data-toggle="modal" data-target="#myModal">Ingresar<b class="caret"></b></a>-->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="row">
@@ -85,8 +83,7 @@
 
         </div>
         <!-- /.navbar-collapse -->
-    </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -136,8 +133,8 @@
 
 
     </div>
-    <!-- Registrar -->
-
+     Registrar 
+-->
     <div class="modal fade" id="regmodal" tabindex="-1" role="dialog" aria-labelledby="registrarLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -170,6 +167,9 @@
         </div>
     </div>
 
+    
+    </div>
+    
     <!-- jQuery -->
     <script src="../Branding/js/jquerylogin.js"></script>
     <script src="../Branding/js/bootstrap.min.js"></script>

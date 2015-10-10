@@ -6,7 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <script type="text/javascript" src="./Branding/js/head.js"></script>
         <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,7 +29,8 @@
         <script type="text/javascript" src="../Branding/js/jqueryRestaurante.js.js"></script>
         <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script><script src="../Branding/js/jquerylogin.js"></script>
         <script src="../Branding/js/bootstrap.min.js"></script>
-        
+                <!--<script type="text/javascript" src="../Branding/js/head.js"></script>-->
+        <script src="./Branding/js/jquerylogin.js" type="text/javascript"></script>
     </head>
     <body>
         <!-- Page Content -->
@@ -72,15 +72,15 @@
         </div>
         <!-- Team Members Row -->
         <!-- Footer -->
-        <footer>
+<!--        <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Quick Order 2015</p>
+                    <p>Copyright &copy; QuickOrder 2015</p>
                 </div>
-                <!-- /.col-lg-12 -->
+                 /.col-lg-12 
             </div>
-            <!-- /.row -->
-        </footer>
+             /.row 
+        </footer>-->
         <!-- /.container -->
         <!-- jQuery -->
         <script src="/Branding/js/jqueryRestaurante.js.js"></script>

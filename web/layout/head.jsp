@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link rel="stylesheet" type="text/css" href="../Branding/css/nav.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -44,8 +46,13 @@
                     <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
                     <li class="dropdown">
                         <!--<input class="btn btn-link dropdown-toggle" type="submit" value="Ingresar" name="ingresar" data-toggle="modal" data-target="#myModal">-->
+                        <!--if(session.getAttribute("Usuario")==null){-->
+                            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">prueba<b class="caret"></b></a>-->
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
+                        <!--}else{-->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
+                        <!--}-->
+                            
                         <ul class="dropdown-menu">
                             <li>
                                 <div class="row">

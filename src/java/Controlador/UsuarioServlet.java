@@ -149,6 +149,22 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("list", lista);
             request.setAttribute("listres", restaurantes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
+        }        
+        if(request.getParameter("search") !=null){
+            String busqueda = (String)request.getParameter("search");
+            Fabrica fabrica = Fabrica.getInstance();
+            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+            ArrayList<DataRestaurante> dr=ICU.buscarRestaurantes(busqueda);
+            Iterator cats = ICU.retColCat().entrySet().iterator();
+            ArrayList<DataCategoria> lista = new ArrayList<>();
+            while (cats.hasNext()){
+                Map.Entry categs =(Map.Entry)cats.next();
+                DataCategoria categ = (DataCategoria)categs.getValue();    
+                lista.add(categ);
+            }
+            request.setAttribute("list", lista);
+            request.setAttribute("listres", dr);
+            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
     }
 

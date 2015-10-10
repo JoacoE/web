@@ -181,4 +181,29 @@ public class Restaurante extends Usuario{
     public ArrayList<String> getImagenes(){
         return this.lstImagen;
     }
+    public boolean tengoCategoria(String nombre){
+        Iterator it = ColCategoria.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry map = (Map.Entry) it.next();
+            String rest = map.getKey().toString().toUpperCase();
+            String nom = nombre.toUpperCase();
+            if(rest.contains(nom))
+                return true;
+        }
+    return false;
+    }
+    
+    public boolean tengoProducto(String nombre){
+        Iterator it = ColProducto.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry map = (Map.Entry) it.next();
+            String rest = map.getKey().toString().toUpperCase();
+            String nom = nombre.toUpperCase();
+            if(rest.contains(nom))
+                return true;
+        }
+    return false;
+    }
+
+
 }

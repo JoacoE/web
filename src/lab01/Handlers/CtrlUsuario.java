@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package lab01.Handlers;
+import java.util.ArrayList;
 import lab01.Clases.Cliente;
 import lab01.Clases.Restaurante;
 import javax.swing.JOptionPane;
@@ -300,4 +301,40 @@ public class CtrlUsuario implements ICtrlUsuario {
         }
         throw new NullPointerException();
     }
+    
+    public ArrayList<DataRestaurante> buscarRestaurantes(String nombre){
+        ArrayList<DataRestaurante> lista = new ArrayList<>();
+        HUsuario HU = HUsuario.getinstance();
+        Map ColUsuarios = HU.obtenerColeccion();
+        Iterator it = ColUsuarios.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry usuarios = (Map.Entry)it.next();
+            if(usuarios.getValue() instanceof Restaurante){
+                Restaurante r = (Restaurante)usuarios.getValue();
+                String nom = nombre.toUpperCase();
+                String n = r.getNombre().toUpperCase();
+                if (n.contains(nom)){
+                    DataRestaurante dr= r.RestauranteADR();
+                    if(!lista.contains(dr))
+                        lista.add(dr);
+                }
+                else{
+                    if(r.tengoCategoria(nombre)){
+                        DataRestaurante dr= r.RestauranteADR();
+                        if(!lista.contains(dr))
+                            lista.add(dr);
+                    }
+                    else{
+                        if(r.tengoProducto(nombre)){
+                            DataRestaurante dr= r.RestauranteADR();
+                            if(!lista.contains(dr))
+                                lista.add(dr);
+                        }                    
+                    }
+                }
+            }
+        }
+    return lista;
+    }
+    
 }

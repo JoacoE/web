@@ -6,6 +6,7 @@
 
 package lab01.Interfaces;
 
+import java.util.ArrayList;
 import java.util.Map;
 import lab01.Clases.DTODatosAdicionales;
 import lab01.Clases.DTOIngresarDatos;
@@ -40,4 +41,5 @@ public interface ICtrlUsuario {
     public abstract boolean existeNickname(String nickname);
     public abstract boolean existeMail(String mail);
     public abstract DataCliente getByMail(String mail);
+    public abstract ArrayList<DataRestaurante> buscarRestaurantes(String nombre);
 }

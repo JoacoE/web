@@ -33,7 +33,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="../Branding/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="../Branding/css/shop-homepage.css" >
+    <link rel="stylesheet" type="text/css" href="../Branding/css/shop-homepage.css" >
     <!-- Custom CSS -->
     <!--<link href="css/shop-homepage.css" rel="stylesheet">-->
 
@@ -46,7 +46,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+    
+    
     <script type="text/template" id="tmp-pictureItem">
 	<div class="shoppingListItemContent">
 		<a href="image" data-toggle="lightbox">
@@ -415,7 +417,6 @@
     </div>
 
     <!-- jQuery -->
-    <script src="../Branding/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../Branding/js/bootstrap.min.js"></script>
@@ -424,6 +425,7 @@
     <script src="js/libs/backbone-min.js"></script>
     <script src="js/libs/lightbox.js"></script>
     <script src="js/store.js"></script>
+    <script src="../Branding/js/jquery.js"></script>
 
 </body>
 

@@ -74,7 +74,7 @@ public class ValidarServlet extends HttpServlet {
         input = null;
         
         try{
-            input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
+            input = new FileInputStream("/home/martin/NetBeansProjects/web/web/WEB-INF/config.testdata");
 
             prop.load(input);
 
@@ -732,8 +732,8 @@ public class ValidarServlet extends HttpServlet {
         
         String Mail, pass;
         
-        Mail = request.getParameter("txtMail");
-        pass = request.getParameter("txtPass");
+        Mail = request.getParameter("txtEmail");
+        pass = request.getParameter("txtPassword");
         
         Usuario u = new Usuario(Mail, pass);
         Usuario u2 = dao.exist(u);

@@ -24,7 +24,7 @@ public class Evaluacion {
     public Evaluacion(String comentario, float puntaje){
         this.comentario = comentario;
         this.puntaje = puntaje;
-        setFecha();
+        this.fecha = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
     }
     
     public String getComentario() {
@@ -47,8 +47,8 @@ public class Evaluacion {
         return fecha;
     }
 
-    public void setFecha() {
-        this.fecha = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
     
     public DTOEvaluacion getDTOEvaluacion(){

@@ -366,7 +366,13 @@ public class CtrlPedido implements ICtrlPedido {
     @Override
     public void altaEvaluacion(double id, DTOEvaluacion data){
         String rest = null;
-        Evaluacion ev = new Evaluacion(data.getComentario(), data.getPuntaje());
+        Evaluacion ev = null;
+        if(data.getFecha() != null){
+            ev = new Evaluacion(data.getComentario(), data.getPuntaje());
+            ev.setFecha(data.getFecha());
+        }else{
+            ev = new Evaluacion(data.getComentario(), data.getPuntaje());
+        }
         HUsuario hu = HUsuario.getinstance();
         Iterator user = hu.obtenerColeccion().entrySet().iterator();
         while(user.hasNext()){

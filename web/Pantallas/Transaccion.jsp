@@ -9,6 +9,7 @@
     <body>
     <div class="container">
         <jsp:include page="/layout/head.jsp"/>
+        <a href="Transaccion.jsp"></a>
        
         <form role="form" method="POST" accept-charset="UTF-8">
 

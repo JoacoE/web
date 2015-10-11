@@ -168,7 +168,7 @@
                                 <c:forEach var="promo" items="${promocionales}">
 
                                 <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
+                                    <div class="thumbnail" >
                                         <img src="http://placehold.it./320x150" alt="">
                                         <div class="caption">
                                             <h4 class="pull-right">$${promo.getDataPrecio()}</h4>
@@ -304,7 +304,7 @@
                                                         </tr>
                                                 </tfoot>
                                         </table>
-                                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#preconfirmacion" id="showForm">Check out</a>
+                                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#preconfirmacion" id="showForm">Check out</button>
                                 </div>
                         </div>
                  </div>
@@ -397,7 +397,55 @@
         </div>
       </div>
     </div>
-
+<div class="modal fade" id="preconfirmacion" tabindex="-1" role="dialog" aria-labelledby="miPreconfirmacion">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="preconfirmacion">¿Desea confirmar el pedido?</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container">        
+              <table class="table-condensed">
+                <thead>
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Producto</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                  </tr>
+                  <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                  </tr>
+                  <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            <div class="container">
+                <h4 >Total: </h4>
+            </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+            <button id="confirmar" class="btn btn-success">
+                    Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- jQuery -->
 
     <!-- Bootstrap Core JavaScript -->

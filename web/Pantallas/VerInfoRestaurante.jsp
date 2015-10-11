@@ -248,7 +248,7 @@
                                     <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
                                         <span class="glyphicon glyphicon-star-empty"></span>
                                     </c:forEach>
-                                    Anonymous
+                                    <p><b>${evaluacion.getNickname()}</b></p>
                                     <span class="pull-right">10 days ago</span>
                                     <p>${evaluacion.getComentario()}</p>
                                 </div>

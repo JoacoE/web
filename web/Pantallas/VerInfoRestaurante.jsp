@@ -222,16 +222,21 @@
                             <br></br>
                             <div><h1>
                                 <option value="restaurante">
+                                    <c:forEach var="i" begin="1" end="${restaurante.getPromedio()}">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </c:forEach>
+                                    <c:forEach var="i" begin="${restaurante.getPromedio()}" end="4">
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                    </c:forEach>
                                     <h3><a><c:out value="${restaurante.getNickname()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getNombre()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getEmail()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getDireccion()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getPromedio()}"/></a></h3>
                                 </option>
-                        </h1>
+                            </h1></div>
                         </div>
-
-                        </div>
+                       
                         <div class="tab-pane fade" id="3">
                             <c:forEach var="evaluacion" items="${evaluaciones}">
                             <div class="row">
@@ -249,9 +254,7 @@
                                 </div>
                             </div>
                             </c:forEach>
-
                             <hr>
-
                         </div>
                         </div>                        
                     </div>

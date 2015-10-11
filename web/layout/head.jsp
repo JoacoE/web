@@ -107,9 +107,12 @@ HttpSession sesion=request.getSession();
 		</c:if>
 		<c:if test="${mostrar=='si'}">
                     <form class="form" role="form" method="get" action="usr" accept-charset="UTF-8" id="login-nav">
-                    <button type="submit" name="cerrar" class="btn btn-block">Cerrar sesion</button>
-
-                    <c:out value="${usuario}"/>           
+                        <button type="submit" name="cerrar" class="btn btn-block">Cerrar sesion</button>
+                    </form>
+                    <form action="pedido" method="GET" accept-charset="UTF-8">
+                        <button type="submit" name="pedidosUsuario" value="${usuario}">
+                        <a name = "pedidosUsuario" value ="${usuario}" />  <c:out value="${usuario}"/> </a> 
+                        </button>
                     </form>
 
 		</c:if>

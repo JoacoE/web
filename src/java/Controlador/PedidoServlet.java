@@ -6,6 +6,8 @@
 package Controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataPedido;
+import lab01.Clases.DataRestaurante;
 import lab01.Handlers.Fabrica;
 import lab01.Interfaces.ICtrlPedido;
+import lab01.Interfaces.ICtrlUsuario;
 
 /**
  *
@@ -55,10 +60,22 @@ public class PedidoServlet extends HttpServlet {
         if(request.getParameter("pedidosUsuario") != null){//devuelve los pedidos de un usuario...
             Fabrica f = Fabrica.getInstance();
             ICtrlPedido ICP = f.getICtrlPedido();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
-            DataCliente dc = (DataCliente)session.getAttribute("usuario");
+            //String nick = (String)session.getAttribute("usuario");
+            String nick = (String)request.getParameter("pedidosUsuario");
+            DataCliente dc=ICU.getUsuarioByNickname(nick);
+            
             Map pedidos = ICP.listaPedidosRecibidos(dc.getNickname());
-            request.setAttribute("pedidos", pedidos);
+            ArrayList<DataPedido> listaPed = new ArrayList<>();
+            Iterator it = pedidos.entrySet().iterator();
+            while (it.hasNext()){
+                Map.Entry res =(Map.Entry)it.next();
+                DataPedido dp = (DataPedido)res.getValue();    
+                listaPed.add(dp);
+            }
+            request.setAttribute("cliente", dc);
+            request.setAttribute("lPedidos", listaPed);
             request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
         }
     }

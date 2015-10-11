@@ -234,10 +234,9 @@
                                     <h3><a><c:out value="${restaurante.getDireccion()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getPromedio()}"/></a></h3>
                                 </option>
-                        </h1>
+                            </h1></div>
                         </div>
-
-                        </div>
+                       
                         <div class="tab-pane fade" id="3">
                             <c:forEach var="evaluacion" items="${evaluaciones}">
                             <div class="row">
@@ -249,15 +248,13 @@
                                     <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
                                         <span class="glyphicon glyphicon-star-empty"></span>
                                     </c:forEach>
-                                    Anonymous
+                                    <p><b>${evaluacion.getNickname()}</b></p>
                                     <span class="pull-right">10 days ago</span>
                                     <p>${evaluacion.getComentario()}</p>
                                 </div>
                             </div>
                             </c:forEach>
-
                             <hr>
-
                         </div>
                         </div>                        
                     </div>

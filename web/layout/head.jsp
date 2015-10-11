@@ -83,7 +83,7 @@ HttpSession sesion=request.getSession();
                                         <form class="form" role="form" method="post" action="usr" accept-charset="UTF-8" id="login-nav">
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="email" class="form-control" name="txtCorreo" id="txtCorreo" placeholder="Email address" required>
+                                                <input type="text" class="form-control" name="txtCorreo" id="txtCorreo" placeholder="Email address" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputPassword2">Password</label>
@@ -137,7 +137,7 @@ HttpSession sesion=request.getSession();
 
                             </div>
                             <div class="panel-body">
-                                <form action="../Pantallas/RegistrarCliente.jsp" method="POST" accept-charset="UTF-8">
+                                <form action="usr" method="POST" accept-charset="UTF-8">
                                     <fieldset>
                                         <div class="form-group">
                                             <input class="form-control" type="email" name="txtMail" placeholder="E-mail" required="required">
@@ -146,7 +146,7 @@ HttpSession sesion=request.getSession();
                                             <input class="form-control" type="text" name="txtNickname" placeholder="Nickname" required="required">
                                         </div>
                                         
-                                        <input class="btn btn-info " type="submit" value="Siguiente" name="siguiente">
+                                        <input class="btn btn-info " type="submit" value="Siguiente" name="registrar">
 
 
                                     </fieldset>

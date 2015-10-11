@@ -51,6 +51,38 @@ public class UsuarioServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private String nombre;
+    private String mail;
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+   
+    
+    public void validar(String correo, String nick){
+        Fabrica f = Fabrica.getInstance();
+        ICtrlUsuario ICU = f.getICtrlUsuario();
+        if(!ICU.existeUsuario(nick, correo)){
+            setMail(correo);
+            setNombre(nick);
+        }
+            
+
+        
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -200,7 +232,7 @@ public class UsuarioServlet extends HttpServlet {
                 while(it.hasNext()){
                     Map.Entry usuarios = (Map.Entry)it.next();
                     DataCliente dc = (DataCliente)usuarios.getValue();
-                    if(dc.getNickname().equals(id) || dc.getNombre().equals(id)){  //getMail devuelve el nombre, se cambia por getNombre que devuelve el mail
+                    if(dc.getNickname().equals(id) || dc.getMail().equals(id)){  //getMail devuelve el nombre, se cambia por getNombre que devuelve el mail
                         usuario = dc;
                     }
                 }
@@ -239,21 +271,34 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("listres", listaRes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
-        if(request.getParameter("registrar") != null){//registrar cliente
+        if(request.getParameter("registrar") != null){
+            Fabrica fabrica = Fabrica.getInstance();
+            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+            HttpSession session = request.getSession();
+            String nickname = request.getParameter("txtNickname");
+            String email = request.getParameter("txtMail");
+            if(!ICU.existeUsuario(nickname, email)){
+                setMail(email);
+                setNombre(nickname);
+                request.getRequestDispatcher("/Pantallas/RegistrarCliente.jsp").forward(request, response);
+            }
+
+        }
+            if(request.getParameter("btnReg") != null){//registrar cliente
             Fabrica fabrica = Fabrica.getInstance();
             ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             HttpSession session = request.getSession();
             HImagenes HI = HImagenes.getInstance();
             File imagen = null;
             String nickname, email, nombre, apellido, fecha, direccion, pwd;
-            nickname = request.getParameter("txtNickname");
-            email = request.getParameter("txtMail");
+            nickname = getNombre();
+            email = getMail();
             nombre = request.getParameter("txtNombre");
             apellido = request.getParameter("txtApellido");
-            fecha = request.getParameter("txtfecha");
+            fecha = request.getParameter("txtFecha");
             direccion = request.getParameter("txtDireccion");
             pwd = request.getParameter("txtPass");
-            imagen = (File)request.getAttribute("imagen");
+            //imagen = (File)request.getAttribute("imagen");
             if(!ICU.existeUsuario(nickname, email)){
                 DTOIngresarDatos ingDatos = new DTOIngresarDatos();
                 ingDatos.setNickname(nickname);
@@ -265,16 +310,31 @@ public class UsuarioServlet extends HttpServlet {
                 regCliente.setApellido(apellido);
                 regCliente.setFecha(fecha);
                 regCliente.setPwd(pwd);
-                if(imagen.exists()){
-                    HI.guardarImagen(imagen, nickname);
-                    regCliente.setImagen(nickname);
-                }else{
-                    regCliente.setImagen("");
-                }
+//                if(imagen.exists()){
+//                    HI.guardarImagen(imagen, nickname);
+//                    regCliente.setImagen(nickname);
+//                }else{
+//                    regCliente.setImagen("");
+//                }
                 ICU.registrarCliente(regCliente);
             }
-//            borrar este comentario
-            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);//deberia mandarlo a iniciar sesion
+            Iterator it3 = ICU.retColCat().entrySet().iterator();
+            ArrayList<DataCategoria> lista = new ArrayList<>();
+            while (it3.hasNext()){
+                Map.Entry cats =(Map.Entry)it3.next();
+                DataCategoria cat = (DataCategoria)cats.getValue();    
+                lista.add(cat);
+            }
+            Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+            ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+            while (it2.hasNext()){
+                Map.Entry res =(Map.Entry)it2.next();
+                DataRestaurante r = (DataRestaurante)res.getValue();    
+                listaRes.add(r);
+            }
+            request.setAttribute("list", lista);
+            request.setAttribute("listres", listaRes);
+            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);   
         }
 //        
 //        if(request.getParameter("/*parametro*/") != null){

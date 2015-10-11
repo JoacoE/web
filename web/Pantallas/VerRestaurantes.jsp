@@ -52,7 +52,7 @@
                     </form>
                 </div>
                 <div class="col-md-9">
-               <form action="usr" method="GET" accept-charset="UTF-8">
+               <form action="usr" method="get" accept-charset="UTF-8">
                     <c:forEach var="listRestaurante" items="${listres}">
                         <div class="col-lg-4 col-sm-6 wraper-box">
                             <div class="text-center box-restaurantes">

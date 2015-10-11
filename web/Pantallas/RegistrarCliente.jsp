@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <title>Registro</title>
         <meta charset="utf-8">
@@ -16,37 +16,37 @@
 
         <h2>Registrarse</h2>
         
-        <form role="form">
+        <form action="usr" method="POST" accept-charset="UTF-8">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" required="required">
+                <input type="text" class="form-control" name="txtNombre" placeholder="Nombre" required="required">
             </div>
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
-                <input type="text" class="form-control" id="txtApellido" placeholder="Apellido" required="required">
+                <input type="text" class="form-control" name="txtApellido" placeholder="Apellido" required="required">
             </div>
             <div class="form-group">
                 <label for="direccion">Dirección:</label>
-                <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion" required="required">
+                <input type="text" class="form-control" name="txtDireccion" placeholder="Direccion" required="required">
             </div>
             <div class="form-group">
                 <label for="pwd">Contraseña:</label>
-                <input type="password" class="form-control" id="txtPass" placeholder="Constraseña" required="required">
+                <input type="password" class="form-control" name="txtPass" placeholder="Constraseña" required="required">
             </div>
             <div class="form-group">
                 <label for="pwd">Confirmar contraseña:</label>
-                <input type="password" class="form-control" id="txtConfirmPass" placeholder="Confirmar constraseña" required="required">
+                <input type="password" class="form-control" name="txtConfirmPass" placeholder="Confirmar constraseña" required="required">
             </div>
             <!--controlar que las contraseñas sean iguales-->
 
             <div class="form-group">
                 <label for="date">Fecha de Nacimiento:</label>
-                <input type="text" class="form-control" id="txtFecha" placeholder="Fecha de nacimiento" data-date-format="dd-mm-yyyy" required="required">
+                <input type="text" class="form-control" name="txtFecha" placeholder="Fecha de nacimiento" data-date-format="dd-mm-yyyy" required="required">
             </div>
 
             <div class="form-group">
                 <label for="selIMg">Seleccionar imagen:</label>
-                <input type="file" id="img">
+                <input type="file" name="imagen">
                 <p class="help-block"></p>
             </div>
 

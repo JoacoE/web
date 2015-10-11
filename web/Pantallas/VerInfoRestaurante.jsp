@@ -324,11 +324,16 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">GetNombreProducto</h4>
+            <h4 class="modal-title" id="titulo">${titulo}</h4>
           </div>
           <div class="modal-body">
-            <select class="form-control">
-              <label class="col-lg-2 control-label">Cantidad</label>
+            <div class="img-thumbnail">
+                <img src="http://placehold.it/320x150" alt="">
+            </div>
+            <div>
+                <p class="pull-center">Aca va la descripcion de mierda</p>
+            </div>
+            <div><select class="input-sm center-block" name="Cantidad">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -340,67 +345,19 @@
               <option>9</option>
               <option>10</option>
             </select>
+            </div>   
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button id="addCart" class="btn btn-danger btn-sm">
-                <i class="fa fa-shopping-cart"></i>Agregar</button>
+            <button id="addCart" class="btn btn-info btn-sm">
+                <i class="fa fa-shopping-cart"></i> Agregar</button>
           </div>
         </div>
       </div>
     </div>
-    
-    
+   
+   
     <div class="modal fade" id="preconfirmacion" tabindex="-1" role="dialog" aria-labelledby="miPreconfirmacion">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="preconfirmacion">¿Desea confirmar el pedido?</h4>
-          </div>
-          <div class="modal-body">
-            <div class="container">         
-              <table class="table-condensed">
-                <thead>
-                  <tr>
-                    <th>Cantidad</th>
-                    <th>Producto</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                  </tr>
-                </tbody>
-              </table>
-            <div class="container"> 
-                <h4 >Total: </h4>
-            </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
-            <button id="confirmar" class="btn btn-success">
-                    Confirmar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-<div class="modal fade" id="preconfirmacion" tabindex="-1" role="dialog" aria-labelledby="miPreconfirmacion">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="lab01.Clases.DataRestaurante"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,14 +10,16 @@
     <div class="container">
         <jsp:include page="/layout/head.jsp"/>
        
-        <form role="form">
+        <form role="form" method="POST" accept-charset="UTF-8">
 
               <div class="header pull-center">
                     <h2>¡Su pedido ha sido realizado con éxito!</h2>
+                    <br></br>
+                    <h4>ID Pedido: <c:out value="${restaurante.getNickname()}"/></h4>
+                    <h4>Restaurante: <c:out value="${restaurante.getNickname()}"/></h4>
               </div>
                 <div class="container pull-center">         
                   <table class="table table-condensed pull-center">
-
                     <thead>
                       <tr>
                         <th>Cantidad</th>
@@ -46,9 +49,10 @@
                     <h4 >Total: </h4>
                 </div>
                 </div>
-              <div class="footer">
-                    <input class="btn btn-danger"  type="submit" value="Volver" name="btnCancelar">
-              </div>
+                <br></br>
+                <div class="container">
+                    <input class="btn btn-info"  type="submit" value="Volver al incio" name="btnVolver" src="../VerInfoRestaurante.jsp">
+                </div>
 
         </form>
     </div>

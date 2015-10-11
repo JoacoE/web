@@ -222,6 +222,12 @@
                             <br></br>
                             <div><h1>
                                 <option value="restaurante">
+                                    <c:forEach var="i" begin="1" end="${restaurante.getPromedio()}">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </c:forEach>
+                                    <c:forEach var="i" begin="${restaurante.getPromedio()}" end="4">
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                    </c:forEach>
                                     <h3><a><c:out value="${restaurante.getNickname()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getNombre()}"/></a></h3>
                                     <h3><a><c:out value="${restaurante.getEmail()}"/></a></h3>
@@ -338,8 +344,57 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             <button id="addCart" class="btn btn-danger btn-sm">
-                <i class="fa fa-shopping-cart"></i>
-                    Agregar
+                <i class="fa fa-shopping-cart"></i>Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="modal fade" id="preconfirmacion" tabindex="-1" role="dialog" aria-labelledby="miPreconfirmacion">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="preconfirmacion">¿Desea confirmar el pedido?</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container">         
+              <table class="table-condensed">
+                <thead>
+                  <tr>
+                    <th>Cantidad</th>
+                    <th>Producto</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>John</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                  </tr>
+                  <tr>
+                    <td>Mary</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                  </tr>
+                  <tr>
+                    <td>July</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            <div class="container"> 
+                <h4 >Total: </h4>
+            </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
+            <button id="confirmar" class="btn btn-success">
+                    Confirmar
             </button>
           </div>
         </div>

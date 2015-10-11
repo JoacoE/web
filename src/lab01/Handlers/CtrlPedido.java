@@ -414,6 +414,7 @@ public class CtrlPedido implements ICtrlPedido {
                     if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == estados.RECIBIDO))){
                         if(p.getEvaluacion() != null){
                             DTOEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
+                            ev.setNickname(c.getNickname());
                             aux.put(ev.getFecha(), ev);
                         }
                     }

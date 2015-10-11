@@ -13,6 +13,7 @@ public class DTOEvaluacion {
     private String comentario;
     private float puntaje;
     private String fecha;
+    private String nickname;
     
     public DTOEvaluacion(){
     }
@@ -50,5 +51,13 @@ public class DTOEvaluacion {
     
     public String getFecha(){
         return this.fecha;
+    }
+    
+    public void setNickname(String nickname){
+        this.nickname = nickname;
+    }
+    
+    public String getNickname(){
+        return this.nickname;
     }
 }

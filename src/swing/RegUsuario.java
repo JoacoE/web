@@ -337,7 +337,7 @@ private File img = null;
         int mes = this.tbMes.getMonth() + 1;
         int anio = this.tbAnio.getValue();
         String fecha = dia + "/" + mes + "/" + anio;
-        DTOIngresarDatos dingresar = new DTOIngresarDatos(nickname, mail, nombre, direccion);
+        DTOIngresarDatos dingresar = new DTOIngresarDatos(nickname, nombre, mail, direccion);
         DTORegistrarCliente dregcliente = new DTORegistrarCliente(apellido, nombreImagen, fecha, pwd);
         
         

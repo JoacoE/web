@@ -75,6 +75,7 @@ public class UsuarioServlet extends HttpServlet {
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
             session.removeAttribute("usuario");
+            session.setAttribute("iniciada", "false");
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
             while (it3.hasNext()){

@@ -165,15 +165,16 @@
                             <div class="row">
                                 <br></br>
                                
-                                
+                                <c:forEach var="promo" items="${promocionales}">
+
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail" data-toggle="modal" data-target="#myModal">
-                                        <img src="http://placehold.it/320x150" alt="">
+                                        <img src="http://placehold.it./320x150" alt="">
                                         <div class="caption">
-                                            <h4 class="pull-right">$24.99</h4>
-                                            <h4><a href="#">First Product</a>
+                                            <h4 class="pull-right">$${promo.getDataPrecio()}</h4>
+                                            <h4><a href="#">${promo.getDataNombre()}</a>
                                             </h4>
-                                            <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                            <p>${promo.getDataDescripcion()}</p>
                                         </div>
                                         <div class="ratings">
                                             <p class="pull-right">15 reviews</p>
@@ -187,15 +188,17 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                </c:forEach>
+                                
+                                <c:forEach var="individ" items="${individuales}">
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail" data-toggle="modal" data-target="#myModal">
                                         <img src="http://placehold.it/320x150" alt="">
                                         <div class="caption">
-                                            <h4 class="pull-right">$64.99</h4>
-                                            <h4><a href="#">Second Product</a>
+                                            <h4 class="pull-right">$${individ.getDataPrecio()}</h4>
+                                            <h4><a href="#">${individ.getDataNombre()}</a>
                                             </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            <p>${individ.getDataDescripcion()}</p>
                                         </div>
                                         <div class="ratings">
                                             <p class="pull-right">12 reviews</p>
@@ -209,72 +212,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                </c:forEach>
+                                
 
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$74.99</h4>
-                                            <h4><a href="#">Third Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">31 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$84.99</h4>
-                                            <h4><a href="#">Fourth Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">6 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail" data-toggle="modal" data-target="#myModal">
-                                        <img src="http://placehold.it/320x150" alt="">
-                                        <div class="caption">
-                                            <h4 class="pull-right">$94.99</h4>
-                                            <h4><a href="#">Fifth Product</a>
-                                            </h4>
-                                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">18 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="tab-pane fade" id="2">
@@ -289,50 +230,29 @@
                                 </option>
                         </h1>
                         </div>
+
+                        </div>
                         <div class="tab-pane fade" id="3">
+                            <c:forEach var="evaluacion" items="${evaluaciones}">
                             <div class="row">
                                 <div class="col-md-12">
                                     <br></br>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </c:forEach>
+                                    <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                    </c:forEach>
                                     Anonymous
                                     <span class="pull-right">10 days ago</span>
-                                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+                                    <p>${evaluacion.getComentario()}</p>
                                 </div>
                             </div>
+                            </c:forEach>
 
                             <hr>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    Anonymous
-                                    <span class="pull-right">12 days ago</span>
-                                    <p>I've alredy ordered another one!</p>
-                                </div>
-                            </div>
-
-                            <hr>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    Anonymous
-                                    <span class="pull-right">15 days ago</span>
-                                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                                </div>
-                            </div>
+                        </div>
                         </div>                        
                     </div>
                 </div>  
@@ -381,7 +301,7 @@
                                                         </tr>
                                                 </tfoot>
                                         </table>
-                                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#preconfirmacion" id="showForm">Check out</a>
+                                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="showForm">Check out</a>
                                 </div>
                         </div>
                  </div>
@@ -426,59 +346,6 @@
       </div>
     </div>
 
-    <form action="pedido" method="POST" accept-charset="UTF-8">
-    <div class="modal fade" id="preconfirmacion" tabindex="-1" role="dialog" aria-labelledby="miPreconfirmacion">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="preconfirmacion">¿Desea confirmar el pedido?</h4>
-          </div>
-          <div class="modal-body">
-            <div class="container">         
-              <table class="table-condensed">
-                <thead>
-                  <tr>
-                    <th>Cantidad</th>
-                    <th>Producto</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                  </tr>
-                </tbody>
-              </table>
-            <div class="container"> 
-                <h4 >Total: </h4>
-            </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
-            <button id="confirmar" class="btn btn-success">
-                    Confirmar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-        </form>
-    </div>
-    
     <!-- jQuery -->
 
     <!-- Bootstrap Core JavaScript -->

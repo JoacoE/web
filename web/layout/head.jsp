@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"  session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" type="text/css" href="../Branding/css/nav.css" >
@@ -47,9 +48,28 @@ HttpSession sesion=request.getSession();
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
+                    
+                    	<% String iniciada= (String)sesion.getAttribute("iniciada"); 
+	String mostrar;
+	String user=(String)sesion.getAttribute("usuario"); 
+		if("true".equals((String)sesion.getAttribute("iniciada"))){
+			 mostrar="si";
+                         
+		}
+		else{
+			
+			mostrar="no";
+		}
+		request.setAttribute("mostrar",mostrar);
+	%>
+		
+		
+		<c:if test="${mostrar=='no'}">
+<li><input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
                     <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
-                    <li class="dropdown">
+                    
+                    
+                                        <li class="dropdown">
                         <!--<input class="btn btn-link dropdown-toggle" type="submit" value="Ingresar" name="ingresar" data-toggle="modal" data-target="#myModal">-->
                         <!--if(session.getAttribute("Usuario")==null){-->
                             <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">prueba<b class="caret"></b></a>-->
@@ -90,6 +110,21 @@ HttpSession sesion=request.getSession();
                             </li>
                         </ul>
                     </li>
+                    <a href="#"> Iniciar sesion</a>
+		</c:if>
+		<c:if test="${mostrar=='si'}">
+                    <div> <a href="#"> Cerrar sesion</a><br></div>
+                    <c:out value="${usuario}"/>           
+                    
+
+		</c:if>
+	
+                    
+                    
+                    
+                    
+                    
+
                 </ul>
             </nav>
 
@@ -112,7 +147,7 @@ HttpSession sesion=request.getSession();
                                             <input class="form-control" type="email" name="txtMail" placeholder="E-mail" required="required">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control" type="password" name="txtPass" placeholder="Contraseña" required="required">
+                                            <input class="form-control" type="password" name="txtPass" placeholder="ContraseÃ±a" required="required">
                                         </div>
                                         <div class="checkbox">
                                             <label>

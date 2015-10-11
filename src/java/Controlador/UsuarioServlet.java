@@ -192,16 +192,20 @@ public class UsuarioServlet extends HttpServlet {
             pwd = request.getParameter("txtPass");
             DataCliente usuario = null;
             Iterator it = ICU.devListaDC().entrySet().iterator();
-            if(ICU.existeNickname(id) || ICU.existeMail(id)){
+            boolean mail =ICU.existeMail(id);
+            boolean nick =ICU.existeNickname(id);
+
+            if(mail || nick){
                 while(it.hasNext()){
                     Map.Entry usuarios = (Map.Entry)it.next();
                     DataCliente dc = (DataCliente)usuarios.getValue();
-                    if(dc.getNickname().equals(id) || dc.getMail().equals(id)){
+                    if(dc.getNickname().equals(id) || dc.getNombre().equals(id)){  //getMail devuelve el nombre, se cambia por getNombre que devuelve el mail
                         usuario = dc;
                     }
                 }
                 if(usuario.getPwd().equals(pwd)){
-                    request.setAttribute("nickname", usuario.getNickname());
+                    request.setAttribute("usuario", usuario.getNickname());
+                    session.setAttribute("iniciada", "true");
                     session.setAttribute(usuario.getNickname(), usuario);
                 }else{
                     //avisar al jsp que esta mal la pwd xD

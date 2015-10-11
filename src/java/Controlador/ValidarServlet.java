@@ -81,7 +81,7 @@ public class ValidarServlet extends HttpServlet {
             prop.load(input);
 
             //CLIENTES                                  //  nickname, nombre,             email,      direccion
-            DTOIngresarDatos datos1 = new DTOIngresarDatos("costas", "gcostas@gmail.com","Gerardo",  "Av. Italia 2078");
+            DTOIngresarDatos datos1 = new DTOIngresarDatos("costas", "Gerardo", "gcostas@gmail.com", "Av. Italia 2078");
             ICU.ingresarDatos(datos1);                        // apellido, imagen,                                                                                             fecha,        pwd
             File Cuno = new File(prop.getProperty("Cimagen1"));
             if(Cuno.exists()){
@@ -93,7 +93,7 @@ public class ValidarServlet extends HttpServlet {
                 ICU.registrarCliente(dreg1);
             }
             
-            DTOIngresarDatos datos2 = new DTOIngresarDatos("roro", "rcotelo@yahoo.com","Rodrigo", "Pdte. Berro 1548");
+            DTOIngresarDatos datos2 = new DTOIngresarDatos("roro","Rodrigo", "rcotelo@yahoo.com","Pdte. Berro 1548");
             ICU.ingresarDatos(datos2);
             File Cdos = new File(prop.getProperty("Cimagen2"));
             if(Cdos.exists()){
@@ -106,7 +106,7 @@ public class ValidarServlet extends HttpServlet {
             }
             
 
-            DTOIngresarDatos datos3 = new DTOIngresarDatos("chechi", "cgarrido@hotmail.com","Cecilia", "Gral. Urquiza 1548");
+            DTOIngresarDatos datos3 = new DTOIngresarDatos("chechi", "Cecilia", "cgarrido@hotmail.com", "Gral. Urquiza 1548");
             ICU.ingresarDatos(datos3);
             File Ctres = new File(prop.getProperty("Cimagen3"));
             if(Ctres.exists()){    
@@ -119,7 +119,7 @@ public class ValidarServlet extends HttpServlet {
             }
             
             
-            DTOIngresarDatos datos4 = new DTOIngresarDatos("andy", "agarcia@gmail.com","Andrea", "Dr. Manuel Albo 4512");
+            DTOIngresarDatos datos4 = new DTOIngresarDatos("andy", "Andrea", "agarcia@gmail.com", "Dr. Manuel Albo 4512");
             ICU.ingresarDatos(datos4);
             File Ccuatro = new File(prop.getProperty("Cimagen4"));
             if(Ccuatro.exists()){    
@@ -131,7 +131,7 @@ public class ValidarServlet extends HttpServlet {
                 ICU.registrarCliente(dreg4);
             }
             
-            DTOIngresarDatos datos5 = new DTOIngresarDatos("weiss", "aweiss@gmail.com","Adrián", "Monte Caseros 5615");
+            DTOIngresarDatos datos5 = new DTOIngresarDatos("weiss", "Adrián", "aweiss@gmail.com", "Monte Caseros 5615");
             ICU.ingresarDatos(datos5);
             File Ccinco = new File(prop.getProperty("Cimagen5"));
             if(Ccinco.exists()){    

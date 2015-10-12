@@ -29,12 +29,6 @@
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <style>
-            body {
-                padding-top: 70px;
-                /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-            }
-        </style>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,9 +69,9 @@
                                 <div class="col-lg-4 col-sm-6 text-center">
                                     <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
                                     <option value="cliente" item="${dc}">
-                                        <h3><a>Nombre: <c:out value="${cliente.getMail()}"/></a></h3>
+                                        <h3><a>Nombre: <c:out value="${cliente.getNombre()}"/></a></h3>
                                         <h3><a>Apellido: <c:out value="${cliente.getApellido()}"/></a></h3>
-                                        <h3><a>Email: <c:out value="${cliente.getNombre()}"/></a></h3>
+                                        <h3><a>Email: <c:out value="${cliente.getMail()}"/></a></h3>
                                         <h3><a>Nickname: <c:out value="${cliente.getNickname()}"/></a></h3>
                                         <h3><a>Direccion: <c:out value="${cliente.getDireccion()}"/></a></h3>
                                         <h3><a>Fecha de Nacimiento: <c:out value="${cliente.getFNac()}"/></a></h3>

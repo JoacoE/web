@@ -1,3 +1,4 @@
+<%@page import="lab01.Clases.DataCliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"  session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +17,7 @@
 <script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
 <%
 HttpSession sesion=request.getSession();
-%> 
+%>
 
 
 <div class="container">
@@ -49,19 +50,19 @@ HttpSession sesion=request.getSession();
 
                 <ul class="nav navbar-nav navbar-right">
                     
-                    	<% String iniciada= (String)sesion.getAttribute("iniciada"); 
-	String mostrar;
-	String user=(String)sesion.getAttribute("usuario"); 
-		if("true".equals((String)sesion.getAttribute("iniciada"))){
-			 mostrar="si";
-                         
-		}
-		else{
-			
-			mostrar="no";
-		}
-		request.setAttribute("mostrar",mostrar);
-	%>
+                    	<%String iniciada= (String)sesion.getAttribute("iniciada"); 
+                            String mostrar;
+                            String user=(String)sesion.getAttribute("usuario"); 
+                            if("true".equals((String)sesion.getAttribute("iniciada"))){
+                                mostrar="si";                 
+                            }
+                            else{			
+                                mostrar="no";
+                            }
+                            request.setAttribute("mostrar",mostrar);
+                        %>
+                        
+                        
 		
 		
 		<c:if test="${mostrar=='no'}">
@@ -103,20 +104,19 @@ HttpSession sesion=request.getSession();
                             </li>
                         </ul>
                     </li>
-                    <a href="#"> Iniciar sesion</a>
 		</c:if>
 		<c:if test="${mostrar=='si'}">
                     <form class="form" role="form" method="get" action="usr" accept-charset="UTF-8" id="login-nav">
                         <button type="submit" name="cerrar" class="btn btn-block">Cerrar sesion</button>
                     </form>
                     <form action="pedido" method="GET" accept-charset="UTF-8">
-                        <button type="submit" name="pedidosUsuario" value="${usuario}">
-                        <a name = "pedidosUsuario" value ="${usuario}" />  <c:out value="${usuario}"/> </a> 
+                        <option>
+                        <button type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
+                        <c:out value="${dcliente.getNickname()}"/>                        
                         </button>
+                        </option>
                     </form>
-
 		</c:if>
-
                 </ul>
             </nav>
 

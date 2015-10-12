@@ -239,7 +239,7 @@ public class UsuarioServlet extends HttpServlet {
                 if(usuario.getPwd().equals(pwd)){
                     request.setAttribute("usuario", usuario.getNickname());
                     session.setAttribute("iniciada", "true");
-                    session.setAttribute(usuario.getNickname(), usuario);
+                    session.setAttribute("dcliente", usuario);
                 }else{
                     //avisar al jsp que esta mal la pwd xD
                 }

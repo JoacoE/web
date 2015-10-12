@@ -14,6 +14,7 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link href="../Branding/css/nav.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="/Branding/css/bootstrapverRestaurante.css" >
         <link rel="stylesheet" type="text/css" href="/Branding/css/round-aboutRestaurante.css">
         <link rel="stylesheet" type="text/css" href="/Branding/css/bootstrap.minRestaurante.css">
@@ -66,32 +67,32 @@
 
                                 </ul>
                                 </div>
-                                <div class="col-lg-4 col-sm-6 text-center">
+                                <div class="col-lg-4 col-sm-6 text-left">
                                     <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
                                     <option value="cliente" item="${dc}">
-                                        <h3><a>Nombre: <c:out value="${cliente.getNombre()}"/></a></h3>
-                                        <h3><a>Apellido: <c:out value="${cliente.getApellido()}"/></a></h3>
-                                        <h3><a>Email: <c:out value="${cliente.getMail()}"/></a></h3>
-                                        <h3><a>Nickname: <c:out value="${cliente.getNickname()}"/></a></h3>
-                                        <h3><a>Direccion: <c:out value="${cliente.getDireccion()}"/></a></h3>
-                                        <h3><a>Fecha de Nacimiento: <c:out value="${cliente.getFNac()}"/></a></h3>
+                                        <h3><p>Nombre: <c:out value="${cliente.getNombre()}"/></p></h3>
+                                        <h3><p>Apellido: <c:out value="${cliente.getApellido()}"/></p></h3>
+                                        <h3><p>Email: <c:out value="${cliente.getMail()}"/></p></h3>
+                                        <h3><p>Nickname: <c:out value="${cliente.getNickname()}"/></p></h3>
+                                        <h3><p>Direccion: <c:out value="${cliente.getDireccion()}"/></p></h3>
+                                        <h3><p>Fecha de Nacimiento: <c:out value="${cliente.getFNac()}"/></p></h3>
                                     </option>    
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="2">
-                                <!--<div class="row">-->
-                                    <!--<br></br>-->
-                                    <c:forEach var="lPedidos" items="${listaPed}">
-                                        <h3><a>Nombre: <c:out value="lala"/></a></h3>
-                                        <!--<div class="col-sm-4 col-lg-4 col-md-4">-->
-                                        <!--<div class="thumbnail" >-->
-                                            <!--<div class="caption">-->
-                                                <!--<h4 class="pull-right">$${pedidos.getId()}</h4>-->
-                                                
-                                                <!--<p>${pedidos.getNickRest()}</p>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
+                            <div class="tab-pane fade" id="2">                             
+                                    <c:forEach var="lPedidos" items="${lPedidos}">
+                                        <div class="col-sm-9 col-lg-9 col-md-9">
+                                            <div class="thumbnail" >                                        
+                                                <div class="caption">
+                                                    <h4 class="pull-right">${lPedidos.getId()}</h4>                                         
+                                                    <h4><p>${lPedidos.getNickRest()}</p><h4>
+                                                    <h4><p>${lPedidos.getPrecio_total()}</p><h4>        
+                                                </div>                                                 
+                                                <p><span class="glyphicon glyphicon-th-list"></span>Detalle</p>                                                
+                                                <p><span class="glyphicon glyphicon-pencil"></span>Comentar</p>                                                
+                                                                                              
+                                            </div>
+                                        </div>       
                                     </c:forEach>        
                                 <!--</div>-->            
                             </div>

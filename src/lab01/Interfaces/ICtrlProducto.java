@@ -9,6 +9,8 @@ import lab01.Clases.DTOActualizarIndividual;
 import lab01.Clases.DTOActualizarPromocional;
 import lab01.Clases.DTOArmarPromo;
 import lab01.Clases.DTORegistrarProducto;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPromocional;
 import lab01.Clases.Producto;
 
 /**
@@ -25,4 +27,6 @@ public interface ICtrlProducto {
     public abstract Producto getProdNombre(String Nprod, String nickRes);
     public abstract void actualizarIndividual(DTOActualizarIndividual datos);
     public abstract void actualizarPromocional(DTOActualizarPromocional datos);
+    public abstract DataIndividual getProdIndividualXNombre(String nombre);
+    public abstract DataPromocional getProdPromocionalXNombre(String nombre);
 }

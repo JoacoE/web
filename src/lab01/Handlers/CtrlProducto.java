@@ -16,6 +16,7 @@ import lab01.Clases.DTOActualizarIndividual;
 import lab01.Clases.DTOActualizarPromocional;
 import lab01.Clases.DTOArmarPromo;
 import lab01.Clases.DTORegistrarProducto;
+import lab01.Clases.DataPromocional;
 import lab01.Clases.Individual;
 import lab01.Clases.Promocional;
 import lab01.Clases.Producto;
@@ -119,6 +120,57 @@ public class CtrlProducto implements ICtrlProducto {
         }
     }
     
+    @Override
+    public DataIndividual getProdIndividualXNombre(String nombre){
+        HUsuario hu = HUsuario.getinstance();
+        DataIndividual di = null;
+        Iterator rests = hu.obtenerColeccion().entrySet().iterator();
+        while(rests.hasNext()){
+            Map.Entry rest = (Map.Entry)rests.next();
+            if(rest.getValue() instanceof Restaurante){
+                Restaurante r = (Restaurante)rest.getValue();
+                Iterator prods = r.obtenerListaProductos().entrySet().iterator();
+                while(prods.hasNext()){
+                    Map.Entry prod = (Map.Entry)prods.next();
+                    if(prod.getValue() instanceof Individual){
+                        Individual i = (Individual)prod.getValue();
+                        if(i.getNombre().equals(nombre)){
+                            di = i.getDataIndividual();
+                            return di;
+                        }
+                    }
+                }
+            }
+        }
+        throw new NullPointerException();
+    }
+    
+    @Override
+    public DataPromocional getProdPromocionalXNombre(String nombre){
+        HUsuario hu = HUsuario.getinstance();
+        DataPromocional dp = null;
+        Iterator rests = hu.obtenerColeccion().entrySet().iterator();
+        while(rests.hasNext()){
+            Map.Entry rest = (Map.Entry)rests.next();
+            if(rest.getValue() instanceof Restaurante){
+                Restaurante r = (Restaurante)rest.getValue();
+                Iterator prods = r.obtenerListaProductos().entrySet().iterator();
+                while(prods.hasNext()){
+                    Map.Entry prod = (Map.Entry)prods.next();
+                    if(prod.getValue() instanceof Promocional){
+                        Promocional p = (Promocional)prod.getValue();
+                        if(p.getNombre().equals(nombre)){
+                            dp = p.getDataPromo();
+                            return dp;
+                        }
+                    }
+                }
+            }
+        }
+        throw new NullPointerException();
+    }
+    
+    @Override
     public Producto getProdNombre(String Nprod, String nickRes){
         HUsuario hu = HUsuario.getinstance();
         Restaurante res = hu.obtenerRestaurante(nickRes);

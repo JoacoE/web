@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+            <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
+
         <link href="./Branding/css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -164,17 +166,17 @@
                         <div class="tab-pane active" id="1">
                             <div class="row">
                                 <br></br>
-                               
+                                <div class="row"><h3>Productos promocionales</h3>
                                 <c:forEach var="promo" items="${promocionales}">
 
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail" >
                                         <img src="http://placehold.it./320x150" alt="">
                                         <div class="caption">
-                                            <h4 class="pull-right">$${promo.getDataPrecio()}</h4>
-                                            <h4 data-toggle="modal" data-target="#myModal"><a href="#">${promo.getDataNombre()}</a>
+                                            <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
+                                            <h4 data-toggle="modal" data-target="#myModal"><a href="#" class="prodPromo">${promo.getDataNombre()}</a>
                                             </h4>
-                                            <p>${promo.getDataDescripcion()}</p>
+                                            <p class="desc">${promo.getDataDescripcion()}</p>
                                         </div>
                                         <div class="ratings">
                                             <p class="pull-right">15 reviews</p>
@@ -189,16 +191,17 @@
                                     </div>
                                 </div>
                                 </c:forEach>
-                                
+                                </div> 
+                                <div class="row"><h3>Productos individuales</h3>
                                 <c:forEach var="individ" items="${individuales}">
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail">
                                         <img src="http://placehold.it/320x150" alt="">
                                         <div class="caption">
-                                            <h4 class="pull-right">$${individ.getDataPrecio()}</h4>
-                                            <h4 data-toggle="modal" data-target="#myModal"><a href="#">${individ.getDataNombre()}</a>
+                                            <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
+                                            <h4 data-toggle="modal" data-target="#myModal"><a href="#" class="prodIndividual">${individ.getDataNombre()}</a>
                                             </h4>
-                                            <p>${individ.getDataDescripcion()}</p>
+                                            <p class="desc">${individ.getDataDescripcion()}</p>
                                         </div>
                                         <div class="ratings">
                                             <p class="pull-right">12 reviews</p>
@@ -213,7 +216,7 @@
                                     </div>
                                 </div>
                                 </c:forEach>
-                                
+                            </div>
 
                                 
                             </div>
@@ -271,9 +274,6 @@
                                                 <span class="icon-bar"></span>
                                         </button>
                                 </div>
-                                <div class="navbar-collapse collapse">
-                                        <h2 id="basket-message" class="text-centre">You have <span id="basket">0</span> items in your basket</h2>
-                                </div>
                         </div>
                 </div>
 
@@ -321,14 +321,14 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="titulo">${titulo}</h4>
+            <h4 class="modal-title" id="modaltitulo" data-target="titulo"></h4>
           </div>
           <div class="modal-body">
             <div class="img-thumbnail">
                 <img src="http://placehold.it/320x150" alt="">
             </div>
             <div>
-                <p class="pull-center">Aca va la descripcion de mierda</p>
+                <p class="pull-center" id="modaldesc" data-target="descripcion"></p>
             </div>
             <div><select class="input-sm center-block" name="Cantidad">
               <option>1</option>
@@ -404,7 +404,6 @@
       </div>
     </div>
     <!-- jQuery -->
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../Branding/js/bootstrap.min.js"></script>
     <script src="../Branding/js/bootstrap.tab.js"></script>
@@ -413,7 +412,20 @@
     <script src="js/libs/lightbox.js"></script>
     <script src="js/store.js"></script>
     <script src="../Branding/js/jquery.js"></script>
-
+    <script type="text/javascript">
+        $(".prodPromo").click(function(){
+            var target = $(this).closest("h4").siblings("#precio").text();
+            $("#modaltitulo").text($(this).text());
+            $("#modaldesc").text(target);
+        });
+    </script>
+    <script type="text/javascript">
+        $(".prodIndividual").click(function(){
+            var target = $(this).closest("h4").siblings("#precio").text();
+            $("#modaltitulo").text($(this).text());
+            $("#modaldesc").text(target);
+        });
+    </script>
 </body>
 
 </html>

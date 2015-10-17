@@ -22,7 +22,6 @@
 HttpSession sesion=request.getSession();
 %>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -35,7 +34,7 @@ HttpSession sesion=request.getSession();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="<%=request.getContextPath()%>/Pantallas/VerRestaurantes.jsp">
                         <img alt="img" src="./Branding/img/logo.png">
                     </a>
                 </div>

@@ -109,7 +109,7 @@ public class ValidarServlet extends HttpServlet {
             DTOIngresarDatos datos3 = new DTOIngresarDatos("chechi", "Cecilia", "cgarrido@hotmail.com", "Gral. Urquiza 1548");
             ICU.ingresarDatos(datos3);
             File Ctres = new File(prop.getProperty("Cimagen3"));
-            if(Ctres.exists()){    
+            if(Ctres.exists()){
                 HI.guardarImagen(Ctres, datos3.getNickname());
                 DTORegistrarCliente dreg3 = new DTORegistrarCliente("Garrido", "chechi", "12/09/1987", "ch4321");
                 ICU.registrarCliente(dreg3);

@@ -28,6 +28,8 @@
                 <!--<script type="text/javascript" src="../Branding/js/head.js"></script>-->
         <script src="./Branding/js/jquerylogin.js" type="text/javascript"></script>
         <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
+        <link href="../Branding/css/perfil.css" rel="stylesheet" type="text/css"/>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
 
@@ -38,69 +40,96 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        
-        
     </head>
 
     <body>
-        <!-- Page Content -->
-        <jsp:include page="/layout/head.jsp"/>
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="tabbable">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a href="#1" data-toggle="tab">Perfil</a>
-                            </li>
-                            <li>
-                                <a href="#2" data-toggle="tab">Pedidos</a>
-                            </li>
-
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="1">
-                                <div class="row">
-                                <br></br>
-                                <ul class="list-unstyled">
-
-                                </ul>
-                                </div>
-                                <div class="col-lg-4 col-sm-6 text-left">
-                                    <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                                    <option value="cliente" item="${dc}">
-                                        <h3><p>Nombre: <c:out value="${cliente.getNombre()}"/></p></h3>
-                                        <h3><p>Apellido: <c:out value="${cliente.getApellido()}"/></p></h3>
-                                        <h3><p>Email: <c:out value="${cliente.getMail()}"/></p></h3>
-                                        <h3><p>Nickname: <c:out value="${cliente.getNickname()}"/></p></h3>
-                                        <h3><p>Direccion: <c:out value="${cliente.getDireccion()}"/></p></h3>
-                                        <h3><p>Fecha de Nacimiento: <c:out value="${cliente.getFNac()}"/></p></h3>
-                                    </option>    
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="2">                             
-                                    <c:forEach var="lPedidos" items="${lPedidos}">
-                                        <div class="col-sm-9 col-lg-9 col-md-9">
-                                            <div class="thumbnail" >                                        
-                                                <div class="caption">
-                                                    <h4 class="pull-right">${lPedidos.getId()}</h4>                                         
-                                                    <h4><p>${lPedidos.getNickRest()}</p><h4>
-                                                    <h4><p>${lPedidos.getPrecio_total()}</p><h4>        
-                                                </div>                                                 
-                                                <p><span class="glyphicon glyphicon-th-list"></span>Detalle</p>                                                
-                                                <p><span class="glyphicon glyphicon-pencil"></span>Comentar</p>                                                
-                                                                                              
-                                            </div>
-                                        </div>       
-                                    </c:forEach>        
-                                <!--</div>-->            
-                            </div>
+    <!-- Page Content -->
+    <jsp:include page="/layout/head.jsp"/>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <option value="cliente" item="${dc}">
+                <div class="col-md-14 col-lg-14 " align="center"> <img alt="User Pic" src="<%=request.getContextPath()%>/Branding/img/${cliente.getImagen()}.jpeg" class="img-circle img-responsive"> </div>
+                <br></br>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <!--<h3 class="panel-title">Perfil</h3>-->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#1" data-toggle="tab">Perfil</a>
+                        </li>
+                        <li>
+                            <a href="#2" data-toggle="tab">Pedidos</a>
+                        </li>
+                    </ul>
+                    </div>
+                <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                    <div class="row">
+                        <div class=" col-md-9 col-lg-9 "> 
+                            <table class="table table-user-information">
+                                <tbody>
+                                    
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td><c:out value="${cliente.getNombre()}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <h3><p> </p></h3>
+                                        <h3><p> </p></h3>
+                                        <h3><p> </p></h3>
+                                        <h3><p> </p></h3>
+                                        <td>Apellido:</td>
+                                        <td><c:out value="${cliente.getApellido()}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td><c:out value="${cliente.getMail()}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nickname:</td>
+                                        <td><c:out value="${cliente.getNickname()}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Direccion:</td>
+                                        <td><c:out value="${cliente.getDireccion()}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de Nacimiento:</td>
+                                        <td><c:out value="${cliente.getFNac()}"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane fade" id="2">                             
+                    <c:forEach var="lPedidos" items="${lPedidos}">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
+                            <div class="thumbnail" >                                        
+                                <div class="caption">
+                                    <h4 class="pull-right">ID pedido: ${lPedidos.getId()}</h4>                                         
+                                    <h4><p>Nick restaurante: ${lPedidos.getNickRest()}</p><h4>
+                                    <h4 class="pull-center">Total: $${lPedidos.getPrecio_total()}<h4>        
+                                </div>                                                 
+                                <p><span class="glyphicon glyphicon-th-list"></span>Detalle</p>                                                
+                                <p><span class="glyphicon glyphicon-pencil"></span>Comentar</p>                                                
+
+                            </div>
+                        </div>       
+                    </c:forEach>          
+                </div>  
+                </div>    
+                </div>
             </div>
-        </div>                            
+        </div>
+    </div>                       
 
         <!-- jQuery Version 1.11.1 -->
         <script src="js/jquery.js"></script>

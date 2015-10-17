@@ -12,13 +12,15 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../Branding/css/datepicker_1.css">
+
 <!-- Latest compiled and minified JavaScript -->
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
 <%
 HttpSession sesion=request.getSession();
 %>
-
 
 <div class="container">
     <div class="row">
@@ -32,7 +34,7 @@ HttpSession sesion=request.getSession();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="<%=request.getContextPath()%>/Pantallas/VerRestaurantes.jsp">
                         <img alt="img" src="./Branding/img/logo.png">
                     </a>
                 </div>

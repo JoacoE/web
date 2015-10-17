@@ -245,7 +245,11 @@ public class UsuarioServlet extends HttpServlet {
                 }
                 if(!usuario.getImagen().isEmpty()){
                     imagen = HI.getImagen(usuario.getNickname());
-                    request.setAttribute("imgPerfil", imagen);
+                    //String path = session.getServletContext().getRealPath("/web/build/web/WEB-INF/lib/imagenes");
+                    String path = imagen.getPath();
+                    String url = path.concat(".jpeg");
+                    request.setAttribute("imgPerfil", url);
+                    
                 }else{
                     noImage = HI.getNoImgeUsuario();
                     request.setAttribute("noImg", noImage);
@@ -295,10 +299,10 @@ public class UsuarioServlet extends HttpServlet {
             email = getMail();
             nombre = request.getParameter("txtNombre");
             apellido = request.getParameter("txtApellido");
-            fecha = request.getParameter("txtFecha");
+            fecha = request.getParameter("datepicker");
             direccion = request.getParameter("txtDireccion");
             pwd = request.getParameter("txtPass");
-            //imagen = (File)request.getAttribute("imagen");
+            imagen = (File)request.getAttribute("imagen");
             if(!ICU.existeUsuario(nickname, email)){
                 DTOIngresarDatos ingDatos = new DTOIngresarDatos();
                 ingDatos.setNickname(nickname);

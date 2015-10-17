@@ -2,11 +2,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<link rel="stylesheet" type="text/css" href="../Branding/css/nav.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!--<link rel="stylesheet" type="text/css" href="../Branding/css/estilos.css" >-->
 
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -17,8 +18,6 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="../Branding/css/nav.css" >
-
 <%
 HttpSession sesion=request.getSession();
 %>
@@ -26,7 +25,7 @@ HttpSession sesion=request.getSession();
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class=" barNav navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -35,8 +34,12 @@ HttpSession sesion=request.getSession();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<%=request.getContextPath()%>/Pantallas/VerRestaurantes.jsp">
-                        <img alt="img" src="./Branding/img/logo.png">
+                    <a class=" barra navbar-brand" href="<%=request.getContextPath()%>/Pantallas/VerRestaurantes.jsp"></a>
+                        <form action="usr" method="GET">
+                        <button type="submit" class="btn-link" name="home" id="home">
+                            <img src="./Branding/img/logo.png">
+                        </button>
+                        </form>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,22 +73,25 @@ HttpSession sesion=request.getSession();
 		
 		<c:if test="${mostrar=='no'}">
                     
-<li><input class="btnRegistrar btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
+<li><input class="btnRegistrar btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
                     <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
                     
                     
                                         <li class="dropdown">
                      
                         <!--}else{-->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
+                        
+                            <a href="#" class="mnIngresar dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
                         <!--}-->
                             
-                        <ul class="dropdown-menu">
+                        <ul class="dropIngresar dropdown-menu">
                             <li>
+                                
                                 <div class="row">
                                     <div class="col-md-12">
                                         <form class="form" role="form" method="post" action="usr" accept-charset="UTF-8" id="login-nav">
                                             <div class="form-group">
+                                               
                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
                                                 <input type="text" class="form-control" name="txtCorreo" id="txtCorreo" placeholder="Email address" required>
                                             </div>
@@ -101,20 +107,17 @@ HttpSession sesion=request.getSession();
                                 </div>
                             </li>
                             <li class="divider"></li>
-                            <li>
-                                <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
-                                <input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Sign In with Twitter">
-                            </li>
+                            
                         </ul>
                     </li>
 		</c:if>
 		<c:if test="${mostrar=='si'}">
                     <form class="form" role="form" method="get" action="usr" accept-charset="UTF-8" id="login-nav">
-                        <button type="submit" name="cerrar" class="btn btn-block">Cerrar sesion</button>
+                        <button type="submit" name="cerrar" class=" btnCerrar btn-link">Cerrar sesion</button>
                     </form>
                     <form action="pedido" method="GET" accept-charset="UTF-8">
                         <option>
-                        <button type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
+                        <button class="btn-link" type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
                         <c:out value="${dcliente.getNickname()}"/>                        
                         </button>
                         </option>
@@ -138,7 +141,7 @@ HttpSession sesion=request.getSession();
                             <div class="panel-heading">
                                 
                                 
-                                <h3 class="btnRegistrar panel-title text-center">Registrar<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></h3>
+                                <h3 class="panel-title text-center">Registrar<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></h3>
                         
 
                             </div>

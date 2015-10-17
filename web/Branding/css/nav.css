@@ -3,6 +3,11 @@ body { margin-top:30px; }
 .form-group{
     margin: 8px;
 }
+
+.btnRegistrar{
+    line-height: 2.429;
+    
+}
 .search-form .form-group {
   float: right !important;
   transition: all 0.35s, border-radius 0s;

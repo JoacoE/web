@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-            <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
 
         <link href="./Branding/css/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -50,7 +49,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
     
-    
+                <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
+
     <script type="text/template" id="tmp-pictureItem">
 	<div class="shoppingListItemContent">
 		<a href="image" data-toggle="lightbox">
@@ -171,23 +171,14 @@
 
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail" >
-                                        <img src="http://placehold.it./320x150" alt="">
+                                        <img src="<%=request.getContextPath()%>/Branding/img/${promo.getDataImagen()}.jpeg" alt="no imagen">
                                         <div class="caption">
                                             <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
-                                            <h4 data-toggle="modal" data-target="#myModal"><a href="#" class="prodPromo">${promo.getDataNombre()}</a>
-                                            </h4>
+                                            <h4 class="nombreProd">${promo.getDataNombre()}</h4>
                                             <p class="desc">${promo.getDataDescripcion()}</p>
+                                        <button class="btnCarrito btn btn-danger glyphicon glyphicon-shopping-cart">Agregar</button>
                                         </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 </c:forEach>
@@ -196,24 +187,17 @@
                                 <c:forEach var="individ" items="${individuales}">
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail">
-                                        <img src="http://placehold.it/320x150" alt="">
+                                        <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="no imagen">
                                         <div class="caption">
                                             <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
-                                            <h4 data-toggle="modal" data-target="#myModal"><a href="#" class="prodIndividual">${individ.getDataNombre()}</a>
+                                            <h4 class="nombreProd">${individ.getDataNombre()}
                                             </h4>
+                                            
                                             <p class="desc">${individ.getDataDescripcion()}</p>
+                                            <button class="btnCarrito btn btn-danger glyphicon glyphicon-shopping-cart">Agregar</button>
+
                                         </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">12 reviews</p>
-                                            <p>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </p>
-                                        </div>
-                                    </div>
+                                   </div>
                                 </div>
                                 </c:forEach>
                             </div>
@@ -261,46 +245,32 @@
                         </div>
                         </div>                        
                     </div>
-                </div>  
-            </div>
-            <div class="col-md-3">
-                <div class="navbar navbar-inverse" role="navigation">
-                        <div class="container-fluid">
-                                <div class="navbar-header">
-                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                                                <span class="sr-only">Toggle navigation</span>
-                                                <span class="icon-bar"></span>
-                                                <span class="icon-bar"></span>
-                                                <span class="icon-bar"></span>
-                                        </button>
-                                </div>
-                        </div>
-                </div>
-
+                    </div>  
+        <div class="col-md-3">
                 <div class="container-fluid">
                         <div class="row">
-
                                 <div class="col-sm-12  col-md-10  main" id="main">
                                         <div class="">
                                                 <div id="app"></div>
                                         </div>
-
                                         <div class="row">
                                                 <ul id="default-item-list" class="col-md-12"></ul>
                                         </div>
-
                                         <div class="row">
                                                 <div id="detail"></div>
                                         </div>
                                 </div>
-
-
+                            
+                            <div class="mostrarCarro"></div>
+                            
                                 <div class="col-sm-3 col-sm-offset-3 col-md-2 col-md-offset-2 sidebar" id="sidebar">
                                         <table id="shopping-cart" class="table table-responsive">
-                                                <tbody id="shopping-list"></tbody>
+                                            <tbody id="shopping-list">
+                                                
+                                            </tbody>
                                                 <tfoot>
                                                         <tr>
-                                                                <td colspan="4" id="total">$ 0.00</td>
+                                                            <td colspan="4" id="total">$ 0.00</td>
                                                         </tr>
                                                 </tfoot>
                                         </table>
@@ -309,100 +279,12 @@
                         </div>
                  </div>
                 
-            </div>
+            </div>    
         </div>
-    </div>
+            
+        </div>
     <!-- /.container -->
     <!-- /.container -->
-    
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="modaltitulo" data-target="titulo"></h4>
-          </div>
-          <div class="modal-body">
-            <div class="img-thumbnail">
-                <img src="http://placehold.it/320x150" alt="">
-            </div>
-            <div>
-                <p class="pull-center" id="modaldesc" data-target="descripcion"></p>
-            </div>
-            <div><select class="input-sm center-block" name="Cantidad">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
-              <option>10</option>
-            </select>
-            </div>   
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button id="addCart" class="btn btn-info btn-sm">
-                <i class="fa fa-shopping-cart"></i> Agregar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-   
-   
-    <div class="modal fade" id="preconfirmacion" tabindex="-1" role="dialog" aria-labelledby="miPreconfirmacion">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="preconfirmacion">¿Desea confirmar el pedido?</h4>
-          </div>
-          <div class="modal-body">
-            <div class="container">        
-              <table class="table-condensed">
-                <thead>
-                  <tr>
-                    <th>Cantidad</th>
-                    <th>Producto</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                  </tr>
-                </tbody>
-              </table>
-            <div class="container">
-                <h4 >Total: </h4>
-            </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Volver</button>
-            <button id="confirmar" class="btn btn-success">
-                    Confirmar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- jQuery -->
     <!-- Bootstrap Core JavaScript -->
     <script src="../Branding/js/bootstrap.min.js"></script>
@@ -413,19 +295,20 @@
     <script src="js/store.js"></script>
     <script src="../Branding/js/jquery.js"></script>
     <script type="text/javascript">
-        $(".prodPromo").click(function(){
-            var target = $(this).closest("h4").siblings("#precio").text();
-            $("#modaltitulo").text($(this).text());
-            $("#modaldesc").text(target);
+        $(".btnCarrito").click(function(){
+            var nombre = $(this).siblings(".nombreProd").text();
+            var precio = $(this).siblings("#precio").text();
+            var preciototal;
+            $("#shopping-list").append("<tr id='borrar'><td>" + nombre + "  " + precio +"<input class='cant'>" +"<button class='remove'>X</button>");
+
+            
+        });
+        
+        $(".remove").click(function(){
+           $("#shopping-list").remove($(this).closest('#borrar'));
         });
     </script>
-    <script type="text/javascript">
-        $(".prodIndividual").click(function(){
-            var target = $(this).closest("h4").siblings("#precio").text();
-            $("#modaltitulo").text($(this).text());
-            $("#modaldesc").text(target);
-        });
-    </script>
+   
 </body>
 
 </html>

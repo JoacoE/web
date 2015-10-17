@@ -2,12 +2,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" type="text/css" href="../Branding/css/nav.css" >
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <!--<link rel="stylesheet" type="text/css" href="../Branding/css/estilos.css" >-->
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -18,6 +17,8 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../Branding/css/nav.css" >
+
 <%
 HttpSession sesion=request.getSession();
 %>
@@ -69,7 +70,7 @@ HttpSession sesion=request.getSession();
 		
 		<c:if test="${mostrar=='no'}">
                     
-<li><input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
+<li><input class="btnRegistrar btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
                     <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
                     
                     
@@ -137,7 +138,7 @@ HttpSession sesion=request.getSession();
                             <div class="panel-heading">
                                 
                                 
-                                <h3 class="panel-title text-center">Registrar<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></h3>
+                                <h3 class="btnRegistrar panel-title text-center">Registrar<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></h3>
                         
 
                             </div>

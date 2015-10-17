@@ -109,21 +109,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="2">                             
-                    <c:forEach var="lPedidos" items="${lPedidos}">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
-                            <div class="thumbnail" >                                        
-                                <div class="caption">
-                                    <h4 class="pull-right">ID pedido: ${lPedidos.getId()}</h4>                                         
-                                    <h4><p>Nick restaurante: ${lPedidos.getNickRest()}</p><h4>
-                                    <h4 class="pull-center">Total: $${lPedidos.getPrecio_total()}<h4>        
-                                </div>                                                 
-                                <p><span class="glyphicon glyphicon-th-list"></span>Detalle</p>                                                
-                                <p><span class="glyphicon glyphicon-pencil"></span>Comentar</p>                                                
-
-                            </div>
-                        </div>       
-                    </c:forEach>          
+                <div class="tab-pane fade" id="2">  
+                    <form action="pedido" method="get" accept-charset="UTF-8">
+                        <c:forEach var="lPedidos" items="${lPedidos}">
+                            <button type="submit" name="pedido" value="${lPedidos.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Conchudo!">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
+                                    <div class="thumbnail" >                                        
+                                        <div class="caption">
+                                            <h4 class="pull-center">ID pedido: ${lPedidos.getId()}</h4>  
+                                            
+                                            <h4 class="pull-center">Nick restaurante: ${lPedidos.getNickRest()}</h4>
+                                            
+                                            <h4 class="pull-center">Total: $${lPedidos.getPrecio_total()}<h4>        
+                                        </div>                                                 
+                                    </div>
+                                </div>   
+                            </button>        
+                        </c:forEach> 
+                    </form>     
                 </div>  
                 </div>    
                 </div>

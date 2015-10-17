@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lab01.Clases.Cliente;
+import lab01.Clases.DTOEvaluacion;
+import lab01.Clases.DataCarrito;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
@@ -56,6 +59,42 @@ public class PedidoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        if(request.getParameter("comment") != null){
+            String comentario = (String)request.getParameter("comment");  
+            Fabrica f = Fabrica.getInstance();
+        
+        }
+        
+            if(request.getParameter("pedido") != null){
+            ArrayList<DataCarrito> listaCar = new ArrayList<>();
+            Fabrica f = Fabrica.getInstance();
+            ICtrlPedido ICP = f.getICtrlPedido();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
+            String idPed = (String)request.getParameter("pedido");
+            long idPedi = Long.parseLong(idPed);
+            Map pedidos = ICP.listDataPedidos();
+            Iterator it = pedidos.entrySet().iterator();
+            DataPedido pedi=null;
+            while(it.hasNext()){
+                Map.Entry pedido = (Map.Entry) it.next();
+                DataPedido dp = (DataPedido)pedido.getValue();
+                if(idPedi==dp.getId())
+                    pedi=dp;
+            }
+            Iterator it1 = pedi.getColCarrito().entrySet().iterator();
+            while(it1.hasNext()){
+                Map.Entry colca = (Map.Entry) it1.next();
+                DataCarrito dc = (DataCarrito)colca.getValue();
+                listaCar.add(dc);
+            }
+        DTOEvaluacion eva = ICP.getEvaluacionXid(idPedi);
+        
+        request.setAttribute("evaluacion", eva);
+        request.setAttribute("carrito", listaCar);
+        request.setAttribute("pedido", pedi);
+        request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+        }
         
         if(request.getParameter("pedidosUsuario") != null){//devuelve los pedidos de un usuario...
             Fabrica f = Fabrica.getInstance();

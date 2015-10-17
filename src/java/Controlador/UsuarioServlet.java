@@ -127,7 +127,30 @@ public class UsuarioServlet extends HttpServlet {
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
             
         }
-        
+        if(request.getParameter("home")!=null){
+           Fabrica f = Fabrica.getInstance();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
+            HttpSession session = request.getSession();
+            session.removeAttribute("usuario");
+            session.setAttribute("iniciada", "false");
+            Iterator it3 = ICU.retColCat().entrySet().iterator();
+            ArrayList<DataCategoria> lista = new ArrayList<>();
+            while (it3.hasNext()){
+                Map.Entry cats =(Map.Entry)it3.next();
+                DataCategoria cat = (DataCategoria)cats.getValue();    
+                lista.add(cat);
+            }
+            Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+            ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+            while (it2.hasNext()){
+                Map.Entry res =(Map.Entry)it2.next();
+                DataRestaurante r = (DataRestaurante)res.getValue();    
+                listaRes.add(r);
+            }
+            request.setAttribute("list", lista);
+            request.setAttribute("listres", listaRes);
+            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response); 
+        }
         if(request.getParameter("restaurante") != null){
             Fabrica f = Fabrica.getInstance();
             ICtrlUsuario ICU = f.getICtrlUsuario();

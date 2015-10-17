@@ -61,9 +61,18 @@ public class PedidoServlet extends HttpServlet {
         processRequest(request, response);
         
         if(request.getParameter("comment") != null){
-            String comentario = (String)request.getParameter("comment");  
             Fabrica f = Fabrica.getInstance();
-        
+            ICtrlPedido ICP = f.getICtrlPedido();
+            
+            String comentario = (String)request.getParameter("comment");  
+            HttpSession sesion = request.getSession();
+            String sobaquena = (String)sesion.getAttribute("idPed");
+            DTOEvaluacion dto = new DTOEvaluacion(comentario,4);
+            ICP.altaEvaluacion(Long.parseLong(sobaquena), dto);
+            
+//            ICtrlUsuario ICU = f.getICtrlUsuario();
+            
+            request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
             if(request.getParameter("pedido") != null){

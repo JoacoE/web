@@ -25,7 +25,7 @@ HttpSession sesion=request.getSession();
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class=" barNav navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -34,8 +34,12 @@ HttpSession sesion=request.getSession();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<%=request.getContextPath()%>/Pantallas/VerRestaurantes.jsp">
-                        <img alt="img" src="./Branding/img/logo.png">
+                    <a class=" barra navbar-brand" href="<%=request.getContextPath()%>/Pantallas/VerRestaurantes.jsp"></a>
+                        <form action="usr" method="GET">
+                        <button type="submit" class="btn-link" name="home" id="home">
+                            <img src="./Branding/img/logo.png">
+                        </button>
+                        </form>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,22 +73,25 @@ HttpSession sesion=request.getSession();
 		
 		<c:if test="${mostrar=='no'}">
                     
-<li><input class="btn btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
+<li><input class="btnRegistrar btn-link" type="submit" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></li>
                     <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
                     
                     
                                         <li class="dropdown">
                      
                         <!--}else{-->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
+                        
+                            <a href="#" class="mnIngresar dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>
                         <!--}-->
                             
-                        <ul class="dropdown-menu">
+                        <ul class="dropIngresar dropdown-menu">
                             <li>
+                                
                                 <div class="row">
                                     <div class="col-md-12">
                                         <form class="form" role="form" method="post" action="usr" accept-charset="UTF-8" id="login-nav">
                                             <div class="form-group">
+                                               
                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
                                                 <input type="text" class="form-control" name="txtCorreo" id="txtCorreo" placeholder="Email address" required>
                                             </div>
@@ -100,20 +107,17 @@ HttpSession sesion=request.getSession();
                                 </div>
                             </li>
                             <li class="divider"></li>
-                            <li>
-                                <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
-                                <input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Sign In with Twitter">
-                            </li>
+                            
                         </ul>
                     </li>
 		</c:if>
 		<c:if test="${mostrar=='si'}">
                     <form class="form" role="form" method="get" action="usr" accept-charset="UTF-8" id="login-nav">
-                        <button type="submit" name="cerrar" class="btn btn-block">Cerrar sesion</button>
+                        <button type="submit" name="cerrar" class=" btnCerrar btn-link">Cerrar sesion</button>
                     </form>
                     <form action="pedido" method="GET" accept-charset="UTF-8">
                         <option>
-                        <button type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
+                        <button class="btn-link" type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
                         <c:out value="${dcliente.getNickname()}"/>                        
                         </button>
                         </option>

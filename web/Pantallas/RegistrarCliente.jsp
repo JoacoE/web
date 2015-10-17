@@ -6,24 +6,22 @@
         <meta charset="utf-8" />
         <title>Regitro</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
-
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="../Branding/css/datepicker.css" rel="stylesheet">
-        <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
-        <link rel="stylesheet" href="../Branding/css/datepicker_1.css">
-
+        <!--<link rel="stylesheet" href="../Branding/css/datepicker.css">-->
+        <link href="../Branding/css/datepicker.css" rel="stylesheet" type="text/css"/>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
             $(function () {
-
-                $("#datepicker").datepicker();
+               
+                $("#datepicker").datepicker({
+                     dateFormat: 'dd/mm/yy'
+                });
             });
         </script>
     </head>
@@ -79,7 +77,7 @@
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-calendar bigicon"></i></span>
                                         <div class="col-md-8">
-                                            <input type="text" id="datepicker" name="datepicker" placeholder="Fecha de nacimiento">
+                                            <input  class="datepicker"type="text" id="datepicker" name="datepicker" placeholder="Fecha de nacimiento">
                                         </div>
                                     </div>
 

@@ -42,4 +42,5 @@ public interface ICtrlPedido {
     public abstract void actualizarPromedioRest(String nickname);
     public abstract void altaEvaluacion(double id, DTOEvaluacion data);
     public abstract Map listarEvaluacionesRest(String nickname);
+    public abstract DTOEvaluacion getEvaluacionXid(long id);
 }

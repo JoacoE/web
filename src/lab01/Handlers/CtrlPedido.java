@@ -423,4 +423,27 @@ public class CtrlPedido implements ICtrlPedido {
         }
         return aux;
     }
+    
+    @Override
+    public DTOEvaluacion getEvaluacionXid(long id){
+        HUsuario hu = HUsuario.getinstance();
+        DTOEvaluacion ret = null;
+        Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
+        while(clientes.hasNext()){
+            Map.Entry cliente = (Map.Entry)clientes.next();
+            if(cliente.getValue() instanceof Cliente){
+                Cliente c = (Cliente)cliente.getValue();
+                Iterator pedidos = c.getPedidos().entrySet().iterator();
+                while(pedidos.hasNext()){
+                    Map.Entry pedido = (Map.Entry)pedidos.next();
+                    Pedido p = (Pedido)pedido.getValue();
+                    if(p.getId() == id){
+                        ret = p.getEvaluacion().getDTOEvaluacion();
+                        return ret;
+                    }
+                }
+            }
+        }
+        throw new NullPointerException();
+    }
 }

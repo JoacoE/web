@@ -126,12 +126,14 @@
                                 <c:if test="${evaluacion.getComentario()==null}">
                                     <br></br>
                                     <div class="text-center">
-                                        <div class="ec-stars-wrapper">
-                                            <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-                                            <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-                                            <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                                            <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-                                            <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+                                        <div>
+                                            <fieldset id="puntaje" name="stars" value="">
+                                                    1<input type="radio" name="star" value="1">  
+                                                    2<input type="radio" name="star" value="2">  
+                                                    3<input type="radio" name="star" value="3">  
+                                                    4<input type="radio" name="star" value="4">  
+                                                    5<input type="radio" name="star" value="5">  
+                                            </fieldset>
                                         </div>
                                     </div>
                                     <div class="text-center">

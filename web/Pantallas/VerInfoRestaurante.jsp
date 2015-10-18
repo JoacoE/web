@@ -95,7 +95,7 @@
                 </div>
                 <div><h1>
                         <option value="restaurante">
-                                    <h3><a><c:out value="${restaurante.getNickname()}"/></a></h3>
+                        <h2><c:out value="${restaurante.getNombre()}"/></h2>
                         </option>
                         </h1></div>
                   <div class="tabbable">
@@ -223,7 +223,9 @@
                             <div class="mostrarCarro"></div>
                             
                                 <div class="col-sm-3 col-sm-offset-3 col-md-2 col-md-offset-2 sidebar" id="sidebar">
-                                        <table id="shopping-cart" class="table table-responsive">
+                                           <form action="pedido" method="get" accept-charset="UTF-8">
+
+                                    <table id="shopping-cart" class="table table-responsive">
                                             <tbody id="shopping-list">
                                                 
                                             </tbody>
@@ -233,7 +235,9 @@
                                                         </tr>
                                                 </tfoot>
                                         </table>
-                                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#preconfirmacion" id="showForm">Check out</button>
+                                               <button class="btn btn-primary btn-lg" type="submit" id="comprar" name="comprar">Comprar</button>
+                                           </form>
+
                                 </div>
                         </div>
                  </div>
@@ -362,19 +366,25 @@
     <script src="js/store.js"></script>
     <script src="../Branding/js/jquery.js"></script>
     <script type="text/javascript">
-        $(".btnCarrito").click(function(){
-            var nombre = $(this).siblings(".nombreProd").text();
-            var precio = $(this).siblings("#precio").text();
-            var preciototal;
-            $("#shopping-list").append("<tr id='borrar'><td>" + nombre + precio +"<input class='cant'><button class='remove btn btn-danger'>X</button></td></tr>");
 
-            
-        });
         
-//        $(".remove").live('click',function(){
-          $(document).on('click','.remove',function(){
+        
+            $(".btnCarrito").click(function(){
+      var newRow = $("<tr>");
+              var cols = "";
+              var nombre = $(this).siblings(".nombreProd").text();
+              var precio = $(this).siblings("#precio").text();
+              cols += '<td><input type="text" name="product" value='+nombre+'></td>';
+              cols += '<td><input type="text" name="price" value='+precio+'></td>';
+              cols += '<td><input type="text" name="qty"/></td>';
+              cols += '<td><button class="remove btn btn-danger">X</button></td>';
+              newRow.append(cols);
+        $("#shopping-list").append(newRow);
+    });
+        
+         $(document).on('click','.remove',function(){
 
-            $(this).parent().remove();
+            $(this).parent().parent().remove();
         });
     </script>
    

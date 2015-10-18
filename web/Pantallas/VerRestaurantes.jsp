@@ -57,6 +57,8 @@
                         <div class="col-lg-4 col-sm-6 wraper-box">
                             <div class="text-center box-restaurantes">
                                 <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
+                                    
+                                    
                                     <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
                                     <option value="lista">
                                     <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>

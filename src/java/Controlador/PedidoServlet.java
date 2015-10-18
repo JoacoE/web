@@ -126,6 +126,29 @@ public class PedidoServlet extends HttpServlet {
             request.setAttribute("lPedidos", listaPed);
             request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
         }
+        if(request.getParameter("comprar") != null){//devuelve los pedidos de un usuario...
+            Fabrica f = Fabrica.getInstance();
+            ICtrlPedido ICP = f.getICtrlPedido();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
+            HttpSession session = request.getSession();
+            //String nick = (String)session.getAttribute("usuario");
+            String[] nombres = request.getParameterValues("product");
+            String[] precios = request.getParameterValues("price");
+            String[] cantidad = request.getParameterValues("qty");
+//            DataCliente dc=ICU.getUsuarioByNickname(nick);
+//            
+//            Map pedidos = ICP.listaPedidosRecibidos(dc.getNickname());
+//            ArrayList<DataPedido> listaPed = new ArrayList<>();
+//            Iterator it = pedidos.entrySet().iterator();
+//            while (it.hasNext()){
+//                Map.Entry res =(Map.Entry)it.next();
+//                DataPedido dp = (DataPedido)res.getValue();    
+//                listaPed.add(dp);
+//            }
+//            request.setAttribute("cliente", dc);
+//            request.setAttribute("lPedidos", listaPed);
+//            request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
+        }
     }
 
     /**

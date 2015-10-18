@@ -59,6 +59,7 @@
         <div class=" col-md-9 col-lg-9 "> 
             <table class="table table-user-information">
                 <tbody>
+                    <c:set var="idPed" scope="session" value="${pedido.getId().toString()}"></c:set>
                     <tr>
                         <tr>
                             <td>Id:</td>
@@ -100,29 +101,31 @@
 
                             <option value="evaluacion" item="${eva}">
                                 <c:if test="${evaluacion.getComentario()==null}">
-                                <div class="container">
-                                    <div class="row" style="margin-top:50px">
-                                        <div class="col-md-12">
-                                            <form class="formtest">
-                                                <button type="button" class="btaval btn btn-success" data-toggle="collapse" data-target="#1" onClick="esconder(this)">Review !!</button>
-                                                    <div id="1" class="collapse">
-                                                        <div class="col-md-12 avaliar ">
-                                                            <textarea cols="50" id="comentario" name="comment" value="" placeholder="Tell me your rate"></textarea>				
-                                                            <div class="stars starrr" data-rating="2">
-                                                                <input class="nota" name="rating" type="hidden" value="">
+                                    <div class="container">
+                                        <div class="row" style="margin-top:50px">
+                                            <div class="col-md-12">
+                                                <form class="formtest">
+                                                    <button type="button" class="btaval btn btn-success" data-toggle="collapse" data-target="#1" onClick="esconder(this)">Review !!</button>
+                                                        <div id="1" class="collapse">
+                                                            <div class="col-md-12 avaliar ">
+                                                                <textarea cols="50" id="comentario" name="comment" value="" placeholder="Tell me your rate"></textarea>				
+                                                                <div class="stars starrr" data-rating="2">
+                                                                    <input class="nota" name="rating" type="hidden" value="">
+                                                                </div>
+                                                                <div class="text-right">	
+                                                                    <form action="pedido" method="GET" accept-charset="UTF-8">
+                                                                        
+                                                                        <button class="btn btn-success" type="submit" onclick="test()" >Enviar <i class="fa fa-reply"></i> </button>
+                                                                           <span class="glyphicon glyphicon-star-empty"></span> 
+                                                                        <span class="btn btn-danger" data-toggle="collapse" data-target="#1" onClick="mostrar()">Cancelar <i class="fa fa-times"></i> </span>
+                                                                    </form>
+                                                                </div>	
                                                             </div>
-                                                            <div class="text-right">	
-                                                                <form action="pedido" method="GET" accept-charset="UTF-8">
-                                                                    <button class="btn btn-success" type="submit" onclick="test()" >Enviar <i class="fa fa-reply"></i> </button>
-                                                                    <span class="btn btn-danger" data-toggle="collapse" data-target="#1" onClick="mostrar()">Cancelar <i class="fa fa-times"></i> </span>
-                                                                </form>
-                                                            </div>	
-                                                        </div>
-                                                    </div>	
-                                            </form>
-                                        </div>    
-                                    </div>
-                                </div> 
+                                                        </div>	
+                                                </form>
+                                            </div>    
+                                        </div>
+                                    </div> 
                                 </c:if>
                                 <c:if test="${evaluacion.getComentario()!=null}">
                                         <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">

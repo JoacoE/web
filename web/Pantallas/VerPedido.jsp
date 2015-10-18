@@ -143,22 +143,99 @@
             </table>
         </div>
     </div>
-    
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4><b>Contenido</b></h4>
+                    </div>
+                    <table class="table table-user-information">
+                        <c:forEach var="carrito" items="${carrito}">
+                            <tbody>
+                                <tr>
+                                    <td>${carrito.getCantidad()} ${carrito.getNomProd()}</td>
+                                    <td><c:out value="${carrito.getPrecio()*carrito.getCantidad()}"/></td>
+                                </tr>  
+                            </tbody>
+                        </c:forEach>
+                        <tr>
+                            <td><b>Total:<b></td>
+                            <td><c:out value="${pedido.getPrecio_total()}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+                        
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4><b>EvaluaciÃ³n</b></h4>
+                    </div>
+                    <form class="formtest">
+                        <table class="table table-user-information">
+                            <tbody class="text-center">
+                                <option value="evaluacion" item="${eva}">
+                                <c:if test="${evaluacion.getComentario()==null}">
+                                    <br></br>
+                                    <div class="text-center">
+                                        <div>
+                                            <fieldset id="puntaje" name="stars" value="">
+                                                    1<input type="radio" name="star" value="1">  
+                                                    2<input type="radio" name="star" value="2">  
+                                                    3<input type="radio" name="star" value="3">  
+                                                    4<input type="radio" name="star" value="4">  
+                                                    5<input type="radio" name="star" value="5">  
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <textarea cols="60" id="comentario" name="comment" value="" placeholder="Ingrese su comentario..."></textarea>
+                                        <div class="text-center">	
+                                            <form action="pedido" method="GET" accept-charset="UTF-8">
+                                                <button class="btn btn-success" type="submit">Enviar evaluaciÃ³n <i class="fa fa-reply"></i></button>
+                                            </form>
+                                        </div>	
+                                    </div>	
+                                </c:if>
+                                <c:if test="${evaluacion.getComentario()!=null}">
+                                    <tr>
+                                        <div class="text-center">
+                                            <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            </c:forEach>
+                                            <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </c:forEach>
+                                        </div>
+                                    </tr>
+                                    <tr><td><c:out value="${evaluacion.getComentario()} (${evaluacion.getFecha()})"/></td></tr>
+                                </c:if>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
 
-        <!-- jQuery Version 1.11.1 -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-        <script src="../Branding/js/bootstrap.min.js"></script>
-        <script src="../Branding/js/bootstrap.tab.js"></script>
-        <script src="js/libs/underscore-min.js"></script>
-        <script src="js/libs/backbone-min.js"></script>
-        <script src="js/libs/lightbox.js"></script>
-        <script src="js/store.js"></script>
-        <script src="../Branding/js/jquery.js"></script>
-        <script src="../Branding/js/jsComentario.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="../Branding/js/bootstrap.min.js"></script>
+    <script src="../Branding/js/bootstrap.tab.js"></script>
+    <script src="js/libs/underscore-min.js"></script>
+    <script src="js/libs/backbone-min.js"></script>
+    <script src="js/libs/lightbox.js"></script>
+    <script src="js/store.js"></script>
+    <script src="../Branding/js/jquery.js"></script>
+    <script src="../Branding/js/jsComentario.js"></script>
         
     </body>
 

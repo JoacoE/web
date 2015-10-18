@@ -28,7 +28,7 @@
         <script type="text/javascript" src="../Branding/js/jqueryRestaurante.js"></script>
         <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script><script src="../Branding/js/jquerylogin.js"></script>
         <script src="../Branding/js/bootstrap.min.js"></script>
-                <!--<script type="text/javascript" src="../Branding/js/head.js"></script>-->
+                <script type="text/javascript" src="./Branding/js/head.js"></script>
         <script src="./Branding/js/jquerylogin.js" type="text/javascript"></script>
     <title>QuickOrder</title>
 

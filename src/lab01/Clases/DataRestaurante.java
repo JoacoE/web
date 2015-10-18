@@ -27,7 +27,7 @@ public class DataRestaurante {
     
     public DataRestaurante(){}
     
-    public DataRestaurante(String nickname, String mail, String nombre, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria, String pwd){
+    public DataRestaurante(String nickname, String nombre, String mail, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria, String pwd){
         this.nickname=nickname;
         this.nombre=nombre;
         this.email=mail;

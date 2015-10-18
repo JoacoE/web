@@ -142,7 +142,7 @@ public class PedidoServlet extends HttpServlet {
             String nick = (String)request.getParameter("pedidosUsuario");
             DataCliente dc=ICU.getUsuarioByNickname(nick);
             
-            Map pedidos = ICP.listaPedidosRecibidos(dc.getNickname());
+            Map pedidos = ICP.listaPedidos(dc.getNickname());
             ArrayList<DataPedido> listaPed = new ArrayList<>();
             Iterator it = pedidos.entrySet().iterator();
             while (it.hasNext()){

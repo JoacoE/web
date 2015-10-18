@@ -96,6 +96,7 @@
                 <div><h1>
                         <option value="restaurante">
                         <h2><c:out value="${restaurante.getNombre()}"/></h2>
+                        <h2 hidden="true" id="nickrest"><c:out value="${restaurante.getNickname()}"/></h2>
                         </option>
                         </h1></div>
                   <div class="tabbable">
@@ -225,7 +226,7 @@
                                 <div class="col-sm-3 col-sm-offset-3 col-md-2 col-md-offset-2 sidebar" id="sidebar">
                                            <form action="pedido" method="get" accept-charset="UTF-8">
 
-                                    <table id="shopping-cart" class="table table-responsive">
+                                               <table id="shopping-cart" name="nickrest" class="table table-responsive">
                                             <tbody id="shopping-list">
                                                 
                                             </tbody>
@@ -372,11 +373,13 @@
             $(".btnCarrito").click(function(){
       var newRow = $("<tr>");
               var cols = "";
+              var nickrest = $("#nickrest").text();
               var nombre = $(this).siblings(".nombreProd").text();
               var precio = $(this).siblings("#precio").text();
+              cols += '<td><input type="text" name="nickrest" value='+nickrest+'></td>';
               cols += '<td><input type="text" name="product" value='+nombre+'></td>';
               cols += '<td><input type="text" name="price" value='+precio+'></td>';
-              cols += '<td><input type="text" name="qty"/></td>';
+              cols += '<td><input type="text" name="qty" value='+1+'></td>';
               cols += '<td><button class="remove btn btn-danger">X</button></td>';
               newRow.append(cols);
         $("#shopping-list").append(newRow);

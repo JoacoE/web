@@ -7,9 +7,6 @@ package Controlador;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,9 +23,7 @@ import lab01.Handlers.Fabrica;
 import lab01.Handlers.HImagenes;
 import lab01.Interfaces.ICtrlUsuario;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import lab01.Clases.DTOEvaluacion;
 import lab01.Clases.DataIndividual;
@@ -107,6 +102,7 @@ public class UsuarioServlet extends HttpServlet {
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
             session.removeAttribute("usuario");
+            session.removeAttribute("dcliente");
             session.setAttribute("iniciada", "false");
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
@@ -128,11 +124,9 @@ public class UsuarioServlet extends HttpServlet {
             
         }
         if(request.getParameter("home")!=null){
-           Fabrica f = Fabrica.getInstance();
+            Fabrica f = Fabrica.getInstance();
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
-            session.removeAttribute("usuario");
-            session.setAttribute("iniciada", "false");
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
             while (it3.hasNext()){
@@ -255,7 +249,7 @@ public class UsuarioServlet extends HttpServlet {
                 while(it.hasNext()){
                     Map.Entry usuarios = (Map.Entry)it.next();
                     DataCliente dc = (DataCliente)usuarios.getValue();
-                    if(dc.getNickname().equals(id) || dc.getMail().equals(id)){  //getMail devuelve el nombre, se cambia por getNombre que devuelve el mail
+                    if(dc.getNickname().equals(id) || dc.getMail().equals(id)){
                         usuario = dc;
                     }
                 }

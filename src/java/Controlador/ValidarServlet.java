@@ -75,7 +75,7 @@ public class ValidarServlet extends HttpServlet {
         input = null;
         
         try{
-           input = new FileInputStream("/home/joaquin/Desktop/aplicaciones/Web/web/config.testdata");
+           input = new FileInputStream("/home/joaco/NetBeansProjects/Web/web/WEB-INF/config.testdata");
             //input = new FileInputStream("/home/martin/NetBeansProjects/Web/web/WEB-INF/config.testdata");
 
             prop.load(input);

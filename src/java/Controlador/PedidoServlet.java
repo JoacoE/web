@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import lab01.Clases.Cliente;
 import lab01.Clases.DTOEvaluacion;
 import lab01.Clases.DataCarrito;
+import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
@@ -142,7 +143,7 @@ public class PedidoServlet extends HttpServlet {
             String nick = (String)request.getParameter("pedidosUsuario");
             DataCliente dc=ICU.getUsuarioByNickname(nick);
             
-            Map pedidos = ICP.listaPedidosRecibidos(dc.getNickname());
+            Map pedidos = ICP.listaPedidos(dc.getNickname());
             ArrayList<DataPedido> listaPed = new ArrayList<>();
             Iterator it = pedidos.entrySet().iterator();
             while (it.hasNext()){
@@ -154,28 +155,51 @@ public class PedidoServlet extends HttpServlet {
             request.setAttribute("lPedidos", listaPed);
             request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
         }
-        if(request.getParameter("comprar") != null){//devuelve los pedidos de un usuario...
+        if(request.getParameter("comprar") != null){
             Fabrica f = Fabrica.getInstance();
             ICtrlPedido ICP = f.getICtrlPedido();
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
-            //String nick = (String)session.getAttribute("usuario");
+            if(session.getAttribute("iniciada").equals("false")){
+                Iterator it3 = ICU.retColCat().entrySet().iterator();
+                ArrayList<DataCategoria> lista = new ArrayList<>();
+                while (it3.hasNext()){
+                    Map.Entry cats =(Map.Entry)it3.next();
+                    DataCategoria cat = (DataCategoria)cats.getValue();    
+                    lista.add(cat);
+                }
+                Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+                ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+                while (it2.hasNext()){
+                    Map.Entry res =(Map.Entry)it2.next();
+                    DataRestaurante r = (DataRestaurante)res.getValue();    
+                    listaRes.add(r);
+                }
+                request.setAttribute("list", lista);
+                request.setAttribute("listres", listaRes);
+                request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response); 
+            }else{
+            DataCliente dc = (DataCliente)session.getAttribute("dcliente");
+            String nickrest = request.getParameter("nickrest");
             String[] nombres = request.getParameterValues("product");
-            String[] precios = request.getParameterValues("price");
             String[] cantidad = request.getParameterValues("qty");
-//            DataCliente dc=ICU.getUsuarioByNickname(nick);
-//            
-//            Map pedidos = ICP.listaPedidosRecibidos(dc.getNickname());
-//            ArrayList<DataPedido> listaPed = new ArrayList<>();
-//            Iterator it = pedidos.entrySet().iterator();
-//            while (it.hasNext()){
-//                Map.Entry res =(Map.Entry)it.next();
-//                DataPedido dp = (DataPedido)res.getValue();    
-//                listaPed.add(dp);
-//            }
-//            request.setAttribute("cliente", dc);
-//            request.setAttribute("lPedidos", listaPed);
-//            request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
+            
+            ICP.setNickname(dc.getNickname());
+            ICP.setMemCliente();
+            ICP.setMailCliente(dc.getMail());
+            ICP.setMemRestaurante(nickrest);
+            
+            boolean exito = true;
+            
+            for(int i = 0; i < nombres.length || exito != true; i++){
+                exito = ICP.selectProductos(nombres[i], Integer.parseInt(cantidad[i]));
+            }
+            DataPedido dp = ICP.altaPedido();
+            ICP.limpiarCtrl();
+            
+            request.setAttribute("pedido", dp);
+            request.getRequestDispatcher("/Pantallas/Transaccion.jsp").forward(request, response);
+            }                     
         }
     }
 

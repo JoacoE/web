@@ -59,9 +59,16 @@
                                 <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
                                     <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
                                     <option value="lista">
-                                    <h3><a><c:out value="${listRestaurante.getNickname()}"/></a></h3>
+                                    <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
+                                    
+                                    <c:forEach var="i" begin="1" end="${listRestaurante.getPromedio()}">
+                                        <span class="fa fa-star fa-2x"></span>
+                                    </c:forEach>
+                                    <c:forEach var="i" begin="${listRestaurante.getPromedio()}" end="4">
+                                        <span class="fa fa-star-o fa-2x"></span>
+                                    </c:forEach>
                                     </option>
-                                    <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+                                    
                                 </button>
                             </div>   
                         </div>

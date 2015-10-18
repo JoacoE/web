@@ -114,10 +114,8 @@
                                                                 </div>
                                                                 <div class="text-right">	
                                                                     <form action="pedido" method="GET" accept-charset="UTF-8">
-                                                                        
-                                                                        <button class="btn btn-success" type="submit" onclick="test()" >Enviar <i class="fa fa-reply"></i> </button>
-                                                                           <span class="glyphicon glyphicon-star-empty"></span> 
-                                                                        <span class="btn btn-danger" data-toggle="collapse" data-target="#1" onClick="mostrar()">Cancelar <i class="fa fa-times"></i> </span>
+                                                                        <button name="puntaje" value="4" class="btn btn-success" type="submit" onclick="test()" >Enviar <i class="fa fa-reply"></i> </button>                                                  
+                                                                        <span class="btn btn-danger" data-toggle="collapse" data-target="#1" onClick="mostrar()">Cancelar <i class="fa fa-times"></i> </span>                                                                       
                                                                     </form>
                                                                 </div>	
                                                             </div>

@@ -69,6 +69,7 @@ public class PedidoServlet extends HttpServlet {
             String sobaquena = (String)sesion.getAttribute("idPed");
             DTOEvaluacion dto = new DTOEvaluacion(comentario,4);
             ICP.altaEvaluacion(Long.parseLong(sobaquena), dto);
+            String punt = (String)request.getParameter("puntaje"); 
             
 //            ICtrlUsuario ICU = f.getICtrlUsuario();
             

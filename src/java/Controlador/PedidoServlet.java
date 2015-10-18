@@ -6,7 +6,9 @@
 package Controlador;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -63,17 +65,42 @@ public class PedidoServlet extends HttpServlet {
         if(request.getParameter("comment") != null){
             Fabrica f = Fabrica.getInstance();
             ICtrlPedido ICP = f.getICtrlPedido();
+            ICtrlUsuario ICU = f.getICtrlUsuario();
+            ArrayList<DataCarrito> listaCar = new ArrayList<>();
             
             String comentario = (String)request.getParameter("comment");  
             HttpSession sesion = request.getSession();
-            String sobaquena = (String)sesion.getAttribute("idPed");
-            DTOEvaluacion dto = new DTOEvaluacion(comentario,4);
-            ICP.altaEvaluacion(Long.parseLong(sobaquena), dto);
-            String punt = (String)request.getParameter("puntaje"); 
+            String idPedi = (String)sesion.getAttribute("idPed");
+            String punt = (String)request.getParameter("star"); 
+            float puntaje = Float.parseFloat(punt);
+            DTOEvaluacion dto = new DTOEvaluacion(comentario,puntaje);
+            dto.setFecha(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+            ICP.altaEvaluacion(Long.parseLong(idPedi), dto);
+            
+            
+            
+            Long idPed = Long.parseLong(idPedi);
+            Map pedidos = ICP.listDataPedidos();
+            Iterator it = pedidos.entrySet().iterator();
+            DataPedido pedi=null;
+            while(it.hasNext()){
+                Map.Entry pedido = (Map.Entry) it.next();
+                DataPedido dp = (DataPedido)pedido.getValue();
+                if(idPed==dp.getId())
+                    pedi=dp;
+            }
+            Iterator it1 = pedi.getColCarrito().entrySet().iterator();
+            while(it1.hasNext()){
+                Map.Entry colca = (Map.Entry) it1.next();
+                DataCarrito dc = (DataCarrito)colca.getValue();
+                listaCar.add(dc);}
             
 //            ICtrlUsuario ICU = f.getICtrlUsuario();
             
-            request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+        request.setAttribute("evaluacion", dto);
+        request.setAttribute("carrito", listaCar);
+        request.setAttribute("pedido", pedi);
+        request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
             if(request.getParameter("pedido") != null){

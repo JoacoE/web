@@ -119,8 +119,13 @@
 
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail" >
-                                        <img src="<%=request.getContextPath()%>/Branding/img/${promo.getDataImagen()}.jpeg" alt="no imagen">
-                                        <div class="caption">
+                                        <c:set var="Imagen" value="${promo.getDataImagen()}"/>
+                                            <c:if test="${Imagen == ''}">
+                                               <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                        </c:if>
+                                                <c:if test="${Imagen != ''}">
+                                            <img src="<%=request.getContextPath()%>/Branding/img/${promo.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
+                                        </c:if><div class="caption">
                                             <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
                                             <h4 class="nombreProd">${promo.getDataNombre()}</h4>
                                             <p class="desc">${promo.getDataDescripcion()}</p>
@@ -135,7 +140,13 @@
                                 <c:forEach var="individ" items="${individuales}">
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail">
-                                        <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="<%=request.getContextPath()%>/Branding/img/Noimage.png">
+                                        <c:set var="Imagen" value="${individ.getDataImagen()}"/>
+                                            <c:if test="${Imagen == ''}">
+                                                <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                        </c:if>
+                                                <c:if test="${Imagen != ''}">
+                                            <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
+                                        </c:if>
                                         <div class="caption">
                                             <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
                                             <h4 class="nombreProd">${individ.getDataNombre()}
@@ -355,15 +366,15 @@
             var nombre = $(this).siblings(".nombreProd").text();
             var precio = $(this).siblings("#precio").text();
             var preciototal;
-            $("#shopping-list").append("<tr id='borrar'><td>" + nombre + "  " + precio +"<input class='cant'>" +"<button class='remove btn btn-danger'>X</button>");
+            $("#shopping-list").append("<tr id='borrar'><td>" + nombre + precio +"<input class='cant'><button class='remove btn btn-danger'>X</button></td></tr>");
 
             
         });
         
 //        $(".remove").live('click',function(){
-                    $(document).on('click','.remove',function(){
+          $(document).on('click','.remove',function(){
 
-           $(this).parent().remove();
+            $(this).parent().remove();
         });
     </script>
    

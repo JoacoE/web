@@ -3,7 +3,9 @@ body { margin-top:30px; }
 .form-group{
     margin: 90px;
 }
-
+.form-login{
+    margin:5px;
+}
 nav.barNav {
     //background-image: linear-gradient(to bottom, #FFF 0px, #1C18D2 100%);
     border-color: #ac2925;

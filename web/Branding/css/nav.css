@@ -1,13 +1,13 @@
 body { margin-top:30px; }
 #login-nav input { margin-bottom: 15px; }
 .form-group{
-    margin: 8px;
+    margin: 90px;
 }
 
 nav.barNav {
-    background-image: linear-gradient(to bottom, #FFF 0px, #1C18D2 100%);
+    //background-image: linear-gradient(to bottom, #FFF 0px, #1C18D2 100%);
     border-color: #ac2925;
-
+    background-image: url("../img/headhd.png")
 
 
 }

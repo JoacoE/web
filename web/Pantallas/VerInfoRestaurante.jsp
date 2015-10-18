@@ -28,7 +28,7 @@
         <script type="text/javascript" src="../Branding/js/jqueryRestaurante.js"></script>
         <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script><script src="../Branding/js/jquerylogin.js"></script>
         <script src="../Branding/js/bootstrap.min.js"></script>
-                <script type="text/javascript" src="./Branding/js/head.js"></script>
+                <!--<script type="text/javascript" src="./Branding/js/head.js"></script>-->
         <script src="./Branding/js/jquerylogin.js" type="text/javascript"></script>
     <title>QuickOrder</title>
 
@@ -46,64 +46,12 @@
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
     
                 <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
 
-    <script type="text/template" id="tmp-pictureItem">
-	<div class="shoppingListItemContent">
-		<a href="image" data-toggle="lightbox">
-			<img src="thumb" class="img-responsive" />
-		</a>
-		<!-- Button trigger modal -->
-		<div class="clearfix">
-			<div class="product-tags pull-left">
-				<span class="label label-danger">= photographer</span>
-				<span class="label label-info"><tag</span>
-			</div>
-			<div class="product-price pull-right">
-				<span class="price">€ = price.toFixed(2)</span>
-			</div>
-		</div>
-		<div class="infos">
-			<h4 class="name text-info">= title</h4>
-			<button id="addCart" class="btn btn-danger btn-sm"><i class="fa fa-shopping-cart"></i> Agregar</button>
-			<button id="moreInfo" class="btn btn-primary btn-sm hidden-md"><i class="fa fa-info-circle"></i> More Info</button>
-		</div>
-	</div>
-	</script>
-
-	<!-- Template for the single picture box in detail view-->
-	<script type="text/template" id="tmp-details">
-	<div class="col-md-6">
-		<a href="<image" data-toggle="lightbox"><img src="= image" class="img-responsive"/></a>
-	</div>
-	<div class="col-md-6">
-		<div class="product-tags">
-			<span class="label label-danger">= photographer</span>
-			<span class="label label-info">= tag</span>
-		</div>
-		<h4>= title</h4>
-		<p class="description">= description</p>
-		<div class="row">
-			<div class="col-sm-3">
-				<div class="product-price">€ = price.toFixed(2)</div>
-			</div>
-			<div class="col-sm-6 col-md-offset-3">
-				<button id="cart" class="btn btn-lg btn-danger"><i class="fa fa-shopping-cart"></i> Add to cart</button>
-			</div>
-		</div>
-	</div>
-	<button id="back" class="btn btn-default"><i class="fa fa-chevron-left"></i> Back</button>
-	</script>
-
-	<!-- Template for the sshopping cart item-->
-	<script type="text/template" id="tmp-shoppingCartItem">
-		<td class="name"><i class="fa fa-times-circle"></i> = title</td>
-		<td class="sub-total">€= total.toFixed(2)</td>
-	</script>
-
+    
 </head>
 
 <body class="home">
@@ -176,7 +124,7 @@
                                             <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
                                             <h4 class="nombreProd">${promo.getDataNombre()}</h4>
                                             <p class="desc">${promo.getDataDescripcion()}</p>
-                                        <button class="btnCarrito btn btn-danger glyphicon glyphicon-shopping-cart">Agregar</button>
+                                        <button class="btnCarrito btn btn-success glyphicon glyphicon-shopping-cart">Agregar</button>
                                         </div>
                                         
                                     </div>
@@ -187,14 +135,14 @@
                                 <c:forEach var="individ" items="${individuales}">
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail">
-                                        <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="no imagen">
+                                        <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="<%=request.getContextPath()%>/Branding/img/Noimage.png">
                                         <div class="caption">
                                             <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
                                             <h4 class="nombreProd">${individ.getDataNombre()}
                                             </h4>
                                             
                                             <p class="desc">${individ.getDataDescripcion()}</p>
-                                            <button class="btnCarrito btn btn-danger glyphicon glyphicon-shopping-cart">Agregar</button>
+                                            <button class="btnCarrito btn btn-success glyphicon glyphicon-shopping-cart">Agregar</button>
 
                                         </div>
                                    </div>
@@ -299,12 +247,14 @@
             var nombre = $(this).siblings(".nombreProd").text();
             var precio = $(this).siblings("#precio").text();
             var preciototal;
-            $("#shopping-list").append("<tr id='borrar'><td>" + nombre + "  " + precio +"<input class='cant'>" +"<button class='remove'>X</button>");
+            $("#shopping-list").append("<tr id='borrar'><td>" + nombre + "  " + precio +"<input class='cant'>" +"<button class='remove btn btn-danger'>X</button>");
 
             
         });
         
-        $(".remove").live('click',function(){
+//        $(".remove").live('click',function(){
+                    $(document).on('click','.remove',function(){
+
            $(this).parent().remove();
         });
     </script>

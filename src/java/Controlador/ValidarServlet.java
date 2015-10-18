@@ -698,7 +698,8 @@ public class ValidarServlet extends HttpServlet {
             ICPed.actualizarPromedioRest(res1.getNickname());
             
             DTOEvaluacion ev4 = new DTOEvaluacion();
-            ev4.setComentario("Todo llegó en hora. El chivito y la milanesa a caballo estaban un poco aceitosos, pero más allá de eso se comió rico y en abundancia.");
+//            ev4.setComentario("Todo llegó en hora. El chivito y la milanesa a caballo estaban un poco aceitosos, pero más allá de eso se comió rico y en abundancia.");
+            ev4.setComentario(null);
             ev4.setFecha("3/10/2014");
             ICPed.altaEvaluacion(p7.getId(), ev4);
             ICPed.actualizarPromedioRest(res2.getNickname());

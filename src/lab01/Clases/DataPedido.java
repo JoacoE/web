@@ -116,4 +116,10 @@ public class DataPedido {
         }
         return false;
     }
+    public boolean esRecibido(){
+        if (this.estado==estados.RECIBIDO)
+            return true;
+        else 
+            return false;
+    }
 }

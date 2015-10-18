@@ -335,6 +335,28 @@ public class CtrlPedido implements ICtrlPedido {
         }
         return aux;
     }
+    
+    public Map listaPedidos(String nickname){
+        Map aux = new HashMap();
+        HUsuario hu = HUsuario.getinstance();
+        Iterator user = hu.obtenerColeccion().entrySet().iterator();
+        while(user.hasNext()){
+            Map.Entry users = (Map.Entry) user.next();
+            if(users.getValue() instanceof Cliente){
+                Cliente client = (Cliente)users.getValue();
+                if(client.getNickname().equals(nickname)){
+                    Iterator pedidos = client.getPedidos().entrySet().iterator();
+                    while(pedidos.hasNext()){
+                        Map.Entry p = (Map.Entry) pedidos.next();
+                        Pedido ped = (Pedido)p.getValue();
+                        aux.put(ped.getDataPedido().getId(), ped.getDataPedido());                 
+                    }
+                }
+            }
+        }
+        return aux;
+    }
+    
 
     @Override
     public void actualizarPromedioRest(String nickname){

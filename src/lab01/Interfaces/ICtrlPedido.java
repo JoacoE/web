@@ -43,4 +43,5 @@ public interface ICtrlPedido {
     public abstract void altaEvaluacion(double id, DTOEvaluacion data);
     public abstract Map listarEvaluacionesRest(String nickname);
     public abstract DTOEvaluacion getEvaluacionXid(long id);
+    public abstract Map listaPedidos(String nickname);
 }

@@ -53,114 +53,130 @@
     
     <jsp:include page="/layout/head.jsp"/>
     
-    <div>
-    <option value="pedido" item="${pedi}">
-   
-        <div class=" col-md-9 col-lg-9 "> 
-            <table class="table table-user-information">
-                <tbody>
-                    <c:set var="idPed" scope="session" value="${pedido.getId().toString()}"></c:set>
-                    <tr>
-                        <tr>
-                            <td>Id:</td>
-                            <td><c:out value="${pedido.getId()}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Restaurante:</td>
-                            <td><c:out value="${pedido.getNickRest()}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Fecha:</td>
-                            <td><c:out value="${pedido.getFecha()}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Estado:</td>
-                            <td><c:out value="${pedido.getEstado()}"/></td>
-                        </tr>  
-                            <c:forEach var="carrito" items="${carrito}">
-                                <table class="table table-user-information">
-                                    <tbody>
-                                        <tr>
-                                            <div class="col-sm-4 col-lg-4 col-md-4">
-                                                <!--<img src="http://placehold.it./320x150" alt="">-->
-                                                    <td>${carrito.getCantidad()} ${carrito.getNomProd()}</td>
-                                                    <td>${carrito.getPrecio()*carrito.getCantidad()}</td>                                                                                                  
-                                            </div>
-                                        </tr>    
-                                    </tbody>
-                                </table>    
-                            </c:forEach>                
-                            <table class="table table-user-information">    
-                                <tbody>
-                                    <tr>
-                                        <td>Total:</td>
-                                        <td><c:out value="${pedido.getPrecio_total()}"/></td>
-                                    </tr>
-                                </tbody>    
-                            </table>  
-
-                            <option value="evaluacion" item="${eva}">
-                                <c:if test="${evaluacion.getComentario()==null}">
-                                    <div class="container">
-                                        <div class="row" style="margin-top:50px">
-                                            <div class="col-md-12">
-                                                <form class="formtest">
-                                                    <button type="button" class="btaval btn btn-success" data-toggle="collapse" data-target="#1" onClick="esconder(this)">Review !!</button>
-                                                        <div id="1" class="collapse">
-                                                            <div class="col-md-12 avaliar ">
-                                                                <textarea cols="50" id="comentario" name="comment" value="" placeholder="Tell me your rate"></textarea>				
-                                                                <div class="stars starrr" data-rating="2">
-                                                                    <input class="nota" name="rating" type="hidden" value="">
-                                                                </div>
-                                                                <div class="text-right">	
-                                                                    <form action="pedido" method="GET" accept-charset="UTF-8">
-                                                                        
-                                                                        <button class="btn btn-success" type="submit" onclick="test()" >Enviar <i class="fa fa-reply"></i> </button>
-                                                                           <span class="glyphicon glyphicon-star-empty"></span> 
-                                                                        <span class="btn btn-danger" data-toggle="collapse" data-target="#1" onClick="mostrar()">Cancelar <i class="fa fa-times"></i> </span>
-                                                                    </form>
-                                                                </div>	
-                                                            </div>
-                                                        </div>	
-                                                </form>
-                                            </div>    
-                                        </div>
-                                    </div> 
-                                </c:if>
-                                <c:if test="${evaluacion.getComentario()!=null}">
-                                        <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
-                                            <span class="glyphicon glyphicon-star"></span>
-                                        </c:forEach>
-                                        <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
-                                            <span class="glyphicon glyphicon-star-empty"></span>
-                                        </c:forEach>
-                                        <br></br>
-                                        <td>Comentario:</td>
-                                        <td><c:out value="${evaluacion.getComentario()}"/></td>
-                                    
-                                    
-                                </c:if>    
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4><b>Detalle</b></h4>
+                    </div>
+                    <option value="pedido" item="${pedi}">
+                    <table class="table table-user-information">
+                        <tbody>
+                            <c:set var="idPed" scope="session" value="${pedido.getId().toString()}"></c:set>
+                            <tr>
+                                <td>Id:</td>
+                                <td><c:out value="${pedido.getId()}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Restaurante:</td>
+                                <td><c:out value="${pedido.getNickRest()}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Fecha:</td>
+                                <td><c:out value="${pedido.getFecha()}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Estado:</td>
+                                <td><c:out value="${pedido.getEstado()}"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4><b>Contenido</b></h4>
+                    </div>
+                    <table class="table table-user-information">
+                        <c:forEach var="carrito" items="${carrito}">
+                            <tbody>
+                                <tr>
+                                    <td>${carrito.getCantidad()} ${carrito.getNomProd()}</td>
+                                    <td><c:out value="${carrito.getPrecio()*carrito.getCantidad()}"/></td>
+                                </tr>  
+                            </tbody>
+                        </c:forEach>
+                        <tr>
+                            <td><b>Total:<b></td>
+                            <td><c:out value="${pedido.getPrecio_total()}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+                        
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4><b>EvaluaciÃ³n</b></h4>
+                    </div>
+                    <form class="formtest">
+                        <table class="table table-user-information">
+                            <tbody class="text-center">
+                                <option value="evaluacion" item="${eva}">
+                                <c:if test="${evaluacion.getComentario()==null}">
+                                    <br></br>
+                                    <div class="text-center">
+                                        <div class="ec-stars-wrapper">
+                                            <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
+                                            <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
+                                            <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
+                                            <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
+                                            <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <textarea cols="60" id="comentario" name="comment" value="" placeholder="Ingrese su comentario..."></textarea>
+                                        <div class="text-center">	
+                                            <form action="pedido" method="GET" accept-charset="UTF-8">
+                                                <button class="btn btn-success" type="submit">Enviar evaluaciÃ³n <i class="fa fa-reply"></i></button>
+                                            </form>
+                                        </div>	
+                                    </div>	
+                                </c:if>
+                                <c:if test="${evaluacion.getComentario()!=null}">
+                                    <tr>
+                                        <div class="text-center">
+                                            <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
+                                                <span class="glyphicon glyphicon-star"></span>
+                                            </c:forEach>
+                                            <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                            </c:forEach>
+                                        </div>
+                                    </tr>
+                                    <tr><td><c:out value="${evaluacion.getComentario()} (${evaluacion.getFecha()})"/></td></tr>
+                                </c:if>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
 
-        <!-- jQuery Version 1.11.1 -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
-        <script src="../Branding/js/bootstrap.min.js"></script>
-        <script src="../Branding/js/bootstrap.tab.js"></script>
-        <script src="js/libs/underscore-min.js"></script>
-        <script src="js/libs/backbone-min.js"></script>
-        <script src="js/libs/lightbox.js"></script>
-        <script src="js/store.js"></script>
-        <script src="../Branding/js/jquery.js"></script>
-        <script src="../Branding/js/jsComentario.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="../Branding/js/bootstrap.min.js"></script>
+    <script src="../Branding/js/bootstrap.tab.js"></script>
+    <script src="js/libs/underscore-min.js"></script>
+    <script src="js/libs/backbone-min.js"></script>
+    <script src="js/libs/lightbox.js"></script>
+    <script src="js/store.js"></script>
+    <script src="../Branding/js/jquery.js"></script>
+    <script src="../Branding/js/jsComentario.js"></script>
         
     </body>
 

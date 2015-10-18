@@ -128,11 +128,11 @@
                                     <div class="text-center">
                                         <div>
                                             <fieldset id="puntaje" name="stars" value="">
-                                                    1<input type="radio" name="star" value="1">  
-                                                    2<input type="radio" name="star" value="2">  
-                                                    3<input type="radio" name="star" value="3">  
-                                                    4<input type="radio" name="star" value="4">  
-                                                    5<input type="radio" name="star" value="5">  
+                                                1<input type="radio" name="star" value="1">  
+                                                2<input type="radio" name="star" value="2">  
+                                                3<input type="radio" name="star" value="3">  
+                                                4<input type="radio" name="star" value="4">  
+                                                5<input type="radio" name="star" value="5">  
                                             </fieldset>
                                         </div>
                                     </div>

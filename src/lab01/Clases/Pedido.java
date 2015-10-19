@@ -33,6 +33,7 @@ public class Pedido {
         this.setFecha();
         this.precio_total = precio_total;
         this.estado = PREPARACION;
+        this.evaluacion = null;
     }
 
     public long getId() {

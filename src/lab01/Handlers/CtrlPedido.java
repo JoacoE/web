@@ -462,6 +462,7 @@ public class CtrlPedido implements ICtrlPedido {
                     if(p.getId() == id){
                         if(p.getEvaluacion()==null)
                             return null;
+                        
                         ret = p.getEvaluacion().getDTOEvaluacion();
                         return ret;
                     }

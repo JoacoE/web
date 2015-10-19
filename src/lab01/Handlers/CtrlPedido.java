@@ -466,6 +466,6 @@ public class CtrlPedido implements ICtrlPedido {
                 }
             }
         }
-        throw new NullPointerException();
+        return null;
     }
 }

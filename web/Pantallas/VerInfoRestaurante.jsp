@@ -264,7 +264,7 @@
                                                     </tr>
                                                 </tfoot>
                                             </table>
-                                            <button class="btn btn-primary btn-warning fa fa-money" type="submit" id="comprar" name="comprar"> Pedir</button>
+                                            <button class="btn btn-primary btn-warning fa fa-money" type="submit" id="comprar" name="comprar"> Realizar pedido</button>
 
 
                                         </form>

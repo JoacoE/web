@@ -10,10 +10,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+        <link href="../Branding/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="../Branding/css/nav.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" type="text/css" href="/Branding/css/bootstrapverRestaurante.css" >
         <link rel="stylesheet" type="text/css" href="/Branding/css/round-aboutRestaurante.css">
@@ -111,8 +112,9 @@
                 </div>
                 <div class="tab-pane fade" id="2">  
                     <form action="pedido" method="get" accept-charset="UTF-8">
+                        <div class="pedidosCliente" align="center">
                         <c:forEach var="lPedidos" items="${lPedidos}">
-                            <button type="submit" name="pedido" value="${lPedidos.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Haga clic para ver el detalle">
+                            <button class="btn btn-link btnPedidos" align="center" type="submit" name="pedido" value="${lPedidos.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Haga clic para ver el detalle">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
                                     <div class="thumbnail" >                                        
                                         <div class="caption">
@@ -126,6 +128,7 @@
                                 </div>   
                             </button>        
                         </c:forEach> 
+                        </div>
                     </form>     
                 </div>  
                 </div>    

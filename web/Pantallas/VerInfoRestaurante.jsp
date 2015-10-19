@@ -258,7 +258,7 @@
                                             </tbody>
                                                 <tfoot>
                                                     <tr class="sum">
-                                                            <td colspan="4" id="total"></td>
+                                                        <td colspan="4"><span id="total"></span></td>
                                                         </tr>
                                                 </tfoot>
                                         </table>
@@ -286,7 +286,7 @@
         
         
             $(".btnCarrito").click(function(){
-      var newRow = $("<tr>");
+              var newRow = $("<tr>");
               var cols = "";
               var nickrest = $("#nickrest").text();
               var nombre = $(this).siblings(".nombreProd").text();
@@ -295,20 +295,40 @@
               nickrest = $.trim(nickrest);
               precio = $.trim(precio);
               cols += '<td><input type="text" name="nickrest" hidden="true" value="'+nickrest+'"></td>';
-              cols += '<td><input type="text" name="product" value="'+nombre+'"></td>';
-              cols += '<td><input type="text" name="price" value="'+precio+'"></td>';
-              cols += '<td><input type="text" name="qty" value="'+1+'"></td>';
+              cols += '<td><input type="text" name="product" hidden="true" value="'+nombre+'">'+nombre+'</td>';
+              cols += '<td><input type="text" name="price" hidden="true" value="'+precio+'">'+precio+'</td>';
+              cols += '<td><input  class="cantidad" precio ="'+precio+'" type="text" name="qty" value="'+1+'"></td>';
               cols += '<td><button class="remove btn btn-danger">X</button></td>';
               newRow.append(cols);
+              var pre = precio.substring(1, precio.length);
+              var prenum = parseInt(pre,10);
+//              $("#total").text(praseInt($("#total").text(),10) + prenum);
+              if ($("#total").html() !== "")
+              { 
+                var resultado = parseInt($("#total").html(),10) + prenum;
+                $("#total").html(resultado); 
+              }else{
+                $("#total").html(prenum);
+              }
         $("#shopping-list").append(newRow);
     });
         
          $(document).on('click','.remove',function(){
-
-            $(this).parent().parent().remove();
+              $(this).parent().parent().remove();
         });
         
-        
+         $(document).on('change','.cantidad',function() {
+//             alert("hola");parseInt($("#total").html(),10)
+              var pre = $(this).attr("precio").substring(1, $(this).attr("precio").length);
+
+   var precio = parseInt(pre,10);
+  var cant= parseInt($(this).val(),10);
+  var precionuevo= cant*precio;
+  var resultSinPrecio = parseInt($("#total").html(),10) - precio;
+  $("#total").html( precionuevo + resultSinPrecio );
+  
+ });
+
     </script>
    
 </body>

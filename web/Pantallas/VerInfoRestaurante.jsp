@@ -294,7 +294,7 @@
               nombre = $.trim(nombre);
               nickrest = $.trim(nickrest);
               precio = $.trim(precio);
-              cols += '<td><input type="text" name="nickrest" value="'+nickrest+'"></td>';
+              cols += '<td><input type="text" name="nickrest" hidden="true" value="'+nickrest+'"></td>';
               cols += '<td><input type="text" name="product" value="'+nombre+'"></td>';
               cols += '<td><input type="text" name="price" value="'+precio+'"></td>';
               cols += '<td><input type="text" name="qty" value="'+1+'"></td>';

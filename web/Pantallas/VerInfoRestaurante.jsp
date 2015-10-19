@@ -257,8 +257,8 @@
                                                 
                                             </tbody>
                                                 <tfoot>
-                                                        <tr>
-                                                            <td colspan="4" id="total">$ 0.00</td>
+                                                    <tr class="sum">
+                                                            <td colspan="4" id="total"></td>
                                                         </tr>
                                                 </tfoot>
                                         </table>
@@ -307,6 +307,8 @@
 
             $(this).parent().parent().remove();
         });
+        
+        
     </script>
    
 </body>

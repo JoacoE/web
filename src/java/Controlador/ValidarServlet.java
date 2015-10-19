@@ -75,8 +75,9 @@ public class ValidarServlet extends HttpServlet {
         input = null;
         
         try{
-           input = new FileInputStream("/home/joaco/NetBeansProjects/Web/web/WEB-INF/config.testdata");
+//           input = new FileInputStream("/home/joaco/NetBeansProjects/Web/web/WEB-INF/config.testdata");
             //input = new FileInputStream("/home/martin/NetBeansProjects/Web/web/WEB-INF/config.testdata");
+            input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
 
             prop.load(input);
 
@@ -751,6 +752,8 @@ public class ValidarServlet extends HttpServlet {
             listaRes.add(r);
         }
         request.setAttribute("list", lista);
+        HttpSession session = request.getSession();
+        session.setAttribute("iniciada", "false");
         request.setAttribute("listres", listaRes);
         request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
             

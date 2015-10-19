@@ -111,13 +111,13 @@
             </div>
         </div>
     </div>
-                        
+    <c:if test="${pedido.esRecibido()}">                      
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h4><b>EvaluaciÃ³n</b></h4>
+                        <h4><b>Evaluacion</b></h4>
                     </div>
                     <form class="formtest">
                         <table class="table table-user-information">
@@ -165,7 +165,7 @@
             </div>
         </div>
     </div>
-        
+    </c:if>   
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
 

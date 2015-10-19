@@ -155,3 +155,13 @@ nav.barNav {
    margin-top: 17px;    
 
 }
+.cantidad{
+    margin: -11px;
+    width: 36px;
+}
+
+.remove{
+    margin: -3px;
+    width: 31px;
+    height: 23px;
+}

@@ -1,7 +1,12 @@
 body { margin-top:30px; }
 #login-nav input { margin-bottom: 15px; }
+
+.row-head{
+       margin: 0px;
+}
+
 .form-group{
-    margin: 90px;
+    margin: 5px;
 }
 .form-login{
     margin:5px;
@@ -9,7 +14,11 @@ body { margin-top:30px; }
 nav.barNav {
     //background-image: linear-gradient(to bottom, #FFF 0px, #1C18D2 100%);
     border-color: #ac2925;
-    background-image: url("../img/headhd.png")
+    background-image: url("../img/headhd.png");
+    height: 145px;
+    margin-top: 5px;
+    
+    
 }
 
 .dropdown-menu.dropdown-menu{
@@ -41,13 +50,14 @@ nav.barNav {
 
 .btnRegistrar {
     line-height: 3.429;
+    padding: 36px 25px;
 
 
 }
 
 
 .nav > li > a.mnIngresar {
-    padding: 15px 30px;
+    padding: 52px 25px;
 }
 
 
@@ -61,7 +71,11 @@ nav.barNav {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     border-radius: 25px;
     border: 1px solid #ccc;
+    margin-top: 43px;
+    margin-right: 127px;
+    margin-bottom: -64px;
 }
+    
 .search-form .form-group input.form-control {
     padding-right: 20px;
     border: 0 none;
@@ -101,4 +115,24 @@ nav.barNav {
     color: #3596e0;
     left: initial;
     font-size: 14px;
+}
+
+.navbar-header{
+    margin: 36px -3px;
+}
+
+.img-head{
+    height: 64px;
+}
+.botonReg{
+   line-height: 3.429;
+   padding: 35px 25px;
+   margin-right: 120px;
+   margin-top: -15px;
+}
+.botonIniciar{
+    line-height: 3.429;
+   padding: -65px 126px;
+   margin-left: 120px;
+   margin-top: -84px;
 }

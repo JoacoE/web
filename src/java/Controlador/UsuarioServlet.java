@@ -319,7 +319,7 @@ public class UsuarioServlet extends HttpServlet {
             fecha = request.getParameter("datepicker");
             direccion = request.getParameter("txtDireccion");
             pwd = request.getParameter("txtPass");
-            imagen = (File)request.getAttribute("imagen");
+            imagen = new File((String)request.getAttribute("imagen"));
             if(!ICU.existeUsuario(nickname, email)){
                 DTOIngresarDatos ingDatos = new DTOIngresarDatos();
                 ingDatos.setNickname(nickname);
@@ -331,12 +331,12 @@ public class UsuarioServlet extends HttpServlet {
                 regCliente.setApellido(apellido);
                 regCliente.setFecha(fecha);
                 regCliente.setPwd(pwd);
-//                if(imagen.exists()){
-//                    HI.guardarImagen(imagen, nickname);
-//                    regCliente.setImagen(nickname);
-//                }else{
-//                    regCliente.setImagen("");
-//                }
+                if(imagen.exists()){
+                    HI.guardarImagen(imagen, nickname);
+                    regCliente.setImagen(nickname);
+                }else{
+                    regCliente.setImagen("");
+                }
                 ICU.registrarCliente(regCliente);
             }
             Iterator it3 = ICU.retColCat().entrySet().iterator();

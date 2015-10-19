@@ -460,12 +460,14 @@ public class CtrlPedido implements ICtrlPedido {
                     Map.Entry pedido = (Map.Entry)pedidos.next();
                     Pedido p = (Pedido)pedido.getValue();
                     if(p.getId() == id){
+                        if(p.getEvaluacion()==null)
+                            return null;
                         ret = p.getEvaluacion().getDTOEvaluacion();
                         return ret;
                     }
                 }
             }
         }
-        throw new NullPointerException();
+        return null;
     }
 }

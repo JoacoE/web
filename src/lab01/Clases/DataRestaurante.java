@@ -167,4 +167,17 @@ public class DataRestaurante {
     public float getPromedio(){
         return this.promedio;
     }
+    public String getLogo(){
+     String logo;
+     if(this.lstImagen!=null){
+        logo = this.lstImagen.get(0);   
+
+     }else{
+         logo = "";
+         
+     }
+       return logo; 
+     
+     
+    }
 }

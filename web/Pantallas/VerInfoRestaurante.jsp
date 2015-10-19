@@ -258,7 +258,7 @@
                                             </tbody>
                                                 <tfoot>
                                                     <tr class="sum">
-                                                        <td colspan="4"><span id="total"></span></td>
+                                                        <td colspan="4"><span>$</span><span id="total"></span></td>
                                                         </tr>
                                                 </tfoot>
                                         </table>
@@ -313,9 +313,17 @@
         $("#shopping-list").append(newRow);
     });
         
-         $(document).on('click','.remove',function(){
-              $(this).parent().parent().remove();
-        });
+        $(document).on('click','.remove',function(){
+     
+       var pre = $(this).parent().parent().find('.cantidad').attr('precio').substring(1, $(this).parent().parent().find('.cantidad').attr('precio').length);
+
+  var precio = parseInt(pre,10);
+ var cant= $(this).parent().parent().find('.cantidad').val();
+ var precionuevo= cant*precio;
+ var resultSinPrecio = parseInt($("#total").html(),10);
+ $("#total").html( resultSinPrecio-precionuevo  );
+ $(this).parent().parent().remove();
+       });
         
          $(document).on('change','.cantidad',function() {
 //             alert("hola");parseInt($("#total").html(),10)

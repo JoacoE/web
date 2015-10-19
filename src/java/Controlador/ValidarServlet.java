@@ -76,8 +76,8 @@ public class ValidarServlet extends HttpServlet {
         
         try{
 //           input = new FileInputStream("/home/joaco/NetBeansProjects/Web/web/WEB-INF/config.testdata");
-            //input = new FileInputStream("/home/martin/NetBeansProjects/Web/web/WEB-INF/config.testdata");
-            input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
+            input = new FileInputStream("/home/martin/NetBeansProjects/web/web/WEB-INF/config.testdata");
+            //input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
 
             prop.load(input);
 
@@ -701,26 +701,27 @@ public class ValidarServlet extends HttpServlet {
             DTOEvaluacion ev4 = new DTOEvaluacion();
             ev4.setComentario("Todo llegó en hora. El chivito y la milanesa a caballo estaban un poco aceitosos, pero más allá de eso se comió rico y en abundancia.");
             ev4.setFecha("3/10/2014");
+            ev4.setPuntaje(4);
             ICPed.altaEvaluacion(p7.getId(), ev4);
             ICPed.actualizarPromedioRest(res2.getNickname());
             
-            DTOEvaluacion ev5 = new DTOEvaluacion();
-            ev5.setComentario(null);
-            ev5.setFecha(null);
-            ICPed.altaEvaluacion(p4.getId(), ev5);
-            ICPed.actualizarPromedioRest(res1.getNickname());
-            
-            DTOEvaluacion ev6 = new DTOEvaluacion();
-            ev6.setComentario(null);
-            ev6.setFecha(null);
-            ICPed.altaEvaluacion(p2.getId(), ev6);
-            ICPed.actualizarPromedioRest(res1.getNickname());
-
-            DTOEvaluacion ev7 = new DTOEvaluacion();
-            ev7.setComentario(null);
-            ev7.setFecha(null);
-            ICPed.altaEvaluacion(p1.getId(), ev7);
-            ICPed.actualizarPromedioRest(res3.getNickname());
+//            DTOEvaluacion ev5 = new DTOEvaluacion();
+//            ev5.setComentario(null);
+//            ev5.setFecha(null);
+//            ICPed.altaEvaluacion(p4.getId(), ev5);
+//            ICPed.actualizarPromedioRest(res1.getNickname());
+//            
+//            DTOEvaluacion ev6 = new DTOEvaluacion();
+//            ev6.setComentario(null);
+//            ev6.setFecha(null);
+//            ICPed.altaEvaluacion(p2.getId(), ev6);
+//            ICPed.actualizarPromedioRest(res1.getNickname());
+//
+//            DTOEvaluacion ev7 = new DTOEvaluacion();
+//            ev7.setComentario(null);
+//            ev7.setFecha(null);
+//            ICPed.altaEvaluacion(p1.getId(), ev7);
+//            ICPed.actualizarPromedioRest(res3.getNickname());
             
             //JOptionPane.showMessageDialog(null, "Los datos de prueba se cargaron con exito","EXITO",JOptionPane.INFORMATION_MESSAGE);
             

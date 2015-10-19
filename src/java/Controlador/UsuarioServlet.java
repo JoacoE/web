@@ -331,14 +331,14 @@ public class UsuarioServlet extends HttpServlet {
                 regCliente.setApellido(apellido);
                 regCliente.setFecha(fecha);
                 regCliente.setPwd(pwd);
-                if(imagen.exists()){
-                    HI.guardarImagen(imagen, nickname);
-                    regCliente.setImagen(nickname);
-                }else{
-                    regCliente.setImagen("");
-                }
-                ICU.registrarCliente(regCliente);
-            }
+//                if(imagen.exists()){
+//                    HI.guardarImagen(imagen, nickname);
+//                    regCliente.setImagen(nickname);
+//                }else{
+//                    regCliente.setImagen("");
+//                }
+//                ICU.registrarCliente(regCliente);
+//            }
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
             while (it3.hasNext()){

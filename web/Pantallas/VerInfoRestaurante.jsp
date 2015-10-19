@@ -71,18 +71,32 @@
                                 <ol class="carousel-indicators">
                                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+<!--                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="item active">
-                                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                        <option value="restaurante">
+                                        <c:set var="Imagen" value="${restaurante.getLstImagen().get(0)}"/>
+                                            <c:if test="${(Imagen == '') || (Imagen == null)}">
+                                                <img  src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                            </c:if>
+                                            <c:if test="${(Imagen != '') || (Imagen != null)}">
+                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(0)}.jpeg" alt="">
+                                            </c:if>
+                                        </option>
                                     </div>
                                     <div class="item">
-                                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                        <option value="restaurante">
+                                        <c:set var="Imagen" value="${restaurante.getLstImagen().get(1)}"/>
+                                            <c:if test="${(Imagen == '') || (Imagen == null)}">
+                                                <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                            </c:if>
+                                            <c:if test="${(Imagen != '') || (Imagen != null)}">
+                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(1)}.jpeg" alt="">
+                                            </c:if>    
+                                        </option>
                                     </div>
-                                    <div class="item">
-                                        <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                    </div>
+                                    </option>
                                 </div>
                                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>

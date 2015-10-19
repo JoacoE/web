@@ -231,6 +231,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
         <div class="col-md-3">
                 <div class="container-fluid">
                         <div class="row">
@@ -256,8 +257,8 @@
                                                 
                                             </tbody>
                                                 <tfoot>
-                                                        <tr>
-                                                            <td colspan="4" id="total">$ 0.00</td>
+                                                    <tr class="sum">
+                                                            <td colspan="4" id="total"></td>
                                                         </tr>
                                                 </tfoot>
                                         </table>
@@ -268,120 +269,9 @@
                         </div>
                  </div>
                 
-            </div> 
-                                
-                                
-                                
-                                
-                                
-<!--            <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Perfil</h3>
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#1" data-toggle="tab">Perfil</a>
-                        </li>
-                        <li>
-                            <a href="#2" data-toggle="tab">Pedidos</a>
-                        </li>
-                    </ul>
-                    </div>
-                <div class="tab-content">
-                <div class="tab-pane active" id="1">
-                    <div class="row">
-                        <div class=" col-md-9 col-lg-9 "> 
-                            <table class="table table-user-information">
-                                <tbody>
-                                    
-                                    <tr>
-                                        <td>Nombre:</td>
-                                        <td><c:out value="${cliente.getNombre()}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <h3><p> </p></h3>
-                                        <h3><p> </p></h3>
-                                        <h3><p> </p></h3>
-                                        <h3><p> </p></h3>
-                                        <td>Apellido:</td>
-                                        <td><c:out value="${cliente.getApellido()}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email:</td>
-                                        <td><c:out value="${cliente.getMail()}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nickname:</td>
-                                        <td><c:out value="${cliente.getNickname()}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Direccion:</td>
-                                        <td><c:out value="${cliente.getDireccion()}"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fecha de Nacimiento:</td>
-                                        <td><c:out value="${cliente.getFNac()}"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="2">  
-                    <form action="pedido" method="get" accept-charset="UTF-8">
-                        <c:forEach var="lPedidos" items="${lPedidos}">
-                            <button type="submit" name="pedido" value="${lPedidos.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Conchudo!">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
-                                    <div class="thumbnail" >                                        
-                                        <div class="caption">
-                                            <h4 class="pull-center">ID pedido: ${lPedidos.getId()}</h4>  
-                                            
-                                            <h4 class="pull-center">Nick restaurante: ${lPedidos.getNickRest()}</h4>
-                                            
-                                            <h4 class="pull-center">Total: $${lPedidos.getPrecio_total()}<h4>        
-                                        </div>                                                 
-                                    </div>
-                                </div>   
-                            </button>        
-                        </c:forEach> 
-                    </form>     
-                </div>  
-                </div>    
-                </div>
-            </div>
-        </div>                    -->
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-        </div>
-            
-        </div>
-    <!-- /.container -->
-    <!-- /.container -->
+            </div>                                 
+        </div>            
+    </div>
     <!-- jQuery -->
     <!-- Bootstrap Core JavaScript -->
     <script src="../Branding/js/bootstrap.min.js"></script>
@@ -417,6 +307,8 @@
 
             $(this).parent().parent().remove();
         });
+        
+        
     </script>
    
 </body>

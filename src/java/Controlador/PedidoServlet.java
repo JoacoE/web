@@ -156,6 +156,7 @@ public class PedidoServlet extends HttpServlet {
             request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
         }
         if(request.getParameter("comprar") != null){
+            ArrayList<DataCarrito> listaCar = new ArrayList<>();
             Fabrica f = Fabrica.getInstance();
             ICtrlPedido ICP = f.getICtrlPedido();
             ICtrlUsuario ICU = f.getICtrlUsuario();
@@ -197,6 +198,13 @@ public class PedidoServlet extends HttpServlet {
             DataPedido dp = ICP.altaPedido();
             ICP.limpiarCtrl();
             
+            Iterator it5 = dp.getColCarrito().entrySet().iterator();
+            while(it5.hasNext()){
+                Map.Entry colca = (Map.Entry) it5.next();
+                DataCarrito dcar = (DataCarrito)colca.getValue();
+                listaCar.add(dcar);
+            }
+            request.setAttribute("carrito", listaCar);
             request.setAttribute("pedido", dp);
             request.getRequestDispatcher("/Pantallas/Transaccion.jsp").forward(request, response);
             }                     

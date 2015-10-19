@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="/layout/head.jsp"/>
 
         <meta charset="utf-8" />
         <title>Regitro</title>
@@ -11,11 +10,12 @@
         <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
-        <!--<link rel="stylesheet" href="../Branding/css/datepicker.css">-->
         <link href="../Branding/css/datepicker.css" rel="stylesheet" type="text/css"/>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="../Branding/js/jquerylogin.js" type="text/javascript"></script>
+
 
         <script>
             $(function () {
@@ -27,6 +27,7 @@
         </script>
     </head>
     <body>
+                <jsp:include page="/layout/head.jsp"/>
 
         <div class="container">
 
@@ -36,7 +37,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="well well-sm">
-                            <form class="form-horizontal"action="usr" method="POST" accept-charset="UTF-8">
+                            <form class="form-horizontal"action="usr" method="POST" onSubmit="validar()" accept-charset="UTF-8">
                                 <fieldset>
                                     <legend class="text-center header">Registrarse</legend>
 
@@ -64,14 +65,14 @@
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-key bigicon"></i></span>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="txtPass" placeholder="Constraseña" required="required">
+                                            <input type="password" class="form-control" id="txtPass" name="txtPass" placeholder="Constraseña" required="required">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-key bigicon"></i></span>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" name="txtConfirmPass" placeholder="Confirmar constraseña" required="required">
+                                            <input type="password" class="form-control" id="txtConfirmPass" name="txtConfirmPass" placeholder="Confirmar constraseña" required="required">
                                         </div>
                                     </div>
 
@@ -88,15 +89,10 @@
                                         <input type="file" name="imagen">
                                         <p class="help-block"></p>
                                     </div>
-
-
-
-
-
-
                                     <div class="form-group">
                                         <div class="col-md-12 text-center">
-                                            <input class="btn btn-success" type="submit" value="Registrar" name="btnReg" onclick="myFunction()">
+                                            <input class="btn btn-success" type="submit" value="Registrar" name="btnReg">
+                                            <!--onclick="myFunction()"-->
                                             <input class="btn btn-danger"  type="submit" value="Cancelar" name="btnCancelar">
                                             <script type="text/javascript">
                                                 function myFunction() {
@@ -107,6 +103,17 @@
                                     </div>
 
                                 </fieldset>
+                                <script>
+                                    function validar(){
+                                        var pass = document.getElementById("txtPass").value;
+                                        var confirm = document.getElementById("txtConfirmPass").value;
+                                        if(pass != confirm){
+                                            alert("Las contraseñas no coinciden");
+                                            return false
+                                            
+                                        }
+                                    }
+                                </script>
                             </form>
                         </div>
                     </div>

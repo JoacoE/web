@@ -48,7 +48,7 @@ public class UsuarioServlet extends HttpServlet {
      */
     private String nombre;
     private String mail;
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -64,20 +64,17 @@ public class UsuarioServlet extends HttpServlet {
     public void setMail(String mail) {
         this.mail = mail;
     }
-   
-    
-    public void validar(String correo, String nick){
+
+    public void validar(String correo, String nick) {
         Fabrica f = Fabrica.getInstance();
         ICtrlUsuario ICU = f.getICtrlUsuario();
-        if(!ICU.existeUsuario(nick, correo)){
+        if (!ICU.existeUsuario(nick, correo)) {
             setMail(correo);
             setNombre(nick);
         }
-            
 
-        
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -96,8 +93,8 @@ public class UsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    
-        if(request.getParameter("cerrar") != null){
+
+        if (request.getParameter("cerrar") != null) {
             Fabrica f = Fabrica.getInstance();
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
@@ -106,70 +103,70 @@ public class UsuarioServlet extends HttpServlet {
             session.setAttribute("iniciada", "false");
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
-            while (it3.hasNext()){
-                Map.Entry cats =(Map.Entry)it3.next();
-                DataCategoria cat = (DataCategoria)cats.getValue();    
+            while (it3.hasNext()) {
+                Map.Entry cats = (Map.Entry) it3.next();
+                DataCategoria cat = (DataCategoria) cats.getValue();
                 lista.add(cat);
             }
             Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
-            while (it2.hasNext()){
-                Map.Entry res =(Map.Entry)it2.next();
-                DataRestaurante r = (DataRestaurante)res.getValue();    
+            while (it2.hasNext()) {
+                Map.Entry res = (Map.Entry) it2.next();
+                DataRestaurante r = (DataRestaurante) res.getValue();
                 listaRes.add(r);
             }
             request.setAttribute("list", lista);
             request.setAttribute("listres", listaRes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
-            
+
         }
-        if(request.getParameter("home")!=null){
+        if (request.getParameter("home") != null) {
             Fabrica f = Fabrica.getInstance();
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
-            while (it3.hasNext()){
-                Map.Entry cats =(Map.Entry)it3.next();
-                DataCategoria cat = (DataCategoria)cats.getValue();    
+            while (it3.hasNext()) {
+                Map.Entry cats = (Map.Entry) it3.next();
+                DataCategoria cat = (DataCategoria) cats.getValue();
                 lista.add(cat);
             }
             Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
-            while (it2.hasNext()){
-                Map.Entry res =(Map.Entry)it2.next();
-                DataRestaurante r = (DataRestaurante)res.getValue();    
+            while (it2.hasNext()) {
+                Map.Entry res = (Map.Entry) it2.next();
+                DataRestaurante r = (DataRestaurante) res.getValue();
                 listaRes.add(r);
             }
             request.setAttribute("list", lista);
             request.setAttribute("listres", listaRes);
-            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response); 
+            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
-        if(request.getParameter("restaurante") != null){
+        if (request.getParameter("restaurante") != null) {
             Fabrica f = Fabrica.getInstance();
             ICtrlUsuario ICU = f.getICtrlUsuario();
             ICtrlPedido ICP = f.getICtrlPedido();
             ArrayList<DataIndividual> individuales = new ArrayList<>();
             ArrayList<DataPromocional> promocionales = new ArrayList<>();
             ArrayList<DTOEvaluacion> evaluaciones = new ArrayList<>();
-            String nickname = (String)request.getParameter("restaurante");
+            String nickname = (String) request.getParameter("restaurante");
             DataRestaurante dr = ICU.getRestauranteByNickname(nickname);
             Iterator it = dr.getColProducto().entrySet().iterator();
-            while(it.hasNext()){
-                Map.Entry productos = (Map.Entry)it.next();
-                if(productos.getValue() instanceof DataIndividual){
-                    DataIndividual di = (DataIndividual)productos.getValue();
+            while (it.hasNext()) {
+                Map.Entry productos = (Map.Entry) it.next();
+                if (productos.getValue() instanceof DataIndividual) {
+                    DataIndividual di = (DataIndividual) productos.getValue();
                     individuales.add(di);
                 }
-                if(productos.getValue() instanceof DataPromocional){
-                    DataPromocional dp = (DataPromocional)productos.getValue();
+                if (productos.getValue() instanceof DataPromocional) {
+                    DataPromocional dp = (DataPromocional) productos.getValue();
                     promocionales.add(dp);
                 }
             }
             Iterator evs = ICP.listarEvaluacionesRest(nickname).entrySet().iterator();
-            while(evs.hasNext()){
-                Map.Entry evals = (Map.Entry)evs.next();
-                DTOEvaluacion de = (DTOEvaluacion)evals.getValue();
+            while (evs.hasNext()) {
+                Map.Entry evals = (Map.Entry) evs.next();
+                DTOEvaluacion de = (DTOEvaluacion) evals.getValue();
                 evaluaciones.add(de);
             }
             request.setAttribute("restaurante", dr);
@@ -178,38 +175,38 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("evaluaciones", evaluaciones);
             request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
         }
-        if(request.getParameter("list-group-item") != null){
+        if (request.getParameter("list-group-item") != null) {
             Fabrica fabrica = Fabrica.getInstance();
             ICtrlUsuario ICU = fabrica.getICtrlUsuario();
-            String cat = (String)request.getParameter("list-group-item");
+            String cat = (String) request.getParameter("list-group-item");
             ArrayList<DataRestaurante> restaurantes = new ArrayList<>();
             Iterator it = ICU.listaUsuPorCategoria(cat).entrySet().iterator();
-            while(it.hasNext()){
-                Map.Entry rests = (Map.Entry)it.next();
-                DataRestaurante dr = (DataRestaurante)rests.getValue();
+            while (it.hasNext()) {
+                Map.Entry rests = (Map.Entry) it.next();
+                DataRestaurante dr = (DataRestaurante) rests.getValue();
                 restaurantes.add(dr);
             }
             Iterator cats = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
-            while (cats.hasNext()){
-                Map.Entry categs =(Map.Entry)cats.next();
-                DataCategoria categ = (DataCategoria)categs.getValue();    
+            while (cats.hasNext()) {
+                Map.Entry categs = (Map.Entry) cats.next();
+                DataCategoria categ = (DataCategoria) categs.getValue();
                 lista.add(categ);
             }
             request.setAttribute("list", lista);
             request.setAttribute("listres", restaurantes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
-        }        
-        if(request.getParameter("search") !=null){
-            String busqueda = (String)request.getParameter("search");
+        }
+        if (request.getParameter("search") != null) {
+            String busqueda = (String) request.getParameter("search");
             Fabrica fabrica = Fabrica.getInstance();
             ICtrlUsuario ICU = fabrica.getICtrlUsuario();
-            ArrayList<DataRestaurante> dr=ICU.buscarRestaurantes(busqueda);
+            ArrayList<DataRestaurante> dr = ICU.buscarRestaurantes(busqueda);
             Iterator cats = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
-            while (cats.hasNext()){
-                Map.Entry categs =(Map.Entry)cats.next();
-                DataCategoria categ = (DataCategoria)categs.getValue();    
+            while (cats.hasNext()) {
+                Map.Entry categs = (Map.Entry) cats.next();
+                DataCategoria categ = (DataCategoria) categs.getValue();
                 lista.add(categ);
             }
             request.setAttribute("list", lista);
@@ -230,7 +227,7 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        if(request.getParameter("ingresar") != null){
+        if (request.getParameter("ingresar") != null) {
             Fabrica fabrica = Fabrica.getInstance();
             ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             HttpSession session = request.getSession();
@@ -242,76 +239,76 @@ public class UsuarioServlet extends HttpServlet {
             pwd = request.getParameter("txtPass");
             DataCliente usuario = null;
             Iterator it = ICU.devListaDC().entrySet().iterator();
-            boolean mail =ICU.existeMail(id);
-            boolean nick =ICU.existeNickname(id);
+            boolean mail = ICU.existeMail(id);
+            boolean nick = ICU.existeNickname(id);
 
-            if(mail || nick){
-                while(it.hasNext()){
-                    Map.Entry usuarios = (Map.Entry)it.next();
-                    DataCliente dc = (DataCliente)usuarios.getValue();
-                    if(dc.getNickname().equals(id) || dc.getMail().equals(id)){
+            if (mail || nick) {
+                while (it.hasNext()) {
+                    Map.Entry usuarios = (Map.Entry) it.next();
+                    DataCliente dc = (DataCliente) usuarios.getValue();
+                    if (dc.getNickname().equals(id) || dc.getMail().equals(id)) {
                         usuario = dc;
                     }
                 }
-                if(usuario.getPwd().equals(pwd)){
+                if (usuario.getPwd().equals(pwd)) {
                     request.setAttribute("usuario", usuario.getNickname());
                     session.setAttribute("iniciada", "true");
                     session.setAttribute("dcliente", usuario);
-                }else{
+                } else {
                     //avisar al jsp que esta mal la pwd xD
                 }
-                if(!usuario.getImagen().isEmpty()){
+                if (!usuario.getImagen().isEmpty()) {
                     imagen = HI.getImagen(usuario.getNickname());
                     //String path = session.getServletContext().getRealPath("/web/build/web/WEB-INF/lib/imagenes");
                     String path = imagen.getPath();
                     String url = path.concat(".jpeg");
                     request.setAttribute("imgPerfil", url);
-                    
-                }else{
+
+                } else {
                     noImage = HI.getNoImgeUsuario();
                     request.setAttribute("noImg", noImage);
                 }
-            }else{
+            } else {
                 //avisar al jsp que esta mal el id xD
-            }    
+            }
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
-            while (it3.hasNext()){
-                Map.Entry cats =(Map.Entry)it3.next();
-                DataCategoria cat = (DataCategoria)cats.getValue();    
+            while (it3.hasNext()) {
+                Map.Entry cats = (Map.Entry) it3.next();
+                DataCategoria cat = (DataCategoria) cats.getValue();
                 lista.add(cat);
             }
             Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
-            while (it2.hasNext()){
-                Map.Entry res =(Map.Entry)it2.next();
-                DataRestaurante r = (DataRestaurante)res.getValue();    
+            while (it2.hasNext()) {
+                Map.Entry res = (Map.Entry) it2.next();
+                DataRestaurante r = (DataRestaurante) res.getValue();
                 listaRes.add(r);
             }
             request.setAttribute("list", lista);
             request.setAttribute("listres", listaRes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
-        if(request.getParameter("registrar") != null){
+        if (request.getParameter("registrar") != null) {
             Fabrica fabrica = Fabrica.getInstance();
             ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             HttpSession session = request.getSession();
             String nickname = request.getParameter("txtNickname");
             String email = request.getParameter("txtMail");
-            if(!ICU.existeUsuario(nickname, email)){
+            if (!ICU.existeUsuario(nickname, email)) {
                 setMail(email);
                 setNombre(nickname);
                 request.getRequestDispatcher("/Pantallas/RegistrarCliente.jsp").forward(request, response);
             }
 
         }
-            if(request.getParameter("btnReg") != null){//registrar cliente
+        if (request.getParameter("btnReg") != null) {//registrar cliente
             Fabrica fabrica = Fabrica.getInstance();
             ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             HttpSession session = request.getSession();
             HImagenes HI = HImagenes.getInstance();
             File imagen = null;
-            String nickname, email, nombre, apellido, fecha, direccion, pwd;
+            String nickname, email, nombre, apellido, fecha, direccion, pwd, confirm;
             nickname = getNombre();
             email = getMail();
             nombre = request.getParameter("txtNombre");
@@ -319,43 +316,51 @@ public class UsuarioServlet extends HttpServlet {
             fecha = request.getParameter("datepicker");
             direccion = request.getParameter("txtDireccion");
             pwd = request.getParameter("txtPass");
-            imagen = new File((String)request.getAttribute("imagen"));
-            if(!ICU.existeUsuario(nickname, email)){
-                DTOIngresarDatos ingDatos = new DTOIngresarDatos();
-                ingDatos.setNickname(nickname);
-                ingDatos.setEmail(email);
-                ingDatos.setNombre(nombre);
-                ingDatos.setDireccion(direccion);
-                ICU.ingresarDatos(ingDatos);
-                DTORegistrarCliente regCliente = new DTORegistrarCliente();
-                regCliente.setApellido(apellido);
-                regCliente.setFecha(fecha);
-                regCliente.setPwd(pwd);
-//                if(imagen.exists()){
-//                    HI.guardarImagen(imagen, nickname);
-//                    regCliente.setImagen(nickname);
-//                }else{
-//                    regCliente.setImagen("");
-//                }
-//                ICU.registrarCliente(regCliente);
+            confirm = request.getParameter("txtConfirmPass");
+//            imagen = new File((String)request.getAttribute("imagen"));
+            if (!ICU.existeUsuario(nickname, email)) {
+                if (pwd.equals(confirm)) {
+                    DTOIngresarDatos ingDatos = new DTOIngresarDatos();
+                    ingDatos.setNickname(nickname);
+                    ingDatos.setEmail(email);
+                    ingDatos.setNombre(nombre);
+                    ingDatos.setDireccion(direccion);
+                    ICU.ingresarDatos(ingDatos);
+                    DTORegistrarCliente regCliente = new DTORegistrarCliente();
+                    regCliente.setApellido(apellido);
+                    regCliente.setFecha(fecha);
+                    regCliente.setPwd(pwd);
+    //                if(imagen.exists()){
+                    //                    HI.guardarImagen(imagen, nickname);
+                    //                    regCliente.setImagen(nickname);
+                    //                }else{
+                    //                    regCliente.setImagen("");
+                    //                }
+                    //                ICU.registrarCliente(regCliente);
+                    Iterator it3 = ICU.retColCat().entrySet().iterator();
+                    ArrayList<DataCategoria> lista = new ArrayList<>();
+                    while (it3.hasNext()) {
+                        Map.Entry cats = (Map.Entry) it3.next();
+                        DataCategoria cat = (DataCategoria) cats.getValue();
+                        lista.add(cat);
+                    }
+                    Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+                    ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+                    while (it2.hasNext()) {
+                        Map.Entry res = (Map.Entry) it2.next();
+                        DataRestaurante r = (DataRestaurante) res.getValue();
+                        listaRes.add(r);
+                    }
+                    request.setAttribute("list", lista);
+                    request.setAttribute("listres", listaRes);
+                    request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
+
+                } else {
+                    request.getRequestDispatcher("/Pantallas/RegistrarCliente.jsp").forward(request, response);
+
+                }
             }
-            Iterator it3 = ICU.retColCat().entrySet().iterator();
-            ArrayList<DataCategoria> lista = new ArrayList<>();
-            while (it3.hasNext()){
-                Map.Entry cats =(Map.Entry)it3.next();
-                DataCategoria cat = (DataCategoria)cats.getValue();    
-                lista.add(cat);
-            }
-            Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
-            ArrayList<DataRestaurante> listaRes = new ArrayList<>();
-            while (it2.hasNext()){
-                Map.Entry res =(Map.Entry)it2.next();
-                DataRestaurante r = (DataRestaurante)res.getValue();    
-                listaRes.add(r);
-            }
-            request.setAttribute("list", lista);
-            request.setAttribute("listres", listaRes);
-            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);   
+
         }
 //        
 //        if(request.getParameter("/*parametro*/") != null){

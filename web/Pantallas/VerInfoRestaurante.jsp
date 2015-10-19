@@ -99,113 +99,138 @@
                         <h2 hidden="true" id="nickrest"><c:out value="${restaurante.getNickname()}"/></h2>
                         </option>
                         </h1></div>
-                  <div class="tabbable">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#1" data-toggle="tab">Menú</a>
-                        </li>
-                        <li>
-                            <a href="#2" data-toggle="tab">Información</a>
-                        </li>
-                        <li>
-                            <a href="#3" data-toggle="tab">Comentarios</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="1">
-                            <div class="row">
-                                <br></br>
-                                <div class="row"><h3>Productos promocionales</h3>
-                                <c:forEach var="promo" items="${promocionales}">
+                  <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="tabbable">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#1" data-toggle="tab">Menú</a>
+                                        </li>
+                                        <li>
+                                            <a href="#2" data-toggle="tab">Información</a>
+                                        </li>
+                                        <li>
+                                            <a href="#3" data-toggle="tab">Comentarios</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="1">
+                                <div class="row-tab">
+                                    <br></br>
+                                    <div class="row text-center"><h3>Productos promocionales</h3>
+                                        <c:forEach var="promo" items="${promocionales}">
+                                            <div class="col-sm-4 col-lg-4 col-md-4">
+                                                <div class="thumbnail" >
+                                                    <c:set var="Imagen" value="${promo.getDataImagen()}"/>
+                                                    <c:if test="${Imagen == ''}">
+                                                       <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                    </c:if>
+                                                    <c:if test="${Imagen != ''}">
+                                                        <img src="<%=request.getContextPath()%>/Branding/img/${promo.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
+                                                    </c:if>
+                                                    <div class="caption">
+                                                        <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
+                                                        <h4 class="nombreProd">${promo.getDataNombre()}</h4>
+                                                        <p class="desc">${promo.getDataDescripcion()}</p>
+                                                        <button class="btnCarrito btn btn-success glyphicon glyphicon-shopping-cart">Agregar</button>
+                                                    </div>   
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div> 
+                                    <div class="row text-center"><h3>Productos individuales</h3>
+                                        <c:forEach var="individ" items="${individuales}">
+                                            <div class="col-sm-4 col-lg-4 col-md-4">
+                                                <div class="thumbnail">
+                                                    <c:set var="Imagen" value="${individ.getDataImagen()}"/>
+                                                    <c:if test="${Imagen == ''}">
+                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                    </c:if>
+                                                    <c:if test="${Imagen != ''}">
+                                                        <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
+                                                    </c:if>
+                                                    <div class="caption">
+                                                        <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
+                                                        <h4 class="nombreProd">${individ.getDataNombre()}</h4>
+                                                        <p class="desc">${individ.getDataDescripcion()}</p>
+                                                        <button class="btnCarrito btn btn-success glyphicon glyphicon-shopping-cart">Agregar</button>
 
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail" >
-                                        <c:set var="Imagen" value="${promo.getDataImagen()}"/>
-                                            <c:if test="${Imagen == ''}">
-                                               <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
-                                        </c:if>
-                                                <c:if test="${Imagen != ''}">
-                                            <img src="<%=request.getContextPath()%>/Branding/img/${promo.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
-                                        </c:if><div class="caption">
-                                            <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
-                                            <h4 class="nombreProd">${promo.getDataNombre()}</h4>
-                                            <p class="desc">${promo.getDataDescripcion()}</p>
-                                        <button class="btnCarrito btn btn-success glyphicon glyphicon-shopping-cart">Agregar</button>
-                                        </div>
-                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
                                     </div>
                                 </div>
-                                </c:forEach>
-                                </div> 
-                                <div class="row"><h3>Productos individuales</h3>
-                                <c:forEach var="individ" items="${individuales}">
-                                <div class="col-sm-4 col-lg-4 col-md-4">
-                                    <div class="thumbnail">
-                                        <c:set var="Imagen" value="${individ.getDataImagen()}"/>
-                                            <c:if test="${Imagen == ''}">
-                                                <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
-                                        </c:if>
-                                                <c:if test="${Imagen != ''}">
-                                            <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
-                                        </c:if>
-                                        <div class="caption">
-                                            <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
-                                            <h4 class="nombreProd">${individ.getDataNombre()}
-                                            </h4>
-                                            
-                                            <p class="desc">${individ.getDataDescripcion()}</p>
-                                            <button class="btnCarrito btn btn-success glyphicon glyphicon-shopping-cart">Agregar</button>
+                            </div>
+                            <div class="tab-pane fade" id="2">
+                                <br>
+                                <div>
+                                    <option value="restaurante">
+                                    <table class="table table-user-information">
+                                        <tbody>
+                                            <tr>
+                                                <td>Nombre:</td>
+                                                <td><a><c:out value="${restaurante.getNombre()}"/></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nickname</td>
+                                                <td><a><c:out value="${restaurante.getNickname()}"/></a></td>
+                                            </tr>
 
+                                            <tr>
+                                                <td>Email:</td>
+                                                <td><a><c:out value="${restaurante.getEmail()}"/></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Direccion:</td>
+                                                <td><c:out value="${restaurante.getDireccion()}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Calificación:</td>
+                                                <td>
+                                                    <c:forEach var="i" begin="1" end="${restaurante.getPromedio()}">
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                    </c:forEach>
+                                                    <c:forEach var="i" begin="${restaurante.getPromedio()}" end="4">
+                                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                                    </c:forEach>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </option>
+                                </div>
+                                </br>
+                            </div>
+                            <div class="tab-pane fade" id="3">
+                                <c:forEach var="evaluacion" items="${evaluaciones}">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
+                                                                <span class="glyphicon glyphicon-star"></span>
+                                                            </c:forEach>
+                                                            <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
+                                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                                            </c:forEach>
+                                                            <p><b>${evaluacion.getNickname()} </b>- ${evaluacion.getFecha()}</p>
+                                                            <p>${evaluacion.getComentario()}</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                   </div>
-                                </div>
+                                    </div>
                                 </c:forEach>
                             </div>
-
-                                
-                            </div>
                         </div>
-                        <div class="tab-pane fade" id="2">
-                            <br></br>
-                            <div><h1>
-                                <option value="restaurante">
-                                    <c:forEach var="i" begin="1" end="${restaurante.getPromedio()}">
-                                        <span class="glyphicon glyphicon-star"></span>
-                                    </c:forEach>
-                                    <c:forEach var="i" begin="${restaurante.getPromedio()}" end="4">
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                    </c:forEach>
-                                    <h3><a><c:out value="${restaurante.getNickname()}"/></a></h3>
-                                    <h3><a><c:out value="${restaurante.getNombre()}"/></a></h3>
-                                    <h3><a><c:out value="${restaurante.getEmail()}"/></a></h3>
-                                    <h3><a><c:out value="${restaurante.getDireccion()}"/></a></h3>
-                                    <h3><a><c:out value="${restaurante.getPromedio()}"/></a></h3>
-                                </option>
-                            </h1></div>
-                        </div>
-                       
-                        <div class="tab-pane fade" id="3">
-                            <c:forEach var="evaluacion" items="${evaluaciones}">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <br></br>
-                                    <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
-                                        <span class="glyphicon glyphicon-star"></span>
-                                    </c:forEach>
-                                    <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                    </c:forEach>
-                                    <p><b>${evaluacion.getNickname()}</b></p>
-                                    <span class="pull-right">10 days ago</span>
-                                    <p>${evaluacion.getComentario()}</p>
-                                </div>
-                            </div>
-                            </c:forEach>
-                            <hr>
-                        </div>
-                        </div>                        
                     </div>
-                    </div>  
         <div class="col-md-3">
                 <div class="container-fluid">
                         <div class="row">
@@ -376,10 +401,13 @@
               var nickrest = $("#nickrest").text();
               var nombre = $(this).siblings(".nombreProd").text();
               var precio = $(this).siblings("#precio").text();
-              cols += '<td><input type="text" name="nickrest" value='+nickrest+'></td>';
-              cols += '<td><input type="text" name="product" value='+nombre+'></td>';
-              cols += '<td><input type="text" name="price" value='+precio+'></td>';
-              cols += '<td><input type="text" name="qty" value='+1+'></td>';
+              nombre = $.trim(nombre);
+              nickrest = $.trim(nickrest);
+              precio = $.trim(precio);
+              cols += '<td><input type="text" name="nickrest" value="'+nickrest+'"></td>';
+              cols += '<td><input type="text" name="product" value="'+nombre+'"></td>';
+              cols += '<td><input type="text" name="price" value="'+precio+'"></td>';
+              cols += '<td><input type="text" name="qty" value="'+1+'"></td>';
               cols += '<td><button class="remove btn btn-danger">X</button></td>';
               newRow.append(cols);
         $("#shopping-list").append(newRow);

@@ -336,7 +336,7 @@ public class UsuarioServlet extends HttpServlet {
                     //                }else{
                     //                    regCliente.setImagen("");
                     //                }
-                    //                ICU.registrarCliente(regCliente);
+                    ICU.registrarCliente(regCliente);
                     Iterator it3 = ICU.retColCat().entrySet().iterator();
                     ArrayList<DataCategoria> lista = new ArrayList<>();
                     while (it3.hasNext()) {

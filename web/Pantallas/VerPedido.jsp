@@ -98,13 +98,13 @@
                             <tbody>
                                 <tr>
                                     <td>${carrito.getCantidad()} ${carrito.getNomProd()}</td>
-                                    <td><c:out value="${carrito.getPrecio()*carrito.getCantidad()}"/></td>
+                                    <td><c:out value="$${carrito.getPrecio()*carrito.getCantidad()}"/></td>
                                 </tr>  
                             </tbody>
                         </c:forEach>
                         <tr>
                             <td><b>Total:<b></td>
-                            <td><c:out value="${pedido.getPrecio_total()}"/></td>
+                            <td><c:out value="$${pedido.getPrecio_total()}"/></td>
                         </tr>
                     </table>
                 </div>
@@ -123,7 +123,7 @@
                         <table class="table table-user-information">
                             <tbody class="text-center">
                                 <option value="evaluacion" item="${eva}">
-                                <c:if test="${evaluacion.getComentario()==null}">
+                                <c:if test="${evaluacion==null || evaluacion.getComentario()==null}">
                                     <br></br>
                                     <div class="text-center">
                                         <div>
@@ -140,7 +140,7 @@
                                         <textarea cols="60" id="comentario" name="comment" value="" placeholder="Ingrese su comentario..."></textarea>
                                         <div class="text-center">	
                                             <form action="pedido" method="GET" accept-charset="UTF-8">
-                                                <button class="btn btn-success" type="submit">Enviar evaluaciÃ³n <i class="fa fa-reply"></i></button>
+                                                <button class="btn btn-success" type="submit">Enviar evaluacion <i class="fa fa-reply"></i></button>
                                             </form>
                                         </div>	
                                     </div>	

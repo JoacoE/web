@@ -57,11 +57,9 @@
                         <div class="col-lg-4 col-sm-6 wraper-box">
                             <div class="text-center box-restaurantes">
                                 <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
-                                    
-                                    
-                                    <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                                    <option value="lista">
-                                    <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
+                                 <img class="img-circle img-responsive img-center" src="<%=request.getContextPath()%>/Branding/img/${listRestaurante.getLogo()}.jpeg" alt="">
+                                  <option value="lista">
+                                        <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
                                     
                                     <c:forEach var="i" begin="1" end="${listRestaurante.getPromedio()}">
                                         <span class="fa fa-star fa-2x"></span>

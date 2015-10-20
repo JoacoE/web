@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html>
     <head>
 
@@ -27,9 +27,9 @@
         </script>
     </head>
     <body>
-                <jsp:include page="/layout/head.jsp"/>
 
         <div class="container">
+            <jsp:include page="/layout/head.jsp"/>
 
             <!-- Contact Form - START -->
 

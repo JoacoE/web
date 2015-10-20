@@ -56,9 +56,9 @@
 
     <body class="home">
         <!-- Fixed navbar -->
-        <jsp:include page="/layout/head.jsp"/>
 
         <div class="container">
+        <jsp:include page="/layout/head.jsp"/>
 
             <div class="row">
 

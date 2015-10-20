@@ -44,11 +44,15 @@
     </head>
 
     <body>
+ 
     <!-- Page Content -->
-    <jsp:include page="/layout/head.jsp"/>
     <div class="container">
+        <jsp:include page="/layout/head.jsp"/>
+
         <div class="row">
+
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+
                 <option value="cliente" item="${dc}">
                 <div class="col-md-14 col-lg-14 " align="center"> <img alt="User Pic" src="<%=request.getContextPath()%>/Branding/img/${cliente.getImagen()}.jpeg" class="img-circle img-responsive"> </div>
                 <br></br>

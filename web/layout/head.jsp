@@ -21,19 +21,23 @@
     HttpSession sesion = request.getSession();
 %>
 
-<div class="container">
-    <div class="row-head">
-        <div class="col-md-12">
-            <nav class=" barNav navbar navbar-default" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
+<div class="cabezal">
+    <div class="navbar-header">
+
+    <form action="usr" method="GET">
+        <button type="submit" class="btn-link" name="home" id="home">
+            <img src="./Branding/img/logo.png" class="img-head">
+        </button>
+    </form>
+   </div>      
+<!--    <div class="navbar-header">
                     <form action="usr" method="GET">
                         <button type="submit" class="btn-link" name="home" id="home">
                             <img src="./Branding/img/logo.png" class="img-head">
                         </button>
                     </form>
                     </a>
-                </div>
+                </div>-->
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
                 <div class="col-md-4 col-md-offset-3">
@@ -78,6 +82,7 @@
                                 </button>
 
                                 <ul class = "dropdown-menu" role = "menu">
+                                    
                                     <div class="col-md-12">
                                         <form class="form" role="form" method="post" action="usr" accept-charset="UTF-8" id="login-nav">
                                             <div class="form-login">
@@ -124,7 +129,12 @@
                             </div>   
                         </c:if>
                 </ul>
-            </nav>
+    
+</div>
+    
+<div class="container">
+    <div class="row-head">
+        <div class="col-md-12">
 
         </div>
         <!-- /.navbar-collapse -->

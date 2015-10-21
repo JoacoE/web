@@ -171,3 +171,19 @@ nav.barNav {
     /*top:0px;*/ 
     /*z-index:10;*/ 
 }
+
+.slide-image{
+    margin-left: 306px;
+    margin-top: -4px;
+}
+.slide-image2{
+    margin-left: 350px;
+    margin-top: -4px;
+}
+.indbannerimg{
+    width: 844px;
+    margin-left: 0px;
+    border: hidden;
+    border: 1px hidden rgba(0,0,0,0.2);
+    border-radius: 10px;
+}

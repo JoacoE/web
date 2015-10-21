@@ -78,7 +78,7 @@
                                         <option value="restaurante">
                                         <c:set var="Imagen" value="${restaurante.getLstImagen().get(0)}"/>
                                             <c:if test="${(Imagen == '') || (Imagen == null)}">
-                                                <img  src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                <img class="slide-image2" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
                                             </c:if>
                                             <c:if test="${(Imagen != '') || (Imagen != null)}">
                                                 <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(0)}.jpeg" alt="">
@@ -89,10 +89,10 @@
                                         <option value="restaurante">
                                         <c:set var="Imagen" value="${restaurante.getLstImagen().get(1)}"/>
                                             <c:if test="${(Imagen == '') || (Imagen == null)}">
-                                                <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
                                             </c:if>
                                             <c:if test="${(Imagen != '') || (Imagen != null)}">
-                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(1)}.jpeg" alt="">
+                                                <img class="slide-image2" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(1)}.jpeg" alt="">
                                             </c:if>    
                                         </option>
                                     </div>
@@ -134,6 +134,9 @@
                                 <div class="row-tab">
                                     <br></br>
                                     <div class="row text-center"><h3>Productos promocionales</h3>
+                                        <div class="indbanner">
+                                            <img class="promobannerimg"src="<%=request.getContextPath()%>/Branding/img/promobanner.png" alt="no imagen">
+                                        </div>
                                         <c:forEach var="promo" items="${promocionales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail" >
@@ -155,6 +158,9 @@
                                         </c:forEach>
                                     </div> 
                                     <div class="row text-center"><h3>Productos individuales</h3>
+                                        <div class="indbanner">
+                                            <img class="indbannerimg"src="<%=request.getContextPath()%>/Branding/img/individuales-banner.png" alt="no imagen">
+                                        </div>
                                         <c:forEach var="individ" items="${individuales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">

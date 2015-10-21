@@ -255,7 +255,9 @@ public class UsuarioServlet extends HttpServlet {
                     session.setAttribute("iniciada", "true");
                     session.setAttribute("dcliente", usuario);
                 } else {
-                    //avisar al jsp que esta mal la pwd xD
+                 
+                    request.setAttribute("pass", "incorrecto");
+
                 }
                 if (!usuario.getImagen().isEmpty()) {
                     imagen = HI.getImagen(usuario.getNickname());
@@ -269,7 +271,8 @@ public class UsuarioServlet extends HttpServlet {
                     request.setAttribute("noImg", noImage);
                 }
             } else {
-                //avisar al jsp que esta mal el id xD
+                    request.setAttribute("succesmail", "incorrecto");
+
             }
             Iterator it3 = ICU.retColCat().entrySet().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();

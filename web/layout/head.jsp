@@ -94,8 +94,35 @@
                                                 <input type="password" class="form-control" name="txtPass" id="txtCont" placeholder="Password" required>
                                             </div>
                                             <div class="form-login">
-                                                <button type="submit" name="ingresar" class="btn btn-success btn-block">Ingresar</button>
-                                          </div>  
+                                                <button type="submit" name="ingresar" onclick="ingresar()"class="btn btn-success btn-block">Ingresar</button>
+                                            </div>
+                                            
+                                            <%
+                                                String strExpired = (String) request.getAttribute("pass");
+                                                String invalidMail = (String) request.getAttribute("succesmail");
+                                                
+                                                if(invalidMail == null){
+                                                    
+                                                }else{
+                                                    if(invalidMail.equals("incorrecto")){
+                                                        out.println("<script language=\"javascript\">");
+                                                        out.print("alert('El mail o nickname no esta registrado');");
+                                                        out.println("</script>");
+                                                    }
+                                                }
+                                                
+                                                if(strExpired == null){
+                                                    
+                                                }else{
+                                                    if(strExpired.equals("incorrecto")){
+                                                        out.println("<script language=\"javascript\">");
+                                                        out.print("alert('Contraseña incorrecta');");
+                                                        out.println("</script>");
+                                                    }
+                                                }
+                                                
+                                            %>
+                                            
                                         </form>
                                     </div> 
                                 </ul>

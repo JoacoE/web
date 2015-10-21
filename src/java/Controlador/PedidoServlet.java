@@ -178,7 +178,7 @@ public class PedidoServlet extends HttpServlet {
                 }
                 request.setAttribute("list", lista);
                 request.setAttribute("listres", listaRes);
-                request.setAttribute("logeado", "no");
+                 request.setAttribute("logeado", "no");
                 request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response); 
             }else{
             DataCliente dc = (DataCliente)session.getAttribute("dcliente");

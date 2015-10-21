@@ -194,8 +194,10 @@ public class CtrlUsuario implements ICtrlUsuario {
             
     public void registrarCat(String nombre){
         HCategoria hu = HCategoria.getinstance();
-        if(hu.member(nombre))
-            JOptionPane.showMessageDialog(null, "La categoria ya existe","ERROR",JOptionPane.ERROR_MESSAGE);
+        if(hu.member(nombre)){
+            
+        }
+            //JOptionPane.showMessageDialog(null, "La categoria ya existe","ERROR",JOptionPane.ERROR_MESSAGE);
         else{
             Categoria c = new Categoria(nombre);
             hu.addCategoria(c);

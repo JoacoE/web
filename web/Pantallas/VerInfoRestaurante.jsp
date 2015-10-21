@@ -55,17 +55,11 @@
     </head>
 
     <body class="home">
-        <!-- Fixed navbar -->
-
         <div class="container">
-        <jsp:include page="/layout/head.jsp"/>
-
+            <jsp:include page="/layout/head.jsp"/>
             <div class="row">
-
                 <div class="col-md-9">
-
                     <div class="row carousel-holder">
-
                         <div class="col-md-12">
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
@@ -285,7 +279,21 @@
                                                 </tfoot>
                                             </table>
                                             <button class="btn btn-primary btn-warning fa fa-money" type="submit" id="comprar" name="comprar"> Realizar pedido</button>
-
+                                            
+                                            <%
+                                                String sesion = (String) request.getAttribute("logeado");
+                                                
+                                                if(sesion == null){
+                                                    
+                                                }else{
+                                                    if(sesion.equals("no")){
+                                                        out.println("<script language=\"javascript\">");
+                                                        out.print("alert('Debe iniciar sesion para realizar un pedido');");
+                                                        out.println("</script>");
+                                                    }
+                                                }
+                                                
+                                            %>
 
                                         </form>
 

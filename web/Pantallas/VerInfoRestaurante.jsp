@@ -50,7 +50,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
 
         <link rel="stylesheet" type="text/css" href="./Branding/css/nav.css" >
-
+        
 
     </head>
 
@@ -252,7 +252,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="carrito col-md-3">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12  col-md-10  main" id="main">

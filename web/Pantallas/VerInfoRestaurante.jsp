@@ -293,6 +293,13 @@
                                                     }
                                                 }
                                                 
+                                                String alerta = (String)request.getAttribute("alert");
+                                                if(alerta != null){
+                                                    out.println("<script language=\"javascript\">");
+                                                    out.print("alert('Debe ingresar productos al carrito');");
+                                                    out.println("</script>");
+                                                }
+                                                
                                             %>
 
                                         </form>
@@ -317,19 +324,31 @@
     <script src="js/store.js"></script>
     <script src="../Branding/js/jquery.js"></script>
     <script type="text/javascript">
+        $(function(){
+            var newRow = $("<tr>");
+            var col = "";
+            var nickrest = $("#nickrest").text();
+            nickrest = $.trim(nickrest);
+            col += '<td><input type="text" name="nickrest" hidden="true" value="' + nickrest + '"></td>';
+            newRow.append(col);
+            $("#shopping-cart").append(newRow);
+        });
+    </script>
+    
+    <script type="text/javascript">
 
 
 
         $(".btnCarrito").click(function () {
             var newRow = $("<tr>");
             var cols = "";
-            var nickrest = $("#nickrest").text();
+            //var nickrest = $("#nickrest").text();
             var nombre = $(this).siblings(".nombreProd").text();
             var precio = $(this).siblings("#precio").text();
             nombre = $.trim(nombre);
-            nickrest = $.trim(nickrest);
+            //nickrest = $.trim(nickrest);
             precio = $.trim(precio);
-            cols += '<td><input type="text" name="nickrest" hidden="true" value="' + nickrest + '"></td>';
+            //cols += '<td><input type="text" name="nickrest" hidden="true" value="' + nickrest + '"></td>';
             cols += '<td><input type="text" name="product" hidden="true" value="' + nombre + '">' + nombre + '</td>';
             cols += '<td><input type="text" name="price" hidden="true" value="' + precio + '">' + precio + '</td>';
             cols += '<td><input  class="cantidad" precio ="' + precio + '" type="text" name="qty" value="' + 1 + '"></td>';

@@ -208,7 +208,15 @@
 
 
     </div>
-
+<%
+                                                
+    String alerta = (String)request.getAttribute("alertaUsuario");
+    if(alerta != null){
+        out.println("<script language=\"javascript\">");
+        out.print("alert('Ya existe el usuario');");
+        out.println("</script>");
+    }                                                
+%>
     <!-- jQuery -->
     <script src="../Branding/js/jquerylogin.js"></script>
     <script src="../Branding/js/bootstrap.min.js"></script>

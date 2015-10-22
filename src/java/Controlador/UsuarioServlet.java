@@ -303,6 +303,30 @@ public class UsuarioServlet extends HttpServlet {
                 setNombre(nickname);
                 request.getRequestDispatcher("/Pantallas/RegistrarCliente.jsp").forward(request, response);
             }
+            else{
+                
+                Iterator it3 = ICU.retColCat().entrySet().iterator();
+            ArrayList<DataCategoria> lista = new ArrayList<>();
+            while (it3.hasNext()) {
+                Map.Entry cats = (Map.Entry) it3.next();
+                DataCategoria cat = (DataCategoria) cats.getValue();
+                lista.add(cat);
+            }
+            Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
+            ArrayList<DataRestaurante> listaRes = new ArrayList<>();
+            while (it2.hasNext()) {
+                Map.Entry res = (Map.Entry) it2.next();
+                DataRestaurante r = (DataRestaurante) res.getValue();
+                listaRes.add(r);
+            }
+            request.setAttribute("list", lista);
+            request.setAttribute("listres", listaRes);
+                
+                
+                String alert = "El usuario ya existe";
+                request.setAttribute("alertaUsuario", alert);
+                request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
+            }
 
         }
         if (request.getParameter("btnReg") != null) {//registrar cliente

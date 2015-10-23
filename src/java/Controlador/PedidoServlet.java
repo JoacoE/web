@@ -163,28 +163,38 @@ public class PedidoServlet extends HttpServlet {
             ICtrlPedido ICP = f.getICtrlPedido();
             ICtrlUsuario ICU = f.getICtrlUsuario();
             HttpSession session = request.getSession();
+            String nickrest = request.getParameter("nickrest");
             if(session.getAttribute("iniciada").equals("false")){
-                Iterator it3 = ICU.retColCat().entrySet().iterator();
-                ArrayList<DataCategoria> lista = new ArrayList<>();
-                while (it3.hasNext()){
-                    Map.Entry cats =(Map.Entry)it3.next();
-                    DataCategoria cat = (DataCategoria)cats.getValue();    
-                    lista.add(cat);
+                ArrayList<DataIndividual> individuales = new ArrayList<>();
+                ArrayList<DataPromocional> promocionales = new ArrayList<>();
+                ArrayList<DTOEvaluacion> evaluaciones = new ArrayList<>();
+                DataRestaurante dr = ICU.getRestauranteByNickname(nickrest);
+                Iterator it = dr.getColProducto().entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry productos = (Map.Entry) it.next();
+                    if (productos.getValue() instanceof DataIndividual) {
+                        DataIndividual di = (DataIndividual) productos.getValue();
+                        individuales.add(di);
+                    }
+                    if (productos.getValue() instanceof DataPromocional) {
+                        DataPromocional dp = (DataPromocional) productos.getValue();
+                        promocionales.add(dp);
+                    }
                 }
-                Iterator it2 = ICU.listaDataRestaurantes().entrySet().iterator();
-                ArrayList<DataRestaurante> listaRes = new ArrayList<>();
-                while (it2.hasNext()){
-                    Map.Entry res =(Map.Entry)it2.next();
-                    DataRestaurante r = (DataRestaurante)res.getValue();    
-                    listaRes.add(r);
+                Iterator evs = ICP.listarEvaluacionesRest(nickrest).entrySet().iterator();
+                while (evs.hasNext()) {
+                    Map.Entry evals = (Map.Entry) evs.next();
+                    DTOEvaluacion de = (DTOEvaluacion) evals.getValue();
+                    evaluaciones.add(de);
                 }
-                request.setAttribute("list", lista);
-                request.setAttribute("listres", listaRes);
+                request.setAttribute("restaurante", dr);
+                request.setAttribute("individuales", individuales);
+                request.setAttribute("promocionales", promocionales);
+                request.setAttribute("evaluaciones", evaluaciones);
                 request.setAttribute("logeado", "no");
                 request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response); 
             }else{
-            DataCliente dc = (DataCliente)session.getAttribute("dcliente");
-            String nickrest = request.getParameter("nickrest");
+            DataCliente dc = (DataCliente)session.getAttribute("dcliente");            
             String[] nombres = request.getParameterValues("product");
             String[] cantidad = request.getParameterValues("qty");
             

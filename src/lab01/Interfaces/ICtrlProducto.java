@@ -11,7 +11,6 @@ import lab01.Clases.DTOArmarPromo;
 import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
-import lab01.Clases.Producto;
 
 /**
  *
@@ -24,9 +23,10 @@ public interface ICtrlProducto {
     public abstract Map listarIndividuales(String nomRest);
     public abstract void setPromo(Map promo);
     public abstract void armarPromo(DTOArmarPromo datos);
-    public abstract Producto getProdNombre(String Nprod, String nickRes);
     public abstract void actualizarIndividual(DTOActualizarIndividual datos);
     public abstract void actualizarPromocional(DTOActualizarPromocional datos);
     public abstract DataIndividual getProdIndividualXNombre(String nombre);
     public abstract DataPromocional getProdPromocionalXNombre(String nombre);
+    public abstract void setIdCtrl(Integer idCtrl);
+    public abstract Integer getIdCtrl();
 }

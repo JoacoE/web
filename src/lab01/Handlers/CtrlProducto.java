@@ -30,7 +30,22 @@ import lab01.Interfaces.ICtrlProducto;
 public class CtrlProducto implements ICtrlProducto {
 
     private Map Promo;
-
+    private Integer idCtrl;
+    
+    public CtrlProducto(){
+        this.Promo = new HashMap();
+    }
+    
+    @Override
+    public void setIdCtrl(Integer idCtrl){
+        this.idCtrl = idCtrl;
+    }
+    
+    @Override
+    public Integer getIdCtrl(){
+        return this.idCtrl;
+    }
+    
     @Override
     public void registrarProducto(DTORegistrarProducto datos) {
         //primero obtengo el restaurante, si existe
@@ -170,7 +185,6 @@ public class CtrlProducto implements ICtrlProducto {
         throw new NullPointerException();
     }
     
-    @Override
     public Producto getProdNombre(String Nprod, String nickRes){
         HUsuario hu = HUsuario.getinstance();
         Restaurante res = hu.obtenerRestaurante(nickRes);

@@ -45,10 +45,21 @@ public class CtrlPedido implements ICtrlPedido {
     private Map ColDataCarrito;
     private ArrayList<Producto_Stock> carrito;
     private DataPedido dp;
+    private Integer idCtrl;
     
     public CtrlPedido(){
     this.ColDataCarrito = new HashMap();
     this.carrito = new ArrayList<>();
+    }
+    
+    @Override
+    public void setIdCtrl(Integer idCtrl){
+        this.idCtrl = idCtrl;
+    }
+    
+    @Override
+    public Integer getIdCtrl(){
+        return this.idCtrl;
     }
     
     @Override

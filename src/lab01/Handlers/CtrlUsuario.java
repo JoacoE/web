@@ -35,9 +35,20 @@ public class CtrlUsuario implements ICtrlUsuario {
     private String email;
     private String direccion;
     private Map Cat;
+    private Integer idCtrl;
     
     
     public CtrlUsuario(){}
+    
+    @Override
+    public void setIdCtrl(int idCtrl){
+        this.idCtrl = idCtrl;
+    }
+    
+    @Override
+    public Integer getIdCtrl(){
+        return this.idCtrl;
+    }
     
     public void setCat(Map cate){
         HCategoria hc = HCategoria.getinstance();
@@ -140,10 +151,11 @@ public class CtrlUsuario implements ICtrlUsuario {
         DataRestaurante dr = r.RestauranteADR();
         return dr;
     }
-
-    public Map devListaDC(){
+    
+    @Override
+    public ArrayList<DataCliente> devListaDC(){
         HUsuario mu = HUsuario.getinstance();
-        Map ret = new HashMap();
+        ArrayList<DataCliente> ret = new ArrayList<>();
         Map col = mu.obtenerColeccion();
         Iterator it = col.entrySet().iterator(); 
         while(it.hasNext()){
@@ -151,7 +163,7 @@ public class CtrlUsuario implements ICtrlUsuario {
             if(map.getValue() instanceof Cliente){
                 Cliente cli = (Cliente)map.getValue();
                 DataCliente dc = cli.ClienteADC();
-                ret.put(dc.getNickname(), dc);
+                ret.add(dc);
             }
         }
     return ret;

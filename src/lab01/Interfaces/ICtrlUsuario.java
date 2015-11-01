@@ -27,7 +27,7 @@ public interface ICtrlUsuario {
     public abstract void datosAdicionales(DTODatosAdicionales datos);
     public abstract DataCliente getUsuarioByNickname(String nickname);
     public abstract DataRestaurante getRestauranteByNickname(String nickname);
-    public abstract Map devListaDC();
+    public abstract ArrayList<DataCliente> devListaDC();
     public abstract Map listaDataRestaurantes();
     public abstract void registrarCat(String nombre);
     public abstract Map retColCat();
@@ -42,4 +42,6 @@ public interface ICtrlUsuario {
     public abstract boolean existeMail(String mail);
     public abstract DataCliente getByMail(String mail);
     public abstract ArrayList<DataRestaurante> buscarRestaurantes(String nombre);
+    public abstract void setIdCtrl(int idCtrl);
+    public abstract Integer getIdCtrl();
 }

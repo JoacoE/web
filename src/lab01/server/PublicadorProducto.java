@@ -19,7 +19,6 @@ import lab01.Clases.DTOArmarPromo;
 import lab01.Clases.DTORegistrarProducto;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
-import lab01.Handlers.CtrlProducto;
 import lab01.Handlers.Fabrica;
 
 /**

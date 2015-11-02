@@ -127,8 +127,8 @@ public class PublicadorPedido {
     
     @WebMethod
     public DataProducto devListaProductos(Integer idCtrlPedido){
-        DataProducto ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).devListaProductos();
-        return ret;
+        DataProducto lista = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).devListaProductos();
+        return lista;
     }
     
     @WebMethod

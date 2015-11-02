@@ -6,14 +6,13 @@
 package lab01.Interfaces;
 
 import java.util.ArrayList;
-import java.util.Map;
 import lab01.Clases.DTOEvaluacion;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataProducto;
 import lab01.Clases.DataRestaurante;
-import lab01.Clases.estados;
+import lab01.Clases.Estados;
 
 /**
  *
@@ -36,7 +35,7 @@ public interface ICtrlPedido {
     public abstract void setMonto();
     public abstract DataPedido altaPedido();
     public abstract ArrayList<DataPedido> listDataPedidos();
-    public abstract void actualizarEPedido(String nickname, long id, estados estado);
+    public abstract void actualizarEPedido(String nickname, long id, Estados estado);
     public abstract void setDp(DataPedido dp);
     public abstract DataPedido getDp();
     public abstract void setMemoriaCliente(String nickname);

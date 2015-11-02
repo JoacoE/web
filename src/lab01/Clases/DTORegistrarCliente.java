@@ -10,13 +10,13 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTORegistrarCliente {
+    
     private String apellido;
     private String imagen;
     private String fecha;
     private String pwd;
     
-    public DTORegistrarCliente(){
-    }
+    public DTORegistrarCliente(){}
     
     public DTORegistrarCliente(String apellido, String imagen, String fecha, String pwd){
         this.apellido = apellido;

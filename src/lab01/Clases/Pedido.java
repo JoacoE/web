@@ -9,21 +9,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-import static lab01.Clases.estados.PREPARACION;
-import static lab01.Clases.estados.RECIBIDO;
+import static lab01.Clases.Estados.PREPARACION;
+import static lab01.Clases.Estados.RECIBIDO;
 
 
 /**
  *
  * @author gera
  */
-//enum estados {PREPARACION, ENVIADO, RECIBIDO};
+//enum Estados {PREPARACION, ENVIADO, RECIBIDO};
 
 public class Pedido {
     private long id; // ver como hacer el autogenerado
     private String fecha; // ver como hacer la fecha si con el jcalendar esta fecha tiene que ser la del momento en q se crea el objeto(la del sistema)
     private double precio_total;
-    private estados estado;
+    private Estados estado;
     private ArrayList<Producto_Stock> carrito;
     private DataPedido dp;
     private Evaluacion evaluacion;
@@ -75,11 +75,11 @@ public class Pedido {
         this.precio_total = precio_total;
     }
 
-    public estados getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(estados estado){
+    public void setEstado(Estados estado){
         if("PREPARACION".equals(this.getEstado().toString())){
             if("ENVIADO".equals(estado.toString()) || "RECIBIDO".equals(estado.toString())){
                 this.estado = estado;

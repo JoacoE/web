@@ -5,8 +5,6 @@
  */
 package lab01.Clases;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -21,13 +19,14 @@ public class DataRestaurante {
     private String pwd;
     private float promedio;
     private ArrayList<String> lstImagen;
-    private Map ColCategoria = new HashMap();
-    private Map ColProducto = new HashMap();
+    private ArrayList<DataCategoria> ColCategoria = new ArrayList<>();
+    private ArrayList<DataPromocional> ColPromocionales = new ArrayList<>();
+    private ArrayList<DataIndividual> ColIndividuales = new ArrayList<>();
 
     
     public DataRestaurante(){}
     
-    public DataRestaurante(String nickname, String nombre, String mail, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria, String pwd){
+    public DataRestaurante(String nickname, String nombre, String mail, String direccion, ArrayList<String>lstImagen, ArrayList<DataPromocional> colPromocionales, ArrayList<DataIndividual> colIndividuales,  ArrayList<DataCategoria> colCategoria, String pwd){
         this.nickname=nickname;
         this.nombre=nombre;
         this.email=mail;
@@ -39,21 +38,27 @@ public class DataRestaurante {
             this.lstImagen = new ArrayList<>();
             this.lstImagen.addAll(lstImagen);
         }
-        if(colProd == null){
-            this.ColProducto = null;
+        if(colPromocionales == null){
+            this.ColPromocionales = null;
         }else{
-            this.ColProducto = new HashMap();
-            this.ColProducto.putAll(colProd);
+            this.ColPromocionales = new ArrayList<>();
+            this.ColPromocionales.addAll(colPromocionales);
+        }
+        if(colIndividuales == null){
+            this.ColIndividuales = null;
+        }else{
+            this.ColIndividuales = new ArrayList<>();
+            this.ColIndividuales.addAll(colIndividuales);
         }
         if(colCategoria == null){
             this.ColCategoria = null;
         }else{
-            this.ColCategoria = new HashMap();
-            this.ColCategoria.putAll(colCategoria);
+            this.ColCategoria = new ArrayList<>();
+            this.ColCategoria.addAll(colCategoria);
         }
     }
     
-    public DataRestaurante(String nickname,  String nombre, String mail, String direccion, ArrayList<String>lstImagen, Map colProd, Map colCategoria, String pwd, float promedio){
+    public DataRestaurante(String nickname,  String nombre, String mail, String direccion, ArrayList<String>lstImagen, ArrayList<DataPromocional> colPromocionales, ArrayList<DataIndividual> colIndividuales,  ArrayList<DataCategoria> colCategoria, String pwd, float promedio){
         this.nickname=nickname;
         this.nombre=nombre;
         this.email=mail;
@@ -66,25 +71,30 @@ public class DataRestaurante {
             this.lstImagen = new ArrayList<>();
             this.lstImagen.addAll(lstImagen);
         }
-        if(colProd == null){
-            this.ColProducto = null;
+        if(colPromocionales == null){
+            this.ColPromocionales = null;
         }else{
-            this.ColProducto = new HashMap();
-            this.ColProducto.putAll(colProd);
+            this.ColPromocionales = new ArrayList<>();
+            this.ColPromocionales.addAll(colPromocionales);
+        }
+        if(colIndividuales == null){
+            this.ColIndividuales = null;
+        }else{
+            this.ColIndividuales = new ArrayList<>();
+            this.ColIndividuales.addAll(colIndividuales);
         }
         if(colCategoria == null){
             this.ColCategoria = null;
         }else{
-            this.ColCategoria = new HashMap();
-            this.ColCategoria.putAll(colCategoria);
+            this.ColCategoria = new ArrayList<>();
+            this.ColCategoria.addAll(colCategoria);
         }
     }
 
     public boolean member(String nombre){
-        Iterator dcats = getColCategoria().entrySet().iterator();
+        Iterator dcats = getColCategoria().iterator();
         while(dcats.hasNext()){
-            Map.Entry dcat = (Map.Entry) dcats.next();
-            DataCategoria dc = (DataCategoria)dcat.getValue();
+            DataCategoria dc = (DataCategoria)dcats.next();
             if(dc.getNombre().equals(nombre)){
                 return true;
             }
@@ -132,23 +142,31 @@ public class DataRestaurante {
         return this.lstImagen;
     }
     
-    public void setColCategoria(Map colCategoria){
-        this.ColCategoria.putAll(colCategoria);
+    public void setColCategoria(ArrayList<DataCategoria> colCategoria){
+        this.ColCategoria.addAll(colCategoria);
     }
     
-    public Map getColCategoria(){
+    public ArrayList<DataCategoria> getColCategoria(){
         return this.ColCategoria;
     }
     
-    public Map getColProducto(){
-        return this.ColProducto;
+    public ArrayList<DataPromocional> getColPromocionales(){
+        return this.ColPromocionales;
     }
     
-    public void setColProducto(Map colProd){
-        this.ColProducto.putAll(colProd);
+    public void setColProducto(ArrayList<DataPromocional> colPromocionales){
+        this.ColPromocionales.addAll(colPromocionales);
     }
     
-    public Map listarCategorias(){
+    public ArrayList<DataIndividual> getColIndividuales(){
+        return this.ColIndividuales;
+    }
+    
+    public void setColIndividuales(ArrayList<DataIndividual> colIndividuales){
+        this.ColIndividuales.addAll(colIndividuales);
+    }
+    
+    public ArrayList<DataCategoria> listarCategorias(){
         return this.ColCategoria;
     }
     
@@ -171,13 +189,10 @@ public class DataRestaurante {
      String logo;
      if(this.lstImagen!=null){
         logo = this.lstImagen.get(0);   
-
      }else{
          logo = "";
          
      }
        return logo; 
-     
-     
     }
 }

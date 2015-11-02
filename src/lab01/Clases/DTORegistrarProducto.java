@@ -10,12 +10,12 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTORegistrarProducto {
+    
     private DataIndividual di;
     private String nickRest;
     private boolean promo;
     
-    public DTORegistrarProducto(){
-    }
+    public DTORegistrarProducto(){}
     
     public DTORegistrarProducto(DataIndividual di, String nickRest, boolean promo){
         this.di = di;
@@ -39,7 +39,7 @@ public class DTORegistrarProducto {
         this.nickRest = nickRest;
     }
 
-    public boolean isPromo() {
+    public boolean getPromo() {
         return promo;
     }
 

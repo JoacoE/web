@@ -10,6 +10,7 @@ package lab01.Clases;
  * @author gera
  */
 public class Cantidad_Individual {
+    
     private int cantidad;
     private Individual prodIndividual;
     

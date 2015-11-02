@@ -10,11 +10,11 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOCarritoCompra {
+    
     private String nombre;
     private int cantidad;
 
-    public DTOCarritoCompra() {
-    }
+    public DTOCarritoCompra(){}
 
     public DTOCarritoCompra(String nombre, int cantidad) {
         this.nombre = nombre;

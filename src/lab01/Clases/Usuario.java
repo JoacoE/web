@@ -10,16 +10,15 @@ package lab01.Clases;
  * @author gera
  */
 public abstract class Usuario {
+    
     protected String nickname;
     protected String nombre;
     protected String mail;
     protected String direccion;
     protected String imagen; //esto es duda
-    //protected String tipoUsuario;
     protected String contrasenia;
 
-    public Usuario() {
-    }
+    public Usuario(){}
     
     public Usuario(String nickname, String nombre, String email, String direccion, String contrasenia) {
         this.nickname=nickname;

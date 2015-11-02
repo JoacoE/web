@@ -5,41 +5,39 @@
  */
 package lab01.Clases;
 
-
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
  * @author gera
  */
 public class DataProducto {
-    private Map ColDatIndividual;
-    private Map ColDatPromocional;
+    private ArrayList<DataIndividual> ColDatIndividual;
+    private ArrayList<DataPromocional> ColDatPromocional;
     
-    public DataProducto() {   
-    }
+    public DataProducto() {}
 
-    public Map getColDatIndividual() {
+    public ArrayList<DataIndividual> getColDatIndividual() {
         return this.ColDatIndividual;
     }
 
     public void setDatIndividual(DataIndividual di) {
-        this.ColDatIndividual.put(di.getDataNombre(), di);
+        this.ColDatIndividual.add(di);
     }
     
-    public void setColDatIndividual(Map ColDatIndividual){//comodidad...
+    public void setColDatIndividual(ArrayList<DataIndividual> ColDatIndividual){//comodidad...
         this.ColDatIndividual = ColDatIndividual;
     }
     
-    public Map getColDatPromocional(){
+    public ArrayList<DataPromocional> getColDatPromocional(){
         return this.ColDatPromocional;
     }
 
     public void setDatPromocional(DataPromocional dp) {
-        this.ColDatPromocional.put(dp.getDataNombre(), dp);
+        this.ColDatPromocional.add(dp);
     }
     
-    public void setColDatPromocional(Map ColDatPromocional){//comodidad...
+    public void setColDatPromocional(ArrayList<DataPromocional> ColDatPromocional){//comodidad...
         this.ColDatPromocional = ColDatPromocional;
     }
     

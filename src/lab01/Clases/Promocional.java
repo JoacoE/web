@@ -23,7 +23,6 @@ public class Promocional extends Producto {
         this.activa = activa;
         this.descuento = descuento;
         this.ColCantIndividual = ColCantIndividual;
-        //this.setPrecioPromo(descuento); hay que llamar a esta operacion una vez creado el promocional...
     }//ver como se hace
 
     public boolean isActiva() {
@@ -71,11 +70,11 @@ public class Promocional extends Producto {
     }
     
     public DataPromocional getDataPromo(){
-        Map ColDatIndividual = new HashMap();
+        ArrayList<DataIndividual> ColDatIndividual = new ArrayList<>();
         for(Cantidad_Individual ci: ColCantIndividual){
             DataIndividual di = ci.getProdIndividual().getDataIndividual();
             di.setCantidad(ci.getCantidad());
-            ColDatIndividual.put(di.getDataNombre(), di);
+            ColDatIndividual.add(di);
         }
         DataPromocional dPromo = new DataPromocional(this.isActiva(), this.getDescuento(), this.getNombre(), this.getDescripcion(), this.getPrecio(), this.getImagen(), ColDatIndividual);
         return dPromo;

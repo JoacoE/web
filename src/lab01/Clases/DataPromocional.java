@@ -5,7 +5,7 @@
  */
 package lab01.Clases;
 
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,19 +18,22 @@ public class DataPromocional {
     private String DataDescripcion;
     private double DataPrecio;
     private String DataImagen;
-    private Map ColDatIndividual;
+    private ArrayList<DataIndividual> ColDatIndividual;
     
     public DataPromocional(){}
     
-    public DataPromocional(boolean activa, double descuento, String nombre, String descripcion, double precio, String imagen, Map ColDatIndividual){
+    public DataPromocional(boolean activa, double descuento, String nombre, String descripcion, double precio, String imagen, ArrayList<DataIndividual> ColDatIndividual){
         this.DataActiva = activa;
         this.DataDescuento = descuento;
         this.DataNombre = nombre;
         this.DataDescripcion = descripcion;
         this.DataPrecio = precio;
         this.DataImagen = imagen;
-        this.ColDatIndividual = ColDatIndividual;
-        
+        if(ColDatIndividual == null){
+            this.ColDatIndividual = null;
+        }else{
+            this.ColDatIndividual.addAll(ColDatIndividual);
+        }
     }
     
     public void setActiva(boolean activa){
@@ -81,15 +84,15 @@ public class DataPromocional {
         return DataDescuento;
     }
     
-    public Map getColDatIndividual(){
+    public ArrayList<DataIndividual> getColDatIndividual(){
         return this.ColDatIndividual;
     }
     
     public void setDatIndividual(DataIndividual di){
-        this.ColDatIndividual.put(di.getDataNombre(), di);
+        this.ColDatIndividual.add(di);
     }
     
-    public void setColDataIndividual(Map ColDatIndividual){
+    public void setColDataIndividual(ArrayList<DataIndividual> ColDatIndividual){
         this.ColDatIndividual = ColDatIndividual;
     }
 }

@@ -9,4 +9,4 @@ package lab01.Clases;
  *
  * @author joaco
  */
-public enum estados {PREPARACION, ENVIADO, RECIBIDO}
+public enum Estados {PREPARACION, ENVIADO, RECIBIDO}

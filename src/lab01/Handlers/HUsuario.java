@@ -32,7 +32,6 @@ public class HUsuario {
     public void addUsuario(Usuario usu){
         String nickname = usu.getNickname();
         Colusuarios.put(nickname,usu);
-        //JOptionPane.showMessageDialog(null, usu.getNickname());
     }
     
     public Map obtenerColeccion(){        

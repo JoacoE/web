@@ -42,9 +42,9 @@ public class HImagenes {
                     throw new NullPointerException();
                 }
             }
-        } catch (URISyntaxException ex) {
+        }catch (URISyntaxException ex) {
             Logger.getLogger(HImagenes.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        }
     }
     
     public static HImagenes getInstance(){

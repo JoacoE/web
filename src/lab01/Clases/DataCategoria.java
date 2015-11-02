@@ -10,21 +10,20 @@ package lab01.Clases;
  * @author joaquin
  */
 public class DataCategoria {
+    
     private String nombre;
     
+    public DataCategoria(){}
+    
     public DataCategoria(String nombre){
-    this.nombre = nombre;
+        this.nombre = nombre;
     }
     
     public void setNombre(String nombre){
-    this.nombre=nombre;
+        this.nombre=nombre;
     }
     
     public String getNombre(){
-    return this.nombre;
-    }
-    public Categoria DCatAC(){
-        Categoria cat = new Categoria(this.nombre);
-        return cat;
+        return this.nombre;
     }
 }

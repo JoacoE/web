@@ -22,7 +22,7 @@ public class Restaurante extends Usuario{
     private Map ColCategoria;
     private Map ColProducto;
 
-    public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, Map colProd, Map categorias, String pwd) {
+    public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, Map categorias, String pwd){
         super(nickname,nombre,email,direccion, pwd);
         if(categorias == null){
             this.ColCategoria = null;
@@ -82,20 +82,21 @@ public class Restaurante extends Usuario{
         return ret;
     }
     public DataRestaurante RestauranteADR(){
-        Map dataProductos = new HashMap();
-        Map dataCategorias = new HashMap();
+        ArrayList<DataPromocional> dataPromocionales = new ArrayList<>();
+        ArrayList<DataIndividual> dataIndividuales = new ArrayList<>();
+        ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
         Iterator prods = this.ColProducto.entrySet().iterator();
         while(prods.hasNext()){
             Map.Entry prod = (Map.Entry) prods.next();
             if(prod.getValue() instanceof Individual){
                 Individual i = (Individual) prod.getValue();
                 DataIndividual di = i.getDataIndividual();
-                dataProductos.put(di.getDataNombre(), di);
+                dataIndividuales.add(di);
             }
             if(prod.getValue() instanceof Promocional){
                 Promocional p = (Promocional) prod.getValue();
                 DataPromocional dp = p.getDataPromo();
-                dataProductos.put(dp.getDataNombre(), dp);
+                dataPromocionales.add(dp);
             }
         }
         Iterator categs = this.ColCategoria.entrySet().iterator();
@@ -103,9 +104,9 @@ public class Restaurante extends Usuario{
             Map.Entry cat = (Map.Entry) categs.next();
             Categoria c = (Categoria) cat.getValue();
             DataCategoria dc = c.CatADC();
-            dataCategorias.put(dc.getNombre(), dc);
+            dataCategorias.add(dc);
         }
-        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataProductos, dataCategorias, this.contrasenia, this.getPromedio());
+        DataRestaurante DR = new DataRestaurante(this.getNickname(), this.getNombre(), this.getMail(), this.getDireccion(), this.lstImagen, dataPromocionales , dataIndividuales, dataCategorias, this.contrasenia, this.getPromedio());
         return DR;
     }
     

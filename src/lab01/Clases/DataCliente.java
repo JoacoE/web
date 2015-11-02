@@ -5,15 +5,34 @@
  */
 package lab01.Clases;
 
-import java.util.Date;
-
 /**
  *
  * @author gonzalo
  */
 public class DataCliente{
-
-    public String getEmail() {
+    
+    private String nickname;
+    private String nombre;
+    private String email;
+    private String direccion;
+    private String apellido;
+    private String imagen;
+    private String fNac;
+    private String pwd;
+    
+    public DataCliente(){}
+    
+    public DataCliente(String nickname, String nombre, String mail, String direccion, String apellido, String img, String fecha, String pwd){
+        this.nickname=nickname;
+        this.nombre=nombre;
+        this.email=mail;
+        this.direccion=direccion;
+        this.apellido = apellido;
+        this.imagen=img;
+        this.fNac = fecha;
+        this.pwd = pwd;
+    }
+     public String getEmail() {
         return email;
     }
 
@@ -29,28 +48,6 @@ public class DataCliente{
         this.fNac = fNac;
     }
     
-    private String nickname;
-    private String nombre;
-    private String email;
-    private String direccion;
-    private String apellido;
-    private String imagen;
-    private String fNac;
-    private String pwd;
-
-    
-    public DataCliente(){}
-    
-    public DataCliente(String nickname, String nombre, String mail, String direccion, String apellido, String img, String fecha, String pwd){
-        this.nickname=nickname;
-        this.nombre=nombre;
-        this.email=mail;
-        this.direccion=direccion;
-        this.apellido = apellido;
-        this.imagen=img;
-        this.fNac = fecha;
-        this.pwd = pwd;
-    }
     public String getNombre(){
         return this.nombre;
     }
@@ -77,8 +74,6 @@ public class DataCliente{
         this.apellido = apellido;
     }
 
-//    public String getMail(){
-//        return this.email;
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
@@ -102,10 +97,4 @@ public class DataCliente{
     public String getPwd(){
         return this.pwd;
     }
-    
-//    public Usuario dataCliACli(){
-//        Usuario c = new Cliente(this.nickname, this.nombre, this.email, this.direccion,this.apellido, this.imagen, this.fNac);
-//        return c;
-//    }
-    
 }

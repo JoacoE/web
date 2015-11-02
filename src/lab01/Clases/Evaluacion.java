@@ -7,19 +7,18 @@ package lab01.Clases;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import lab01.Clases.DTOEvaluacion;
 
 /**
  *
  * @author joaco
  */
 public class Evaluacion {
+    
     private String comentario;
     private float puntaje;
     private String fecha;
 
-    public Evaluacion(){
-    }
+    public Evaluacion(){}
     
     public Evaluacion(String comentario, float puntaje){
         this.comentario = comentario;

@@ -28,7 +28,7 @@ import lab01.Clases.Pedido;
 import lab01.Clases.Producto;
 import lab01.Clases.Producto_Stock;
 import lab01.Clases.Promocional;
-import lab01.Clases.estados;
+import lab01.Clases.Estados;
 
 /**
  *
@@ -76,6 +76,8 @@ public class CtrlPedido implements ICtrlPedido {
     public void setNickname(String nick){
         this.nickname=nick;
     }
+    
+    @Override
     public String getNickname(){
         return this.nickname;
     }
@@ -100,13 +102,19 @@ public class CtrlPedido implements ICtrlPedido {
             this.memCliente = mu.obtenerUsuario(this.getNickname());
         }
     }
+    
+    @Override
     public void setMemoriaCliente(String nickname){
             HUsuario hu = HUsuario.getinstance();
             this.memCliente = hu.obtenerUsuario(nickname);
     }
+    
+    @Override
     public void setCat(String nombre){
         this.categoria=nombre;
     }
+    
+    @Override
     public String getCat(){
         return this.categoria;
     }
@@ -257,15 +265,21 @@ public class CtrlPedido implements ICtrlPedido {
         this.setMonto();
         Pedido nuevo = new Pedido(this.getMonto());
         nuevo.setCarrito(this.getCarrito());
-        DataPedido newDP = new DataPedido(nuevo.getId(), this.getNickname(), this.getMailCliente(), nuevo.getFecha(), this.memRestaurante.getNickname(), this.getColDataCarrito(), this.getMonto(), nuevo.getEstado());
+        ArrayList<DataCarrito> param = new ArrayList<>();
+        Iterator it = this.getColDataCarrito().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry dcarts = (Map.Entry)it.next();
+            DataCarrito dc = (DataCarrito)dcarts.getValue();
+            param.add(dc);
+        }
+        DataPedido newDP = new DataPedido(nuevo.getId(), this.getNickname(), this.getMailCliente(), nuevo.getFecha(), this.memRestaurante.getNickname(), param, this.getMonto(), nuevo.getEstado());
         nuevo.setDataPedido(newDP);
         this.memCliente.setPedido(nuevo);
         return newDP;
     }
     
     @Override
-    public ArrayList<DataPedido> listDataPedidos(){
-        
+    public ArrayList<DataPedido> listDataPedidos(){       
         ArrayList<DataPedido> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Iterator user = hu.obtenerColeccion().entrySet().iterator();
@@ -296,12 +310,11 @@ public class CtrlPedido implements ICtrlPedido {
                 if(client.existePedido(id)){
                     ped = client.getPedido(id);
                     DataPedido dp = ped.getDataPedido();
-                    if(ped.getEstado() == estados.PREPARACION){
+                    if(ped.getEstado() == Estados.PREPARACION){
                         Restaurante r = hu.obtenerRestaurante(dp.getNickRest());
-                        Iterator it = dp.getColCarrito().entrySet().iterator();
+                        Iterator it = dp.getColCarrito().iterator();
                         while(it.hasNext()){
-                            Map.Entry map = (Map.Entry)it.next();
-                            DataCarrito dc = (DataCarrito)map.getValue();
+                            DataCarrito dc = (DataCarrito)it.next();
                             Producto prod = r.getProducto(dc.getNomProd());
                             prod.sumarStock(dc.getCantidad());
                         }
@@ -323,7 +336,7 @@ public class CtrlPedido implements ICtrlPedido {
     }
     
     @Override
-    public void actualizarEPedido(String nickname, long id, estados estado){//usar listarDataPedido antes q esto xD
+    public void actualizarEPedido(String nickname, long id, Estados estado){//usar listarDataPedido antes q esto xD
         HUsuario hu = HUsuario.getinstance();
         Cliente user = hu.obtenerUsuario(nickname);
         user.actualizarEstadoPedido(id, estado);
@@ -343,7 +356,7 @@ public class CtrlPedido implements ICtrlPedido {
                     while(pedidos.hasNext()){
                         Map.Entry p = (Map.Entry) pedidos.next();
                         Pedido ped = (Pedido)p.getValue();
-                        if(ped.getEstado() == estados.RECIBIDO){
+                        if(ped.getEstado() == Estados.RECIBIDO){
                             aux.add(dp);
                         }
                     }
@@ -353,6 +366,7 @@ public class CtrlPedido implements ICtrlPedido {
         return aux;
     }
     
+    @Override
     public ArrayList<DataPedido> listaPedidos(String nickname){
         ArrayList<DataPedido> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
@@ -389,7 +403,7 @@ public class CtrlPedido implements ICtrlPedido {
                 while(pedidos.hasNext()){
                     Map.Entry pedido = (Map.Entry)pedidos.next();
                     Pedido p = (Pedido)pedido.getValue();
-                    if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == estados.RECIBIDO))){
+                    if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == Estados.RECIBIDO))){
                         if(p.getEvaluacion() != null){
                             sumaPuntajes = sumaPuntajes + p.getEvaluacion().getPuntaje();
                             cantidadPedidos++;
@@ -450,7 +464,7 @@ public class CtrlPedido implements ICtrlPedido {
                 while(pedidos.hasNext()){
                     Map.Entry pedido = (Map.Entry)pedidos.next();
                     Pedido p = (Pedido)pedido.getValue();
-                    if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == estados.RECIBIDO))){
+                    if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == Estados.RECIBIDO))){
                         if(p.getEvaluacion() != null){
                             DTOEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
                             ev.setNickname(c.getNickname());

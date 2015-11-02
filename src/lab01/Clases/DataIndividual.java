@@ -17,14 +17,12 @@ public class DataIndividual {
     private String DataImagen;
     private int cantidad;
 
-    public DataIndividual() {
-    }
+    public DataIndividual(){}
     
     public DataIndividual(String nombre, String descripcion, double precio, int cantidad){
         this.DataNombre = nombre;
         this.DataDescripcion = descripcion;
-        this.DataPrecio = precio;
-       
+        this.DataPrecio = precio;       
         this.cantidad = cantidad;
     }
     public DataIndividual(String nombre, String descripcion, double precio, String imagen, int cantidad) {
@@ -72,7 +70,6 @@ public class DataIndividual {
     }
     
     public void setCantidad(int cantidad){
-        this.cantidad = cantidad;
-        
+        this.cantidad = cantidad;       
     }
 }

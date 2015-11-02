@@ -28,5 +28,4 @@ public class Categoria {
         DataCategoria dc = new DataCategoria(this.getNombre());
         return dc;
     }
-    
 }

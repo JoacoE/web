@@ -17,7 +17,7 @@ public class ImagenFondo implements Border{
         try {
             URL imagePath = new URL(getClass().getResource("/Helpers/portadaquickorder.png").toString());
             back = ImageIO.read(imagePath);
-        } catch (Exception ex) {            
+        }catch (Exception ex){            
         }
     }
 
@@ -31,6 +31,5 @@ public class ImagenFondo implements Border{
  
     public boolean isBorderOpaque() {
         return false;
-    }
- 
+    } 
 }

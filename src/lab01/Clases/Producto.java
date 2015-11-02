@@ -10,6 +10,7 @@ package lab01.Clases;
  * @author gera
  */
 public abstract class  Producto {
+    
     private String nombre;
     private String descripcion;
     private String imagen;

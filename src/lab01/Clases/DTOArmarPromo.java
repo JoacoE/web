@@ -10,14 +10,14 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOArmarPromo {
+    
     private String nickRest;
     private String nombre;
     private String descripcion;
     private double descuento;
     private String imagen;
     
-    public DTOArmarPromo(){
-    }
+    public DTOArmarPromo(){}
     
     public DTOArmarPromo(String nickRest, String nombre, String descripcion, double descuento){
         this.nickRest = nickRest;

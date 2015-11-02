@@ -10,13 +10,13 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOActualizarPromocional {
+    
     private DataPromocional dp;
     private String nombre;
     private String nickRest;
     private String imagen;
     
-    public DTOActualizarPromocional(){
-    }
+    public DTOActualizarPromocional(){}
     
     public DTOActualizarPromocional(DataPromocional dp, String nombre, String nickRest){
         this.dp = dp;

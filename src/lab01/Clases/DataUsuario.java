@@ -15,6 +15,8 @@ public class DataUsuario {
     private String nombre;
     private String mail;
 
+    public DataUsuario(){}
+    
     public DataUsuario(String nombre, String mail){
         this.nombre=nombre;
         this.mail=mail;

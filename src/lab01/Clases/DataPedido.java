@@ -5,34 +5,36 @@
  */
 package lab01.Clases;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
-
 /**
  *
  * @author joaco
  */
 public class DataPedido {
-    private long id;  //ver q historia con el autogenerado...
+    private long id;
     private String fecha; 
     private double precio_total;
-    private estados estado;
+    private Estados estado;
     private String nickUsr;
     private String mailUsr;
-    private String nickRest; //o el nombre no c
-    private Map ColCarrito; //map de DataCarrito
+    private String nickRest;
+    private ArrayList<DataCarrito> ColCarrito;
     
-    public DataPedido(long id, String nickUsr, String mailUsr, String fecha, String nickRest, Map ColCarrito, double precio_total, estados estado){
+    public DataPedido(){}
+    
+    public DataPedido(long id, String nickUsr, String mailUsr, String fecha, String nickRest, ArrayList<DataCarrito> ColCarrito, double precio_total, Estados estado){
         this.id = id;
         this.nickUsr = nickUsr;
         this.mailUsr = mailUsr;
         this.fecha = fecha;
         this.nickRest = nickRest;
-        this.ColCarrito = new HashMap();
-        this.ColCarrito.putAll(ColCarrito);
-        //if(this.ColCarrito.isEmpty()){
-        //    this.ColCarrito = new HashMap();}
+        if(ColCarrito == null){
+            this.ColCarrito = null;
+        }else{
+            this.ColCarrito = new ArrayList<>();
+            this.ColCarrito.addAll(ColCarrito);
+        }
         this.precio_total = precio_total;
         this.estado = estado;
     }
@@ -61,11 +63,11 @@ public class DataPedido {
         this.precio_total = precio_total;
     }
 
-    public estados getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(estados estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
     
@@ -93,23 +95,22 @@ public class DataPedido {
         this.nickRest = nickRest;
     }
     
-    public Map getColCarrito(){
+    public ArrayList<DataCarrito> getColCarrito(){
         return this.ColCarrito;
     }
     
-    public void setColCarrito(Map ColCarrito){//por si queda mas comodo...
+    public void setColCarrito(ArrayList<DataCarrito> ColCarrito){//por si queda mas comodo...
         this.ColCarrito = ColCarrito;
     }
     
     public void setDatCarrito(DataCarrito dc){
-        this.ColCarrito.put(dc.getNomProd(), dc);
+        this.ColCarrito.add(dc);
     }
     
     public boolean existeProducto(String nombre){
-        Iterator it = this.getColCarrito().entrySet().iterator();
+        Iterator it = this.getColCarrito().iterator();
         while(it.hasNext()){
-            Map.Entry dcarr = (Map.Entry) it.next();
-            DataCarrito dc = (DataCarrito)dcarr.getValue();
+            DataCarrito dc = (DataCarrito)it.next();
             if(dc.getNomProd().equals(nombre)){
                 return true;
             }
@@ -117,7 +118,7 @@ public class DataPedido {
         return false;
     }
     public boolean esRecibido(){
-        if (this.estado==estados.RECIBIDO)
+        if (this.estado==Estados.RECIBIDO)
             return true;
         else 
             return false;

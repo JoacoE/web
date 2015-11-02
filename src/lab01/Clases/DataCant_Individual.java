@@ -12,8 +12,7 @@ package lab01.Clases;
 public class DataCant_Individual {
     private int cantidad;
 
-    public DataCant_Individual() {
-    }
+    public DataCant_Individual() {}
     
     public DataCant_Individual(int cantidad) {
         this.cantidad = cantidad;
@@ -25,7 +24,5 @@ public class DataCant_Individual {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-    
-    
+    } 
 }

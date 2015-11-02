@@ -10,13 +10,13 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOIngresarDatos {
+    
     private String nickname;
     private String nombre;
     private String email;
     private String direccion;
 
-    public DTOIngresarDatos(){
-    }
+    public DTOIngresarDatos(){}
     
     public DTOIngresarDatos(String nickname, String nombre, String email, String direccion){
         this.nickname = nickname;
@@ -56,6 +56,4 @@ public class DTOIngresarDatos {
     public String getDireccion() {
         return direccion;
     }
-    
-    
 }

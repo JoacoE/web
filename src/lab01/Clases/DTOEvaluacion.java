@@ -10,13 +10,13 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOEvaluacion {
+    
     private String comentario;
     private float puntaje;
     private String fecha;
     private String nickname;
     
-    public DTOEvaluacion(){
-    }
+    public DTOEvaluacion(){}
     
     public DTOEvaluacion(String comentario, float puntaje){
         this.comentario = comentario;

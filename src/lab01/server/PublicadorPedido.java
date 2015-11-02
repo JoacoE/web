@@ -19,7 +19,7 @@ import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataProducto;
 import lab01.Clases.DataRestaurante;
-import lab01.Clases.estados;
+import lab01.Clases.Estados;
 import lab01.Handlers.Fabrica;
 
 /**
@@ -162,7 +162,7 @@ public class PublicadorPedido {
     }
     
     @WebMethod
-    public void actualizarEPedido(Integer idCtrlPedido, String nickname, long id, estados estado){
+    public void actualizarEPedido(Integer idCtrlPedido, String nickname, long id, Estados estado){
         Fabrica.getInstance().getICtrlPedido(idCtrlPedido).actualizarEPedido(nickname, id, estado);
     }
     

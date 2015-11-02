@@ -5,7 +5,6 @@
  */
 package lab01.Interfaces;
 import java.util.ArrayList;
-import java.util.Map;
 import lab01.Clases.DTOActualizarIndividual;
 import lab01.Clases.DTOActualizarPromocional;
 import lab01.Clases.DTOArmarPromo;

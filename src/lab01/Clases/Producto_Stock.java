@@ -10,6 +10,7 @@ package lab01.Clases;
  * @author gera
  */
 public class Producto_Stock {
+    
     private int cantidad;
     private double precio;
     private Producto prod;
@@ -20,7 +21,6 @@ public class Producto_Stock {
 
     public Producto_Stock(int cantidad/*, double precio*/) {
         this.cantidad = cantidad;
-        //this.precio = precio;
     }
 
     public int getCantidad() {

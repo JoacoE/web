@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package lab01.Handlers;
+
 import java.util.ArrayList;
 import lab01.Clases.Cliente;
 import lab01.Clases.Restaurante;
@@ -122,19 +123,15 @@ public class CtrlUsuario implements ICtrlUsuario {
             while(cats.hasNext()){
                 Map.Entry cat = (Map.Entry) cats.next();
                 Categoria c = (Categoria)cat.getValue();
-                Iterator dcats = dt.getColCategoria().entrySet().iterator();
+                Iterator dcats = dt.getColCategoria().iterator();
                 while(dcats.hasNext()){
-                    Map.Entry dcat = (Map.Entry) dcats.next();
-                    DataCategoria dc = (DataCategoria)dcat.getValue();
+                    DataCategoria dc = (DataCategoria)dcats.next();
                     if(c.getNombre().equals(dc.getNombre())){
                         categorias.put(c.getNombre(), c);
                     }
                 }                
             }
-//            if(dt.getLstImagen() == null){
-//                dt.getLstImagen().add("");
-//            }
-            Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), dt.getColProducto(), categorias, dt.getPwd());
+            Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), categorias, dt.getPwd());
             HUsuario HU = HUsuario.getinstance();
             HU.addUsuario(r);
         }else{
@@ -206,10 +203,9 @@ public class CtrlUsuario implements ICtrlUsuario {
         Iterator it = listaDataRestaurantes().iterator();
         while(it.hasNext()){
             DataRestaurante dr = (DataRestaurante)it.next();
-            Iterator dcats = dr.getColCategoria().entrySet().iterator();
+            Iterator dcats = dr.getColCategoria().iterator();
             while(dcats.hasNext()){
-                Map.Entry dcat = (Map.Entry) dcats.next();
-                DataCategoria dc = (DataCategoria)dcat.getValue();
+                DataCategoria dc = (DataCategoria)dcats.next();
                 if(dc.getNombre().equals(cate)){
                     ret.add(dr);
                 }
@@ -366,6 +362,6 @@ public class CtrlUsuario implements ICtrlUsuario {
                 }
             }
         }
-    return lista;
+        return lista;
     }    
 }

@@ -93,7 +93,7 @@ public class Cliente extends Usuario{
         return DC;
     }
     
-    public void actualizarEstadoPedido(long id, estados estado){
+    public void actualizarEstadoPedido(long id, Estados estado){
         this.getPedido(id).setEstado(estado);
     }
     public Map listaPedidos(){

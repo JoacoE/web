@@ -55,7 +55,7 @@ public class CtrlProducto implements ICtrlProducto {
             JOptionPane.showMessageDialog(null, "El restaurante no esta registrado en el sistema", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
-            if (!datos.isPromo()) { // si el producto es individual
+            if (!datos.getPromo()) { // si el producto es individual
                 Producto i = new Individual(datos.getDi().getDataNombre(), datos.getDi().getDataDescripcion(), datos.getDi().getDataPrecio(), datos.getDi().getCantidad());
                 if(!datos.getDi().getDataImagen().equals("")){
                     i.setImagen(datos.getDi().getDataImagen());

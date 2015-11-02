@@ -7,11 +7,13 @@
 package lab01.Interfaces;
 
 import java.util.ArrayList;
-import java.util.Map;
 import lab01.Clases.DTODatosAdicionales;
 import lab01.Clases.DTOIngresarDatos;
 import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 
 /**
@@ -28,15 +30,15 @@ public interface ICtrlUsuario {
     public abstract DataCliente getUsuarioByNickname(String nickname);
     public abstract DataRestaurante getRestauranteByNickname(String nickname);
     public abstract ArrayList<DataCliente> devListaDC();
-    public abstract Map listaDataRestaurantes();
+    public abstract ArrayList<DataRestaurante> listaDataRestaurantes();
     public abstract void registrarCat(String nombre);
-    public abstract Map retColCat();
-    public abstract Map listaUsuPorCategoria(String cate);
-    public abstract void setCat(Map cate);
-    public abstract Map getLstCat();
-    public abstract Map listaProductosStock(String r);
-    public abstract Map listarPedidos();
-    public abstract Map pedidosUsuario(String nickname);
+    public abstract ArrayList<DataCategoria> retColCat();
+    public abstract ArrayList<DataRestaurante> listaUsuPorCategoria(String cate);
+    public abstract void setCat(ArrayList<String> cate);
+    public abstract ArrayList<DataCategoria> getLstCat();
+    public abstract ArrayList<DataIndividual> listaProductosStock(String r);
+    public abstract ArrayList<DataPedido> listarPedidos();
+    public abstract ArrayList<DataPedido> pedidosUsuario(String nickname);
     public abstract boolean existeUsuario(String nickname, String email);
     public abstract boolean existeNickname(String nickname);
     public abstract boolean existeMail(String mail);

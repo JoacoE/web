@@ -5,6 +5,10 @@
  */
 package lab01.server;
 
+import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -12,8 +16,11 @@ import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
 import lab01.Clases.DTOEvaluacion;
+import lab01.Clases.DataCategoria;
+import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataProducto;
+import lab01.Clases.DataRestaurante;
 import lab01.Clases.estados;
 import lab01.Handlers.Fabrica;
 
@@ -76,28 +83,49 @@ public class PublicadorPedido {
         return ret;
     }
     
-//    @WebMethod
-//    public Map devListaDC(int index){
-//        Map ret = CP.get(index).devListaDC();
-//        return ret;
-//    }
+    @WebMethod
+    public DataCliente[] devListaDC(Integer idCtrlPedido){
+        
+        ArrayList<DataCliente> lista = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).devListaDC();
+        DataCliente[] ret = new DataCliente[lista.size()];
+        Iterator it = lista.iterator();
+        int index = 0;
+        while(it.hasNext()){
+            ret[index] = (DataCliente) it.next();
+            index++;
+        }
+        return ret;
+    }
     
-//    @WebMethod
-//    public Map devListaDR(){
-//        Map ret = CP.devListaDR();
-//        return ret;
-//    }
+    @WebMethod
+    public DataRestaurante[] devListaDR(Integer idCtrlPedido){
+        ArrayList<DataRestaurante> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).devListaDR();
+        DataRestaurante[] lista = new DataRestaurante[ret.size()];
+        Iterator it = ret.iterator();
+        int i = 0;
+        while(it.hasNext()){
+            lista[i] = (DataRestaurante) it.next();
+        }
+        return lista;
+    }
     
     @WebMethod
     public boolean setMemRestaurante(Integer idCtrlPedido, String nickname){
         return Fabrica.getInstance().getICtrlPedido(idCtrlPedido).setMemRestaurante(nickname);
     }
     
-//    @WebMethod
-//    public Map retColDCat(){
-//        Map ret = CP.retColDCat();
-//        return ret;
-//    }
+    @WebMethod
+    public DataCategoria[] retColDCat(Integer idCtrlPedido){
+        ArrayList<DataCategoria> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).retColDCat();
+        DataCategoria[] lista = new DataCategoria[ret.size()];
+        Iterator it =  ret.iterator();
+        int i = 0;
+        while(it.hasNext()){
+            lista[i] = (DataCategoria) it.next();
+            i++;
+        }
+        return lista;
+    }
     
     @WebMethod
     public DataProducto devListaProductos(Integer idCtrlPedido){
@@ -121,11 +149,19 @@ public class PublicadorPedido {
         return ret;
     }
     
-//    @WebMethod
-//    public Map listDataPedidos(){
-//        Map ret = CP.listDataPedidos();
-//        return ret;
-//    }
+    @WebMethod
+    public DataPedido[] listDataPedidos(Integer idCtrlPedido){
+         ArrayList<DataPedido> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listDataPedidos();
+         DataPedido[] lista = new DataPedido[ret.size()];
+         Iterator it = ret.iterator();
+         int i = 0;
+         while(it.hasNext()){
+             lista[i] = (DataPedido) it.next();
+             i++;
+         }
+         
+         return lista;
+    }
     
     @WebMethod
     public void actualizarEPedido(Integer idCtrlPedido, String nickname, long id, estados estado){
@@ -158,11 +194,18 @@ public class PublicadorPedido {
         Fabrica.getInstance().getICtrlPedido(idCtrlPedido).cancelarPedido(id);
     }
     
-//    @WebMethod
-//    public Map listaPedidosRecibidos(String nickname){
-//        Map ret = CP.listaPedidosRecibidos(nickname);
-//        return ret;
-//    }
+    @WebMethod
+    public DataPedido[] listaPedidosRecibidos(Integer idCtrlPedido,String nickname){
+        ArrayList<DataPedido> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listaPedidosRecibidos(nickname);
+        DataPedido[] lista = new DataPedido[ret.size()];
+        Iterator it = ret.iterator();
+        int i = 0;
+        while(it.hasNext()){
+            lista[i]= ret.get(i);
+            i++;
+        }
+        return lista;
+    }
     
     @WebMethod
     public void actualizarPromedioRest(Integer idCtrlPedido, String nickname){
@@ -174,11 +217,18 @@ public class PublicadorPedido {
         Fabrica.getInstance().getICtrlPedido(idCtrlPedido).altaEvaluacion(id, data);
     }
     
-//    @WebMethod
-//    public Map listarEvaluacionesRest(String nickname){
-//        Map ret = CP.listarEvaluacionesRest(nickname);
-//        return ret;
-//    }
+    @WebMethod
+    public DTOEvaluacion[] listarEvaluacionesRest(Integer idCtrlPedido, String nickname){
+        ArrayList<DTOEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
+        DTOEvaluacion[] lista = new DTOEvaluacion[ret.size()];
+        Iterator it = ret.iterator();
+        int i = 0;
+        while(it.hasNext()){
+            lista[i] = (DTOEvaluacion) it.next();
+            i++;
+        }
+        return lista;
+    }
     
     @WebMethod
     public DTOEvaluacion getEvaluacionXid(Integer idCtrlPedido, long id){
@@ -186,9 +236,16 @@ public class PublicadorPedido {
         return ret;
     }
     
-//    @WebMethod
-//    public Map listaPedidos(String nickname){
-//        Map ret = CP.listaPedidos(nickname);
-//        return ret;
-//    }
+    @WebMethod
+    public DataPedido[] listaPedidos(Integer idCtrlPedido,String nickname){
+        ArrayList<DTOEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
+        DataPedido[] lista = new DataPedido[ret.size()];
+        Iterator it = ret.iterator();
+        int i = 0;
+        while(it.hasNext()){
+            lista[i] = ( DataPedido) it.next();
+            i++;
+        }
+        return lista;
+    }
 }

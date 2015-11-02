@@ -152,39 +152,44 @@ public class CtrlPedido implements ICtrlPedido {
     }
     
     @Override
-    public Map devListaDC(){
+    public ArrayList<DataCliente> devListaDC(){
         HUsuario mu = HUsuario.getinstance();
-        Map ret = new HashMap();
         Map col = mu.obtenerColeccion();
+        ArrayList<DataCliente> lista = new ArrayList<>();
         Iterator it = col.entrySet().iterator(); 
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
             if(map.getValue() instanceof Cliente){
                 Cliente cli = (Cliente)map.getValue();
                 DataCliente dc = cli.ClienteADC();
-                ret.put(dc.getNickname(), dc);
+                lista.add(dc);
             }
+            
         }
-    return ret;
+        
+        
+    return lista;
     }
-    public Map retColDCat(){
+   
+    @Override
+    public ArrayList<DataCategoria> retColDCat(){
         Map col;       
-        Map ret = new HashMap();
+        ArrayList<DataCategoria> ret = new ArrayList<>();
         HCategoria hc = HCategoria.getinstance();
         col=hc.obtenerColeccion();
         Iterator it = col.entrySet().iterator(); 
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
                 DataCategoria dc = (DataCategoria)map.getValue();
-                ret.put(dc.getNombre(), dc);
+                ret.add(dc);
         }
-    return (Map)ret;    
+    return ret;    
     }
     
     @Override
-    public Map devListaDR(){
+    public ArrayList<DataRestaurante> devListaDR(){
         HUsuario mu = HUsuario.getinstance();
-        Map ret = new HashMap();
+        ArrayList<DataRestaurante> ret = new ArrayList<>();
         Map col = mu.obtenerColeccion();
         Iterator it = col.entrySet().iterator();
         while(it.hasNext()){
@@ -193,7 +198,7 @@ public class CtrlPedido implements ICtrlPedido {
                 Restaurante rest = (Restaurante)map.getValue();
                 if(rest.member(this.categoria)){
                     DataRestaurante dr = rest.RestauranteADR();
-                    ret.put(dr.getNickname(), dr);
+                    ret.add(dr);
                 }
             }
         }
@@ -259,8 +264,9 @@ public class CtrlPedido implements ICtrlPedido {
     }
     
     @Override
-    public Map listDataPedidos(){
-        Map aux = new HashMap();
+    public ArrayList<DataPedido> listDataPedidos(){
+        
+        ArrayList<DataPedido> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Iterator user = hu.obtenerColeccion().entrySet().iterator();
         while(user.hasNext()){
@@ -271,7 +277,7 @@ public class CtrlPedido implements ICtrlPedido {
                 while(pedidos.hasNext()){
                     Map.Entry p = (Map.Entry) pedidos.next();
                     Pedido ped = (Pedido)p.getValue();
-                    aux.put(ped.getDataPedido().getId(), ped.getDataPedido());
+                    aux.add(dp);
                 }
             }
         }
@@ -324,8 +330,8 @@ public class CtrlPedido implements ICtrlPedido {
     }
     
     @Override
-    public Map listaPedidosRecibidos(String nickname){
-        Map aux = new HashMap();
+    public ArrayList<DataPedido> listaPedidosRecibidos(String nickname){
+        ArrayList<DataPedido> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Iterator user = hu.obtenerColeccion().entrySet().iterator();
         while(user.hasNext()){
@@ -338,7 +344,7 @@ public class CtrlPedido implements ICtrlPedido {
                         Map.Entry p = (Map.Entry) pedidos.next();
                         Pedido ped = (Pedido)p.getValue();
                         if(ped.getEstado() == estados.RECIBIDO){
-                            aux.put(ped.getDataPedido().getId(), ped.getDataPedido());
+                            aux.add(dp);
                         }
                     }
                 }
@@ -347,8 +353,8 @@ public class CtrlPedido implements ICtrlPedido {
         return aux;
     }
     
-    public Map listaPedidos(String nickname){
-        Map aux = new HashMap();
+    public ArrayList<DataPedido> listaPedidos(String nickname){
+        ArrayList<DataPedido> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Iterator user = hu.obtenerColeccion().entrySet().iterator();
         while(user.hasNext()){
@@ -360,7 +366,7 @@ public class CtrlPedido implements ICtrlPedido {
                     while(pedidos.hasNext()){
                         Map.Entry p = (Map.Entry) pedidos.next();
                         Pedido ped = (Pedido)p.getValue();
-                        aux.put(ped.getDataPedido().getId(), ped.getDataPedido());                 
+                        aux.add(dp);                 
                     }
                 }
             }
@@ -432,8 +438,8 @@ public class CtrlPedido implements ICtrlPedido {
     }
 
     @Override
-    public Map listarEvaluacionesRest(String nickname){
-        Map aux = new HashMap();
+    public ArrayList<DTOEvaluacion> listarEvaluacionesRest(String nickname){
+        ArrayList<DTOEvaluacion> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
         while(clientes.hasNext()){
@@ -448,7 +454,7 @@ public class CtrlPedido implements ICtrlPedido {
                         if(p.getEvaluacion() != null){
                             DTOEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
                             ev.setNickname(c.getNickname());
-                            aux.put(ev.getFecha(), ev);
+                            aux.add(ev);
                         }
                     }
                 }

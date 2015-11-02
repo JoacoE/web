@@ -12,6 +12,22 @@ import java.util.Date;
  * @author gonzalo
  */
 public class DataCliente{
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getfNac() {
+        return fNac;
+    }
+
+    public void setfNac(String fNac) {
+        this.fNac = fNac;
+    }
     
     private String nickname;
     private String nombre;
@@ -45,10 +61,29 @@ public class DataCliente{
     public String getImagen(){
         return this.imagen;
     }
-    
-    public String getMail(){
-        return this.email;
+    public void setNickname(String nickname) {    
+        this.nickname = nickname;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+//    public String getMail(){
+//        return this.email;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+//    }
     public String getNickname() {
         return this.nickname;
     }

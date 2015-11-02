@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package lab01.Interfaces;
+import java.util.ArrayList;
 import java.util.Map;
 import lab01.Clases.DTOActualizarIndividual;
 import lab01.Clases.DTOActualizarPromocional;
@@ -20,8 +21,8 @@ public interface ICtrlProducto {
     
     public abstract void registrarProducto(DTORegistrarProducto datos);
     public abstract boolean existeRestaurante(String nomRest);
-    public abstract Map listarIndividuales(String nomRest);
-    public abstract void setPromo(Map promo);
+    public abstract ArrayList<DataIndividual> listarIndividuales(String nomRest);
+    public abstract void setPromo(ArrayList<DataPromocional> promo);
     public abstract void armarPromo(DTOArmarPromo datos);
     public abstract void actualizarIndividual(DTOActualizarIndividual datos);
     public abstract void actualizarPromocional(DTOActualizarPromocional datos);

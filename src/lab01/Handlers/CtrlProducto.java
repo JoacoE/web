@@ -81,14 +81,22 @@ public class CtrlProducto implements ICtrlProducto {
     }
 
     @Override
-    public void setPromo(Map promo) {
-        this.Promo = promo;
+    public void setPromo(ArrayList<DataPromocional> promo) {
+        
+        Iterator it = promo.iterator();
+        Map res = new HashMap();
+        while (it.hasNext()){
+            DataPromocional dt =(DataPromocional)it.next();
+            res.put(dt.getDataNombre(), dt);
+        }
+        this.Promo = res;
     }
 
     @Override
-    public Map listarIndividuales(String nomRest) {
+    public ArrayList<DataIndividual> listarIndividuales(String nomRest) {
 
-        Map ret = new HashMap();
+        ArrayList<DataIndividual> ret = new ArrayList();
+        //Map ret = new HashMap();
         HUsuario HU = HUsuario.getinstance();
         Restaurante restoran = HU.obtenerRestaurante(nomRest);
         Iterator it = restoran.obtenerListaProductos().entrySet().iterator();
@@ -97,7 +105,7 @@ public class CtrlProducto implements ICtrlProducto {
             if ((Producto) map.getValue() instanceof Individual) {
                 Individual ind = (Individual) map.getValue();
                 DataIndividual di = ind.getDataIndividual();
-                ret.put(di.getDataNombre(), di);
+                ret.add(di);
             }
 
         }

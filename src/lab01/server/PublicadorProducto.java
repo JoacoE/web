@@ -6,6 +6,7 @@
 package lab01.server;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -58,16 +59,31 @@ public class PublicadorProducto {
         return Fabrica.getInstance().getICtrlProducto(idCtrlProducto).existeRestaurante(nomRest);
     }
     
-//    @WebMethod
-//    public Map listarIndividuales(String nomRest){
-//        Map ret = CP.listarIndividuales(nomRest);
-//        return ret;
-//    }
+    @WebMethod
+    public DataIndividual[] listarIndividuales(Integer idCtrlProducto, String nomRest){
+         
+        ArrayList<DataIndividual> datas = Fabrica.getInstance().getICtrlProducto(idCtrlProducto).listarIndividuales(nomRest);
+        DataIndividual[] ret = new DataIndividual[datas.size()];
+        Iterator it = datas.iterator();
+        int i = 0;
+        while (it.hasNext()){
+            ret[i]= (DataIndividual)it.next();
+            i++;
+        }
+        
+        return ret;
+    }
     
-//    @WebMethod
-//    public void setPromo(Map promo){
-//        CP.setPromo(promo);
-//    }
+    @WebMethod
+    public void setPromo(Integer idCtrlProducto, DataPromocional[] promo){
+        ArrayList<DataPromocional> ret = new ArrayList();
+        
+        for(int i=0; i<promo.length; i++){
+            ret.add(promo[i]);
+            i++;
+        }
+        Fabrica.getInstance().getICtrlProducto(idCtrlProducto).setPromo(ret);
+    }
     
     @WebMethod
     public void armarPromo(Integer idCtrlProducto, DTOArmarPromo datos){

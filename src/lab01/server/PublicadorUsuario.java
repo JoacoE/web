@@ -16,7 +16,10 @@ import javax.xml.ws.Endpoint;
 import lab01.Clases.DTODatosAdicionales;
 import lab01.Clases.DTOIngresarDatos;
 import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataIndividual;
+import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 import lab01.Handlers.Fabrica;
 
@@ -104,57 +107,110 @@ public class PublicadorUsuario {
         return ret;
     }
     
-//    @WebMethod
-//    public Map listaDataRestaurantes(){
-//        Map ret = CU.listaDataRestaurantes();
-//        return ret;
-//    }
+    @WebMethod
+    public DataRestaurante[] listaDataRestaurantes(Integer idCtrlUsuario){
+        ArrayList<DataRestaurante> rests = Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).listaDataRestaurantes();
+        DataRestaurante[] ret = new DataRestaurante[rests.size()];
+        Iterator it = rests.iterator();
+        int index = 0;
+        while(it.hasNext()){
+            ret[index] = (DataRestaurante)it.next();
+            index++;
+        }
+        return ret;
+    }
     
     @WebMethod
     public void registrarCat(Integer idCtrlUsuario, String nombre){
         Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).registrarCat(nombre);
     }
     
-//    @WebMethod
-//    public Map retColCat(){
-//        Map ret = CU.retColCat();
-//        return ret;
-//    }
+    @WebMethod
+    public DataCategoria[] retColCat(Integer idCtrlUsuario){
+        ArrayList<DataCategoria> cats = Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).retColCat();
+        DataCategoria[] ret = new DataCategoria[cats.size()];
+        Iterator it = cats.iterator();
+        int index = 0;
+        while(it.hasNext()){
+            ret[index] = (DataCategoria)it.next();
+            index++;
+        }
+        return ret;
+    }
     
-//    @WebMethod
-//    public Map listaUsuPorCategoria(String cate){
-//        Map ret = CU.listaUsuPorCategoria(cate);
-//        return ret;
-//    }
+    @WebMethod
+    public DataRestaurante[] listaUsuPorCategoria(Integer idCtrlUsuario, String cate){
+        ArrayList<DataRestaurante> rests = Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).listaUsuPorCategoria(cate);
+        DataRestaurante[] ret = new DataRestaurante[rests.size()];
+        Iterator it = rests.iterator();
+        int index = 0;
+        while(it.hasNext()){
+            ret[index] = (DataRestaurante)it.next();
+            index++;
+        }
+        return ret;
+    }
     
-//    @WebMethod
-//    public void setCat(Map cate){
-//        CU.setCat(cate);
-//    }
+    @WebMethod
+    public void setCat(Integer idCtrlUsuario, String[] cate){
+        ArrayList<String> param = new ArrayList<>();
+        for(int i = 0; i < cate.length; i++){
+            param.add(cate[i]);
+        }
+        Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).setCat(param);
+    }
     
-//    @WebMethod
-//    public Map getLstCat(){
-//        Map ret = CU.getLstCat();
-//        return ret;
-//    }
+    @WebMethod
+    public DataCategoria[] getLstCat(Integer idCtrlUsuario){
+        ArrayList<DataCategoria> cats = Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).getLstCat();
+        DataCategoria[] ret = new DataCategoria[cats.size()];
+        int index = 0;
+        Iterator it = cats.iterator();
+        while(it.hasNext()){
+            ret[index] = (DataCategoria)it.next();
+            index++;
+        }
+        return ret;
+    }
     
-//    @WebMethod
-//    public Map listaProductosStock(String r){
-//        Map ret = CU.listaProductosStock(r);
-//        return ret;
-//    }
+    @WebMethod
+    public DataIndividual[] listaProductosStock(Integer idCtrlUsuario, String r){
+        ArrayList<DataIndividual> indivs = Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).listaProductosStock(r);
+        DataIndividual[] ret = new DataIndividual[indivs.size()];
+        int index = 0;
+        Iterator it = indivs.iterator();
+        while(it.hasNext()){
+            ret[index] = (DataIndividual)it.next();
+            index++;
+        }
+        return ret;
+    }
     
-//    @WebMethod
-//    public Map listarPedidos(){
-//        Map ret = CU.listarPedidos();
-//        return ret;
-//    }
+    @WebMethod
+    public DataPedido[] listarPedidos(Integer idCtrlUsuario){
+        ArrayList<DataPedido> peds = Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).listarPedidos();
+        DataPedido[] ret = new DataPedido[peds.size()];
+        int index = 0;
+        Iterator it = peds.iterator();
+        while(it.hasNext()){
+            ret[index] = (DataPedido)it.next();
+            index++;
+        }
+        return ret;
+    }
     
-//    @WebMethod
-//    public Map pedidosUsuario(String nickname){
-//        Map ret = CU.pedidosUsuario(nickname);
-//        return ret;
-//    }
+    @WebMethod
+    public DataPedido[] pedidosUsuario(Integer idCtrlUsusario, String nickname){
+        ArrayList<DataPedido> peds = Fabrica.getInstance().getICtrlUsuario(idCtrlUsusario).pedidosUsuario(nickname);
+        DataPedido[] ret = new DataPedido[peds.size()];
+        int index = 0;
+        Iterator it = peds.iterator();
+        while(it.hasNext()){
+            ret[index] = (DataPedido)it.next();
+            index++;
+        }
+        return ret;
+    }
     
     @WebMethod
     public boolean existeUsuario(Integer idCtrlUsuario, String nickname, String email){

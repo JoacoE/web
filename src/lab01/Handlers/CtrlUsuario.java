@@ -18,6 +18,7 @@ import lab01.Clases.DTOIngresarDatos;
 import lab01.Clases.DTORegistrarCliente;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
+import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataRestaurante;
 import lab01.Clases.Pedido;
@@ -50,17 +51,17 @@ public class CtrlUsuario implements ICtrlUsuario {
         return this.idCtrl;
     }
     
-    public void setCat(Map cate){
+    @Override
+    public void setCat(ArrayList<String> cate){
         HCategoria hc = HCategoria.getinstance();
         Map aux = new HashMap();
         Iterator cats = hc.obtenerColeccion().entrySet().iterator();
         while(cats.hasNext()){
             Map.Entry cat = (Map.Entry) cats.next();
             Categoria c = (Categoria)cat.getValue();
-            Iterator scats = cate.entrySet().iterator();
+            Iterator scats = cate.iterator();
             while(scats.hasNext()){
-                Map.Entry scat = (Map.Entry) scats.next();
-                String selectedcat = (String) scat.getValue();
+                String selectedcat = (String) scats.next();
                 if(c.getNombre().equals(selectedcat)){
                     DataCategoria dc = c.CatADC();
                     aux.put(dc.getNombre(), dc);
@@ -70,12 +71,24 @@ public class CtrlUsuario implements ICtrlUsuario {
         this.Cat = aux;
     }
     
-    public Map getLstCat(){
-        return this.Cat;
+    @Override
+    public ArrayList<DataCategoria> getLstCat(){
+        ArrayList<DataCategoria> ret = new ArrayList<>();
+        Iterator it = this.Cat.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry cats = (Map.Entry)it.next();
+            DataCategoria dc = (DataCategoria)cats.getValue();
+            ret.add(dc);
+        }
+        return ret;
     }
+    
+    @Override
     public void setNickname(String nick){
         this.nickname=nick;
     }
+    
+    @Override
     public String getNickname(){
         return this.nickname;
     }
@@ -100,7 +113,7 @@ public class CtrlUsuario implements ICtrlUsuario {
         HU.addUsuario(c);
     }
 
-   
+    @Override
     public void registrarRestaurante(DataRestaurante dt){
         if(!dt.getColCategoria().isEmpty()){
             HCategoria hc = HCategoria.getinstance();
@@ -168,10 +181,11 @@ public class CtrlUsuario implements ICtrlUsuario {
         }
     return ret;
     }
-
-    public Map listaDataRestaurantes(){
+    
+    @Override
+    public ArrayList<DataRestaurante> listaDataRestaurantes(){
         HUsuario mu = HUsuario.getinstance();
-        Map ret = new HashMap();
+        ArrayList<DataRestaurante> ret = new ArrayList<>();
         Map col = mu.obtenerColeccion();
         Iterator it = col.entrySet().iterator(); 
         while(it.hasNext()){
@@ -179,31 +193,32 @@ public class CtrlUsuario implements ICtrlUsuario {
             if(map.getValue() instanceof Restaurante){
                 Restaurante res = (Restaurante)map.getValue();
                 DataRestaurante dc = res.RestauranteADR();
-                ret.put(dc.getNickname(), dc);
+                ret.add(dc);
             }
         }
     return ret;
     }
     
-    public Map listaUsuPorCategoria(String cate){
+    @Override
+    public ArrayList<DataRestaurante> listaUsuPorCategoria(String cate){
         HUsuario mu = HUsuario.getinstance();
-        Map ret = new HashMap();
-        Iterator it = listaDataRestaurantes().entrySet().iterator();
+        ArrayList<DataRestaurante> ret = new ArrayList<>();
+        Iterator it = listaDataRestaurantes().iterator();
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            DataRestaurante dr = (DataRestaurante)map.getValue();
+            DataRestaurante dr = (DataRestaurante)it.next();
             Iterator dcats = dr.getColCategoria().entrySet().iterator();
             while(dcats.hasNext()){
                 Map.Entry dcat = (Map.Entry) dcats.next();
                 DataCategoria dc = (DataCategoria)dcat.getValue();
                 if(dc.getNombre().equals(cate)){
-                    ret.put(dr.getNickname(),dr);
+                    ret.add(dr);
                 }
             }
         }
         return ret;
     }
             
+    @Override
     public void registrarCat(String nombre){
         HCategoria hu = HCategoria.getinstance();
         if(hu.member(nombre)){
@@ -217,30 +232,39 @@ public class CtrlUsuario implements ICtrlUsuario {
         }
     }
 
-    public Map retColCat(){
-        Map ret  = new HashMap();        
+    @Override
+    public ArrayList<DataCategoria> retColCat(){
+        ArrayList<DataCategoria> ret  = new ArrayList<>();        
         HCategoria hc = HCategoria.getinstance();
         Iterator it = hc.obtenerColeccion().entrySet().iterator();
         while(it.hasNext()){
             Map.Entry cat = (Map.Entry) it.next();
             Categoria c = (Categoria)cat.getValue();
             DataCategoria dc = c.CatADC();
-            ret.put(dc.getNombre(), dc);
+            ret.add(dc);
         }
         return ret;
     }
     
-    public Map listaProductosStock(String r){
+    @Override
+    public ArrayList<DataIndividual> listaProductosStock(String r){
+        ArrayList<DataIndividual> ret = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Restaurante rest = hu.obtenerRestaurante(r);
-        Map lProd = rest.obtenerListaIndividualesStock();
-        return lProd;
+        Iterator it = rest.obtenerListaIndividualesStock().entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry inds = (Map.Entry)it.next();
+            DataIndividual di = (DataIndividual)inds.getValue();
+            ret.add(di);
+        }
+        return ret;
     }
-
-    public Map listarPedidos(){
+    
+    @Override
+    public ArrayList<DataPedido> listarPedidos(){
         HUsuario HU = HUsuario.getinstance();
         Map lu = HU.obtenerColeccion();
-        Map ret = new HashMap();
+        ArrayList<DataPedido> ret = new ArrayList<>();
         Iterator it = lu.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
@@ -252,34 +276,28 @@ public class CtrlUsuario implements ICtrlUsuario {
                     Map.Entry mapP = (Map.Entry) itp.next();
                     Pedido p = (Pedido)mapP.getValue();
                     DataPedido dp = p.getDataPedido();
-                    
-                    ret.put(dp.getId(), dp);
+                    ret.add(dp);
                 }
             }
         }
     return ret;
     }
-//    @Override
-//    public void registrarRestaurante(DataRestaurante dt) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-    public Map pedidosUsuario(String nickname){
+
+    @Override
+    public ArrayList<DataPedido> pedidosUsuario(String nickname){
         HUsuario hu = HUsuario.getinstance();
         Cliente user = (Cliente) hu.obtenerUsuario(nickname);
         Map pedidos = new HashMap();
-        Map datPeds = new HashMap();
+        ArrayList<DataPedido> ret = new ArrayList<>();
         pedidos = user.getPedidos();
-        //if(pedidos.isEmpty()){
-        //    throw ( new NullPointerException());
-        //}
         Iterator it = pedidos.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry p = (Map.Entry) it.next();
             Pedido ped = (Pedido) p.getValue();
             DataPedido dp = ped.getDataPedido();
-            datPeds.put(dp.getId(), dp);
+            ret.add(dp);
         }
-        return datPeds;
+        return ret;
     }
     
     @Override
@@ -349,6 +367,5 @@ public class CtrlUsuario implements ICtrlUsuario {
             }
         }
     return lista;
-    }
-    
+    }    
 }

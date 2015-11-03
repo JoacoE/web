@@ -10,6 +10,8 @@ package lab01.Clases;
  * @author joaco
  */
 public class DataCarrito {
+
+    
     private String nomProd;
     private boolean promo;
     private int cantidad;
@@ -22,6 +24,10 @@ public class DataCarrito {
         this.promo = promo;
         this.cantidad = cantidad;
         this.precio = precio;
+    }
+    
+    public boolean isPromo() {
+        return promo;
     }
     
     public String getNomProd(){

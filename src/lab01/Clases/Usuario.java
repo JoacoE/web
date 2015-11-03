@@ -10,6 +10,8 @@ package lab01.Clases;
  * @author gera
  */
 public abstract class Usuario {
+
+    
     
     protected String nickname;
     protected String nombre;
@@ -75,4 +77,13 @@ public abstract class Usuario {
     public String getPwd(){
         return this.contrasenia;
     }
+    
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
 }

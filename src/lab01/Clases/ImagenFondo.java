@@ -11,6 +11,7 @@ import javax.swing.border.Border;
  
 
 public class ImagenFondo implements Border{
+
     public BufferedImage back;
  
     public ImagenFondo(){
@@ -29,6 +30,14 @@ public class ImagenFondo implements Border{
         return new Insets(0,0,0,0);
     }
  
+    public BufferedImage getBack() {
+        return back;
+    }
+
+    public void setBack(BufferedImage back) {
+        this.back = back;
+    }
+
     public boolean isBorderOpaque() {
         return false;
     } 

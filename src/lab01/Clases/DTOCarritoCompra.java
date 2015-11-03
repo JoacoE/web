@@ -10,7 +10,7 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTOCarritoCompra {
-    
+
     private String nombre;
     private int cantidad;
 
@@ -21,16 +21,15 @@ public class DTOCarritoCompra {
         this.cantidad = cantidad;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public float getCantidad() {
-        return cantidad;
     }
 
     public void setCantidad(int cantidad) {

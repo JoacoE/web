@@ -18,7 +18,7 @@ public class Cliente extends Usuario{
     private String fNac;
     private Map pedidos;
    
-    //public Cliente(){}
+    public Cliente(){}
     public Cliente(String nickname, String nombre, String email, String direccion,String apellido, String img, String fecha, String pwd) {
         super(nickname,nombre,email,direccion, pwd);
        //setNickname(); poner los valores de los tb

@@ -10,7 +10,7 @@ package lab01.Clases;
  * @author joaco
  */
 public class DTORegistrarProducto {
-    
+
     private DataIndividual di;
     private String nickRest;
     private boolean promo;
@@ -23,6 +23,10 @@ public class DTORegistrarProducto {
         this.promo = promo;
     }
 
+    public boolean isPromo() {
+        return promo;
+    }
+    
     public DataIndividual getDi() {
         return di;
     }

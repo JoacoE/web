@@ -14,6 +14,9 @@ public class Cantidad_Individual {
     private int cantidad;
     private Individual prodIndividual;
     
+    public Cantidad_Individual(){
+        
+    }
     public Cantidad_Individual(Individual i, int cant){
         this.cantidad=cant;
         this.prodIndividual=i;

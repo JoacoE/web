@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * @author joaco
  */
 public class DataPromocional {
+
+    
     private boolean DataActiva;
     private double DataDescuento;
     private String DataNombre;
@@ -36,6 +38,21 @@ public class DataPromocional {
         }
     }
     
+    public boolean isDataActiva() {
+        return DataActiva;
+    }
+
+    public void setDataActiva(boolean DataActiva) {
+        this.DataActiva = DataActiva;
+    }
+
+    public double getDataDescuento() {
+        return DataDescuento;
+    }
+
+    public void setDataDescuento(double DataDescuento) {
+        this.DataDescuento = DataDescuento;
+    }
     public void setActiva(boolean activa){
         this.DataActiva = activa;
     }

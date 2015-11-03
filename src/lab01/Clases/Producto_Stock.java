@@ -10,7 +10,7 @@ package lab01.Clases;
  * @author gera
  */
 public class Producto_Stock {
-    
+
     private int cantidad;
     private double precio;
     private Producto prod;
@@ -40,5 +40,9 @@ public class Producto_Stock {
     }
     public void setProducto(Producto p){
         this.prod=p;
+    }
+    
+    public void setProd(Producto prod) {
+        this.prod = prod;
     }
 }

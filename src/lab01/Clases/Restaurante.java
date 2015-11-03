@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
  * @author gera
  */
 public class Restaurante extends Usuario{
+
+    
     private float puntajeProm;
     private ArrayList<String> lstImagen;
     private Map ColCategoria;
@@ -206,5 +208,43 @@ public class Restaurante extends Usuario{
     return false;
     }
 
+    public float getPuntajeProm() {
+        return puntajeProm;
+    }
 
+    public void setPuntajeProm(float puntajeProm) {
+        this.puntajeProm = puntajeProm;
+    }
+
+    public ArrayList<String> getLstImagen() {
+        return lstImagen;
+    }
+
+    public void setLstImagen(ArrayList<String> lstImagen) {
+        this.lstImagen = lstImagen;
+    }
+
+    public Map getColCategoria() {
+        return ColCategoria;
+    }
+
+    public void setColCategoria(Map ColCategoria) {
+        this.ColCategoria = ColCategoria;
+    }
+
+    public Map getColProducto() {
+        return ColProducto;
+    }
+
+    public void setColProducto(Map ColProducto) {
+        this.ColProducto = ColProducto;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
 }

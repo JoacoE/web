@@ -153,6 +153,10 @@ public class DataRestaurante {
     public ArrayList<DataPromocional> getColPromocionales(){
         return this.ColPromocionales;
     }
+
+    public void setColPromocionales(ArrayList<DataPromocional> ColPromocionales) {
+        this.ColPromocionales = ColPromocionales;
+    }
     
     public void setColProducto(ArrayList<DataPromocional> colPromocionales){
         this.ColPromocionales.addAll(colPromocionales);

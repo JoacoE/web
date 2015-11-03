@@ -20,6 +20,8 @@ import static lab01.Clases.Estados.RECIBIDO;
 //enum Estados {PREPARACION, ENVIADO, RECIBIDO};
 
 public class Pedido {
+
+    
     private long id; // ver como hacer el autogenerado
     private String fecha; // ver como hacer la fecha si con el jcalendar esta fecha tiene que ser la del momento en q se crea el objeto(la del sistema)
     private double precio_total;
@@ -131,5 +133,12 @@ public class Pedido {
     
     public Evaluacion getEvaluacion(){
         return this.evaluacion;
+    }
+    public DataPedido getDp() {
+        return dp;
+    }
+
+    public void setDp(DataPedido dp) {
+        this.dp = dp;
     }
 }

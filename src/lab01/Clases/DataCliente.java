@@ -5,10 +5,15 @@
  */
 package lab01.Clases;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author gonzalo
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class DataCliente{
     
     private String nickname;

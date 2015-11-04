@@ -7,10 +7,14 @@ package lab01.Clases;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 /**
  *
  * @author joaco
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class DataPedido {
     private long id;
     private String fecha; 

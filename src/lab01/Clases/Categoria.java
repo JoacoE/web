@@ -5,10 +5,14 @@
  */
 package lab01.Clases;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author gera
  */
+
 public class Categoria {
     
     private String nombre;

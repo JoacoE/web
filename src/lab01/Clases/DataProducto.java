@@ -6,11 +6,15 @@
 package lab01.Clases;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author gera
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class DataProducto {
     private ArrayList<DataIndividual> ColDatIndividual;
     private ArrayList<DataPromocional> ColDatPromocional;

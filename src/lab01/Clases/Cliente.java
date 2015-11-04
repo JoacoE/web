@@ -8,11 +8,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author gera
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Cliente extends Usuario{
     private String apellido;
     private String fNac;

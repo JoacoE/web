@@ -6,11 +6,15 @@
 package lab01.Clases;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
  * @author joaquin
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class DataRestaurante {
     private String nickname;
     private String nombre;

@@ -6,10 +6,15 @@
 
 package lab01.Clases;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author admin123
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class DataUsuario {
 
     private String nombre;

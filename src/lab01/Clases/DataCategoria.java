@@ -5,10 +5,15 @@
  */
 package lab01.Clases;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author joaquin
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class DataCategoria {
     
     private String nombre;

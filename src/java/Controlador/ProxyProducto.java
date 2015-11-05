@@ -94,4 +94,5 @@ public static ProxyProducto getInstance(){
         lab01.server.DataPromocional ret = CP.getProdPromocionalXNombre(idCtrlProducto, nombre);
         return ret;
     }
+    
 }

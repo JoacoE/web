@@ -166,4 +166,5 @@ public class ProxyPedido {
     public void actualizarFechaPedido(String nickname, long id, String fecha){
         PP.actualizarFechaPedido(idCtrlPedido, nickname, id, fecha);
     }
+    
 }

@@ -18,13 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lab01.server.*;
-//import pkg.DataCategoria;
-//import pkg.DataCliente;
-//import pkg.DataIndividual;
-//import pkg.DataPedido;
-//import pkg.DataPromocional;
-//import pkg.DataRestaurante;
-//import pkg.DtoEvaluacion;
 
 /**
  *

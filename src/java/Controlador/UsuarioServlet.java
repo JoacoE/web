@@ -290,7 +290,8 @@ public class UsuarioServlet extends HttpServlet {
                             } else {
                                 request.setAttribute("pass", "incorrecto");
                             }
-                        }                
+                        }
+                        
 //                    if (!usuario.getImagen().isEmpty()) {
 //                        //imagen = HI.getImagen(usuario.getNickname());
 //                        //String path = session.getServletContext().getRealPath("/web/build/web/WEB-INF/lib/imagenes");

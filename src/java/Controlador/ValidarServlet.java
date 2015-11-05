@@ -8,10 +8,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,12 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lab01.server.DataCategoria;
 import lab01.server.DataRestaurante;
-import lab01.server.DtoArmarPromo;
-import lab01.server.DtoEvaluacion;
 import lab01.server.DtoIngresarDatos;
 import lab01.server.DtoRegistrarCliente;
-import lab01.server.DtoRegistrarProducto;
-import lab01.server.Estados;
 
 @WebServlet(name = "ValidarServlet", urlPatterns = {"/validar.do"})
 public class ValidarServlet extends HttpServlet {

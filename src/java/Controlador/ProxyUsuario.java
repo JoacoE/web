@@ -155,4 +155,5 @@ public class ProxyUsuario {
         ret.addAll(CU.buscarRestaurantes(idCtrlUsuario, nombre).getItem());
         return ret;
     }
+    
 }

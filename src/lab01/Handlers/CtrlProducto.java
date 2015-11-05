@@ -81,12 +81,11 @@ public class CtrlProducto implements ICtrlProducto {
     }
 
     @Override
-    public void setPromo(ArrayList<DataPromocional> promo) {
-        
+    public void setPromo(ArrayList<DataIndividual> promo) {
         Iterator it = promo.iterator();
         Map res = new HashMap();
         while (it.hasNext()){
-            DataPromocional dt =(DataPromocional)it.next();
+            DataIndividual dt =(DataIndividual)it.next();
             res.put(dt.getDataNombre(), dt);
         }
         this.Promo = res;

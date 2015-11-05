@@ -502,4 +502,11 @@ public class CtrlPedido implements ICtrlPedido {
         }
         return null;
     }
+    
+    @Override
+    public void actualizarFechaPedido(String nickname, long id, String fecha){
+        HUsuario HU = HUsuario.getinstance();
+        Cliente c = HU.obtenerUsuario(nickname);
+        c.getPedido(id).setFecha(fecha);
+    }
 }

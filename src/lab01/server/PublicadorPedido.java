@@ -246,4 +246,9 @@ public class PublicadorPedido {
         }
         return lista;
     }
+    
+    @WebMethod
+    public void actualizarFechaPedido(Integer idCtrlPedido, String nickname, long id, String fecha){
+        Fabrica.getInstance().getICtrlPedido(idCtrlPedido).actualizarFechaPedido(nickname, id, fecha);
+    }
 }

@@ -74,9 +74,8 @@ public class PublicadorProducto {
     }
     
     @WebMethod
-    public void setPromo(Integer idCtrlProducto, DataPromocional[] promo){
-        ArrayList<DataPromocional> ret = new ArrayList();
-        
+    public void setPromo(Integer idCtrlProducto, DataIndividual[] promo){
+        ArrayList<DataIndividual> ret = new ArrayList();
         for(int i=0; i<promo.length; i++){
             ret.add(promo[i]);
             i++;

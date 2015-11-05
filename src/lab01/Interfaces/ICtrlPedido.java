@@ -49,4 +49,5 @@ public interface ICtrlPedido {
     public abstract ArrayList<DataPedido> listaPedidos(String nickname);
     public abstract void setIdCtrl(Integer idCtrl);
     public abstract Integer getIdCtrl();
+    public abstract void actualizarFechaPedido(String nickname, long id, String fecha);
 }

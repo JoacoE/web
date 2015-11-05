@@ -174,10 +174,6 @@ public class DataRestaurante {
         this.ColIndividuales.addAll(colIndividuales);
     }
     
-    public ArrayList<DataCategoria> listarCategorias(){
-        return this.ColCategoria;
-    }
-    
     public void setPwd(String pwd){
         this.pwd = pwd;
     }
@@ -193,14 +189,14 @@ public class DataRestaurante {
     public float getPromedio(){
         return this.promedio;
     }
+    
     public String getLogo(){
      String logo;
-     if(this.lstImagen!=null){
-        logo = this.lstImagen.get(0);   
-     }else{
-         logo = "";
-         
-     }
-       return logo; 
+        if(this.lstImagen!=null){
+            logo = this.lstImagen.get(0);   
+        }else{
+            logo = "";     
+        }
+        return logo; 
     }
 }

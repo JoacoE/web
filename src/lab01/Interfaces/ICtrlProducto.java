@@ -21,7 +21,7 @@ public interface ICtrlProducto {
     public abstract void registrarProducto(DTORegistrarProducto datos);
     public abstract boolean existeRestaurante(String nomRest);
     public abstract ArrayList<DataIndividual> listarIndividuales(String nomRest);
-    public abstract void setPromo(ArrayList<DataPromocional> promo);
+    public abstract void setPromo(ArrayList<DataIndividual> promo);
     public abstract void armarPromo(DTOArmarPromo datos);
     public abstract void actualizarIndividual(DTOActualizarIndividual datos);
     public abstract void actualizarPromocional(DTOActualizarPromocional datos);

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="lab01.Clases.DataPedido" %>
+<%@page import="lab01.server.DataPedido" %>
 <html lang="es">
 
     <head>

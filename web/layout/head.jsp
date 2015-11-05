@@ -1,4 +1,4 @@
-<%@page import="lab01.Clases.DataCliente"%>
+<%@page import="lab01.server.DataCliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"  session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -165,8 +165,8 @@
 
         </div>
         <!-- /.navbar-collapse -->
-        <!--Registrar 
-        -->
+        <!--Registrar-->
+        
         <div class="modal fade" id="regmodal" tabindex="-1" role="dialog" aria-labelledby="registrarLabel">
             <div class="modal-dialog" role="document">
 

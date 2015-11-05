@@ -17,18 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import lab01.Clases.Cliente;
-import lab01.Clases.DTOEvaluacion;
-import lab01.Clases.DataCarrito;
-import lab01.Clases.DataCategoria;
-import lab01.Clases.DataCliente;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataPedido;
-import lab01.Clases.DataPromocional;
-import lab01.Clases.DataRestaurante;
-import lab01.Handlers.Fabrica;
-import lab01.Interfaces.ICtrlPedido;
-import lab01.Interfaces.ICtrlUsuario;
+import lab01.server.*;
+//import pkg.DataCategoria;
+//import pkg.DataCliente;
+//import pkg.DataIndividual;
+//import pkg.DataPedido;
+//import pkg.DataPromocional;
+//import pkg.DataRestaurante;
+//import pkg.DtoEvaluacion;
 
 /**
  *
@@ -66,9 +62,11 @@ public class PedidoServlet extends HttpServlet {
         processRequest(request, response);
         
         if(request.getParameter("comment") != null){
-            Fabrica f = Fabrica.getInstance();
-            ICtrlPedido ICP = f.getICtrlPedido();
-            ICtrlUsuario ICU = f.getICtrlUsuario();
+//            Fabrica f = Fabrica.getInstance();
+//            ICtrlPedido PP = f.getICtrlPedido();
+//            ICtrlUsuario PU = f.getICtrlUsuario();
+            ProxyPedido PP = ProxyPedido.getInstance();
+            ProxyUsuario PU = ProxyUsuario.getInstance();
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
             
             String comentario = (String)request.getParameter("comment");  
@@ -76,15 +74,17 @@ public class PedidoServlet extends HttpServlet {
             String idPedi = (String)sesion.getAttribute("idPed");
             String punt = (String)request.getParameter("star"); 
             float puntaje = Float.parseFloat(punt);
-            DTOEvaluacion dto = new DTOEvaluacion(comentario,puntaje);
+            DtoEvaluacion dto = new DtoEvaluacion();
+            dto.setComentario(comentario);
+            dto.setPuntaje(puntaje);
             dto.setFecha(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-            ICP.altaEvaluacion(Long.parseLong(idPedi), dto);
+            PP.altaEvaluacion(Long.parseLong(idPedi), dto);
             
             
             
             Long idPed = Long.parseLong(idPedi);
-            Map pedidos = ICP.listDataPedidos();
-            Iterator it = pedidos.entrySet().iterator();
+            ArrayList<DataPedido> pedidos = PP.listDataPedidos();
+            Iterator it = pedidos.iterator();
             DataPedido pedi=null;
             while(it.hasNext()){
                 Map.Entry pedido = (Map.Entry) it.next();
@@ -92,13 +92,13 @@ public class PedidoServlet extends HttpServlet {
                 if(idPed==dp.getId())
                     pedi=dp;
             }
-            Iterator it1 = pedi.getColCarrito().entrySet().iterator();
+            Iterator it1 = pedi.getColCarrito().iterator();
             while(it1.hasNext()){
                 Map.Entry colca = (Map.Entry) it1.next();
                 DataCarrito dc = (DataCarrito)colca.getValue();
                 listaCar.add(dc);}
             
-//            ICtrlUsuario ICU = f.getICtrlUsuario();
+//            ICtrlUsuario PU = f.getICtrlUsuario();
             
         request.setAttribute("evaluacion", dto);
         request.setAttribute("carrito", listaCar);
@@ -108,13 +108,15 @@ public class PedidoServlet extends HttpServlet {
         
             if(request.getParameter("pedido") != null){
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
-            Fabrica f = Fabrica.getInstance();
-            ICtrlPedido ICP = f.getICtrlPedido();
-            ICtrlUsuario ICU = f.getICtrlUsuario();
+//            Fabrica f = Fabrica.getInstance();
+//            ICtrlPedido PP = f.getICtrlPedido();
+//            ICtrlUsuario PU = f.getICtrlUsuario();
+            ProxyPedido PP = ProxyPedido.getInstance();
+            ProxyProducto PU = ProxyProducto.getInstance();
             String idPed = (String)request.getParameter("pedido");
             long idPedi = Long.parseLong(idPed);
-            Map pedidos = ICP.listDataPedidos();
-            Iterator it = pedidos.entrySet().iterator();
+            ArrayList<DataPedido> pedidos = PP.listDataPedidos();
+            Iterator it = pedidos.iterator();
             DataPedido pedi=null;
             while(it.hasNext()){
                 Map.Entry pedido = (Map.Entry) it.next();
@@ -122,13 +124,13 @@ public class PedidoServlet extends HttpServlet {
                 if(idPedi==dp.getId())
                     pedi=dp;
             }
-            Iterator it1 = pedi.getColCarrito().entrySet().iterator();
+            Iterator it1 = pedi.getColCarrito().iterator();
             while(it1.hasNext()){
                 Map.Entry colca = (Map.Entry) it1.next();
                 DataCarrito dc = (DataCarrito)colca.getValue();
                 listaCar.add(dc);
             }
-        DTOEvaluacion eva = ICP.getEvaluacionXid(idPedi);
+        DtoEvaluacion eva = PP.getEvaluacionXid(idPedi);
         
         request.setAttribute("evaluacion", eva);
         request.setAttribute("carrito", listaCar);
@@ -137,17 +139,19 @@ public class PedidoServlet extends HttpServlet {
         }
         
         if(request.getParameter("pedidosUsuario") != null){//devuelve los pedidos de un usuario...
-            Fabrica f = Fabrica.getInstance();
-            ICtrlPedido ICP = f.getICtrlPedido();
-            ICtrlUsuario ICU = f.getICtrlUsuario();
+//            Fabrica f = Fabrica.getInstance();
+//            ICtrlPedido PP = f.getICtrlPedido();
+//            ICtrlUsuario PU = f.getICtrlUsuario();
+            ProxyPedido PP = ProxyPedido.getInstance();
+            ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
             //String nick = (String)session.getAttribute("usuario");
             String nick = (String)request.getParameter("pedidosUsuario");
-            DataCliente dc=ICU.getUsuarioByNickname(nick);
+            DataCliente dc=PU.getUsuarioByNickname(nick);
             
-            Map pedidos = ICP.listaPedidos(dc.getNickname());
+            ArrayList<DataPedido> pedidos = PP.listaPedidos(dc.getNickname());
             ArrayList<DataPedido> listaPed = new ArrayList<>();
-            Iterator it = pedidos.entrySet().iterator();
+            Iterator it = pedidos.iterator();
             while (it.hasNext()){
                 Map.Entry res =(Map.Entry)it.next();
                 DataPedido dp = (DataPedido)res.getValue();    
@@ -159,32 +163,34 @@ public class PedidoServlet extends HttpServlet {
         }
         if(request.getParameter("comprar") != null){
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
-            Fabrica f = Fabrica.getInstance();
-            ICtrlPedido ICP = f.getICtrlPedido();
-            ICtrlUsuario ICU = f.getICtrlUsuario();
+//            Fabrica f = Fabrica.getInstance();
+//            ICtrlPedido PP = f.getICtrlPedido();
+//            ICtrlUsuario PU = f.getICtrlUsuario();
+            ProxyPedido PP = ProxyPedido.getInstance();
+            ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
             String nickrest = request.getParameter("nickrest");
             if(session.getAttribute("iniciada").equals("false")){
                 ArrayList<DataIndividual> individuales = new ArrayList<>();
                 ArrayList<DataPromocional> promocionales = new ArrayList<>();
-                ArrayList<DTOEvaluacion> evaluaciones = new ArrayList<>();
-                DataRestaurante dr = ICU.getRestauranteByNickname(nickrest);
-                Iterator it = dr.getColProducto().entrySet().iterator();
+                ArrayList<DtoEvaluacion> evaluaciones = new ArrayList<>();
+                DataRestaurante dr = PU.getRestauranteByNickname(nickrest);
+                Iterator it = dr.getColIndividuales().iterator();
+                Iterator it2 = dr.getColPromocionales().iterator();
                 while (it.hasNext()) {
-                    Map.Entry productos = (Map.Entry) it.next();
-                    if (productos.getValue() instanceof DataIndividual) {
-                        DataIndividual di = (DataIndividual) productos.getValue();
-                        individuales.add(di);
-                    }
-                    if (productos.getValue() instanceof DataPromocional) {
-                        DataPromocional dp = (DataPromocional) productos.getValue();
-                        promocionales.add(dp);
-                    }
+                    Map.Entry ind = (Map.Entry) it.next();
+                    DataIndividual di = (DataIndividual) ind.getValue();
+                    individuales.add(di);
                 }
-                Iterator evs = ICP.listarEvaluacionesRest(nickrest).entrySet().iterator();
+                while(it2.hasNext()){
+                    Map.Entry promo =(Map.Entry)it2.next();
+                        DataPromocional dp = (DataPromocional) promo.getValue();
+                        promocionales.add(dp);
+                }
+                Iterator evs = PP.listarEvaluacionesRest(nickrest).iterator();
                 while (evs.hasNext()) {
                     Map.Entry evals = (Map.Entry) evs.next();
-                    DTOEvaluacion de = (DTOEvaluacion) evals.getValue();
+                    DtoEvaluacion de = (DtoEvaluacion) evals.getValue();
                     evaluaciones.add(de);
                 }
                 request.setAttribute("restaurante", dr);
@@ -203,24 +209,25 @@ public class PedidoServlet extends HttpServlet {
                 request.setAttribute("alert", alert);
                 ArrayList<DataIndividual> individuales = new ArrayList<>();
                 ArrayList<DataPromocional> promocionales = new ArrayList<>();
-                ArrayList<DTOEvaluacion> evaluaciones = new ArrayList<>();
-                DataRestaurante dr = ICU.getRestauranteByNickname(nickrest);
-                Iterator it = dr.getColProducto().entrySet().iterator();
+                ArrayList<DtoEvaluacion> evaluaciones = new ArrayList<>();
+                DataRestaurante dr = PU.getRestauranteByNickname(nickrest);
+                Iterator it = dr.getColIndividuales().iterator();
                 while (it.hasNext()) {
                     Map.Entry productos = (Map.Entry) it.next();
-                    if (productos.getValue() instanceof DataIndividual) {
-                        DataIndividual di = (DataIndividual) productos.getValue();
-                        individuales.add(di);
-                    }
-                    if (productos.getValue() instanceof DataPromocional) {
-                        DataPromocional dp = (DataPromocional) productos.getValue();
-                        promocionales.add(dp);
-                    }
+                    DataIndividual di = (DataIndividual) productos.getValue();
+                    individuales.add(di);
                 }
-                Iterator evs = ICP.listarEvaluacionesRest(nickrest).entrySet().iterator();
+                while(it.hasNext()){
+                    Map.Entry promo = (Map.Entry) it.next();
+                    DataPromocional dp = (DataPromocional) promo.getValue();
+                    promocionales.add(dp);
+                    
+
+                }
+                Iterator evs = PP.listarEvaluacionesRest(nickrest).iterator();
                 while (evs.hasNext()) {
                     Map.Entry evals = (Map.Entry) evs.next();
-                    DTOEvaluacion de = (DTOEvaluacion) evals.getValue();
+                    DtoEvaluacion de = (DtoEvaluacion) evals.getValue();
                     evaluaciones.add(de);
                 }
                 request.setAttribute("restaurante", dr);
@@ -230,20 +237,20 @@ public class PedidoServlet extends HttpServlet {
                 request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
             }
             
-            ICP.setNickname(dc.getNickname());
-            ICP.setMemCliente();
-            ICP.setMailCliente(dc.getMail());
-            ICP.setMemRestaurante(nickrest);
+            PP.setNickname(dc.getNickname());
+            PP.setMemCliente();
+            PP.setMailCliente(dc.getEmail());
+            PP.setMemRestaurante(nickrest);
             
             boolean exito = true;
             
             for(int i = 0; i < nombres.length || exito != true; i++){
-                exito = ICP.selectProductos(nombres[i], Integer.parseInt(cantidad[i]));
+                exito = PP.selectProductos(nombres[i], Integer.parseInt(cantidad[i]));
             }
-            DataPedido dp = ICP.altaPedido();
-            ICP.limpiarCtrl();
+            DataPedido dp = PP.altaPedido();
+            PP.limpiarCtrl();
             
-            Iterator it5 = dp.getColCarrito().entrySet().iterator();
+            Iterator it5 = dp.getColCarrito().iterator();
             while(it5.hasNext()){
                 Map.Entry colca = (Map.Entry) it5.next();
                 DataCarrito dcar = (DataCarrito)colca.getValue();

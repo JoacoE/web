@@ -1,6 +1,6 @@
-<%@page import="lab01.Clases.DataCategoria"%>
+<%@page import="lab01.server.DataCategoria"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="lab01.Clases.DataRestaurante"%>
+<%@page import="lab01.server.DataRestaurante"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

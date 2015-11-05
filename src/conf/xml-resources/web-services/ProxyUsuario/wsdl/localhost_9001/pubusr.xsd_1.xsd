@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.4-b01. --><xs:schema xmlns:tns="http://server.lab01/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://server.lab01/">
+
+<xs:complexType name="dataPedido">
+<xs:sequence>
+<xs:element name="colCarrito">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:anyType"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:anyType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="estado" type="tns:estados" minOccurs="0"></xs:element>
+<xs:element name="fecha" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="id" type="xs:long"></xs:element>
+<xs:element name="mailUsr" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickRest" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickUsr" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio_total" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoIngresarDatos">
+<xs:sequence>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataCategoria">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataCliente">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pwd" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fNac" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataRestaurante">
+<xs:sequence>
+<xs:element name="colCategoria">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:anyType"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:anyType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="colProducto">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="xs:anyType"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:anyType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="lstImagen" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="promedio" type="xs:float"></xs:element>
+<xs:element name="pwd" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoRegistrarCliente">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fecha" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pwd" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataIndividual">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int"></xs:element>
+<xs:element name="dataDescripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="dataImagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="dataNombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="dataPrecio" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoDatosAdicionales">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="estados">
+<xs:restriction base="xs:string">
+<xs:enumeration value="PREPARACION"></xs:enumeration>
+<xs:enumeration value="ENVIADO"></xs:enumeration>
+<xs:enumeration value="RECIBIDO"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="dataPedidoArray" final="#all">
+<xs:sequence>
+<xs:element name="item" type="tns:dataPedido" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataCategoriaArray" final="#all">
+<xs:sequence>
+<xs:element name="item" type="tns:dataCategoria" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataClienteArray" final="#all">
+<xs:sequence>
+<xs:element name="item" type="tns:dataCliente" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataRestauranteArray" final="#all">
+<xs:sequence>
+<xs:element name="item" type="tns:dataRestaurante" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataIndividualArray" final="#all">
+<xs:sequence>
+<xs:element name="item" type="tns:dataIndividual" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -3,92 +3,102 @@
 
 //CLIENTES
 //Cliente 1
-Cimagen1=/home/martin/NetBeansProjects/web/imgenes de prueba/costas.jpeg
+Cimagen1=/home/joaco/NetBeansProjects/web/ImgenesPrueba/costas.jpeg
 
 //Cliente 2
-Cimagen2=/home/martin/NetBeansProjects/web/imgenes de prueba/roro.jpeg
+Cimagen2=/home/joaco/NetBeansProjects/web/ImgenesPrueba/roro.jpeg
 
 //Cliente 3
-Cimagen3=/home/martin/NetBeansProjects/web/imgenes de prueba/chechi.jpeg
+Cimagen3=/home/joaco/NetBeansProjects/web/ImgenesPrueba/chechi.jpeg
 
 //Cliente 4
-Cimagen4=/home/martin/NetBeansProjects/web/imgenes de prueba/andy.jpeg
+Cimagen4=/home/joaco/NetBeansProjects/web/ImgenesPrueba/andy.jpeg
 
 //Cliente 5
-Cimagen5=/home/martin/NetBeansProjects/web/imgenes de prueba/weiss.jpeg
+Cimagen5=/home/joaco/NetBeansProjects/web/ImgenesPrueba/weiss.jpeg
 
 //RESTAURANTES
 //Restaurante 1
 //no tiene imagenes
 
 //Restaurante 2
-Rimagen1=/home/martin/NetBeansProjects/web/imgenes de prueba/rlogo.jpeg
-Rimagen2=/home/martin/NetBeansProjects/web/imgenes de prueba/rossell.jpeg
+Rimagen1=/home/joaco/NetBeansProjects/web/ImgenesPrueba/rlogo.jpeg
+Rimagen2=/home/joaco/NetBeansProjects/web/ImgenesPrueba/rossell.jpeg
 
 //Restaurante 3
-Rimagen3=/home/martin/NetBeansProjects/web/imgenes de prueba/blogo.jpeg
-Rimagen4=/home/martin/NetBeansProjects/web/imgenes de prueba/caprese.jpeg
-Rimagen5=/home/martin/NetBeansProjects/web/imgenes de prueba/cyq.jpeg
+Rimagen3=/home/joaco/NetBeansProjects/web/ImgenesPrueba/blogo.jpeg
+Rimagen4=/home/joaco/NetBeansProjects/web/ImgenesPrueba/caprese.jpeg
+Rimagen5=/home/joaco/NetBeansProjects/web/ImgenesPrueba/cyq.jpeg
 
 //Restaurante 4
-Rimagen6=/home/martin/NetBeansProjects/web/imgenes de prueba/wlogo.jpeg
-Rimagen7=/home/martin/NetBeansProjects/web/imgenes de prueba/wokbox.jpeg
+Rimagen6=/home/joaco/NetBeansProjects/web/ImgenesPrueba/wlogo.jpeg
+Rimagen7=/home/joaco/NetBeansProjects/web/ImgenesPrueba/wokbox.jpeg
 
 //PRODUCTOS INDIVIDUALES
 //Producto 1
 Iimagen1=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Producto 2
-Iimagen2=/home/martin/NetBeansProjects/web/imgenes de prueba/milanesacarne.jpeg
+Iimagen2=/home/joaco/NetBeansProjects/web/ImgenesPrueba/milanesacarne.jpeg
 
 //Producto 3
-Iimagen3=/home/martin/NetBeansProjects/web/imgenes de prueba/canadiense.jpeg
+Iimagen3=/home/joaco/NetBeansProjects/web/ImgenesPrueba/canadiense.jpeg
 
 //Producto 4
 Iimagen4=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Producto 5
 Iimagen5=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Producto 6
-Iimagen6=/home/martin/NetBeansProjects/web/imgenes de prueba/acaballo.jpeg
+Iimagen6=/home/joaco/NetBeansProjects/web/ImgenesPrueba/acaballo.jpeg
 
 //Producto 7
 Iimagen7=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Producto 8
-Iimagen8=/home/martin/NetBeansProjects/web/imgenes de prueba/agnolotis.jpeg
+Iimagen8=/home/joaco/NetBeansProjects/web/ImgenesPrueba/agnolotis.jpeg
 
 //Producto 9
-Iimagen9=/home/martin/NetBeansProjects/web/imgenes de prueba/empacarne.jpeg
+Iimagen9=/home/joaco/NetBeansProjects/web/ImgenesPrueba/empacarne.jpeg
 
 //Producto 10
 Iimagen10=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Producto 11
-Iimagen11=/home/martin/NetBeansProjects/web/imgenes de prueba/cyq.jpeg
+Iimagen11=/home/joaco/NetBeansProjects/web/ImgenesPrueba/cyq.jpeg
 
 //Producto 12
-Iimagen12=/home/martin/NetBeansProjects/web/imgenes de prueba/caprese.jpeg
+Iimagen12=/home/joaco/NetBeansProjects/web/ImgenesPrueba/caprese.jpeg
 
 //Producto 13
-Iimagen13=/home/martin/NetBeansProjects/web/imgenes de prueba/tahiwok.jpeg
+Iimagen13=/home/joaco/NetBeansProjects/web/ImgenesPrueba/tahiwok.jpeg
 
 //Producto 14
 Iimagen14=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Producto 15
-Iimagen15=/home/martin/NetBeansProjects/web/imgenes de prueba/wokpollo.jpeg
+Iimagen15=/home/joaco/NetBeansProjects/web/ImgenesPrueba/wokpollo.jpeg
 
 //Producto 16
 Iimagen16=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //PRODUCTOS PROMOCIONALES
 //Promocional 1
 Pimagen1=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Promocional 2
 Pimagen2=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/
 
 //Promocional 3
 Pimagen3=
+//home/joaco/NetBeansProjects/web/ImgenesPrueba/

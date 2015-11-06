@@ -148,25 +148,20 @@ public class UsuarioServlet extends HttpServlet {
             Iterator it3 = PU.retColCat().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
             while (it3.hasNext()) {
-                Map.Entry cats = (Map.Entry) it3.next();
-                DataCategoria cat = (DataCategoria) cats.getValue();
+                DataCategoria cat = (DataCategoria)it3.next();
                 lista.add(cat);
             }
             Iterator it2 = PU.listaDataRestaurantes().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
             while (it2.hasNext()) {
-                Map.Entry res = (Map.Entry) it2.next();
-                DataRestaurante r = (DataRestaurante) res.getValue();
+                DataRestaurante r = (DataRestaurante)it2.next();
                 listaRes.add(r);
             }
             request.setAttribute("list", lista);
             request.setAttribute("listres", listaRes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
-        if (request.getParameter("restaurante") != null) {
-            //Fabrica f = Fabrica.getInstance();
-            //ICtrlUsuario ICU = f.getICtrlUsuario();
-            //ICtrlPedido ICP = f.getICtrlPedido();
+        if(request.getParameter("restaurante") != null){
             ProxyUsuario PU = ProxyUsuario.getInstance();
             ProxyPedido PP = ProxyPedido.getInstance();
 
@@ -175,23 +170,19 @@ public class UsuarioServlet extends HttpServlet {
             ArrayList<DtoEvaluacion> evaluaciones = new ArrayList<>();
             String nickname = (String) request.getParameter("restaurante");
             DataRestaurante dr = PU.getRestauranteByNickname(nickname);
-            Iterator it = dr.getColIndividuales().iterator();
-            
-            while (it.hasNext()) {
-                Map.Entry productos = (Map.Entry) it.next();
-                if (productos.getValue() instanceof DataIndividual) {
-                    DataIndividual di = (DataIndividual) productos.getValue();
-                    individuales.add(di);
-                }
-                if (productos.getValue() instanceof DataPromocional) {
-                    DataPromocional dp = (DataPromocional) productos.getValue();
-                    promocionales.add(dp);
-                }
-            }
+            Iterator indvs = dr.getColIndividuales().iterator();
+            Iterator proms = dr.getColPromocionales().iterator();
             Iterator evs = PP.listarEvaluacionesRest(nickname).iterator();
-            while (evs.hasNext()) {
-                Map.Entry evals = (Map.Entry) evs.next();
-                DtoEvaluacion de = (DtoEvaluacion) evals.getValue();
+            while(indvs.hasNext()){
+                    DataIndividual di = (DataIndividual)indvs.next();
+                    individuales.add(di);
+            }
+            while(proms.hasNext()){
+                DataPromocional dp = (DataPromocional)proms.next();
+                promocionales.add(dp);
+            } 
+            while(evs.hasNext()){
+                DtoEvaluacion de = (DtoEvaluacion) evs.next();
                 evaluaciones.add(de);
             }
             request.setAttribute("restaurante", dr);
@@ -200,23 +191,19 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("evaluaciones", evaluaciones);
             request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
         }
-        if (request.getParameter("list-group-item") != null) {
-            //Fabrica fabrica = Fabrica.getInstance();
-            //ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+        if(request.getParameter("list-group-item") != null){
             ProxyUsuario PU = ProxyUsuario.getInstance();
             String cat = (String) request.getParameter("list-group-item");
             ArrayList<DataRestaurante> restaurantes = new ArrayList<>();
             Iterator it = PU.listaUsuPorCategoria(cat).iterator();
             while (it.hasNext()) {
-                Map.Entry rests = (Map.Entry) it.next();
-                DataRestaurante dr = (DataRestaurante) rests.getValue();
+                DataRestaurante dr = (DataRestaurante)it.next();
                 restaurantes.add(dr);
             }
             Iterator cats = PU.retColCat().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
             while (cats.hasNext()) {
-                Map.Entry categs = (Map.Entry) cats.next();
-                DataCategoria categ = (DataCategoria) categs.getValue();
+                DataCategoria categ = (DataCategoria)cats.next();
                 lista.add(categ);
             }
             request.setAttribute("list", lista);
@@ -232,8 +219,7 @@ public class UsuarioServlet extends HttpServlet {
             Iterator cats = PU.retColCat().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
             while (cats.hasNext()) {
-                Map.Entry categs = (Map.Entry) cats.next();
-                DataCategoria categ = (DataCategoria) categs.getValue();
+                DataCategoria categ = (DataCategoria)cats.next();
                 lista.add(categ);
             }
             request.setAttribute("list", lista);
@@ -323,7 +309,7 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("listres", listaRes);
             request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
         }
-        if (request.getParameter("registrar") != null) {
+        if(request.getParameter("registrar") != null){
 //            Fabrica fabrica = Fabrica.getInstance();
 //            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             ProxyUsuario PU = ProxyUsuario.getInstance();
@@ -346,23 +332,20 @@ public class UsuarioServlet extends HttpServlet {
             Iterator it2 = PU.listaDataRestaurantes().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
             while (it2.hasNext()) {
-                Map.Entry res = (Map.Entry) it2.next();
-                DataRestaurante r = (DataRestaurante) res.getValue();
+                DataRestaurante r = (DataRestaurante)it2.next();
                 listaRes.add(r);
             }
             request.setAttribute("list", lista);
             request.setAttribute("listres", listaRes);
                 
                 
-                String alert = "El usuario ya existe";
-                request.setAttribute("alertaUsuario", alert);
-                request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
+            String alert = "El usuario ya existe";
+            request.setAttribute("alertaUsuario", alert);
+            request.getRequestDispatcher("/Pantallas/VerRestaurantes.jsp").forward(request, response);
             }
 
         }
-        if (request.getParameter("btnReg") != null) {//registrar cliente
-//            Fabrica fabrica = Fabrica.getInstance();
-//            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
+        if(request.getParameter("btnReg") != null){//registrar cliente
             ProxyUsuario PU = ProxyUsuario.getInstance();
 
             HttpSession session = request.getSession();

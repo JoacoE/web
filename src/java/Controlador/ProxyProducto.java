@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.jws.WebMethod;
 import lab01.server.DataIndividual;
 import lab01.server.DataIndividualArray;
+import lab01.server.DataPromocional;
 import lab01.server.DtoActualizarIndividual;
 import lab01.server.DtoActualizarPromocional;
 import lab01.server.DtoArmarPromo;
@@ -47,52 +48,43 @@ public static ProxyProducto getInstance(){
         CP.registrarProducto(idCtrlProducto, datos);
     }
     
-    @WebMethod
     public boolean existeRestaurante(String nomRest){
         return CP.existeRestaurante(idCtrlProducto, nomRest);
     }
-    
-    @WebMethod
+
     public ArrayList<DataIndividual> listarIndividuales(String nomRest){
         ArrayList<DataIndividual> ret = new ArrayList<>();
         ret.addAll(CP.listarIndividuales(idCtrlProducto, nomRest).getItem());
         return ret;
     }
     
-    @WebMethod
     public void setPromo(ArrayList<DataIndividual> promo){
         DataIndividualArray param = new DataIndividualArray();
-        for(DataIndividual dp: promo){
-            param.getItem().add(dp);
+        for(DataIndividual di: promo){
+            param.getItem().add(di);
         }
         CP.setPromo(idCtrlProducto, param);
     }
-    
-    
+
     public void armarPromo(DtoArmarPromo datos){
         CP.armarPromo(idCtrlProducto, datos);
     }
-    
-    
+
     public void actualizarIndividual(DtoActualizarIndividual datos){
         CP.actualizarIndividual(idCtrlProducto, datos);
     }
-    
-    
+
     public void actualizarPromocional(DtoActualizarPromocional datos){
         CP.actualizarPromocional(idCtrlProducto, datos);
     }
-    
-    
-    public lab01.server.DataIndividual getProdIndividualXNombre(String nombre){
+
+    public DataIndividual getProdIndividualXNombre(String nombre){
         lab01.server.DataIndividual ret = CP.getProdIndividualXNombre(idCtrlProducto, nombre);
         return ret;
     }
-    
-    
-    public lab01.server.DataPromocional getProdPromocionalXNombre(String nombre){
+
+    public DataPromocional getProdPromocionalXNombre(String nombre){
         lab01.server.DataPromocional ret = CP.getProdPromocionalXNombre(idCtrlProducto, nombre);
         return ret;
     }
-    
 }

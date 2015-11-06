@@ -50,7 +50,7 @@ public class Evaluacion {
         this.fecha = fecha;
     }
     
-    public DTOEvaluacion getDTOEvaluacion(){
-        return new DTOEvaluacion(getComentario(), getPuntaje(), getFecha());
+    public DtoEvaluacion getDTOEvaluacion(){
+        return new DtoEvaluacion(getComentario(), getPuntaje(), getFecha());
     }
 }

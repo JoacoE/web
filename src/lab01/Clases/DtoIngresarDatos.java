@@ -13,16 +13,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @author joaco
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DTOIngresarDatos {
+public class DtoIngresarDatos {
     
     private String nickname;
     private String nombre;
     private String email;
     private String direccion;
 
-    public DTOIngresarDatos(){}
+    public DtoIngresarDatos(){}
     
-    public DTOIngresarDatos(String nickname, String nombre, String email, String direccion){
+    public DtoIngresarDatos(String nickname, String nombre, String email, String direccion){
         this.nickname = nickname;
         this.nombre = nombre;
         this.email = email;

@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import lab01.Clases.Cliente;
-import lab01.Clases.DTOEvaluacion;
+import lab01.Clases.DtoEvaluacion;
 import lab01.Clases.DataCarrito;
 import lab01.Clases.DataCliente;
 import lab01.Clases.Restaurante;
@@ -417,7 +417,7 @@ public class CtrlPedido implements ICtrlPedido {
     }
 
     @Override
-    public void altaEvaluacion(double id, DTOEvaluacion data){
+    public void altaEvaluacion(double id, DtoEvaluacion data){
         String rest = null;
         Evaluacion ev = null;
         if(data.getFecha() != null){
@@ -452,8 +452,8 @@ public class CtrlPedido implements ICtrlPedido {
     }
 
     @Override
-    public ArrayList<DTOEvaluacion> listarEvaluacionesRest(String nickname){
-        ArrayList<DTOEvaluacion> aux = new ArrayList<>();
+    public ArrayList<DtoEvaluacion> listarEvaluacionesRest(String nickname){
+        ArrayList<DtoEvaluacion> aux = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
         while(clientes.hasNext()){
@@ -466,7 +466,7 @@ public class CtrlPedido implements ICtrlPedido {
                     Pedido p = (Pedido)pedido.getValue();
                     if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == Estados.RECIBIDO))){
                         if(p.getEvaluacion() != null){
-                            DTOEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
+                            DtoEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
                             ev.setNickname(c.getNickname());
                             aux.add(ev);
                         }
@@ -478,9 +478,9 @@ public class CtrlPedido implements ICtrlPedido {
     }
     
     @Override
-    public DTOEvaluacion getEvaluacionXid(long id){
+    public DtoEvaluacion getEvaluacionXid(long id){
         HUsuario hu = HUsuario.getinstance();
-        DTOEvaluacion ret = null;
+        DtoEvaluacion ret = null;
         Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
         while(clientes.hasNext()){
             Map.Entry cliente = (Map.Entry)clientes.next();

@@ -14,27 +14,29 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DTOActualizarPromocional {
+public class DtoArmarPromo {
     
-    private DataPromocional dp;
-    private String nombre;
     private String nickRest;
+    private String nombre;
+    private String descripcion;
+    private double descuento;
     private String imagen;
     
-    public DTOActualizarPromocional(){}
+    public DtoArmarPromo(){}
     
-    public DTOActualizarPromocional(DataPromocional dp, String nombre, String nickRest){
-        this.dp = dp;
-        this.nombre = nombre;
+    public DtoArmarPromo(String nickRest, String nombre, String descripcion, double descuento){
         this.nickRest = nickRest;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.descuento = descuento;
     }
 
-    public DataPromocional getDp() {
-        return dp;
+    public String getNickRest() {
+        return nickRest;
     }
 
-    public void setDp(DataPromocional dp) {
-        this.dp = dp;
+    public void setNickRest(String nickRest) {
+        this.nickRest = nickRest;
     }
 
     public String getNombre() {
@@ -45,12 +47,20 @@ public class DTOActualizarPromocional {
         this.nombre = nombre;
     }
 
-    public String getNickRest() {
-        return nickRest;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNickRest(String nickRest) {
-        this.nickRest = nickRest;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
     }
     
     public String getImagen(){

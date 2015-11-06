@@ -6,7 +6,7 @@
 package lab01.Interfaces;
 
 import java.util.ArrayList;
-import lab01.Clases.DTOEvaluacion;
+import lab01.Clases.DtoEvaluacion;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
@@ -43,9 +43,9 @@ public interface ICtrlPedido {
     public abstract void cancelarPedido(long id);
     public abstract ArrayList<DataPedido> listaPedidosRecibidos(String nickname);
     public abstract void actualizarPromedioRest(String nickname);
-    public abstract void altaEvaluacion(double id, DTOEvaluacion data);
-    public abstract ArrayList<DTOEvaluacion> listarEvaluacionesRest(String nickname);
-    public abstract DTOEvaluacion getEvaluacionXid(long id);
+    public abstract void altaEvaluacion(double id, DtoEvaluacion data);
+    public abstract ArrayList<DtoEvaluacion> listarEvaluacionesRest(String nickname);
+    public abstract DtoEvaluacion getEvaluacionXid(long id);
     public abstract ArrayList<DataPedido> listaPedidos(String nickname);
     public abstract void setIdCtrl(Integer idCtrl);
     public abstract Integer getIdCtrl();

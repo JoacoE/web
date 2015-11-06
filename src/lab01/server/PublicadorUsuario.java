@@ -13,9 +13,9 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
-import lab01.Clases.DTODatosAdicionales;
-import lab01.Clases.DTOIngresarDatos;
-import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DtoDatosAdicionales;
+import lab01.Clases.DtoIngresarDatos;
+import lab01.Clases.DtoRegistrarCliente;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataIndividual;
@@ -63,12 +63,12 @@ public class PublicadorUsuario {
     }
     
     @WebMethod
-    public boolean ingresarDatos(Integer idCtrlUsuario, DTOIngresarDatos datos){
+    public boolean ingresarDatos(Integer idCtrlUsuario, DtoIngresarDatos datos){
         return Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).ingresarDatos(datos);
     }
     
     @WebMethod
-    public void registrarCliente(Integer idCtrlUsuario, DTORegistrarCliente datos){
+    public void registrarCliente(Integer idCtrlUsuario, DtoRegistrarCliente datos){
         Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).registrarCliente(datos);
     }
     
@@ -78,7 +78,7 @@ public class PublicadorUsuario {
     }
     
     @WebMethod
-    public void datosAdicionales(Integer idCtrlUsuario, DTODatosAdicionales datos){
+    public void datosAdicionales(Integer idCtrlUsuario, DtoDatosAdicionales datos){
         Fabrica.getInstance().getICtrlUsuario(idCtrlUsuario).datosAdicionales(datos);
     }
     

@@ -13,21 +13,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @author joaco
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DTOEvaluacion {
+public class DtoEvaluacion {
     
     private String comentario;
     private float puntaje;
     private String fecha;
     private String nickname;
     
-    public DTOEvaluacion(){}
+    public DtoEvaluacion(){}
     
-    public DTOEvaluacion(String comentario, float puntaje){
+    public DtoEvaluacion(String comentario, float puntaje){
         this.comentario = comentario;
         this.puntaje = puntaje;
     }
     
-    public DTOEvaluacion(String comentario, float puntaje, String fecha){
+    public DtoEvaluacion(String comentario, float puntaje, String fecha){
         this.comentario = comentario;
         this.puntaje = puntaje;
         this.fecha = fecha;

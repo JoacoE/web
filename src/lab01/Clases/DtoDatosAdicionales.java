@@ -13,20 +13,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @author joaco
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DTORegistrarCliente {
+public class DtoDatosAdicionales {
     
     private String apellido;
     private String imagen;
-    private String fecha;
-    private String pwd;
     
-    public DTORegistrarCliente(){}
+    public DtoDatosAdicionales(){}
     
-    public DTORegistrarCliente(String apellido, String imagen, String fecha, String pwd){
+    public DtoDatosAdicionales(String apellido, String imagen){
         this.apellido = apellido;
         this.imagen = imagen;
-        this.fecha = fecha;
-        this.pwd = pwd;
     }
 
     public String getApellido() {
@@ -43,21 +39,5 @@ public class DTORegistrarCliente {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-    
-    public void setPwd(String pwd){
-        this.pwd = pwd;
-    }
-    
-    public String getPwd(){
-        return this.pwd;
-    }
+    }    
 }

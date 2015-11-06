@@ -14,27 +14,27 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DTOActualizarIndividual {
+public class DtoActualizarPromocional {
     
-    private DataIndividual di;
+    private DataPromocional dp;
     private String nombre;
     private String nickRest;
     private String imagen;
     
-    public DTOActualizarIndividual(){}
+    public DtoActualizarPromocional(){}
     
-    public DTOActualizarIndividual(DataIndividual di, String nombre, String nickRest){
-        this.di = di;
+    public DtoActualizarPromocional(DataPromocional dp, String nombre, String nickRest){
+        this.dp = dp;
         this.nombre = nombre;
         this.nickRest = nickRest;
     }
 
-    public DataIndividual getDi() {
-        return di;
+    public DataPromocional getDp() {
+        return dp;
     }
 
-    public void setDi(DataIndividual di) {
-        this.di = di;
+    public void setDp(DataPromocional dp) {
+        this.dp = dp;
     }
 
     public String getNombre() {
@@ -52,12 +52,12 @@ public class DTOActualizarIndividual {
     public void setNickRest(String nickRest) {
         this.nickRest = nickRest;
     }
-
-    public String getImagen() {
-        return imagen;
+    
+    public String getImagen(){
+        return this.imagen;
     }
-
-    public void setImagen(String imagen) {
+    
+    public void setImagen(String imagen){
         this.imagen = imagen;
     }
 }

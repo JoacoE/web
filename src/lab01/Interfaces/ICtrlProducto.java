@@ -5,10 +5,10 @@
  */
 package lab01.Interfaces;
 import java.util.ArrayList;
-import lab01.Clases.DTOActualizarIndividual;
-import lab01.Clases.DTOActualizarPromocional;
-import lab01.Clases.DTOArmarPromo;
-import lab01.Clases.DTORegistrarProducto;
+import lab01.Clases.DtoActualizarIndividual;
+import lab01.Clases.DtoActualizarPromocional;
+import lab01.Clases.DtoArmarPromo;
+import lab01.Clases.DtoRegistrarProducto;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
 
@@ -18,13 +18,13 @@ import lab01.Clases.DataPromocional;
  */
 public interface ICtrlProducto {
     
-    public abstract void registrarProducto(DTORegistrarProducto datos);
+    public abstract void registrarProducto(DtoRegistrarProducto datos);
     public abstract boolean existeRestaurante(String nomRest);
     public abstract ArrayList<DataIndividual> listarIndividuales(String nomRest);
     public abstract void setPromo(ArrayList<DataIndividual> promo);
-    public abstract void armarPromo(DTOArmarPromo datos);
-    public abstract void actualizarIndividual(DTOActualizarIndividual datos);
-    public abstract void actualizarPromocional(DTOActualizarPromocional datos);
+    public abstract void armarPromo(DtoArmarPromo datos);
+    public abstract void actualizarIndividual(DtoActualizarIndividual datos);
+    public abstract void actualizarPromocional(DtoActualizarPromocional datos);
     public abstract DataIndividual getProdIndividualXNombre(String nombre);
     public abstract DataPromocional getProdPromocionalXNombre(String nombre);
     public abstract void setIdCtrl(Integer idCtrl);

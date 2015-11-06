@@ -14,9 +14,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 import lab01.Clases.Categoria;
-import lab01.Clases.DTODatosAdicionales;
-import lab01.Clases.DTOIngresarDatos;
-import lab01.Clases.DTORegistrarCliente;
+import lab01.Clases.DtoDatosAdicionales;
+import lab01.Clases.DtoIngresarDatos;
+import lab01.Clases.DtoRegistrarCliente;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataIndividual;
@@ -95,7 +95,7 @@ public class CtrlUsuario implements ICtrlUsuario {
     }
 
     @Override
-    public boolean ingresarDatos(DTOIngresarDatos datos){
+    public boolean ingresarDatos(DtoIngresarDatos datos){
         this.nickname = datos.getNickname();
         this.direccion = datos.getDireccion();
         this.nombre = datos.getNombre();
@@ -105,7 +105,7 @@ public class CtrlUsuario implements ICtrlUsuario {
     }
 
     @Override
-    public void registrarCliente(DTORegistrarCliente datos){
+    public void registrarCliente(DtoRegistrarCliente datos){
         if(datos.getImagen() == null){
             datos.setImagen("");
         }
@@ -141,7 +141,7 @@ public class CtrlUsuario implements ICtrlUsuario {
     }
     
     @Override
-    public void datosAdicionales(DTODatosAdicionales datos){
+    public void datosAdicionales(DtoDatosAdicionales datos){
         HUsuario mu = HUsuario.getinstance();
         Cliente c = mu.obtenerUsuario(this.nickname);
         c.setApellido(datos.getApellido());

@@ -6,16 +6,15 @@
 package lab01.Handlers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.Cantidad_Individual;
-import lab01.Clases.DTOActualizarIndividual;
-import lab01.Clases.DTOActualizarPromocional;
-import lab01.Clases.DTOArmarPromo;
-import lab01.Clases.DTORegistrarProducto;
+import lab01.Clases.DtoActualizarIndividual;
+import lab01.Clases.DtoActualizarPromocional;
+import lab01.Clases.DtoArmarPromo;
+import lab01.Clases.DtoRegistrarProducto;
 import lab01.Clases.DataPromocional;
 import lab01.Clases.Individual;
 import lab01.Clases.Promocional;
@@ -29,11 +28,11 @@ import lab01.Interfaces.ICtrlProducto;
  */
 public class CtrlProducto implements ICtrlProducto {
 
-    private Map Promo;
+    private ArrayList<DataIndividual> Promo;
     private Integer idCtrl;
     
     public CtrlProducto(){
-        this.Promo = new HashMap();
+        this.Promo = new ArrayList<>();
     }
     
     @Override
@@ -47,7 +46,7 @@ public class CtrlProducto implements ICtrlProducto {
     }
     
     @Override
-    public void registrarProducto(DTORegistrarProducto datos) {
+    public void registrarProducto(DtoRegistrarProducto datos) {
         //primero obtengo el restaurante, si existe
         HUsuario HU = HUsuario.getinstance();
         Restaurante restoran = HU.obtenerRestaurante(datos.getNickRest());
@@ -82,13 +81,9 @@ public class CtrlProducto implements ICtrlProducto {
 
     @Override
     public void setPromo(ArrayList<DataIndividual> promo) {
-        Iterator it = promo.iterator();
-        Map res = new HashMap();
-        while (it.hasNext()){
-            DataIndividual dt =(DataIndividual)it.next();
-            res.put(dt.getDataNombre(), dt);
+        for(DataIndividual di: promo){
+            this.Promo.add(di);
         }
-        this.Promo = res;
     }
 
     @Override
@@ -112,17 +107,18 @@ public class CtrlProducto implements ICtrlProducto {
     }
 
     @Override
-    public void armarPromo(DTOArmarPromo datos) {
-        Iterator it = this.Promo.entrySet().iterator();
+    public void armarPromo(DtoArmarPromo datos) {
+        Iterator it = this.Promo.iterator();
         HUsuario HU = HUsuario.getinstance();
         Restaurante r = HU.obtenerRestaurante(datos.getNickRest());
-        ArrayList<Cantidad_Individual> ColCantIndividual = new ArrayList<Cantidad_Individual>();
+        ArrayList<Cantidad_Individual> ColCantIndividual = new ArrayList<>();
         //Promocional pro = 
         while (it.hasNext()) {
-            Map.Entry map = (Map.Entry) it.next();
-            Individual i = (Individual) r.getProducto(map.getKey().toString());
-            String cant = (String) map.getValue().toString();
-            int cantidad = Integer.parseInt(cant);
+            //Map.Entry map = (Map.Entry) it.next();
+            DataIndividual di = (DataIndividual)it.next();
+            Individual i = (Individual)r.getProducto(di.getDataNombre());
+            //String cant = (String) map.getValue().toString();
+            int cantidad = di.getCantidad();
             Cantidad_Individual CI = new Cantidad_Individual(i, cantidad);
             ColCantIndividual.add(CI);
         }
@@ -199,7 +195,7 @@ public class CtrlProducto implements ICtrlProducto {
     }
     
     @Override
-    public void actualizarIndividual(DTOActualizarIndividual datos){
+    public void actualizarIndividual(DtoActualizarIndividual datos){
         Individual individual = (Individual) this.getProdNombre(datos.getNombre(), datos.getNickRest());
         individual.setNombre(datos.getDi().getDataNombre());
         individual.setDescripcion(datos.getDi().getDataDescripcion());
@@ -209,7 +205,7 @@ public class CtrlProducto implements ICtrlProducto {
     }
     
     @Override
-    public void actualizarPromocional(DTOActualizarPromocional datos){
+    public void actualizarPromocional(DtoActualizarPromocional datos){
         Promocional promo = (Promocional) this.getProdNombre(datos.getNombre(), datos.getNickRest());
         promo.setNombre(datos.getDp().getDataNombre());
         promo.setDescripcion(datos.getDp().getDataDescripcion());

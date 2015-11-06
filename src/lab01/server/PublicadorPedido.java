@@ -13,7 +13,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
-import lab01.Clases.DTOEvaluacion;
+import lab01.Clases.DtoEvaluacion;
 import lab01.Clases.DataCategoria;
 import lab01.Clases.DataCliente;
 import lab01.Clases.DataPedido;
@@ -211,32 +211,32 @@ public class PublicadorPedido {
     }
     
     @WebMethod
-    public void altaEvaluacion(Integer idCtrlPedido, double id, DTOEvaluacion data){
+    public void altaEvaluacion(Integer idCtrlPedido, double id, DtoEvaluacion data){
         Fabrica.getInstance().getICtrlPedido(idCtrlPedido).altaEvaluacion(id, data);
     }
     
     @WebMethod
-    public DTOEvaluacion[] listarEvaluacionesRest(Integer idCtrlPedido, String nickname){
-        ArrayList<DTOEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
-        DTOEvaluacion[] lista = new DTOEvaluacion[ret.size()];
+    public DtoEvaluacion[] listarEvaluacionesRest(Integer idCtrlPedido, String nickname){
+        ArrayList<DtoEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
+        DtoEvaluacion[] lista = new DtoEvaluacion[ret.size()];
         Iterator it = ret.iterator();
         int i = 0;
         while(it.hasNext()){
-            lista[i] = (DTOEvaluacion) it.next();
+            lista[i] = (DtoEvaluacion) it.next();
             i++;
         }
         return lista;
     }
     
     @WebMethod
-    public DTOEvaluacion getEvaluacionXid(Integer idCtrlPedido, long id){
-        DTOEvaluacion ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).getEvaluacionXid(id);
+    public DtoEvaluacion getEvaluacionXid(Integer idCtrlPedido, long id){
+        DtoEvaluacion ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).getEvaluacionXid(id);
         return ret;
     }
     
     @WebMethod
     public DataPedido[] listaPedidos(Integer idCtrlPedido,String nickname){
-        ArrayList<DTOEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
+        ArrayList<DtoEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
         DataPedido[] lista = new DataPedido[ret.size()];
         Iterator it = ret.iterator();
         int i = 0;

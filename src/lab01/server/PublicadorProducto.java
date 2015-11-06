@@ -13,10 +13,10 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.Endpoint;
-import lab01.Clases.DTOActualizarIndividual;
-import lab01.Clases.DTOActualizarPromocional;
-import lab01.Clases.DTOArmarPromo;
-import lab01.Clases.DTORegistrarProducto;
+import lab01.Clases.DtoActualizarIndividual;
+import lab01.Clases.DtoActualizarPromocional;
+import lab01.Clases.DtoArmarPromo;
+import lab01.Clases.DtoRegistrarProducto;
 import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPromocional;
 import lab01.Handlers.Fabrica;
@@ -49,7 +49,7 @@ public class PublicadorProducto {
     }
     
     @WebMethod
-    public void registrarProducto(Integer idCtrlProducto, DTORegistrarProducto datos){
+    public void registrarProducto(Integer idCtrlProducto, DtoRegistrarProducto datos){
         Fabrica.getInstance().getICtrlProducto(idCtrlProducto).registrarProducto(datos);
     }
     
@@ -84,17 +84,17 @@ public class PublicadorProducto {
     }
     
     @WebMethod
-    public void armarPromo(Integer idCtrlProducto, DTOArmarPromo datos){
+    public void armarPromo(Integer idCtrlProducto, DtoArmarPromo datos){
         Fabrica.getInstance().getICtrlProducto(idCtrlProducto).armarPromo(datos);
     }
     
     @WebMethod
-    public void actualizarIndividual(Integer idCtrlProducto, DTOActualizarIndividual datos){
+    public void actualizarIndividual(Integer idCtrlProducto, DtoActualizarIndividual datos){
         Fabrica.getInstance().getICtrlProducto(idCtrlProducto).actualizarIndividual(datos);
     }
     
     @WebMethod
-    public void actualizarPromocional(Integer idCtrlProducto, DTOActualizarPromocional datos){
+    public void actualizarPromocional(Integer idCtrlProducto, DtoActualizarPromocional datos){
         Fabrica.getInstance().getICtrlProducto(idCtrlProducto).actualizarPromocional(datos);
     }
     

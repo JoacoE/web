@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DTOCarritoCompra {
+public class DtoCarritoCompra {
 
     private String nombre;
     private int cantidad;
 
-    public DTOCarritoCompra(){}
+    public DtoCarritoCompra(){}
 
-    public DTOCarritoCompra(String nombre, int cantidad) {
+    public DtoCarritoCompra(String nombre, int cantidad) {
         this.nombre = nombre;
         this.cantidad = cantidad;
     }

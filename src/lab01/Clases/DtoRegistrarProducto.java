@@ -14,15 +14,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 
-public class DTORegistrarProducto {
+public class DtoRegistrarProducto {
 
     private DataIndividual di;
     private String nickRest;
     private boolean promo;
     
-    public DTORegistrarProducto(){}
+    public DtoRegistrarProducto(){}
     
-    public DTORegistrarProducto(DataIndividual di, String nickRest, boolean promo){
+    public DtoRegistrarProducto(DataIndividual di, String nickRest, boolean promo){
         this.di = di;
         this.nickRest = nickRest;
         this.promo = promo;

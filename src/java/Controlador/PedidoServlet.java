@@ -55,9 +55,6 @@ public class PedidoServlet extends HttpServlet {
         processRequest(request, response);
         
         if(request.getParameter("comment") != null){
-//            Fabrica f = Fabrica.getInstance();
-//            ICtrlPedido PP = f.getICtrlPedido();
-//            ICtrlUsuario PU = f.getICtrlUsuario();
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
@@ -73,25 +70,19 @@ public class PedidoServlet extends HttpServlet {
             dto.setFecha(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
             PP.altaEvaluacion(Long.parseLong(idPedi), dto);
             
-            
-            
             Long idPed = Long.parseLong(idPedi);
             ArrayList<DataPedido> pedidos = PP.listDataPedidos();
             Iterator it = pedidos.iterator();
             DataPedido pedi=null;
             while(it.hasNext()){
-                Map.Entry pedido = (Map.Entry) it.next();
-                DataPedido dp = (DataPedido)pedido.getValue();
+                DataPedido dp = (DataPedido)it.next();
                 if(idPed==dp.getId())
                     pedi=dp;
             }
             Iterator it1 = pedi.getColCarrito().iterator();
             while(it1.hasNext()){
-                Map.Entry colca = (Map.Entry) it1.next();
-                DataCarrito dc = (DataCarrito)colca.getValue();
+                DataCarrito dc = (DataCarrito)it1.next();
                 listaCar.add(dc);}
-            
-//            ICtrlUsuario PU = f.getICtrlUsuario();
             
         request.setAttribute("evaluacion", dto);
         request.setAttribute("carrito", listaCar);
@@ -101,9 +92,6 @@ public class PedidoServlet extends HttpServlet {
         
             if(request.getParameter("pedido") != null){
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
-//            Fabrica f = Fabrica.getInstance();
-//            ICtrlPedido PP = f.getICtrlPedido();
-//            ICtrlUsuario PU = f.getICtrlUsuario();
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyProducto PU = ProxyProducto.getInstance();
             String idPed = (String)request.getParameter("pedido");
@@ -112,15 +100,13 @@ public class PedidoServlet extends HttpServlet {
             Iterator it = pedidos.iterator();
             DataPedido pedi=null;
             while(it.hasNext()){
-                Map.Entry pedido = (Map.Entry) it.next();
-                DataPedido dp = (DataPedido)pedido.getValue();
+                DataPedido dp = (DataPedido)it.next();
                 if(idPedi==dp.getId())
                     pedi=dp;
             }
             Iterator it1 = pedi.getColCarrito().iterator();
             while(it1.hasNext()){
-                Map.Entry colca = (Map.Entry) it1.next();
-                DataCarrito dc = (DataCarrito)colca.getValue();
+                DataCarrito dc = (DataCarrito)it1.next();
                 listaCar.add(dc);
             }
         DtoEvaluacion eva = PP.getEvaluacionXid(idPedi);
@@ -131,10 +117,7 @@ public class PedidoServlet extends HttpServlet {
         request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
-        if(request.getParameter("pedidosUsuario") != null){//devuelve los pedidos de un usuario...
-//            Fabrica f = Fabrica.getInstance();
-//            ICtrlPedido PP = f.getICtrlPedido();
-//            ICtrlUsuario PU = f.getICtrlUsuario();
+        if(request.getParameter("pedidosUsuario") != null){
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
@@ -146,8 +129,7 @@ public class PedidoServlet extends HttpServlet {
             ArrayList<DataPedido> listaPed = new ArrayList<>();
             Iterator it = pedidos.iterator();
             while (it.hasNext()){
-                Map.Entry res =(Map.Entry)it.next();
-                DataPedido dp = (DataPedido)res.getValue();    
+                DataPedido dp = (DataPedido)it.next();
                 listaPed.add(dp);
             }
             request.setAttribute("cliente", dc);
@@ -156,9 +138,6 @@ public class PedidoServlet extends HttpServlet {
         }
         if(request.getParameter("comprar") != null){
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
-//            Fabrica f = Fabrica.getInstance();
-//            ICtrlPedido PP = f.getICtrlPedido();
-//            ICtrlUsuario PU = f.getICtrlUsuario();
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
@@ -171,19 +150,16 @@ public class PedidoServlet extends HttpServlet {
                 Iterator it = dr.getColIndividuales().iterator();
                 Iterator it2 = dr.getColPromocionales().iterator();
                 while (it.hasNext()) {
-                    Map.Entry ind = (Map.Entry) it.next();
-                    DataIndividual di = (DataIndividual) ind.getValue();
+                    DataIndividual di = (DataIndividual)it.next();
                     individuales.add(di);
                 }
                 while(it2.hasNext()){
-                    Map.Entry promo =(Map.Entry)it2.next();
-                        DataPromocional dp = (DataPromocional) promo.getValue();
-                        promocionales.add(dp);
+                    DataPromocional dp = (DataPromocional)it2.next();
+                    promocionales.add(dp);
                 }
                 Iterator evs = PP.listarEvaluacionesRest(nickrest).iterator();
                 while (evs.hasNext()) {
-                    Map.Entry evals = (Map.Entry) evs.next();
-                    DtoEvaluacion de = (DtoEvaluacion) evals.getValue();
+                    DtoEvaluacion de = (DtoEvaluacion)evs.next();
                     evaluaciones.add(de);
                 }
                 request.setAttribute("restaurante", dr);
@@ -206,21 +182,18 @@ public class PedidoServlet extends HttpServlet {
                 DataRestaurante dr = PU.getRestauranteByNickname(nickrest);
                 Iterator it = dr.getColIndividuales().iterator();
                 while (it.hasNext()) {
-                    Map.Entry productos = (Map.Entry) it.next();
-                    DataIndividual di = (DataIndividual) productos.getValue();
+                    DataIndividual di = (DataIndividual)it.next();
                     individuales.add(di);
                 }
                 while(it.hasNext()){
-                    Map.Entry promo = (Map.Entry) it.next();
-                    DataPromocional dp = (DataPromocional) promo.getValue();
+                    DataPromocional dp = (DataPromocional)it.next();
                     promocionales.add(dp);
                     
 
                 }
                 Iterator evs = PP.listarEvaluacionesRest(nickrest).iterator();
                 while (evs.hasNext()) {
-                    Map.Entry evals = (Map.Entry) evs.next();
-                    DtoEvaluacion de = (DtoEvaluacion) evals.getValue();
+                    DtoEvaluacion de = (DtoEvaluacion)evs.next();
                     evaluaciones.add(de);
                 }
                 request.setAttribute("restaurante", dr);
@@ -245,8 +218,7 @@ public class PedidoServlet extends HttpServlet {
             
             Iterator it5 = dp.getColCarrito().iterator();
             while(it5.hasNext()){
-                Map.Entry colca = (Map.Entry) it5.next();
-                DataCarrito dcar = (DataCarrito)colca.getValue();
+                DataCarrito dcar = (DataCarrito)it5.next();
                 listaCar.add(dcar);
             }
             request.setAttribute("carrito", listaCar);

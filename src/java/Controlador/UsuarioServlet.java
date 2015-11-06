@@ -131,8 +131,7 @@ public class UsuarioServlet extends HttpServlet {
             Iterator it2 = PU.listaDataRestaurantes().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
             while (it2.hasNext()) {
-                Map.Entry res = (Map.Entry) it2.next();
-                DataRestaurante r = (DataRestaurante) res.getValue();
+                DataRestaurante r = (DataRestaurante)it2.next();
                 listaRes.add(r);
             }
             request.setAttribute("list", lista);
@@ -241,11 +240,8 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         if (request.getParameter("ingresar") != null) {
-            //Fabrica fabrica = Fabrica.getInstance();
-            //ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
-            //HImagenes HI = HImagenes.getInstance();
             File imagen = null;
             ImageIcon noImage = null;
             String id, pwd;
@@ -257,18 +253,9 @@ public class UsuarioServlet extends HttpServlet {
             boolean nick = PU.existeNickname(id);
 
             if (mail || nick) {
-//                while (it.hasNext()) {
-//                    Map.Entry usuarios = (Map.Entry) it.next();
-//                    DataCliente dc = (DataCliente) usuarios.getValue();
-//                    if (dc.getNickname().equals(id) || dc.getEmail().equals(id)) {
-//                        usuario = dc;
-//                    }
-//                }
-                List<DataCliente> lista = PU.devListaDC();
-                
-                for(int i = 0; i<lista.size();i++){
-                        if(lista.get(i).getNickname().equals(id) || lista.get(i).getEmail().equals(id)){
-                            usuario = lista.get(i);
+                for(DataCliente dc: PU.devListaDC()){
+                        if(dc.getNickname().equals(id) || dc.getEmail().equals(id)){
+                            usuario = dc;
                             if (usuario.getPwd().equals(pwd)) {
                                 request.setAttribute("usuario", usuario.getNickname());
                                 session.setAttribute("iniciada", "true");
@@ -403,26 +390,6 @@ public class UsuarioServlet extends HttpServlet {
             }
 
         }
-//        
-//        if(request.getParameter("/*parametro*/") != null){
-//            Fabrica fabrica = Fabrica.getInstance();
-//            ICtrlUsuario ICU = fabrica.getICtrlUsuario();
-//            String id = (String)request.getAttribute("txtMail");
-//            String pwd = (String)request.getAttribute("txtPass");
-//            DataCliente dc = null;
-//            if(ICU.existeNickname(id) || ICU.existeMail(id)){
-//                if(ICU.existeNickname(id)){
-//                    dc = ICU.getUsuarioByNickname(id);
-//                }if(ICU.existeMail(id)){
-//                    dc = ICU.getByMail(id);
-//                }
-//                if(dc.getPwd().equals(pwd)){
-//                    HttpSession session = request.getSession();
-//                    request.setAttribute("usuario", dc);
-//                    request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
-//                }   
-//            }
-//        }
     }
 
     /**

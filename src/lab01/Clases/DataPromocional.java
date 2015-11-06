@@ -38,6 +38,7 @@ public class DataPromocional {
         if(ColDatIndividual == null){
             this.ColDatIndividual = null;
         }else{
+            this.ColDatIndividual = new ArrayList<>();
             this.ColDatIndividual.addAll(ColDatIndividual);
         }
     }

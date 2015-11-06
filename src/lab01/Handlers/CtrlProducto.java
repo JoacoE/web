@@ -80,10 +80,9 @@ public class CtrlProducto implements ICtrlProducto {
     }
 
     @Override
-    public void setPromo(ArrayList<DataIndividual> promo) {
-        for(DataIndividual di: promo){
-            this.Promo.add(di);
-        }
+    public void setPromo(ArrayList<DataIndividual> promo){
+        this.Promo.clear();
+        this.Promo.addAll(promo);
     }
 
     @Override

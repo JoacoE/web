@@ -115,9 +115,7 @@ public class UsuarioServlet extends HttpServlet {
         }
 
         if (request.getParameter("cerrar") != null) {
-            //Fabrica f = Fabrica.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
-            //ICtrlUsuario PU = .getICtrlUsuario();
             HttpSession session = request.getSession();
             session.removeAttribute("usuario");
             session.removeAttribute("dcliente");
@@ -140,8 +138,6 @@ public class UsuarioServlet extends HttpServlet {
 
         }
         if (request.getParameter("home") != null) {
-//            Fabrica f = Fabrica.getInstance();
-//            ICtrlUsuario ICU = f.getICtrlUsuario();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
             Iterator it3 = PU.retColCat().iterator();
@@ -211,9 +207,7 @@ public class UsuarioServlet extends HttpServlet {
         }
         if (request.getParameter("search") != null) {
             String busqueda = (String) request.getParameter("search");
-            //Fabrica fabrica = Fabrica.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
-            //ICtrlUsuario ICU = fabrica.getICtrlUsuario();
             ArrayList<DataRestaurante> dr = PU.buscarRestaurantes(busqueda);
             Iterator cats = PU.retColCat().iterator();
             ArrayList<DataCategoria> lista = new ArrayList<>();
@@ -251,7 +245,6 @@ public class UsuarioServlet extends HttpServlet {
             Iterator it = PU.devListaDC().iterator();
             boolean mail = PU.existeMail(id);
             boolean nick = PU.existeNickname(id);
-
             if (mail || nick) {
                 for(DataCliente dc: PU.devListaDC()){
                         if(dc.getNickname().equals(id) || dc.getEmail().equals(id)){

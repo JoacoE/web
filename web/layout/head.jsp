@@ -24,141 +24,115 @@
 <div class="cabezal">
     <div class="navbar-header">
 
-    <form action="usr" method="GET">
-        <button type="submit" class="btn-link" name="home" id="home">
-            <img src="./Branding/img/logo.png" class="img-head">
-        </button>
-    </form>
-   </div>      
-<!--    <div class="navbar-header">
-                    <form action="usr" method="GET">
-                        <button type="submit" class="btn-link" name="home" id="home">
-                            <img src="./Branding/img/logo.png" class="img-head">
-                        </button>
-                    </form>
-                    </a>
-                </div>-->
-                <!-- Collect the nav links, forms, and other content for toggling -->
+        <form action="usr" method="GET">
+            <button type="submit" class="btn-link" name="home" id="home">
+                <img src="./Branding/img/logo.png" class="img-head">
+            </button>
+        </form>
+    </div>      
+    <div class="col-md-4 col-md-offset-3">
+        <form action="usr" class="search-form">
+            <div class="form-group has-feedback">
+                <label for="search" class="sr-only">Buscar restaurante...</label>
+                <input type="text" class="form-control" name="search" id="search" placeholder="Buscar restaurante...">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+        </form>
+    </div>
 
-                <div class="col-md-4 col-md-offset-3">
-                    <form action="usr" class="search-form">
-                        <div class="form-group has-feedback">
-                            <label for="search" class="sr-only">Buscar restaurante...</label>
-                            <input type="text" class="form-control" name="search" id="search" placeholder="Buscar restaurante...">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                        </div>
-                    </form>
+    <ul class="nav navbar-nav navbar-right">
+
+        <%String iniciada = (String) sesion.getAttribute("iniciada");
+            String mostrar;
+            String user = (String) sesion.getAttribute("usuario");
+            if ("true".equals((String) sesion.getAttribute("iniciada"))) {
+                mostrar = "si";
+            } else {
+                mostrar = "no";
+            }
+            request.setAttribute("mostrar", mostrar);
+        %>
+
+
+
+
+        <c:if test="${mostrar=='no'}">
+            <div class="btn-dorpdounMenu">
+                <div class="botonReg">
+                    <button class="btn  btn-warning" type="button" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal">Registro</button>
+                </div>    
+                <div class="botonIniciar">
+                    <button type = "button" class = "btn btn-success dropdown-toggle" data-toggle = "dropdown">
+                        Iniciar Sesion
+                        <span class = "caret"></span>
+                    </button>
+                    <ul class = "dropdown-menu" role = "menu">
+                        <div class="col-md-12">
+                            <form class="form" role="form" method="post" action="usr" accept-charset="UTF-8" id="login-nav">
+                                <div class="form-login">
+                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                    <input type="text" class="form-control" name="txtCorreo" id="txtCorreo" placeholder="Email address" required>
+                                </div>
+                                <div class="form-login">
+                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                    <input type="password" class="form-control" name="txtPass" id="txtCont" placeholder="Password" required>
+                                </div>
+                                <div class="form-login">
+                                    <button type="submit" name="ingresar" onclick="ingresar()"class="btn btn-success btn-block">Ingresar</button>
+                                </div>
+
+                                <%
+                                    String strExpired = (String) request.getAttribute("pass");
+                                    String invalidMail = (String) request.getAttribute("succesmail");
+
+                                    if (invalidMail == null) {
+
+                                    } else {
+                                        if (invalidMail.equals("incorrecto")) {
+                                            out.println("<script language=\"javascript\">");
+                                            out.print("alert('El mail o nickname no esta registrado');");
+                                            out.println("</script>");
+                                        }
+                                    }
+
+                                    if (strExpired == null) {
+
+                                    } else {
+                                        if (strExpired.equals("incorrecto")) {
+                                            out.println("<script language=\"javascript\">");
+                                            out.print("alert('Contraseña incorrecta');");
+                                            out.println("</script>");
+                                        }
+                                    }
+
+                                %>
+
+                            </form>
+                        </div> 
+                    </ul>
                 </div>
-
-                <ul class="nav navbar-nav navbar-right">
-
-                    <%String iniciada = (String) sesion.getAttribute("iniciada");
-                        String mostrar;
-                        String user = (String) sesion.getAttribute("usuario");
-                        if ("true".equals((String) sesion.getAttribute("iniciada"))) {
-                            mostrar = "si";
-                        } else {
-                            mostrar = "no";
-                        }
-                        request.setAttribute("mostrar", mostrar);
-                    %>
-
-
-
-
-                    <c:if test="${mostrar=='no'}">
-                        <div class="btn-dorpdounMenu">
-                            <div class="botonReg">
-                                <button class="btn  btn-warning" type="button" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal">Registro</button>
-                            </div>    
-                            <!--<button class="btnRegistrar btn-success" type="button" value="Registrarse" name="registrar" data-toggle="modal" data-target="#regmodal"></button></li>-->
-                            <!--<li><a href="http://www.jquery2dotnet.com">Registrarse</a></li>-->
-                            <div class="botonIniciar">
-
-                                <!--<a href="#" class="mnIngresar dropdown-toggle" data-toggle="dropdown">Ingresar<b class="caret"></b></a>-->
-                                <button type = "button" class = "btn btn-success dropdown-toggle" data-toggle = "dropdown">
-                                    Iniciar Sesion
-                                    <span class = "caret"></span>
-                                </button>
-
-                                <ul class = "dropdown-menu" role = "menu">
-                                    
-                                    <div class="col-md-12">
-                                        <form class="form" role="form" method="post" action="usr" accept-charset="UTF-8" id="login-nav">
-                                            <div class="form-login">
-                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="text" class="form-control" name="txtCorreo" id="txtCorreo" placeholder="Email address" required>
-                                            </div>
-                                            <div class="form-login">
-                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                <input type="password" class="form-control" name="txtPass" id="txtCont" placeholder="Password" required>
-                                            </div>
-                                            <div class="form-login">
-                                                <button type="submit" name="ingresar" onclick="ingresar()"class="btn btn-success btn-block">Ingresar</button>
-                                            </div>
-                                            
-                                            <%
-                                                String strExpired = (String) request.getAttribute("pass");
-                                                String invalidMail = (String) request.getAttribute("succesmail");
-                                                
-                                                if(invalidMail == null){
-                                                    
-                                                }else{
-                                                    if(invalidMail.equals("incorrecto")){
-                                                        out.println("<script language=\"javascript\">");
-                                                        out.print("alert('El mail o nickname no esta registrado');");
-                                                        out.println("</script>");
-                                                    }
-                                                }
-                                                
-                                                if(strExpired == null){
-                                                    
-                                                }else{
-                                                    if(strExpired.equals("incorrecto")){
-                                                        out.println("<script language=\"javascript\">");
-                                                        out.print("alert('Contraseña incorrecta');");
-                                                        out.println("</script>");
-                                                    }
-                                                }
-                                                
-                                            %>
-                                            
-                                        </form>
-                                    </div> 
-                                </ul>
-                            </div>
-                        </div>
-
-
-                        
-                        <div class = "btn-group">
-
-
-
-
-
-
-                        </c:if>
-                        <c:if test="${mostrar=='si'}">
-                            <div class="btncerrarSesion">
-                                <form class="form" role="form" method="get" action="usr" accept-charset="UTF-8" id="login-nav">
-                                    <button type="submit" name="cerrar" class=" btn btn-danger">Cerrar sesion</button>
-                                </form>
-                            </div>    
-                            <div class="btnPerfil">
-                                <form action="pedido" method="GET" accept-charset="UTF-8">
-                                    <option>
-                                    <button class="btn btn-success" type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
-                                        <c:out value="${dcliente.getNickname()}"/>                        
-                                    </button>
-                                    </option>
-                                </form>
-                            </div>   
-                        </c:if>
-                </ul>
-    
+            </div>
+            <div class = "btn-group">
+            </c:if>
+            <c:if test="${mostrar=='si'}">
+                <div class="btncerrarSesion">
+                    <form class="form" role="form" method="get" action="usr" accept-charset="UTF-8" id="login-nav">
+                        <button type="submit" name="cerrar" class=" btn btn-danger">Cerrar sesion</button>
+                    </form>
+                </div>    
+                <div class="btnPerfil">
+                    <form action="pedido" method="GET" accept-charset="UTF-8">
+                        <option>
+                        <button class="btn btn-success" type="submit" name="pedidosUsuario" value="<c:out value="${dcliente.getNickname()}"/>">
+                            <c:out value="${dcliente.getNickname()}"/>                        
+                        </button>
+                        </option>
+                    </form>
+                </div>   
+            </c:if>
+    </ul>
 </div>
-    
+
 <div class="container">
     <div class="row-head">
         <div class="col-md-12">
@@ -166,7 +140,7 @@
         </div>
         <!-- /.navbar-collapse -->
         <!--Registrar-->
-        
+
         <div class="modal fade" id="regmodal" tabindex="-1" role="dialog" aria-labelledby="registrarLabel">
             <div class="modal-dialog" role="document">
 
@@ -197,7 +171,6 @@
 
                                         </fieldset>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -205,18 +178,14 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-<%
-                                                
-    String alerta = (String)request.getAttribute("alertaUsuario");
-    if(alerta != null){
-        out.println("<script language=\"javascript\">");
-        out.print("alert('Ya existe el usuario');");
-        out.println("</script>");
-    }                                                
-%>
+    <%    String alerta = (String) request.getAttribute("alertaUsuario");
+        if (alerta != null) {
+            out.println("<script language=\"javascript\">");
+            out.print("alert('Ya existe el usuario');");
+            out.println("</script>");
+        }
+    %>
     <!-- jQuery -->
     <script src="../Branding/js/jquerylogin.js"></script>
     <script src="../Branding/js/bootstrap.min.js"></script>

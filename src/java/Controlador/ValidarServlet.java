@@ -62,8 +62,8 @@ public class ValidarServlet extends HttpServlet {
             input = null;
 
             try{
-                input = new FileInputStream("/home/joaco/NetBeansProjects/Web/web/WEB-INF/config.testdata");
-                //input = new FileInputStream("/home/martin/NetBeansProjects/web/web/WEB-INF/config.testdata");
+                //input = new FileInputStream("/home/joaco/NetBeansProjects/Web/web/WEB-INF/config.testdata");
+                input = new FileInputStream("/home/martin/NetBeansProjects/web/web/WEB-INF/config.testdata");
                 //input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
 
                 prop.load(input);
@@ -939,7 +939,6 @@ public class ValidarServlet extends HttpServlet {
                 DataCategoria cat = (DataCategoria)it.next();    
                 lista.add(cat);
             }
-
             Iterator it2 = ICU.listaDataRestaurantes().iterator();
             ArrayList<DataRestaurante> listaRes = new ArrayList<>();
             while (it2.hasNext()){

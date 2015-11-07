@@ -1,3 +1,6 @@
+<%@page import="lab01.server.DataRestaurante"%>
+<%@page import="lab01.server.DataProducto"%>
+
 l<!DOCTYPE html>
 <html>
     <head>

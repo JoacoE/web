@@ -84,13 +84,13 @@ public class PedidoServlet extends HttpServlet {
                 DataCarrito dc = (DataCarrito)it1.next();
                 listaCar.add(dc);}
             
-        request.setAttribute("evaluacion", dto);
-        request.setAttribute("carrito", listaCar);
-        request.setAttribute("pedido", pedi);
-        request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+            request.setAttribute("evaluacion", dto);
+            request.setAttribute("carrito", listaCar);
+            request.setAttribute("pedido", pedi);
+            request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
-            if(request.getParameter("pedido") != null){
+        if(request.getParameter("pedido") != null){//trae informacion del pedido
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyProducto PU = ProxyProducto.getInstance();
@@ -109,15 +109,15 @@ public class PedidoServlet extends HttpServlet {
                 DataCarrito dc = (DataCarrito)it1.next();
                 listaCar.add(dc);
             }
-        DtoEvaluacion eva = PP.getEvaluacionXid(idPedi);
-        
-        request.setAttribute("evaluacion", eva);
-        request.setAttribute("carrito", listaCar);
-        request.setAttribute("pedido", pedi);
-        request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+            DtoEvaluacion eva = PP.getEvaluacionXid(idPedi);
+
+            request.setAttribute("evaluacion", eva);
+            request.setAttribute("carrito", listaCar);
+            request.setAttribute("pedido", pedi);
+            request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
-        if(request.getParameter("pedidosUsuario") != null){
+        if(request.getParameter("pedidosUsuario") != null){//trae informacion del cliente
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();

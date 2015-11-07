@@ -67,31 +67,7 @@
                                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 <!--                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
                                 </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <option value="restaurante">
-                                        <c:set var="Imagen" value="${restaurante.getLstImagen().get(0)}"/>
-                                            <c:if test="${(Imagen == '') || (Imagen == null)}">
-                                                <img class="slide-image2" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
-                                            </c:if>
-                                            <c:if test="${(Imagen != '') || (Imagen != null)}">
-                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(0)}.jpeg" alt="">
-                                            </c:if>
-                                        </option>
-                                    </div>
-                                    <div class="item">
-                                        <option value="restaurante">
-                                        <c:set var="Imagen" value="${restaurante.getLstImagen().get(1)}"/>
-                                            <c:if test="${(Imagen == '') || (Imagen == null)}">
-                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
-                                            </c:if>
-                                            <c:if test="${(Imagen != '') || (Imagen != null)}">
-                                                <img class="slide-image2" src="<%=request.getContextPath()%>/Branding/img/${restaurante.getLstImagen().get(1)}.jpeg" alt="">
-                                            </c:if>    
-                                        </option>
-                                    </div>
-                                    </option>
-                                </div>
+                                <!--Aca van las imagenes del carrusel-->
                                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                 </a>
@@ -134,13 +110,7 @@
                                         <c:forEach var="promo" items="${promocionales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail" >
-                                                    <c:set var="Imagen" value="${promo.getDataImagen()}"/>
-                                                    <c:if test="${Imagen == ''}">
-                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
-                                                    </c:if>
-                                                    <c:if test="${Imagen != ''}">
-                                                        <img src="<%=request.getContextPath()%>/Branding/img/${promo.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
-                                                    </c:if>
+                                                    <!--Aca van las imagenes de los productos promocionales-->
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
                                                         <h4 class="nombreProd">${promo.getDataNombre()}</h4>
@@ -158,13 +128,7 @@
                                         <c:forEach var="individ" items="${individuales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">
-                                                    <c:set var="Imagen" value="${individ.getDataImagen()}"/>
-                                                    <c:if test="${Imagen == ''}">
-                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
-                                                    </c:if>
-                                                    <c:if test="${Imagen != ''}">
-                                                        <img src="<%=request.getContextPath()%>/Branding/img/${individ.getDataImagen().toLowerCase()}.jpeg" alt="imagen">
-                                                    </c:if>
+                                                    <!--Aca van las imagenes de los individuales-->
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
                                                         <h4 class="nombreProd">${individ.getDataNombre()}</h4>

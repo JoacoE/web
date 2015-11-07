@@ -95,7 +95,7 @@
                                     </tr>
                                     <tr>
                                         <td>Email:</td>
-                                        <td><c:out value="${cliente.getMail()}"/></td>
+                                        <td><c:out value="${cliente.getEmail()}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Nickname:</td>
@@ -120,7 +120,7 @@
                         <c:forEach var="lPedidos" items="${lPedidos}">
                             <button class="btn btn-link btnPedidos" align="center" type="submit" name="pedido" value="${lPedidos.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Haga clic para ver el detalle">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
-                                    <div class="thumbnail" >                                        
+                                    <div class="thumbnail" >
                                         <div class="caption">
                                             <h4 class="pull-center">ID pedido: ${lPedidos.getId()}</h4>  
                                             

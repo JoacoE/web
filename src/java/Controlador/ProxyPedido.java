@@ -156,6 +156,7 @@ public class ProxyPedido {
     public ArrayList<DataPedido> listaPedidos(String nickname){
         ArrayList<DataPedido> lista = new ArrayList<>();
         lista.addAll(PP.listaPedidos(idCtrlPedido, nickname).getItem());
+        
         return lista;
     }
     

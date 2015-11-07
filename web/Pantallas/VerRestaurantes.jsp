@@ -29,7 +29,7 @@
         <script type="text/javascript" src="../Branding/js/jqueryRestaurante.js.js"></script>
         <script type="text/javascript" src="../Branding/js/bootstrap.min_1.js"></script><script src="../Branding/js/jquerylogin.js"></script>
         <script src="../Branding/js/bootstrap.min.js"></script>
-                <!--<script type="text/javascript" src="../Branding/js/head.js"></script>-->
+        <!--<script type="text/javascript" src="../Branding/js/head.js"></script>-->
         <script src="./Branding/js/jquerylogin.js" type="text/javascript"></script>
     </head>
     <body>
@@ -52,53 +52,42 @@
                     </form>
                 </div>
                 <div class="col-md-9">
-               <form action="usr" method="get" accept-charset="UTF-8">
-                    <c:forEach var="listRestaurante" items="${listres}">
-                        <div class="col-lg-4 col-sm-6 wraper-box">
-                            <div class="text-center box-restaurantes">
-                                <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
-                                 <!--<img class="img-circle img-responsive img-center" src="<%=request.getContextPath()%>/Branding/img/${listRestaurante.getLogo()}.jpeg" alt="">-->
-                                 <c:set var="Imagen" value="${listRestaurante.getLogo()}"/>
-                                  <c:if test="${Imagen == ''}">
-                                    <img src="<%=request.getContextPath()%>/Branding/img/defaultRes.jpeg"alt="no imagen">
-                                 </c:if>
-                                 <c:if test="${Imagen != ''}">
-                                    <img src="<%=request.getContextPath()%>/Branding/img/${listRestaurante.getLogo().toLowerCase()}.jpeg" alt="imagen">
-                                 </c:if> 
-                                 
-                                 
-                                 
-                                 
-                                 <option value="lista">
+                    <form action="usr" method="get" accept-charset="UTF-8">
+                        <c:forEach var="listRestaurante" items="${listres}">
+                            <div class="col-lg-4 col-sm-6 wraper-box">
+                                <div class="text-center box-restaurantes">
+                                    <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
+                                     <!--Aca va el codigo de la imagen--> 
+                                        <option value="lista">
                                         <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
-                                    
-                                    <c:forEach var="i" begin="1" end="${listRestaurante.getPromedio()}">
-                                   <span class="fa fa-star fa-2x"></span>
-                                    </c:forEach>
-                                    <c:forEach var="i" begin="${listRestaurante.getPromedio()}" end="4">
-                                        <span class="fa fa-star-o fa-2x"></span>
-                                    </c:forEach>
-                                    </option>
-                                    
-                                </button>
-                            </div>   
-                        </div>
-                    </c:forEach>
-               </form>
-</div>
+
+                                        <c:forEach var="i" begin="1" end="${listRestaurante.getPromedio()}">
+                                            <span class="fa fa-star fa-2x"></span>
+                                        </c:forEach>
+                                        <c:forEach var="i" begin="${listRestaurante.getPromedio()}" end="4">
+                                            <span class="fa fa-star-o fa-2x"></span>
+                                        </c:forEach>
+                                        </option>
+
+                                    </button>
+                                </div>   
+                            </div>
+                        </c:forEach>
+                    </form>
+                </div>
             </div>
         </div>
         <!-- Team Members Row -->
         <!-- Footer -->
-<!--        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; QuickOrder 2015</p>
-                </div>
-                 /.col-lg-12 
-            </div>
-             /.row 
-        </footer>-->
+        <!--        <footer>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Copyright &copy; QuickOrder 2015</p>
+                        </div>
+                         /.col-lg-12 
+                    </div>
+                     /.row 
+                </footer>-->
         <!-- /.container -->
         <!-- jQuery -->
         <script src="/Branding/js/jqueryRestaurante.js.js"></script>

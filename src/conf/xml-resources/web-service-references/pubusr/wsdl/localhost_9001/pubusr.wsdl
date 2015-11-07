@@ -29,17 +29,6 @@
 <message name="devListaDCResponse">
 <part name="return" type="tns:dataClienteArray"></part>
 </message>
-<message name="registrarCat">
-<part name="arg0" type="xsd:int"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="registrarCatResponse"></message>
-<message name="retColCat">
-<part name="arg0" type="xsd:int"></part>
-</message>
-<message name="retColCatResponse">
-<part name="return" type="tns:dataCategoriaArray"></part>
-</message>
 <message name="listaUsuPorCategoria">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -151,6 +140,17 @@
 <message name="listaDataRestaurantesResponse">
 <part name="return" type="tns:dataRestauranteArray"></part>
 </message>
+<message name="registrarCat">
+<part name="arg0" type="xsd:int"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="registrarCatResponse"></message>
+<message name="retColCat">
+<part name="arg0" type="xsd:int"></part>
+</message>
+<message name="retColCatResponse">
+<part name="return" type="tns:dataCategoriaArray"></part>
+</message>
 <message name="getId"></message>
 <message name="getIdResponse">
 <part name="return" type="xsd:int"></part>
@@ -171,14 +171,6 @@
 <operation name="devListaDC">
 <input wsam:Action="http://server.lab01/PublicadorUsuario/devListaDCRequest" message="tns:devListaDC"></input>
 <output wsam:Action="http://server.lab01/PublicadorUsuario/devListaDCResponse" message="tns:devListaDCResponse"></output>
-</operation>
-<operation name="registrarCat" parameterOrder="arg0 arg1">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatRequest" message="tns:registrarCat"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatResponse" message="tns:registrarCatResponse"></output>
-</operation>
-<operation name="retColCat">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/retColCatRequest" message="tns:retColCat"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/retColCatResponse" message="tns:retColCatResponse"></output>
 </operation>
 <operation name="listaUsuPorCategoria" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorUsuario/listaUsuPorCategoriaRequest" message="tns:listaUsuPorCategoria"></input>
@@ -248,6 +240,14 @@
 <input wsam:Action="http://server.lab01/PublicadorUsuario/listaDataRestaurantesRequest" message="tns:listaDataRestaurantes"></input>
 <output wsam:Action="http://server.lab01/PublicadorUsuario/listaDataRestaurantesResponse" message="tns:listaDataRestaurantesResponse"></output>
 </operation>
+<operation name="registrarCat" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatRequest" message="tns:registrarCat"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatResponse" message="tns:registrarCatResponse"></output>
+</operation>
+<operation name="retColCat">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/retColCatRequest" message="tns:retColCat"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/retColCatResponse" message="tns:retColCatResponse"></output>
+</operation>
 <operation name="getId">
 <input wsam:Action="http://server.lab01/PublicadorUsuario/getIdRequest" message="tns:getId"></input>
 <output wsam:Action="http://server.lab01/PublicadorUsuario/getIdResponse" message="tns:getIdResponse"></output>
@@ -283,24 +283,6 @@
 </output>
 </operation>
 <operation name="devListaDC">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
-</output>
-</operation>
-<operation name="registrarCat">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
-</output>
-</operation>
-<operation name="retColCat">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -454,6 +436,24 @@
 </output>
 </operation>
 <operation name="listaDataRestaurantes">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="registrarCat">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="retColCat">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>

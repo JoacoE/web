@@ -13,16 +13,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DTOActualizarIndividual;
-import lab01.Clases.DTOActualizarPromocional;
-import lab01.Clases.Producto;
-import lab01.Handlers.Fabrica;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataPedido;
-import lab01.Clases.DataPromocional;
-import lab01.Clases.DataRestaurante;
-import lab01.Handlers.HImagenes;
-import lab01.Interfaces.*;
+import lab01.server.DataCarrito;
+import lab01.server.DataIndividual;
+import lab01.server.DataPedido;
+import lab01.server.DataPromocional;
+import lab01.server.DataRestaurante;
+import lab01.server.DtoActualizarIndividual;
+import lab01.server.DtoActualizarPromocional;
 /**
  *
  * @author martin
@@ -35,8 +32,7 @@ public class VerInfoProd extends javax.swing.JFrame {
     private DataIndividual di = new DataIndividual();
     private DataPromocional dp = new DataPromocional();
     private DataRestaurante res;
-    private ICtrlPedido ICPed;
-    private HImagenes HI;
+    private ProxyPedido ICPed;
     private String imagen = "";
     String nomprod;
     String nombre;
@@ -44,20 +40,18 @@ public class VerInfoProd extends javax.swing.JFrame {
     
     public VerInfoProd(DataIndividual individual, DataRestaurante dr) {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICPed = fabrica.getICtrlPedido();
-        ICP = fabrica.getICtrlProducto();
-        HI = HImagenes.getInstance();
+        ICPed = ProxyPedido.getInstance();
+        ICP = ProxyProducto.getInstance();
         modelo = (DefaultTableModel) jTabla.getModel();
         modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
         imagen = individual.getDataImagen();
         if(!individual.getDataImagen().equals("")){
-            ImageIcon icon = new ImageIcon(HI.getImagen(individual.getDataImagen()).getAbsolutePath());
-            this.lblImagen.setIcon(icon);
-            this.lblImagen.setVisible(true);
+//            ImageIcon icon = new ImageIcon(HI.getImagen(individual.getDataImagen()).getAbsolutePath());
+//            this.lblImagen.setIcon(icon);
+//            this.lblImagen.setVisible(true);
         }else{
-            this.lblImagen.setIcon(HI.getNoImage());
-            this.lblImagen.setVisible(true);
+//            this.lblImagen.setIcon(HI.getNoImage());
+//            this.lblImagen.setVisible(true);
         }
         this.nomprod = individual.getDataNombre();
         this.txtNomProd.setText(individual.getDataNombre());
@@ -86,21 +80,19 @@ public class VerInfoProd extends javax.swing.JFrame {
 
     public VerInfoProd(DataPromocional promo, DataRestaurante dr){
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICPed = fabrica.getICtrlPedido();
-        ICP = fabrica.getICtrlProducto();
-        HI = HImagenes.getInstance();
+        ICPed = ProxyPedido.getInstance();
+        ICP = ProxyProducto.getInstance();
         modelo = (DefaultTableModel) jTabla.getModel();
         modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
         this.res = dr;
         imagen = promo.getDataImagen();
         if(!promo.getDataImagen().equals("")){
-            ImageIcon icon = new ImageIcon(HI.getImagen(promo.getDataImagen()).getAbsolutePath());
-            this.lblImagen.setIcon(icon);
-            this.lblImagen.setVisible(true);
+//            ImageIcon icon = new ImageIcon(HI.getImagen(promo.getDataImagen()).getAbsolutePath());
+//            this.lblImagen.setIcon(icon);
+//            this.lblImagen.setVisible(true);
         }else{
-            this.lblImagen.setIcon(HI.getNoImage());
-            this.lblImagen.setVisible(true);
+//            this.lblImagen.setIcon(HI.getNoImage());
+//            this.lblImagen.setVisible(true);
         }
         this.nomprod = promo.getDataNombre();
         this.txtNomProd.setText(promo.getDataNombre());
@@ -117,9 +109,9 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.jbImagen.setEnabled(false);
         this.jbImagen.setVisible(false);
         this.lblDescuento.setVisible(true);
-        this.tbDescuento.setText(String.valueOf(promo.getDescuento()));
+        this.tbDescuento.setText(String.valueOf(promo.getDataDescuento()));
         this.promo = true;
-        if (promo.getActiva()) {
+        if (promo.isDataActiva()) {
             this.jcEstado.addItem("ACTIVA");
         } else {
             this.jcEstado.addItem("INACTIVA");
@@ -131,8 +123,7 @@ public class VerInfoProd extends javax.swing.JFrame {
     }
     DefaultTableModel modelo;
     DefaultTableModel modelo2;
-    private Producto p;
-    ICtrlProducto ICP;
+    ProxyProducto ICP;
     
 
     private VerInfoProd() {
@@ -450,11 +441,10 @@ public class VerInfoProd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargartabla(DataPromocional promo, DataRestaurante r) {
-        Iterator it = promo.getColDatIndividual().entrySet().iterator();
+        Iterator it = promo.getColDatIndividual().iterator();
         String lista[] = new String[3];
         while (it.hasNext()) {
-            Map.Entry map = (Map.Entry) it.next();
-            DataIndividual di = (DataIndividual) map.getValue();
+            DataIndividual di = (DataIndividual)it.next();
             lista[0] = di.getDataNombre();
             int cant = di.getCantidad();
             String st = Integer.toString(cant);
@@ -474,18 +464,19 @@ public class VerInfoProd extends javax.swing.JFrame {
     }
     
     public boolean cargarTablaPedidos(){
-        Iterator dpedidos = ICPed.listDataPedidos().entrySet().iterator();
+        Iterator dpedidos = ICPed.listDataPedidos().iterator();
         String list[] = new String[3];
         while(dpedidos.hasNext()){
-            Map.Entry dpeds = (Map.Entry) dpedidos.next();
-            DataPedido datp = (DataPedido) dpeds.getValue();
-            if(datp.existeProducto(this.nomprod)){
-                list[0] = datp.getFecha();
-                list[1] = datp.getNickUsr();
-                String ptotal = Double.toString(datp.getPrecio_total());
-                list[2] = ptotal;
-                modelo2.insertRow((int) jTablaPedidos.getRowCount(), list);
-                return true;
+            DataPedido datp = (DataPedido)dpedidos.next();
+            for(DataCarrito dc: datp.getColCarrito()){
+                if(dc.getNomProd().equals(this.nomprod)){
+                    list[0] = datp.getFecha();
+                    list[1] = datp.getNickUsr();
+                    String ptotal = Double.toString(datp.getPrecioTotal());
+                    list[2] = ptotal;
+                    modelo2.insertRow((int) jTablaPedidos.getRowCount(), list);
+                    return true;
+                }
             }
         }
         return false;
@@ -550,14 +541,17 @@ public class VerInfoProd extends javax.swing.JFrame {
                 this.di.setDataPrecio(Double.parseDouble(this.txtPrecioProd.getText()));
                 this.di.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
                 if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-                    DTOActualizarIndividual datosi = new DTOActualizarIndividual(di, this.nombre, res.getNickname());
-                    if(HI.getImagen(imagen).exists()){
+                    DtoActualizarIndividual datosi = new DtoActualizarIndividual();
+                    datosi.setDi(di);
+                    datosi.setNombre(this.nombre);
+                    datosi.setNickRest(res.getNickname());
+//                    if(HI.getImagen(imagen).exists()){
+//                        datosi.setImagen(imagen);
+//                        ICP.actualizarIndividual(datosi);
+//                    }else{
                         datosi.setImagen(imagen);
                         ICP.actualizarIndividual(datosi);
-                    }else{
-                        datosi.setImagen(imagen);
-                        ICP.actualizarIndividual(datosi);
-                    }
+                    //}
                     JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -569,22 +563,25 @@ public class VerInfoProd extends javax.swing.JFrame {
             try{
                 this.dp.setDataNombre(this.txtNomProd.getText());
                 this.dp.setDataDescripcion(this.txtDescProd.getText());
-                this.dp.setDescuento(Double.parseDouble(this.tbDescuento.getText()));
+                this.dp.setDataDescuento(Double.parseDouble(this.tbDescuento.getText()));
                 String activa = jcEstado.getSelectedItem().toString();
                 if(activa.equals("ACTIVA")){
-                    this.dp.setActiva(true);
+                    this.dp.setDataActiva(true);
                 }else{
-                    this.dp.setActiva(false);
+                    this.dp.setDataActiva(false);
                 }
                 if(JOptionPane.showConfirmDialog(null, "Desea actualizar el producto?", "Confrimación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-                    DTOActualizarPromocional datosp = new DTOActualizarPromocional(dp,this.nombre , res.getNickname());
-                    if(HI.getImagen(imagen).exists()){
+                    DtoActualizarPromocional datosp = new DtoActualizarPromocional();
+                    datosp.setDp(dp);
+                    datosp.setNombre(this.nombre);
+                    datosp.setNickRest(res.getNickname());
+//                    if(HI.getImagen(imagen).exists()){
+//                        datosp.setImagen(imagen);
+//                        ICP.actualizarPromocional(datosp);
+//                    }else{
                         datosp.setImagen(imagen);
                         ICP.actualizarPromocional(datosp);
-                    }else{
-                        datosp.setImagen(imagen);
-                        ICP.actualizarPromocional(datosp);
-                    }
+                    //}
                     JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -604,10 +601,10 @@ public class VerInfoProd extends javax.swing.JFrame {
         File archivo = selector.getSelectedFile();
         String aux = res.getNickname();
         this.imagen = aux.concat(this.txtNomProd.getText());
-        HI.guardarImagen(archivo, this.imagen);
-        ImageIcon icon = new ImageIcon(HI.getImagen(imagen).getAbsolutePath());
-        this.lblImagen.setIcon(icon);
-        this.lblImagen.setVisible(true);
+//        HI.guardarImagen(archivo, this.imagen);
+//        ImageIcon icon = new ImageIcon(HI.getImagen(imagen).getAbsolutePath());
+//        this.lblImagen.setIcon(icon);
+//        this.lblImagen.setVisible(true);
     }//GEN-LAST:event_jbImagenActionPerformed
 
     /**

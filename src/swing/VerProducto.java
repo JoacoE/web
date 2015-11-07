@@ -5,19 +5,17 @@
  */
 package swing;
 import java.awt.Point;
-import lab01.Clases.DataProducto;
-import lab01.Clases.DataRestaurante;
-import lab01.Handlers.Fabrica;
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataPromocional;
-import lab01.Clases.Producto;
-import lab01.Interfaces.*;
+import lab01.server.DataIndividual;
+import lab01.server.DataProducto;
+import lab01.server.DataPromocional;
+import lab01.server.DataRestaurante;
 
 /**
  *
@@ -28,11 +26,10 @@ public class VerProducto extends javax.swing.JInternalFrame {
     /**
      * Creates new form VerProducto
      */
-    ICtrlUsuario ICU;
+    ProxyUsuario ICU;
     public VerProducto() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
+        ICU = ProxyUsuario.getInstance();
         modelo = (DefaultTableModel)jTabla.getModel();
         cargarTabla();
     }
@@ -150,22 +147,20 @@ public class VerProducto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El restaurante no está en el sistema","Error",JOptionPane.ERROR_MESSAGE);
         }
         
-        Iterator dprods = res.getColProducto().entrySet().iterator();
+        Iterator dprods = res.getColIndividuales().iterator();
         while(dprods.hasNext()){
-            Map.Entry dprod = (Map.Entry) dprods.next();
-            if(dprod.getValue() instanceof DataIndividual){
-                DataIndividual di = (DataIndividual)dprod.getValue();
-                if(di.getDataNombre().equals(nomProd)){
-                    VerInfoProd verinfop = new VerInfoProd(di, res);
-                    verinfop.setVisible(true);
-                }
+            DataIndividual di = (DataIndividual)dprods.next();;
+            if(di.getDataNombre().equals(nomProd)){
+                VerInfoProd verinfop = new VerInfoProd(di, res);
+                verinfop.setVisible(true);
             }
-            if(dprod.getValue() instanceof DataPromocional){
-                DataPromocional dp = (DataPromocional)dprod.getValue();
-                if(dp.getDataNombre().equals(nomProd)){
-                    VerInfoProd verinfop = new VerInfoProd(dp, res);
-                    verinfop.setVisible(true);
-                }
+        }
+        Iterator dproms = res.getColPromocionales().iterator();
+        while(dproms.hasNext()){
+            DataPromocional dp = (DataPromocional)dproms.next();
+            if(dp.getDataNombre().equals(nomProd)){
+                VerInfoProd verinfop = new VerInfoProd(dp, res);
+                verinfop.setVisible(true);
             }
         }
     }//GEN-LAST:event_jTablaMousePressed
@@ -185,26 +180,25 @@ public class VerProducto extends javax.swing.JInternalFrame {
 //       }
     
      private void cargarTabla(){
-        Iterator it = ICU.listaDataRestaurantes().entrySet().iterator();
+        Iterator it = ICU.listaDataRestaurantes().iterator();
         String lista[]=new String[2];
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
             DataRestaurante dr = (DataRestaurante) map.getValue();
             lista[1]=dr.getNickname();
-            Map colProd = dr.getColProducto();
-            Iterator it2 = colProd.entrySet().iterator();
+            List<DataIndividual> colInds = dr.getColIndividuales();
+            Iterator it2 = colInds.iterator();
             while(it2.hasNext()){
-                Map.Entry mapcol = (Map.Entry) it2.next();
-                if(mapcol.getValue() instanceof DataIndividual){
-                    DataIndividual di = (DataIndividual) mapcol.getValue();
-                    lista[0] = di.getDataNombre();
-                }
-                if(mapcol.getValue() instanceof DataPromocional){
-                    DataPromocional dp = (DataPromocional) mapcol.getValue();
-                    lista[0] = dp.getDataNombre();
-                }
-                modelo.insertRow((int)jTabla.getRowCount(), lista);
+                DataIndividual di = (DataIndividual)it2.next();
+                lista[0] = di.getDataNombre();
             }
+            List<DataPromocional> colProms = dr.getColPromocionales();
+            Iterator it3 = colProms.iterator();
+            while(it3.hasNext()){
+                DataPromocional dp = (DataPromocional)it3.next();
+                lista[0] = dp.getDataNombre();
+            }
+            modelo.insertRow((int)jTabla.getRowCount(), lista);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

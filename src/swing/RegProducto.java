@@ -7,37 +7,30 @@ package swing;
 
 import java.awt.event.ItemEvent;
 import java.io.File;
-import java.util.Map;
 import java.util.Iterator;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import lab01.Clases.DTOArmarPromo;
-import lab01.Clases.DTORegistrarProducto;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataRestaurante;
-import lab01.Handlers.Fabrica;
-import lab01.Handlers.HImagenes;
-import lab01.Interfaces.*;
+import lab01.server.DataIndividual;
+import lab01.server.DataRestaurante;
+import lab01.server.DtoArmarPromo;
+import lab01.server.DtoRegistrarProducto;
 /**
  *
  * @author gonzalo
  */
 public class RegProducto extends javax.swing.JInternalFrame {
 
-    private ICtrlProducto CP;
-    private ICtrlUsuario ICU;
-    private HImagenes HI;
+    private ProxyProducto CP;
+    private ProxyUsuario ICU;
     private String restaurante;
     private String nomProd;
     private String imagen = "";
 
     public RegProducto() {
         initComponents();
-        Fabrica f = Fabrica.getInstance();
-        CP = f.getICtrlProducto();
-        ICU = f.getICtrlUsuario();
-        HI = HImagenes.getInstance();
+        CP = ProxyProducto.getInstance();
+        ICU = ProxyUsuario.getInstance();
         cargarCBbox();
     }
 
@@ -287,13 +280,20 @@ public class RegProducto extends javax.swing.JInternalFrame {
                     try{
                         precio = Double.parseDouble(tbPrecio.getText());
                         cantidad = Integer.parseInt(tbCantidad.getText()); // me guardo la cantidad de productos para ese producto particular
-                        DataIndividual di = new DataIndividual(tbNombre.getText(), tbDesc.getText(), precio, cantidad); // me guardo los datos en el dataproducto
+                        DataIndividual di = new DataIndividual(); // me guardo los datos en el dataproducto
+                        di.setDataNombre(tbNombre.getText());
+                        di.setDataDescripcion(tbDesc.getText());
+                        di.setDataPrecio(precio);
+                        di.setCantidad(cantidad);
                         if(!this.imagen.equals("")){
                             di.setDataImagen(this.imagen);
                         }else{
                             di.setDataImagen("");
                         }
-                        DTORegistrarProducto datosi = new DTORegistrarProducto(di, restaurante, Promocional);
+                        DtoRegistrarProducto datosi = new DtoRegistrarProducto();
+                        datosi.setDi(di);
+                        datosi.setNickRest(restaurante);
+                        datosi.setPromo(Promocional);
                         CP.registrarProducto(datosi); // registro producto
                         JOptionPane.showMessageDialog(null, "Producto registrado con exito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                         limpiarCampos();
@@ -311,7 +311,11 @@ public class RegProducto extends javax.swing.JInternalFrame {
                             if(control.isEmpty()){
                                 JOptionPane.showInternalMessageDialog(rootPane, "Ingrese descuento", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                             }
-                            DTOArmarPromo datosp = new DTOArmarPromo(restaurante, tbNombre.getText(), tbDesc.getText(), descuento);
+                            DtoArmarPromo datosp = new DtoArmarPromo();
+                            datosp.setNickRest(restaurante);
+                            datosp.setNombre(tbNombre.getText());
+                            datosp.setDescripcion(tbDesc.getText());
+                            datosp.setDescuento(descuento);
                             if(!this.imagen.equals("")){
                                 datosp.setImagen(this.imagen);
                             }else{
@@ -384,7 +388,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
             File archivo = selector.getSelectedFile();
             String aux = (String) jcbRest.getSelectedItem();
             this.imagen = aux.concat(this.tbNombre.getText());
-            HI.guardarImagen(archivo, this.imagen);
         }
         if(rbPromocional.isSelected()){
             JFileChooser selector = new JFileChooser();
@@ -394,7 +397,6 @@ public class RegProducto extends javax.swing.JInternalFrame {
             File archivo = selector.getSelectedFile();
             String aux = (String) jcbRest.getSelectedItem();
             this.imagen = aux.concat(this.tbNombre.getText());
-            HI.guardarImagen(archivo, this.imagen);
         }
     }//GEN-LAST:event_btnSeleccionarImagenActionPerformed
 
@@ -425,10 +427,9 @@ public class RegProducto extends javax.swing.JInternalFrame {
     }
 
     public void cargarCBbox() {
-        Iterator it = ICU.listaDataRestaurantes().entrySet().iterator();
+        Iterator it = ICU.listaDataRestaurantes().iterator();
         while (it.hasNext()) {
-            Map.Entry map = (Map.Entry) it.next();
-            DataRestaurante res = (DataRestaurante) map.getValue();
+            DataRestaurante res = (DataRestaurante)it.next();
             this.jcbRest.addItem(res.getNickname());
         }
         //String res = (String) jcbRest.getItemAt(WIDTH);

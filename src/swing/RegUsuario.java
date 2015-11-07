@@ -9,23 +9,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lab01.Clases.DataRestaurante;
-import lab01.Handlers.Fabrica;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import lab01.Clases.DTOIngresarDatos;
-import lab01.Clases.DTORegistrarCliente;
-import lab01.Handlers.HImagenes;
-import lab01.Interfaces.*;
+import lab01.server.DataRestaurante;
+import lab01.server.DtoIngresarDatos;
+import lab01.server.DtoRegistrarCliente;
 /**
  *
  * @author gera
  */
 public class RegUsuario extends javax.swing.JInternalFrame {
-private ICtrlUsuario ICU;
-private HImagenes HI;
+private ProxyUsuario ICU;
 private HashMap mapCat = new HashMap();
 DefaultListModel model;
 private boolean clientOrRestaurant;
@@ -36,9 +32,7 @@ private File img = null;
 
     public RegUsuario() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
-        HI = HImagenes.getInstance();
+        ICU = ProxyUsuario.getInstance();
         model = new DefaultListModel();
     }
     
@@ -337,8 +331,16 @@ private File img = null;
         int mes = this.tbMes.getMonth() + 1;
         int anio = this.tbAnio.getValue();
         String fecha = dia + "/" + mes + "/" + anio;
-        DTOIngresarDatos dingresar = new DTOIngresarDatos(nickname, nombre, mail, direccion);
-        DTORegistrarCliente dregcliente = new DTORegistrarCliente(apellido, nombreImagen, fecha, pwd);
+        DtoIngresarDatos dingresar = new DtoIngresarDatos();
+        dingresar.setNickname(nickname);
+        dingresar.setNombre(nombre);
+        dingresar.setEmail(mail);
+        dingresar.setDireccion(direccion);
+        DtoRegistrarCliente dregcliente = new DtoRegistrarCliente();
+        dregcliente.setApellido(apellido);
+        dregcliente.setImagen(nombreImagen);
+        dregcliente.setFecha(fecha);
+        dregcliente.setPwd(pwd);
         
         
         
@@ -367,7 +369,13 @@ private File img = null;
                 }
                 else
                     if(rbRestaurante.isSelected()){
-                        DataRestaurante dt = new DataRestaurante(nickname, nombre, mail, direccion, nombresImagenes, null, ICU.getLstCat(), pwd);
+                        DataRestaurante dt = new DataRestaurante();
+                        dt.setNickname(nickname);
+                        dt.setNombre(nombre);
+                        dt.setDireccion(direccion);
+                        dt.getLstImagen().addAll(nombresImagenes);
+                        dt.getColCategoria().addAll(ICU.getLstCat());
+                        dt.setPwd(pwd);
                         if(dt.getColCategoria() != null){
                             ICU.registrarRestaurante(dt);
                             JOptionPane.showMessageDialog(null, "El restaurante ha sido registrado","Exito",JOptionPane.INFORMATION_MESSAGE);
@@ -407,7 +415,6 @@ private File img = null;
                     lstImagen.add(agregar);
                     nombresImagenes.add(nuevoNombre);
                 }
-                HI.guardarArrayImg(lstImagen, tbNickname.getText());
             }
         } 
         if(rbCliente.isSelected()){
@@ -416,8 +423,7 @@ private File img = null;
             selector.setFileFilter(filtroImagen);
             selector.showOpenDialog(null);
             img = selector.getSelectedFile();
-            nombreImagen = tbNickname.getText();
-            HI.guardarImagen(img, nombreImagen);
+            nombreImagen = tbNickname.getText();;
         }
     }//GEN-LAST:event_btnSelImagenActionPerformed
 

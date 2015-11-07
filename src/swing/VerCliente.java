@@ -9,14 +9,11 @@ package swing;
 import java.awt.Point;
 import java.util.Iterator;
 import java.util.Map;
-import lab01.Handlers.Fabrica;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataCliente;
-import lab01.Clases.DataPedido;
-import lab01.Handlers.HImagenes;
-import lab01.Interfaces.*;
+import lab01.server.DataCliente;
+import lab01.server.DataPedido;
 
 /**
  *
@@ -24,8 +21,7 @@ import lab01.Interfaces.*;
  */
 
 public class VerCliente extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU;
-    private HImagenes HI;
+    private ProxyUsuario ICU;
     private DataPedido dp;
     private String nickname;
     DefaultTableModel modelo;
@@ -34,9 +30,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
      */
     public VerCliente() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
-        HI = HImagenes.getInstance();
+        ICU = ProxyUsuario.getInstance();
         modelo = (DefaultTableModel)jTableP.getModel();
         cargarDatos();
     }
@@ -253,12 +247,11 @@ public class VerCliente extends javax.swing.JInternalFrame {
         JTable tab = (JTable)evt.getSource();
         Point point = evt.getPoint();
         int fila = tab.rowAtPoint(point);
-        Iterator it = ICU.pedidosUsuario(this.nickname).entrySet().iterator();
+        Iterator it = ICU.pedidosUsuario(this.nickname).iterator();
         int cont = 0;
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
             if(cont == fila){
-                this.dp = (DataPedido) map.getValue();
+                this.dp = (DataPedido)it.next();
                 break;
             }else{
                 cont++;
@@ -280,7 +273,7 @@ public class VerCliente extends javax.swing.JInternalFrame {
         this.tbfechaDeNacCliente.setVisible(true);
         this.tbfechaDeNacCliente.setText(c.getFNac());
         this.tbmailCliente.setVisible(true);
-        this.tbmailCliente.setText(c.getMail());
+        this.tbmailCliente.setText(c.getEmail());
         this.tbnombreCliente.setVisible(true);
         this.tbnombreCliente.setText(c.getNombre());
         this.lblNicknameCliente.setVisible(true);
@@ -290,23 +283,22 @@ public class VerCliente extends javax.swing.JInternalFrame {
         this.lblmailCliente.setVisible(true);
         this.lblnombreCliente.setVisible(true);
         if(!c.getImagen().equals("")){
-            ImageIcon icon = new ImageIcon(HI.getImagen(c.getNickname()).getAbsolutePath());
-            this.lblVerImagenUsr.setIcon(icon);
-            this.lblVerImagenUsr.setVisible(true);
+            //ImageIcon icon = new ImageIcon(HI.getImagen(c.getNickname()).getAbsolutePath());
+            //this.lblVerImagenUsr.setIcon(icon);
+            //this.lblVerImagenUsr.setVisible(true);
         }else{
-            this.lblVerImagenUsr.setIcon(HI.getNoImgeUsuario());
-            this.lblVerImagenUsr.setVisible(true);
+            //this.lblVerImagenUsr.setIcon(HI.getNoImgeUsuario());
+            //this.lblVerImagenUsr.setVisible(true);
         }
         cargarTabla();
     }                                   
     
     public void cargarTabla(){
         if(!ICU.pedidosUsuario(this.nickname).isEmpty()){
-            Iterator it = ICU.pedidosUsuario(this.nickname).entrySet().iterator();
+            Iterator it = ICU.pedidosUsuario(this.nickname).iterator();
             String lista[] = new String[2];
             while(it.hasNext()){
-                Map.Entry datp = (Map.Entry) it.next();
-                DataPedido datped = (DataPedido) datp.getValue();
+                DataPedido datped = (DataPedido)it.next();
                 lista[0] = datped.getFecha();
                 lista[1] = datped.getNickRest();
                 modelo.insertRow((int) jTableP.getRowCount(), lista);

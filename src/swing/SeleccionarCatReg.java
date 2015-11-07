@@ -6,26 +6,25 @@
 package swing;
 
 import java.awt.event.ItemEvent;
-import lab01.Handlers.Fabrica;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import lab01.Interfaces.*;
+import lab01.server.DataCategoria;
 /**
  *
  * @author joaquin
  */
 public class SeleccionarCatReg extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU;
+    private ProxyUsuario ICU;
     private Map catMap = new HashMap();
     private DefaultListModel model= new DefaultListModel();
     
     public SeleccionarCatReg(Map map) {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
+        ICU = ProxyUsuario.getInstance();
         this.cargarCBbox();
         model = new DefaultListModel();
     }
@@ -156,10 +155,10 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
           if (model.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe ingresar al menos una categoria.", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            Map ret = new HashMap();
+            ArrayList<String> ret = new ArrayList<>();
             int i = 0;
             while (i < model.size()) {
-                ret.put(model.getElementAt(i), model.getElementAt(i));
+                ret.add(model.getElementAt(i).toString());
                 i++;
             }
             ICU.setCat(ret);
@@ -180,12 +179,12 @@ public class SeleccionarCatReg extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     public void cargarCBbox(){
-        Map cats; 
+        ArrayList<DataCategoria> cats; 
         cats=ICU.retColCat();
-        Iterator it = cats.entrySet().iterator();
+        Iterator it = cats.iterator();
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            jcbSelect.addItem(map.getKey().toString());
+            DataCategoria dc = (DataCategoria)it.next();
+            jcbSelect.addItem(dc.getNombre());
         }
     
         

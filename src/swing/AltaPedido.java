@@ -6,11 +6,10 @@
 package swing;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataCarrito;
-import lab01.Handlers.Fabrica;
-import lab01.Interfaces.*;
+import lab01.server.DataCarrito;
 /**
  *
  * @author gera
@@ -20,27 +19,26 @@ public class AltaPedido extends javax.swing.JInternalFrame {
     /**
      * Creates new form AltaPedido
      */
-    ICtrlPedido ICP;
+    ProxyPedido PP;
     int fila = 0;
  
     public AltaPedido() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICP = fabrica.getICtrlPedido();
-        lblnomUsuario.setText(ICP.getDp().getNickUsr());
-        lblMailCliente.setText(ICP.getDp().getMailUsr());
-        long l =ICP.getDp().getId();
+        PP = ProxyPedido.getInstance();
+        lblnomUsuario.setText(PP.getDp().getNickUsr());
+        lblMailCliente.setText(PP.getDp().getMailUsr());
+        long l = PP.getDp().getId();
         String id = Long.toString(l);
         lblIdPedido.setText(id);
         lblEstadoPedido.setText("Preparacion");
-        lblFecha.setText(ICP.getDp().getFecha());
-        lblRestaurante.setText(ICP.getDp().getNickRest());
+        lblFecha.setText(PP.getDp().getFecha());
+        lblRestaurante.setText(PP.getDp().getNickRest());
         modelo = (DefaultTableModel)tblPedido.getModel();
-        LoadTablePedido(ICP.getDp().getNickRest());
-        Double tot = ICP.getDp().getPrecio_total();
+        LoadTablePedido(PP.getDp().getNickRest());
+        Double tot = PP.getDp().getPrecioTotal();
         String sTotal = Double.toString(tot);
         lblTotalPedido.setText(sTotal);
-        ICP.limpiarCtrl();
+        PP.limpiarCtrl();
         
         //LoadTablePedido();
 
@@ -51,11 +49,10 @@ public class AltaPedido extends javax.swing.JInternalFrame {
         private void LoadTablePedido(String res){
         //Restaurante r = null;
         String lista[]=new String[5];
-        Map prod = ICP.getDp().getColCarrito();
-        Iterator it = prod.entrySet().iterator();
+        List<DataCarrito> prod = PP.getDp().getColCarrito();
+        Iterator it = prod.iterator();
         while(it.hasNext()){
-            Map.Entry mapcol = (Map.Entry) it.next();
-            DataCarrito carro = (DataCarrito)mapcol.getValue();
+            DataCarrito carro = (DataCarrito)it.next();
             lista[0]= carro.getNomProd();
             int cant = carro.getCantidad();
             String sCant = Integer.toString(cant);
@@ -66,7 +63,7 @@ public class AltaPedido extends javax.swing.JInternalFrame {
             double totalU = cant * precio;
             String sTotalU = Double.toString(totalU);
             lista[3] = sTotalU;
-            boolean promo = carro.getPromo();
+            boolean promo = carro.isPromo();
             //String sPromo = Boolean.toString(promo);
             if (promo){
               lista[4] = "SI";

@@ -5,26 +5,24 @@
  */
 
 package swing;
+import java.util.ArrayList;
 import java.util.Iterator;
-import lab01.Handlers.Fabrica;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataCliente;
-import lab01.Interfaces.*;
+import lab01.server.DataCliente;
 
 /**
  *
  * @author admin123
  */
 public class ListarClientesVer extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU; 
+    private ProxyUsuario ICU; 
     /**
      * Creates new form VerCliente
      */
     public ListarClientesVer() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
+        ICU = ProxyUsuario.getInstance();
         modelo = (DefaultTableModel)jtabla.getModel();
 
         this.cargarTabla();
@@ -147,15 +145,13 @@ public class ListarClientesVer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cargarTabla(){
-    Map Datas; 
+    ArrayList<DataCliente> Datas; 
         Datas=ICU.devListaDC();
-        Iterator it = Datas.entrySet().iterator();
+        Iterator it = Datas.iterator();
         String lista[]=new String[2];
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            DataCliente dc = (DataCliente) map.getValue();
-            //lista[0]=model.getSize()-1;
-            lista[0]=dc.getMail();
+            DataCliente dc = (DataCliente)it.next();
+            lista[0]=dc.getEmail();
             lista[1]=dc.getNickname();
             modelo.insertRow((int)jtabla.getRowCount(), lista);
         }

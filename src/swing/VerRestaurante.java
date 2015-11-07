@@ -9,17 +9,15 @@ package swing;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import lab01.Handlers.Fabrica;
 import java.util.Map;
 import java.util.Iterator;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JSlider;
-import lab01.Clases.DataCategoria;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataPromocional;
-import lab01.Clases.DataRestaurante;
-import lab01.Handlers.HImagenes;
-import lab01.Interfaces.*;
+import lab01.server.DataCategoria;
+import lab01.server.DataIndividual;
+import lab01.server.DataPromocional;
+import lab01.server.DataRestaurante;
 
 /**
  *
@@ -27,9 +25,8 @@ import lab01.Interfaces.*;
  */
 
 public class VerRestaurante extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU; 
-    private ICtrlProducto CP;
-    private HImagenes HI;
+    private ProxyUsuario ICU; 
+    private ProxyProducto CP;
     private String nickname;
     private int max;
     /**
@@ -37,11 +34,9 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
      */
 
     public VerRestaurante(String restau) {
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
-        CP = fabrica.getICtrlProducto();
-        HI = HImagenes.getInstance();
-        max = (HI.getArrayImg(restau).size()) - 1;
+        ICU = ProxyUsuario.getInstance();
+        CP = ProxyProducto.getInstance();
+        //max = (HI.getArrayImg(restau).size()) - 1;
         initComponents();
         this.tbNickNameCliente.setVisible(false);
         this.tbdireccionCliente.setVisible(false);
@@ -82,54 +77,51 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         this.tbnombreCliente.setVisible(true);
         this.tbnombreCliente.setText(c.getNombre());
         this.lblNicknameCliente.setVisible(true);
-        if(c.getLstImagen() != null){
-            ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
-            max = imagen.size();
-            if(max > 1){
-                this.jSlider = new JSlider();
-                this.jSlider.setMaximum(max);
-                this.jSlider.setPaintTicks(true);
-                this.jSlider.setVisible(true);
-            }else{
-                this.jSlider.setEnabled(false);
-                this.jSlider.setVisible(false);
-            }
-            ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
-            this.lblImagenes.setIcon(icon);
-            this.lblImagenes.setVisible(true);
-        }else{
-            this.lblImagenes.setIcon(HI.getNoImage());
-            this.lblImagenes.setVisible(true);
-            this.jSlider.setEnabled(false);
-            this.jSlider.setVisible(false);
-        }
+//        if(c.getLstImagen() != null){
+//            ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
+//            max = imagen.size();
+//            if(max > 1){
+//                this.jSlider = new JSlider();
+//                this.jSlider.setMaximum(max);
+//                this.jSlider.setPaintTicks(true);
+//                this.jSlider.setVisible(true);
+//            }else{
+//                this.jSlider.setEnabled(false);
+//                this.jSlider.setVisible(false);
+//            }
+//            ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
+//            this.lblImagenes.setIcon(icon);
+//            this.lblImagenes.setVisible(true);
+//        }else{
+//            this.lblImagenes.setIcon(HI.getNoImage());
+//            this.lblImagenes.setVisible(true);
+//            this.jSlider.setEnabled(false);
+//            this.jSlider.setVisible(false);
+//        }
         this.lblmailCliente.setVisible(true);
         this.lblnombreCliente.setVisible(true);
         model.clear();
-        Map cats = c.getColCategoria();
-        Iterator it = cats.entrySet().iterator();
+        List<DataCategoria> cats = c.getColCategoria();
+        Iterator it = cats.iterator();
         //Iterator itret = ret.entrySet().iterator();
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            DataCategoria dc = (DataCategoria)map.getValue();
+            DataCategoria dc = (DataCategoria)it.next();
             model.addElement(dc.getNombre());
         }
         this.jlCat.setModel(model);
     }
     
     public void CargarLista(DataRestaurante c){
-        if(!c.getColProducto().isEmpty()){
-            Iterator it = c.getColProducto().entrySet().iterator();
+        if(!c.getColIndividuales().isEmpty() || !c.getColPromocionales().isEmpty()){
+            Iterator it = c.getColIndividuales().iterator();
+            Iterator it2 = c.getColPromocionales().iterator();
             while(it.hasNext()){
-                Map.Entry map = (Map.Entry) it.next();
-                if(map.getValue() instanceof DataIndividual){
-                    DataIndividual di = (DataIndividual)map.getValue();
-                    modelProd.addElement(di.getDataNombre());
-                }
-                if(map.getValue() instanceof DataPromocional){
-                    DataPromocional dp = (DataPromocional)map.getValue();
-                    modelProd.addElement(dp.getDataNombre());
-                }
+                DataIndividual di = (DataIndividual)it.next();
+                modelProd.addElement(di.getDataNombre());
+            }
+            while(it2.hasNext()){
+                DataPromocional dp = (DataPromocional)it2.next();
+                modelProd.addElement(dp.getDataNombre());
             }
             this.jListProd.setModel(modelProd);
         }else{
@@ -340,22 +332,20 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DataRestaurante c = ICU.getRestauranteByNickname(client);
         String prod = jListProd.getSelectedValue().toString();
-        Iterator dprods = c.getColProducto().entrySet().iterator();
-        while(dprods.hasNext()){
-            Map.Entry dprod = (Map.Entry) dprods.next();
-            if(dprod.getValue() instanceof DataIndividual){
-                DataIndividual di = (DataIndividual)dprod.getValue();
-                if(di.getDataNombre().equals(prod)){
-                    VerInfoProd verProd = new VerInfoProd(di, c);
-                    verProd.show();
-                }
+        Iterator dinds = c.getColIndividuales().iterator();
+        while(dinds.hasNext()){
+            DataIndividual di = (DataIndividual)dinds.next();
+            if(di.getDataNombre().equals(prod)){
+                VerInfoProd verProd = new VerInfoProd(di, c);
+                verProd.show();
             }
-            if(dprod.getValue() instanceof DataPromocional){
-                DataPromocional dp = (DataPromocional)dprod.getValue();
-                if(dp.getDataNombre().equals(prod)){
-                    VerInfoProd verProd = new VerInfoProd(dp, c);
-                    verProd.show();
-                }
+        }
+        Iterator dproms = c.getColPromocionales().iterator();
+        while(dproms.hasNext()){
+            DataPromocional dp = (DataPromocional)dproms.next();
+            if(dp.getDataNombre().equals(prod)){
+                VerInfoProd verProd = new VerInfoProd(dp, c);
+                verProd.show();
             }
         }
     }//GEN-LAST:event_jListProdMouseClicked
@@ -366,15 +356,15 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
        
     private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
         // TODO add your handling code here:
-        ArrayList<File> imagenes = HI.getArrayImg(this.nickname);
-        JSlider source = (JSlider)evt.getSource();
-        this.jSlider.setMaximum(max);
-        this.jSlider.setPaintTicks(true);
-        this.jSlider.setVisible(true);
-        int posicion = (int)source.getValue();
-        ImageIcon icons = new ImageIcon(imagenes.get(posicion).getAbsolutePath());
-        this.lblImagenes.setIcon(icons);
-        this.lblImagenes.setVisible(true);
+//        ArrayList<File> imagenes = HI.getArrayImg(this.nickname);
+//        JSlider source = (JSlider)evt.getSource();
+//        this.jSlider.setMaximum(max);
+//        this.jSlider.setPaintTicks(true);
+//        this.jSlider.setVisible(true);
+//        int posicion = (int)source.getValue();
+//        ImageIcon icons = new ImageIcon(imagenes.get(posicion).getAbsolutePath());
+//        this.lblImagenes.setIcon(icons);
+//        this.lblImagenes.setVisible(true);
     }//GEN-LAST:event_jSliderStateChanged
 
 

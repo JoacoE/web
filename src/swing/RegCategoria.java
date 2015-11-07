@@ -6,21 +6,18 @@
 package swing;
 
 import javax.swing.JOptionPane;
-import lab01.Handlers.Fabrica;
-import lab01.Interfaces.*;
 /**
  *
  * @author gera
  */
 public class RegCategoria extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU;
+    private ProxyUsuario ICU;
     /**
      * Creates new form RegCategoria
      */
     public RegCategoria() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
+        ICU = ProxyUsuario.getInstance();
     }
 
     /**

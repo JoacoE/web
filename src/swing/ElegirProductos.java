@@ -5,12 +5,10 @@
  */
 package swing;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
-import lab01.Handlers.Fabrica;
-import lab01.Interfaces.*;
+import lab01.server.DataIndividual;
 /**
  *
  * @author joaquin
@@ -18,18 +16,17 @@ import lab01.Interfaces.*;
 public class ElegirProductos extends javax.swing.JInternalFrame {
 
     private String rest;
-    private ICtrlUsuario ICU;
+    private ProxyUsuario ICU;
     DefaultTableModel modelo;
-    private ICtrlProducto CP;
+    private ProxyProducto CP;
     /**
      * Creates new form EjegirProductos
      */
     public ElegirProductos(String r) {
         initComponents();
         rest=r;
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
-        CP = fabrica.getICtrlProducto();
+        ICU = ProxyUsuario.getInstance();
+        CP = ProxyProducto.getInstance();
         modelo = (DefaultTableModel)jTabla.getModel();
         cargarTabla();
     }
@@ -138,12 +135,14 @@ public class ElegirProductos extends javax.swing.JInternalFrame {
 
     private void jblistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblistoActionPerformed
         // TODO add your handling code here:
-        Map prodPromo = new HashMap();
+        ArrayList<DataIndividual> prodPromo = new ArrayList<>();
         for(int i=0; i<jTabla.getRowCount(); i++){
             if(!modelo.getValueAt(i,2).toString().equals("0")){
-                String nom = modelo.getValueAt(i,0).toString();
-                String cant = modelo.getValueAt(i,2).toString();
-                prodPromo.put(nom, cant);
+                DataIndividual di = new DataIndividual();
+                di.setDataNombre(modelo.getValueAt(i,0).toString());
+                int cant = Integer.parseInt(modelo.getValueAt(i,2).toString());
+                di.setCantidad(cant);
+                prodPromo.add(di);
             }
         }
         CP.setPromo(prodPromo);
@@ -156,16 +155,15 @@ public class ElegirProductos extends javax.swing.JInternalFrame {
 
     
     public void cargarTabla(){
-    Map prods; 
+    ArrayList<DataIndividual> prods; 
         prods=ICU.listaProductosStock(rest);
-        Iterator it = prods.entrySet().iterator();
+        Iterator it = prods.iterator();
         String lista[]=new String[3];
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            String nomprod = (String) map.getKey();
-            String cant = (String)map.getValue().toString();
-            lista[0]=nomprod;
-            lista[1]=cant;
+            DataIndividual di = (DataIndividual)it.next();
+            lista[0]=di.getDataNombre();
+            String cantidad = String.valueOf(di.getCantidad());
+            lista[1]=cantidad;
             lista[2]="0";
             modelo.insertRow((int)jTabla.getRowCount(), lista);
         }    

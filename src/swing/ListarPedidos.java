@@ -6,14 +6,13 @@
 package swing;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import lab01.Handlers.Fabrica;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataPedido;
-import lab01.Interfaces.*;
+import lab01.server.DataPedido;
 
 /**
  *
@@ -25,14 +24,13 @@ public class ListarPedidos extends javax.swing.JInternalFrame {
      * Creates new form ListarPedidos
      */
     DefaultTableModel model;
-    ICtrlPedido ICP;
+    ProxyPedido ICP;
     DataPedido ped;
-    private Map listaPedidos;
+    private ArrayList<DataPedido> listaPedidos;
     
     public ListarPedidos() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICP = fabrica.getICtrlPedido();
+        ICP = ProxyPedido.getInstance();
         model = (DefaultTableModel)jTabla.getModel();
         CargarTabla();
         this.setVisible(true);
@@ -155,8 +153,11 @@ public class ListarPedidos extends javax.swing.JInternalFrame {
             id = Long.parseLong(idPedido);
         }
         try{
-            ped = (DataPedido)listaPedidos.get(id);
-             
+            for(DataPedido dp: listaPedidos){
+                if(dp.getId() == id){
+                    ped = dp;
+                }
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "El pedido no esta en el sistema","Error",JOptionPane.ERROR_MESSAGE);
         }
@@ -171,18 +172,17 @@ public class ListarPedidos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     public void CargarTabla(){
-        Map lp =ICP.listDataPedidos();
-        Iterator it = lp.entrySet().iterator();
+        ArrayList<DataPedido> lp =ICP.listDataPedidos();
+        Iterator it = lp.iterator();
         String lista[]=new String[5];
             while(it.hasNext()){
-                Map.Entry map = (Map.Entry) it.next();
-                ped = (DataPedido)map.getValue();
+                ped = (DataPedido)it.next();
                 String id = String.valueOf(ped.getId());
                 lista[0]=id;
                 lista[1]= ped.getNickUsr();
                 lista[2]= ped.getNickRest();
                 lista[3]= ped.getEstado().toString();
-                lista[4]= Double.toString(ped.getPrecio_total());
+                lista[4]= Double.toString(ped.getPrecioTotal());
                 model.insertRow((int)jTabla.getRowCount(), lista);
                 
             }

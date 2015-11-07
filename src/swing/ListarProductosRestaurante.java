@@ -6,14 +6,12 @@
 package swing;
 
 import java.util.Iterator;
-import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import lab01.Handlers.Fabrica;
 import java.applet.AudioClip;
-import lab01.Clases.DataIndividual;
-import lab01.Clases.DataPromocional;
-import lab01.Clases.DataRestaurante;
-import lab01.Interfaces.*;
+import java.util.List;
+import lab01.server.DataIndividual;
+import lab01.server.DataPromocional;
+import lab01.server.DataRestaurante;
 /**
  *
  * @author gera
@@ -23,16 +21,15 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListarProductosRestaurante
      */
-    ICtrlUsuario ICU;
-    ICtrlPedido ICP;
+    ProxyUsuario ICU;
+    ProxyPedido ICP;
     boolean stock;
     int fila = 0;
     public ListarProductosRestaurante(String res) {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
+        ICU = ProxyUsuario.getInstance();
         modelo = (DefaultTableModel)tblProductosRes.getModel();
-        ICP = fabrica.getICtrlPedido();
+        ICP = ProxyPedido.getInstance();
         LoadTableProductRest(res);
     }
     DefaultTableModel modelo;
@@ -188,22 +185,23 @@ public class ListarProductosRestaurante extends javax.swing.JInternalFrame {
         String lista[]=new String[3];
         DataRestaurante r = ICU.getRestauranteByNickname(res);
         ICP.setMemRestaurante(res);
-        Map lstProd = r.getColProducto();
-        Iterator it = lstProd.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry mapcol = (Map.Entry) it.next();
-            if(mapcol.getValue() instanceof DataIndividual){
-                DataIndividual dproducto = (DataIndividual)mapcol.getValue();            
-                lista[0]= dproducto.getDataNombre();
-                lista[1]= Double.toString(dproducto.getDataPrecio());
-                lista[2]= "0";
-            }
-            if(mapcol.getValue() instanceof DataPromocional){
-                DataPromocional dproducto = (DataPromocional)mapcol.getValue();            
-                lista[0]= dproducto.getDataNombre();
-                lista[1]= Double.toString(dproducto.getDataPrecio());
-                lista[2]= "0";
-            }
+        List<DataPromocional> lstProdProm = r.getColPromocionales();
+        List<DataIndividual> lstProdInd = r.getColIndividuales();
+        Iterator proms = lstProdProm.iterator();
+        Iterator inds = lstProdInd.iterator();
+        while(proms.hasNext()){
+            DataPromocional dproducto = (DataPromocional)proms.next();
+            lista[0]= dproducto.getDataNombre();
+            lista[1]= Double.toString(dproducto.getDataPrecio());
+            lista[2]= "0";
+            modelo.insertRow((int)fila, lista);
+            fila++;
+        }
+        while(inds.hasNext()){
+            DataIndividual dproducto = (DataIndividual)inds.next();            
+            lista[0]= dproducto.getDataNombre();
+            lista[1]= Double.toString(dproducto.getDataPrecio());
+            lista[2]= "0";
             modelo.insertRow((int)fila, lista);
             fila++;
         }

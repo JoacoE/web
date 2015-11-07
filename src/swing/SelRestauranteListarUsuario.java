@@ -5,29 +5,27 @@
  */
 package swing;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.JTree;
-import lab01.Handlers.Fabrica;
-import lab01.Clases.DataCategoria;
-import lab01.Interfaces.*;
+import lab01.server.DataCategoria;
+import lab01.server.DataRestaurante;
 /**
  *
  * @author gera
  */
 public class SelRestauranteListarUsuario extends javax.swing.JInternalFrame {
-    private ICtrlUsuario ICU;
+    private ProxyUsuario ICU;
         
     
     //DefaultTreeModel modelo;
     public SelRestauranteListarUsuario() {
         initComponents();
-        Fabrica fabrica = Fabrica.getInstance();
-        ICU = fabrica.getICtrlUsuario();
+        ICU = ProxyUsuario.getInstance();
         //modelo = (DefaultTreeModel) treeCat.getModel();
         modelRest = new DefaultListModel();
         Raiz = new DefaultMutableTreeNode("Categorias");
@@ -44,23 +42,21 @@ public class SelRestauranteListarUsuario extends javax.swing.JInternalFrame {
     
     public void cargarTree(){
         if (Raiz != null){
-            Iterator itC = ICU.retColCat().entrySet().iterator();
+            Iterator itC = ICU.retColCat().iterator();
             while(itC.hasNext()){
-                Map.Entry mapC = (Map.Entry) itC.next();
-                DataCategoria cat= (DataCategoria)mapC.getValue();
+                DataCategoria cat= (DataCategoria)itC.next();
                 DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(cat.getNombre());
                 modelo.insertNodeInto(nodo, Raiz, 0);
-                Map Crest = ICU.listaUsuPorCategoria(cat.getNombre());
+                ArrayList<DataRestaurante> Crest = ICU.listaUsuPorCategoria(cat.getNombre());
                 if(Crest.isEmpty()){
                     DefaultMutableTreeNode vacio = new DefaultMutableTreeNode("Sin restaurantes");
                     modelo.insertNodeInto(vacio, nodo, 0);
                 }
                 else{
-                    Iterator itR = Crest.entrySet().iterator();
+                    Iterator itR = Crest.iterator();
                     while(itR.hasNext()){
-                        Map.Entry mapR = (Map.Entry) itR.next();
-                        String c= (String)mapR.getKey();
-                        DefaultMutableTreeNode Res = new DefaultMutableTreeNode(c);
+                        DataRestaurante dt = (DataRestaurante)itR.next();
+                        DefaultMutableTreeNode Res = new DefaultMutableTreeNode(dt.getNickname());
                         modelo.insertNodeInto(Res, nodo, 0);
                     }
                 }

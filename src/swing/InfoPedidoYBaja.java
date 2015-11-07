@@ -9,12 +9,10 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataCarrito;
-import lab01.Clases.DataPedido;
-import lab01.Handlers.Fabrica;
 import javax.swing.SwingUtilities;
-import lab01.Clases.estados;
-import lab01.Interfaces.*;
+import lab01.server.DataCarrito;
+import lab01.server.DataPedido;
+import lab01.server.Estados;
 /**
  *
  * @author joaco
@@ -24,14 +22,13 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
     /**
      * Creates new form InfoPedidoYBaja
      */
-    private ICtrlPedido ICP;
+    private ProxyPedido ICP;
     int fila = 0;
     private DataPedido datped;
     public InfoPedidoYBaja(DataPedido dp){
         initComponents();
         datped = dp;
-        Fabrica fabrica = Fabrica.getInstance();
-        ICP = fabrica.getICtrlPedido();
+        ICP = ProxyPedido.getInstance();
         String id = Long.toString(dp.getId());
         lblIDpedido.setText(id);
         lblNickCliente.setText(dp.getNickUsr());
@@ -39,13 +36,13 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         lblEstado.setText(dp.getEstado().toString());
         modelo = (DefaultTableModel)jTable.getModel();
         cargarTabla(this.datped);
-        String PTotal = Double.toString(dp.getPrecio_total());
+        String PTotal = Double.toString(dp.getPrecioTotal());
         lblPrecioTotal.setText(PTotal);
         jComboBox1.setVisible(false);
         if("RECIBIDO".equals(datped.getEstado().toString())){
             jbActualizar.setEnabled(false);
         }
-        if(this.datped.getEstado() == estados.ENVIADO || this.datped.getEstado() == estados.RECIBIDO){
+        if(this.datped.getEstado() == Estados.ENVIADO || this.datped.getEstado() == Estados.RECIBIDO){
             btnEliminar.setEnabled(false);
         }
     }
@@ -56,15 +53,14 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
     }
 
     private void cargarTabla(DataPedido dp){
-        Iterator it = dp.getColCarrito().entrySet().iterator();
+        Iterator it = dp.getColCarrito().iterator();
         String lista[] = new String[4];
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            DataCarrito dc = (DataCarrito)map.getValue();
+            DataCarrito dc = (DataCarrito)it.next();
             lista[0] = dc.getNomProd();
             String cant = Integer.toString(dc.getCantidad());
             lista[1] = cant;
-            boolean promo = dc.getPromo();
+            boolean promo = dc.isPromo();
             if(promo){
                 lista[2] = "SI";
             }else{
@@ -299,15 +295,15 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
     // TODO add your handling code here:
-        estados es = null;
+        Estados es = null;
         jComboBox1.setEditable(false);
         
         if("ENVIADO".equals(jComboBox1.getSelectedItem().toString())){
-            es = estados.ENVIADO;
+            es = Estados.ENVIADO;
             
         }
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
-            es =  estados.RECIBIDO;
+            es =  Estados.RECIBIDO;
         }
         if(JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
             ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(),es);

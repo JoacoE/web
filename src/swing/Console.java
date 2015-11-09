@@ -14,7 +14,7 @@ import java.security.CodeSource;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
-//import lab01.Clases.ImagenFondo;
+import swing.ImagenFondo;
 
 
 
@@ -30,7 +30,7 @@ public class Console extends javax.swing.JFrame {
      */
     public Console() {
         initComponents();
-        //EscritorioMenu.setBorder(new ImagenFondo());
+        EscritorioMenu.setBorder(new ImagenFondo());
         this.setExtendedState(Console.MAXIMIZED_BOTH);
         
     }

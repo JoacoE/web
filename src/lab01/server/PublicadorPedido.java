@@ -236,12 +236,12 @@ public class PublicadorPedido {
     
     @WebMethod
     public DataPedido[] listaPedidos(Integer idCtrlPedido,String nickname){
-        ArrayList<DtoEvaluacion> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listarEvaluacionesRest(nickname);
+        ArrayList<DataPedido> ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).listaPedidos(nickname);
         DataPedido[] lista = new DataPedido[ret.size()];
         Iterator it = ret.iterator();
         int i = 0;
         while(it.hasNext()){
-            lista[i] = ( DataPedido) it.next();
+            lista[i] = (DataPedido)it.next();
             i++;
         }
         return lista;

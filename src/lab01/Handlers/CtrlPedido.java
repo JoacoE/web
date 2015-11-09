@@ -291,7 +291,8 @@ public class CtrlPedido implements ICtrlPedido {
                 while(pedidos.hasNext()){
                     Map.Entry p = (Map.Entry) pedidos.next();
                     Pedido ped = (Pedido)p.getValue();
-                    aux.add(dp);
+                    DataPedido datped = ped.getDataPedido();
+                    aux.add(datped);
                 }
             }
         }
@@ -357,7 +358,8 @@ public class CtrlPedido implements ICtrlPedido {
                         Map.Entry p = (Map.Entry) pedidos.next();
                         Pedido ped = (Pedido)p.getValue();
                         if(ped.getEstado() == Estados.RECIBIDO){
-                            aux.add(dp);
+                            DataPedido datped = ped.getDataPedido();
+                            aux.add(datped);
                         }
                     }
                 }
@@ -380,7 +382,8 @@ public class CtrlPedido implements ICtrlPedido {
                     while(pedidos.hasNext()){
                         Map.Entry p = (Map.Entry) pedidos.next();
                         Pedido ped = (Pedido)p.getValue();
-                        aux.add(dp);                 
+                        DataPedido datped = ped.getDataPedido();
+                        aux.add(datped);                 
                     }
                 }
             }

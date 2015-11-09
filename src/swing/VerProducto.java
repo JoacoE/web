@@ -5,7 +5,6 @@
  */
 package swing;
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
@@ -183,8 +182,7 @@ public class VerProducto extends javax.swing.JInternalFrame {
         Iterator it = ICU.listaDataRestaurantes().iterator();
         String lista[]=new String[2];
         while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            DataRestaurante dr = (DataRestaurante) map.getValue();
+            DataRestaurante dr = (DataRestaurante)it.next();
             lista[1]=dr.getNickname();
             List<DataIndividual> colInds = dr.getColIndividuales();
             Iterator it2 = colInds.iterator();

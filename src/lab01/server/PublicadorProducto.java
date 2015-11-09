@@ -60,7 +60,6 @@ public class PublicadorProducto {
     
     @WebMethod
     public DataIndividual[] listarIndividuales(Integer idCtrlProducto, String nomRest){
-         
         ArrayList<DataIndividual> datas = Fabrica.getInstance().getICtrlProducto(idCtrlProducto).listarIndividuales(nomRest);
         DataIndividual[] ret = new DataIndividual[datas.size()];
         Iterator it = datas.iterator();
@@ -68,8 +67,7 @@ public class PublicadorProducto {
         while (it.hasNext()){
             ret[i]= (DataIndividual)it.next();
             i++;
-        }
-        
+        }        
         return ret;
     }
     

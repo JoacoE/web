@@ -45,6 +45,7 @@ public interface ICtrlPedido {
     public abstract void actualizarPromedioRest(String nickname);
     public abstract void altaEvaluacion(double id, DtoEvaluacion data);
     public abstract ArrayList<DtoEvaluacion> listarEvaluacionesRest(String nickname);
+    public abstract boolean existeEvaluacionPedido(long id);
     public abstract DtoEvaluacion getEvaluacionXid(long id);
     public abstract ArrayList<DataPedido> listaPedidos(String nickname);
     public abstract void setIdCtrl(Integer idCtrl);

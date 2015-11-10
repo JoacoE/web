@@ -228,6 +228,11 @@ public class PublicadorPedido {
     }
     
     @WebMethod
+    public boolean existeEvaluacionPedido(Integer idCtrlPedido, long id){
+        return Fabrica.getInstance().getICtrlPedido(idCtrlPedido).existeEvaluacionPedido(id);
+    }
+    
+    @WebMethod
     public DtoEvaluacion getEvaluacionXid(Integer idCtrlPedido, long id){
         DtoEvaluacion ret = Fabrica.getInstance().getICtrlPedido(idCtrlPedido).getEvaluacionXid(id);
         return ret;

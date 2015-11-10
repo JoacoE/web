@@ -481,6 +481,32 @@ public class CtrlPedido implements ICtrlPedido {
     }
     
     @Override
+    public boolean existeEvaluacionPedido(long id){
+        HUsuario hu = HUsuario.getinstance();
+        DtoEvaluacion ret = null;
+        Iterator clientes = hu.obtenerColeccion().entrySet().iterator();
+        while(clientes.hasNext()){
+            Map.Entry cliente = (Map.Entry)clientes.next();
+            if(cliente.getValue() instanceof Cliente){
+                Cliente c = (Cliente)cliente.getValue();
+                Iterator pedidos = c.getPedidos().entrySet().iterator();
+                while(pedidos.hasNext()){
+                    Map.Entry pedido = (Map.Entry)pedidos.next();
+                    Pedido p = (Pedido)pedido.getValue();
+                    if(p.getId() == id){
+                        if(p.getEvaluacion()!=null){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    @Override
     public DtoEvaluacion getEvaluacionXid(long id){
         HUsuario hu = HUsuario.getinstance();
         DtoEvaluacion ret = null;
@@ -494,16 +520,17 @@ public class CtrlPedido implements ICtrlPedido {
                     Map.Entry pedido = (Map.Entry)pedidos.next();
                     Pedido p = (Pedido)pedido.getValue();
                     if(p.getId() == id){
-                        if(p.getEvaluacion()==null)
-                            return null;
-                        
-                        ret = p.getEvaluacion().getDTOEvaluacion();
-                        return ret;
+                        if(p.getEvaluacion()!=null){
+                            ret = p.getEvaluacion().getDTOEvaluacion();
+                            return ret;
+                        }else{
+                            throw new NullPointerException();
+                        }
                     }
                 }
             }
         }
-        return null;
+        throw new NullPointerException();
     }
     
     @Override

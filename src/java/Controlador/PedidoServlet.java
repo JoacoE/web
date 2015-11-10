@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,11 +81,13 @@ public class PedidoServlet extends HttpServlet {
             Iterator it1 = pedi.getColCarrito().iterator();
             while(it1.hasNext()){
                 DataCarrito dc = (DataCarrito)it1.next();
-                listaCar.add(dc);}
-            
+                listaCar.add(dc);
+            }
+            boolean estado = pedi.getEstado()==Estados.RECIBIDO;
             request.setAttribute("evaluacion", dto);
             request.setAttribute("carrito", listaCar);
             request.setAttribute("pedido", pedi);
+            request.setAttribute("recibido", estado);
             request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
@@ -109,11 +110,15 @@ public class PedidoServlet extends HttpServlet {
                 DataCarrito dc = (DataCarrito)it1.next();
                 listaCar.add(dc);
             }
-            DtoEvaluacion eva = PP.getEvaluacionXid(idPedi);
-
-            request.setAttribute("evaluacion", eva);
+            DtoEvaluacion eva = null;
+            if(PP.existeEvaluacioPedido(idPedi)){
+                eva = PP.getEvaluacionXid(idPedi);
+                request.setAttribute("evaluacion", eva);
+            } 
+            boolean estado = pedi.getEstado()==Estados.RECIBIDO;
             request.setAttribute("carrito", listaCar);
             request.setAttribute("pedido", pedi);
+            request.setAttribute("recibido", estado);
             request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
         }
         
@@ -121,7 +126,6 @@ public class PedidoServlet extends HttpServlet {
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyUsuario PU = ProxyUsuario.getInstance();
             HttpSession session = request.getSession();
-            //String nick = (String)session.getAttribute("usuario");
             String nick = (String)request.getParameter("pedidosUsuario");
             DataCliente dc=PU.getUsuarioByNickname(nick);
             

@@ -149,23 +149,25 @@ public class ProxyPedido {
         return lista;
     }
 
+    public boolean existeEvaluacioPedido(long id){
+        return PP.existeEvaluacionPedido(idCtrlPedido, id);
+    }
+    
     public DtoEvaluacion getEvaluacionXid(long id){
         return PP.getEvaluacionXid(idCtrlPedido, id);
     }
     
     public ArrayList<DataPedido> listaPedidos(String nickname){
         ArrayList<DataPedido> lista = new ArrayList<>();
-        lista.addAll(PP.listaPedidos(idCtrlPedido, nickname).getItem());
-        
+        lista.addAll(PP.listaPedidos(idCtrlPedido, nickname).getItem());        
         return lista;
     }
     
     public void setMemRestaurante(String nickname){
-     PP.setMemRestaurante(idCtrlPedido, nickname);
+        PP.setMemRestaurante(idCtrlPedido, nickname);
     }
     
     public void actualizarFechaPedido(String nickname, long id, String fecha){
         PP.actualizarFechaPedido(idCtrlPedido, nickname, id, fecha);
     }
-    
 }

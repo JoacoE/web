@@ -54,23 +54,31 @@
                 <div class="col-md-9">
                     <form action="usr" method="get" accept-charset="UTF-8">
                         <c:forEach var="listRestaurante" items="${listres}">
-                            <div class="col-lg-4 col-sm-6 wraper-box">
-                                <div class="text-center box-restaurantes">
-                                    <button type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
-                                     <!--Aca va el codigo de la imagen--> 
-                                        <option value="lista">
-                                        <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
+                            <div class="botonesRest">
+                                <style>
+                                    .botonesRest{
+                                        color:black;
+                                        border-color:chartreuse;
+                                    }
+                                </style>
+                                <div class="col-lg-4 col-sm-6 wraper-box">
+                                    <div class="text-center box-restaurantes">
+                                        <button class="btn btn-link" type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
+                                         <!--Aca va el codigo de la imagen--> 
+                                            <option value="lista">
+                                            <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
 
-                                        <c:forEach var="i" begin="1" end="${listRestaurante.getPromedio()}">
-                                            <span class="fa fa-star fa-2x"></span>
-                                        </c:forEach>
-                                        <c:forEach var="i" begin="${listRestaurante.getPromedio()}" end="4">
-                                            <span class="fa fa-star-o fa-2x"></span>
-                                        </c:forEach>
-                                        </option>
+                                            <c:forEach var="i" begin="1" end="${listRestaurante.getPromedio()}">
+                                                <span class="fa fa-star fa-2x"></span>
+                                            </c:forEach>
+                                            <c:forEach var="i" begin="${listRestaurante.getPromedio()}" end="4">
+                                                <span class="fa fa-star-o fa-2x"></span>
+                                            </c:forEach>
+                                            </option>
 
-                                    </button>
-                                </div>   
+                                        </button>
+                                    </div>   
+                                </div>
                             </div>
                         </c:forEach>
                     </form>

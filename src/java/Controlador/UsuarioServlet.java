@@ -19,7 +19,6 @@ import lab01.server.DataCliente;
 import lab01.server.DataRestaurante;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import lab01.server.DtoEvaluacion;
 import lab01.server.DataIndividual;
@@ -70,8 +69,6 @@ public class UsuarioServlet extends HttpServlet {
         }
 
     }
-//    lab01.server.PublicadorUsuarioService serviceUsuario =  new PublicadorUsuarioService();
-//    lab01.server.PublicadorUsuario  port =  serviceUsuario.getPublicadorUsuarioPort();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

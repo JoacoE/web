@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="lab01.server.DataCliente" %>
 <%@page import="lab01.server.DataPedido" %>
+<%@page import="java.util.ArrayList"%>
 <html lang="es">
 
     <head>
@@ -83,7 +85,7 @@
                                     
                                     <tr>
                                         <td>Nombre:</td>
-                                        <td><c:out value="${cliente.getNombre()}"/></td>
+                                        <td><c:out value="${cliente.getNombre()}"></c:out></td>
                                     </tr>
                                     <tr>
                                         <h3><p> </p></h3>
@@ -91,23 +93,23 @@
                                         <h3><p> </p></h3>
                                         <h3><p> </p></h3>
                                         <td>Apellido:</td>
-                                        <td><c:out value="${cliente.getApellido()}"/></td>
+                                        <td><c:out value="${cliente.getApellido()}"></c:out></td>
                                     </tr>
                                     <tr>
                                         <td>Email:</td>
-                                        <td><c:out value="${cliente.getEmail()}"/></td>
+                                        <td><c:out value="${cliente.getEmail()}"></c:out></td>
                                     </tr>
                                     <tr>
                                         <td>Nickname:</td>
-                                        <td><c:out value="${cliente.getNickname()}"/></td>
+                                        <td><c:out value="${cliente.getNickname()}"></c:out></td>
                                     </tr>
                                     <tr>
                                         <td>Direccion:</td>
-                                        <td><c:out value="${cliente.getDireccion()}"/></td>
+                                        <td><c:out value="${cliente.getDireccion()}"></c:out></td>
                                     </tr>
                                     <tr>
                                         <td>Fecha de Nacimiento:</td>
-                                        <td><c:out value="${cliente.getFNac()}"/></td>
+                                        <td><c:out value="${cliente.getFNac()}"></c:out></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -117,16 +119,16 @@
                 <div class="tab-pane fade" id="2">  
                     <form action="pedido" method="get" accept-charset="UTF-8">
                         <div class="pedidosCliente" align="center">
-                        <c:forEach var="lPedidos" items="${lPedidos}">
-                            <button class="btn btn-link btnPedidos" align="center" type="submit" name="pedido" value="${lPedidos.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Haga clic para ver el detalle">
+                        <c:forEach items="${lPedidos}" var="pedido">
+                            <button class="btn btn-link btnPedidos" align="center" type="submit" name="pedido" value="${pedido.getId()}" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" data-toggle="tooltip" title="Haga clic para ver el detalle">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad" >
                                     <div class="thumbnail" >
                                         <div class="caption">
-                                            <h4 class="pull-center">ID pedido: ${lPedidos.getId()}</h4>  
+                                            <h4 class="pull-center">ID pedido: ${pedido.getId()}</h4>  
                                             
-                                            <h4 class="pull-center">Nick restaurante: ${lPedidos.getNickRest()}</h4>
+                                            <h4 class="pull-center">Nick restaurante: ${pedido.getNickRest()}</h4>
                                             
-                                            <h4 class="pull-center">Total: $${lPedidos.getPrecio_total()}<h4>        
+                                            <h4 class="pull-center">Total: $${pedido.getPrecioTotal()}<h4>        
                                         </div>                                                 
                                     </div>
                                 </div>   

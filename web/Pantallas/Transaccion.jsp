@@ -4,10 +4,13 @@
     Author     : joaquin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="lab01.server.DataRestaurante"%>
-<%@page import="lab01.server.DataProducto"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="lab01.server.DataCarrito"%>
+<%@page import="lab01.server.DataPedido"%>
+<%@page import="lab01.server.Estados"%>
+<%@page import="lab01.server.DtoEvaluacion"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -71,19 +74,19 @@
                             <c:set var="idPed" scope="session" value="${pedido.getId().toString()}"></c:set>
                             <tr>
                                 <td>Id:</td>
-                                <td><c:out value="${pedido.getId()}"/></td>
+                                <td><c:out value="${pedido.getId()}"></c:out></td>
                             </tr>
                             <tr>
                                 <td>Restaurante:</td>
-                                <td><c:out value="${pedido.getNickRest()}"/></td>
+                                <td><c:out value="${pedido.getNickRest()}"></c:out></td>
                             </tr>
                             <tr>
                                 <td>Fecha:</td>
-                                <td><c:out value="${pedido.getFecha()}"/></td>
+                                <td><c:out value="${pedido.getFecha()}"></c:out></td>
                             </tr>
                             <tr>
                                 <td>Estado:</td>
-                                <td><c:out value="${pedido.getEstado()}"/></td>
+                                <td><c:out value="${pedido.getEstado()}"></c:out></td>
                             </tr>
                         </tbody>
                     </table>
@@ -103,74 +106,19 @@
                             <tbody>
                                 <tr>
                                     <td>${carrito.getCantidad()} ${carrito.getNomProd()}</td>
-                                    <td><c:out value="${carrito.getPrecio()*carrito.getCantidad()}"/></td>
+                                    <td><c:out value="${carrito.getPrecio()*carrito.getCantidad()}"></c:out></td>
                                 </tr>  
                             </tbody>
                         </c:forEach>
                         <tr>
-                            <td><b>Total:<b></td>
-                            <td><c:out value="${pedido.getPrecio_total()}"/></td>
+                            <td><b>Total:</b></td>
+                            <td><c:out value="${pedido.getPrecioTotal()}"></c:out></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-    <c:if test="${pedido.esRecibido()}">                      
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4><b>Evaluacion</b></h4>
-                    </div>
-                    <form class="formtest">
-                        <table class="table table-user-information">
-                            <tbody class="text-center">
-                                <option value="evaluacion" item="${eva}">
-                                <c:if test="${evaluacion.getComentario()==null}">
-                                    <br></br>
-                                    <div class="text-center">
-                                        <div>
-                                            <fieldset id="puntaje" name="stars" value="">
-                                                1<input type="radio" name="star" value="1">  
-                                                2<input type="radio" name="star" value="2">  
-                                                3<input type="radio" name="star" value="3">  
-                                                4<input type="radio" name="star" value="4">  
-                                                5<input type="radio" name="star" value="5">  
-                                            </fieldset>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <textarea cols="60" id="comentario" name="comment" value="" placeholder="Ingrese su comentario..."></textarea>
-                                        <div class="text-center">	
-                                            <form action="pedido" method="GET" accept-charset="UTF-8">
-                                                <button class="btn btn-success" type="submit">Enviar evaluaciÃ³n <i class="fa fa-reply"></i></button>
-                                            </form>
-                                        </div>	
-                                    </div>	
-                                </c:if>
-                                <c:if test="${evaluacion.getComentario()!=null}">
-                                    <tr>
-                                        <div class="text-center">
-                                            <c:forEach var="i" begin="1" end="${evaluacion.getPuntaje()}">
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </c:forEach>
-                                            <c:forEach var="i" begin="${evaluacion.getPuntaje()}" end="4">
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            </c:forEach>
-                                        </div>
-                                    </tr>
-                                    <tr><td><c:out value="${evaluacion.getComentario()} (${evaluacion.getFecha()})"/></td></tr>
-                                </c:if>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    </c:if>   
+    </div>   
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
 

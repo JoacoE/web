@@ -4,8 +4,13 @@
     Author     : joaquin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="lab01.server.DataCarrito"%>
+<%@page import="lab01.server.DtoEvaluacion"%>
+<%@page import="lab01.server.DataPedido"%>
+<%@page import="lab01.server.Estados"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -67,19 +72,19 @@
                             <c:set var="idPed" scope="session" value="${pedido.getId().toString()}"></c:set>
                             <tr>
                                 <td>Id:</td>
-                                <td><c:out value="${pedido.getId()}"/></td>
+                                <td><c:out value="${pedido.getId()}"></c:out></td>
                             </tr>
                             <tr>
                                 <td>Restaurante:</td>
-                                <td><c:out value="${pedido.getNickRest()}"/></td>
+                                <td><c:out value="${pedido.getNickRest()}"></c:out></td>
                             </tr>
                             <tr>
                                 <td>Fecha:</td>
-                                <td><c:out value="${pedido.getFecha()}"/></td>
+                                <td><c:out value="${pedido.getFecha()}"></c:out></td>
                             </tr>
                             <tr>
                                 <td>Estado:</td>
-                                <td><c:out value="${pedido.getEstado()}"/></td>
+                                <td><c:out value="${pedido.getEstado()}"></c:out></td>
                             </tr>
                         </tbody>
                     </table>
@@ -95,24 +100,28 @@
                         <h4><b>Contenido</b></h4>
                     </div>
                     <table class="table table-user-information">
-                        <c:forEach var="carrito" items="${carrito}">
+                        <c:forEach var="detalle" items="${carrito}">
                             <tbody>
                                 <tr>
-                                    <td>${carrito.getCantidad()} ${carrito.getNomProd()}</td>
-                                    <td><c:out value="$${carrito.getPrecio()*carrito.getCantidad()}"/></td>
+                                    <td>${detalle.getCantidad()} ${detalle.getNomProd()}</td>
+                                    <td><c:out value="$${detalle.getPrecio()*detalle.getCantidad()}"></c:out></td>
                                 </tr>  
                             </tbody>
                         </c:forEach>
                         <tr>
                             <td><b>Total:<b></td>
-                            <td><c:out value="$${pedido.getPrecio_total()}"/></td>
+                                <td><c:out value="$${pedido.getPrecioTotal()}"></c:out></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <c:if test="${pedido.esRecibido()}">                      
+    <option value="booleano" item="${recibido}">
+    <%
+    boolean bool = (boolean)request.getAttribute("recibido");
+    if(bool){
+    %>                       
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
@@ -157,7 +166,7 @@
                                             </c:forEach>
                                         </div>
                                     </tr>
-                                    <tr><td><c:out value="${evaluacion.getComentario()} (${evaluacion.getFecha()})"/></td></tr>
+                                    <tr><td><c:out value="${evaluacion.getComentario()} (${evaluacion.getFecha()})"></c:out></td></tr>
                                 </c:if>
                             </tbody>
                         </table>
@@ -166,7 +175,9 @@
             </div>
         </div>
     </div>
-    </c:if>   
+    <%
+    }
+    %>      
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
 

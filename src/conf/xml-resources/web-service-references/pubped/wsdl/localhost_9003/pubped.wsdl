@@ -147,6 +147,13 @@
 <message name="listarEvaluacionesRestResponse">
 <part name="return" type="tns:dtoEvaluacionArray"></part>
 </message>
+<message name="existeEvaluacionPedido">
+<part name="arg0" type="xsd:int"></part>
+<part name="arg1" type="xsd:long"></part>
+</message>
+<message name="existeEvaluacionPedidoResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="getEvaluacionXid">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="xsd:long"></part>
@@ -272,6 +279,10 @@
 <operation name="listarEvaluacionesRest" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorPedido/listarEvaluacionesRestRequest" message="tns:listarEvaluacionesRest"></input>
 <output wsam:Action="http://server.lab01/PublicadorPedido/listarEvaluacionesRestResponse" message="tns:listarEvaluacionesRestResponse"></output>
+</operation>
+<operation name="existeEvaluacionPedido" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorPedido/existeEvaluacionPedidoRequest" message="tns:existeEvaluacionPedido"></input>
+<output wsam:Action="http://server.lab01/PublicadorPedido/existeEvaluacionPedidoResponse" message="tns:existeEvaluacionPedidoResponse"></output>
 </operation>
 <operation name="getEvaluacionXid" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorPedido/getEvaluacionXidRequest" message="tns:getEvaluacionXid"></input>
@@ -509,6 +520,15 @@
 </output>
 </operation>
 <operation name="listarEvaluacionesRest">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="existeEvaluacionPedido">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>

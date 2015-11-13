@@ -106,9 +106,6 @@ public class CtrlUsuario implements ICtrlUsuario {
 
     @Override
     public void registrarCliente(DtoRegistrarCliente datos){
-        if(datos.getImagen() == null){
-            datos.setImagen("");
-        }
         Cliente c = new Cliente(this.nickname, this.nombre, this.email, this.direccion, datos.getApellido(), datos.getImagen(), datos.getFecha(), datos.getPwd());
         HUsuario HU = HUsuario.getinstance();
         HU.addUsuario(c);

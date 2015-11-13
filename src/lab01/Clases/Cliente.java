@@ -22,7 +22,7 @@ public class Cliente extends Usuario{
     private Map pedidos;
    
     public Cliente(){}
-    public Cliente(String nickname, String nombre, String email, String direccion,String apellido, byte[] img, String fecha, String pwd) {
+    public Cliente(String nickname, String nombre, String email, String direccion,String apellido, String img, String fecha, String pwd) {
         super(nickname,nombre,email,direccion, pwd);
        //setNickname(); poner los valores de los tb
         this.apellido = apellido;

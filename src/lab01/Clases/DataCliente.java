@@ -21,13 +21,13 @@ public class DataCliente{
     private String email;
     private String direccion;
     private String apellido;
-    private byte[] imagen;
+    private String imagen;
     private String fNac;
     private String pwd;
     
     public DataCliente(){}
     
-    public DataCliente(String nickname, String nombre, String mail, String direccion, String apellido, byte[] img, String fecha, String pwd){
+    public DataCliente(String nickname, String nombre, String mail, String direccion, String apellido, String img, String fecha, String pwd){
         this.nickname=nickname;
         this.nombre=nombre;
         this.email=mail;
@@ -60,7 +60,7 @@ public class DataCliente{
         return this.apellido;
     }
     
-    public byte[] getImagen(){
+    public String getImagen(){
         return this.imagen;
     }
     public void setNickname(String nickname) {    
@@ -79,7 +79,7 @@ public class DataCliente{
         this.apellido = apellido;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 

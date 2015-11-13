@@ -17,7 +17,7 @@ public abstract class Usuario {
     protected String nombre;
     protected String mail;
     protected String direccion;
-    protected byte[] imagen; //esto es duda
+    protected String imagen;
     protected String contrasenia;
 
     public Usuario(){}
@@ -62,11 +62,11 @@ public abstract class Usuario {
         this.direccion = direccion;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
     
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
    

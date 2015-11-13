@@ -16,11 +16,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class DtoDatosAdicionales {
     
     private String apellido;
-    private byte[] imagen;
+    private String imagen;
     
     public DtoDatosAdicionales(){}
     
-    public DtoDatosAdicionales(String apellido, byte[] imagen){
+    public DtoDatosAdicionales(String apellido, String imagen){
         this.apellido = apellido;
         this.imagen = imagen;
     }
@@ -33,11 +33,11 @@ public class DtoDatosAdicionales {
         this.apellido = apellido;
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }    
 }

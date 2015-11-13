@@ -15,19 +15,21 @@ public class Producto_Stock {
     private double precio;
     private Producto prod;
 
-    public Producto getProd() {
+    public Producto_Stock(){}
+    
+    public Producto_Stock(int cantidad){
+        this.cantidad = cantidad;
+    }
+    
+    public Producto getProd(){
         return prod;
     }
 
-    public Producto_Stock(int cantidad/*, double precio*/) {
-        this.cantidad = cantidad;
-    }
-
-    public int getCantidad() {
+    public int getCantidad(){
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(int cantidad){
         this.cantidad = cantidad;
     }
     
@@ -42,7 +44,7 @@ public class Producto_Stock {
         this.prod=p;
     }
     
-    public void setProd(Producto prod) {
+    public void setProd(Producto prod){
         this.prod = prod;
     }
 }

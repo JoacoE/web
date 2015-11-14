@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package lab01.Clases;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,8 +20,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Cliente extends Usuario{
     private String apellido;
     private String fNac;
-    private Map pedidos;
-   
+//    private Map pedidos;
+    private ArrayList<Pedido> pedidos;
+
     public Cliente(){}
     public Cliente(String nickname, String nombre, String email, String direccion,String apellido, String img, String fecha, String pwd) {
         super(nickname,nombre,email,direccion, pwd);
@@ -28,7 +30,7 @@ public class Cliente extends Usuario{
         this.apellido = apellido;
         this.setImagen(img);
         this.fNac = fecha;
-        this.pedidos = new HashMap();
+        this.pedidos = new ArrayList<>();
     }
 
     public Cliente(String nickname, String nombre, String email, String direccion, String apellido) {
@@ -57,16 +59,13 @@ public class Cliente extends Usuario{
         return nickname;
     }
     
-    public Map getPedidos(){
+    public ArrayList<Pedido> getPedidos(){
         return this.pedidos;
     }
     
     public Pedido getPedido(long id){
         double iderror = 0;
-        Iterator it = this.getPedidos().entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry peds = (Map.Entry) it.next();
-            Pedido p = (Pedido)peds.getValue();
+        for (Pedido p : this.getPedidos()) {
             if(p.getId() == id){
                 return p;
             }
@@ -76,7 +75,12 @@ public class Cliente extends Usuario{
     }
     
     public boolean existePedido(long id){
-        return this.getPedidos().containsKey(id);
+        for (Pedido p : this.getPedidos()) {
+            if(p.getId() == id){
+                return true;
+            }
+        }
+        return false;
     }
     
     public void quitarPedido(long id){
@@ -84,10 +88,10 @@ public class Cliente extends Usuario{
     }
     
     public void setPedido(Pedido p){
-        this.pedidos.put(p.getId(), p);
+        this.pedidos.add(p);
     }
     
-    public void setPedidos(Map pedidos){
+    public void setPedidos(ArrayList<Pedido> pedidos){
         this.pedidos = pedidos;
     }
     
@@ -99,7 +103,7 @@ public class Cliente extends Usuario{
     public void actualizarEstadoPedido(long id, Estados estado){
         this.getPedido(id).setEstado(estado);
     }
-    public Map listaPedidos(){
+    public ArrayList<Pedido> listaPedidos(){
     return this.pedidos;
     }
 }

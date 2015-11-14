@@ -115,7 +115,7 @@ public class CtrlUsuario implements ICtrlUsuario {
     public void registrarRestaurante(DataRestaurante dt){
         if(!dt.getColCategoria().isEmpty()){
             HCategoria hc = HCategoria.getinstance();
-            Map categorias = new HashMap();
+            ArrayList<Categoria> categorias = new ArrayList<>();
             Iterator cats = hc.obtenerColeccion().entrySet().iterator();
             while(cats.hasNext()){
                 Map.Entry cat = (Map.Entry) cats.next();
@@ -124,7 +124,7 @@ public class CtrlUsuario implements ICtrlUsuario {
                 while(dcats.hasNext()){
                     DataCategoria dc = (DataCategoria)dcats.next();
                     if(c.getNombre().equals(dc.getNombre())){
-                        categorias.put(c.getNombre(), c);
+                        categorias.add(c);
                     }
                 }                
             }
@@ -244,10 +244,7 @@ public class CtrlUsuario implements ICtrlUsuario {
         ArrayList<DataIndividual> ret = new ArrayList<>();
         HUsuario hu = HUsuario.getinstance();
         Restaurante rest = hu.obtenerRestaurante(r);
-        Iterator it = rest.obtenerListaIndividualesStock().entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry inds = (Map.Entry)it.next();
-            DataIndividual di = (DataIndividual)inds.getValue();
+        for (DataIndividual di : rest.obtenerListaIndividualesStock()) {
             ret.add(di);
         }
         return ret;
@@ -263,11 +260,8 @@ public class CtrlUsuario implements ICtrlUsuario {
             Map.Entry map = (Map.Entry) it.next();
             if(map.getValue() instanceof Cliente){
                 Cliente c = (Cliente)map.getValue();
-                Map lp = c.listaPedidos();
-                Iterator itp = lp.entrySet().iterator();
-                while(itp.hasNext()){
-                    Map.Entry mapP = (Map.Entry) itp.next();
-                    Pedido p = (Pedido)mapP.getValue();
+                ArrayList<Pedido> lp = c.listaPedidos();
+                for (Pedido p : lp) {
                     DataPedido dp = p.getDataPedido();
                     ret.add(dp);
                 }
@@ -280,13 +274,10 @@ public class CtrlUsuario implements ICtrlUsuario {
     public ArrayList<DataPedido> pedidosUsuario(String nickname){
         HUsuario hu = HUsuario.getinstance();
         Cliente user = (Cliente) hu.obtenerUsuario(nickname);
-        Map pedidos = new HashMap();
+        ArrayList<Pedido> pedidos = new ArrayList<>();
         ArrayList<DataPedido> ret = new ArrayList<>();
         pedidos = user.getPedidos();
-        Iterator it = pedidos.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry p = (Map.Entry) it.next();
-            Pedido ped = (Pedido) p.getValue();
+        for (Pedido ped : pedidos) {
             DataPedido dp = ped.getDataPedido();
             ret.add(dp);
         }

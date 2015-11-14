@@ -92,7 +92,7 @@ public class CtrlProducto implements ICtrlProducto {
         //Map ret = new HashMap();
         HUsuario HU = HUsuario.getinstance();
         Restaurante restoran = HU.obtenerRestaurante(nomRest);
-        Iterator it = restoran.obtenerListaProductos().entrySet().iterator();
+        Iterator it = restoran.obtenerListaProductos().iterator();
         while (it.hasNext()) {
             Map.Entry map = (Map.Entry) it.next();
             if ((Producto) map.getValue() instanceof Individual) {
@@ -146,7 +146,7 @@ public class CtrlProducto implements ICtrlProducto {
             Map.Entry rest = (Map.Entry)rests.next();
             if(rest.getValue() instanceof Restaurante){
                 Restaurante r = (Restaurante)rest.getValue();
-                Iterator prods = r.obtenerListaProductos().entrySet().iterator();
+                Iterator prods = r.obtenerListaProductos().iterator();
                 while(prods.hasNext()){
                     Map.Entry prod = (Map.Entry)prods.next();
                     if(prod.getValue() instanceof Individual){
@@ -171,7 +171,7 @@ public class CtrlProducto implements ICtrlProducto {
             Map.Entry rest = (Map.Entry)rests.next();
             if(rest.getValue() instanceof Restaurante){
                 Restaurante r = (Restaurante)rest.getValue();
-                Iterator prods = r.obtenerListaProductos().entrySet().iterator();
+                Iterator prods = r.obtenerListaProductos().iterator();
                 while(prods.hasNext()){
                     Map.Entry prod = (Map.Entry)prods.next();
                     if(prod.getValue() instanceof Promocional){

@@ -21,18 +21,21 @@ public class Restaurante extends Usuario{
     
     private float puntajeProm;
     private ArrayList<String> lstImagen;
-    private Map ColCategoria;
-    private Map ColProducto;
+    private ArrayList<Categoria> ColCategoria;
+    private ArrayList<Individual> ColProductoInd;
+    private ArrayList<Promocional> ColProductoProm;
 
-    public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, Map categorias, String pwd){
+    public Restaurante(String nickname, String nombre, String email, String direccion, ArrayList<String> lstImagenes, ArrayList<Categoria> categorias, String pwd){
         super(nickname,nombre,email,direccion, pwd);
         if(categorias == null){
             this.ColCategoria = null;
         }else{
-            this.ColCategoria = new HashMap();
-            this.ColCategoria.putAll(categorias);
+            this.ColCategoria = new ArrayList<>();
+            this.ColCategoria.addAll(categorias);
         }
-        this.ColProducto = new HashMap();
+        this.ColProductoInd = new ArrayList<>();
+        this.ColProductoProm = new ArrayList<>();
+
         if(lstImagenes == null){
             this.lstImagen = null;
         }else{
@@ -42,69 +45,79 @@ public class Restaurante extends Usuario{
     }
     
     public void addCategoria(Categoria c){
-        ColCategoria.put(c.getNombre(), c);
+        ColCategoria.add(c);
     }
     
     public boolean member(String nombre){
+//        boolean aux = false;
         if(ColCategoria.isEmpty())
             return false;
-        else
-            return ColCategoria.containsKey(nombre);
+        else{
+            for(Categoria itCat: ColCategoria){
+               if(itCat.getNombre().equals(nombre)){
+                   return true;
+               }
+            }
+            return false;
+        }
     }
     
     public void addProducto(Producto p){
-        if(this.ColProducto == null){
-            this.ColProducto = new HashMap();
-            this.ColProducto.put(p.getNombre(), p);
+        if(p instanceof Individual){            
+            if(this.ColProductoInd== null){
+                this.ColProductoInd = new ArrayList<>();
+                this.ColProductoInd.add((Individual)p);
+            }else{
+                this.ColProductoInd.add((Individual)p);
+            }
         }else{
-            ColProducto.put(p.getNombre(), p);
+            if(this.ColProductoProm == null){
+                this.ColProductoProm = new ArrayList<>();
+                this.ColProductoProm.add((Promocional)p);
+            }else{
+                this.ColProductoProm.add((Promocional)p);
+            }
         }
     }
     
     public Producto getProducto(String nombre){
-        Iterator it = this.ColProducto.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry mprod = (Map.Entry) it.next();
-            Producto prod = (Producto) mprod.getValue();
-            if(prod.getNombre().equals(nombre)){
-                return prod;
+        if(!(ColProductoInd.isEmpty())){
+            for(Individual itInd: ColProductoInd){
+               if(itInd.getNombre().equals(nombre)){
+                   return (Producto)itInd;
+               }
             }
         }
-        throw new NullPointerException();
+        if(!(ColProductoProm.isEmpty())){
+            for(Promocional itProm: ColProductoProm){
+               if(itProm.getNombre().equals(nombre)){
+                   return (Producto)itProm;
+               }
+            }
+        }
+        throw new NullPointerException();        
     }
     
-    public Map obtenerColeccion(){
-        Map ret = new HashMap();
-        Iterator it = ColCategoria.entrySet().iterator();
-        //Iterator itret = ret.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            ret.put(map.getKey(), map.getKey());        
+    public ArrayList<Categoria> obtenerColeccion(){
+        if(!(ColCategoria.isEmpty())){
+            return this.ColCategoria;
         }
-        return ret;
+        throw new NullPointerException();        
     }
+    
     public DataRestaurante RestauranteADR(){
         ArrayList<DataPromocional> dataPromocionales = new ArrayList<>();
         ArrayList<DataIndividual> dataIndividuales = new ArrayList<>();
         ArrayList<DataCategoria> dataCategorias = new ArrayList<>();
-        Iterator prods = this.ColProducto.entrySet().iterator();
-        while(prods.hasNext()){
-            Map.Entry prod = (Map.Entry) prods.next();
-            if(prod.getValue() instanceof Individual){
-                Individual i = (Individual) prod.getValue();
+        for (Individual i: ColProductoInd){
                 DataIndividual di = i.getDataIndividual();
                 dataIndividuales.add(di);
             }
-            if(prod.getValue() instanceof Promocional){
-                Promocional p = (Promocional) prod.getValue();
+        for (Promocional p: ColProductoProm){
                 DataPromocional dp = p.getDataPromo();
                 dataPromocionales.add(dp);
             }
-        }
-        Iterator categs = this.ColCategoria.entrySet().iterator();
-        while(categs.hasNext()){
-            Map.Entry cat = (Map.Entry) categs.next();
-            Categoria c = (Categoria) cat.getValue();
+        for (Categoria c: ColCategoria){
             DataCategoria dc = c.CatADC();
             dataCategorias.add(dc);
         }
@@ -112,29 +125,36 @@ public class Restaurante extends Usuario{
         return DR;
     }
     
-    public Map obtenerColProductos(){
-        Map ret = new HashMap();
-        Iterator it = ColProducto.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            ret.put(map.getKey(), map.getKey());
+    public ArrayList<Producto> obtenerColProductos(){
+        ArrayList<Producto> ret = new ArrayList<>();
+        for (Individual ind: ColProductoInd){
+            Producto p = (Producto)ind;
+            ret.add(p);
+        }for (Promocional prom: ColProductoProm){
+            Producto p = (Producto)prom;
+            ret.add(p);
         }
         return ret;
     }
     
-    public Map obtenerListaProductos(){
-        return this.ColProducto;
-    }
+    public ArrayList<Producto> obtenerListaProductos(){
+        ArrayList<Producto> ret = new ArrayList<>();
+        for (Individual ind: ColProductoInd){
+            Producto p = (Producto)ind;
+            ret.add(p);
+        }for (Promocional prom: ColProductoProm){
+            Producto p = (Producto)prom;
+            ret.add(p);
+        }
+        return ret;
+    }    
     
-    public Map obtenerListaIndividualesStock(){
-    Map ret = new HashMap();
-        Iterator it = ColProducto.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            if(map.getValue() instanceof Individual){
-                Individual i = (Individual) map.getValue();
-                DataIndividual di = i.getDataIndividual();
-                ret.put(di.getDataNombre(),di.getCantidad());
+    public ArrayList<DataIndividual> obtenerListaIndividualesStock(){
+        ArrayList<DataIndividual> ret = new ArrayList<>();
+        for (Individual i: ColProductoInd){
+            if(i.getCantidad()>=1){
+            DataIndividual di = i.getDataIndividual();
+            ret.add(di);
             }
         }
         return ret;
@@ -185,24 +205,26 @@ public class Restaurante extends Usuario{
         return this.lstImagen;
     }
     public boolean tengoCategoria(String nombre){
-        Iterator it = ColCategoria.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            String rest = map.getKey().toString().toUpperCase();
+        for (Categoria cat : ColCategoria) {
+            String nomCat = cat.getNombre().toUpperCase();
             String nom = nombre.toUpperCase();
-            if(rest.contains(nom))
+            if(nomCat.contains(nom))
                 return true;
         }
     return false;
     }
     
     public boolean tengoProducto(String nombre){
-        Iterator it = ColProducto.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry map = (Map.Entry) it.next();
-            String rest = map.getKey().toString().toUpperCase();
+        for (Promocional p : ColProductoProm) {
+            String nomProd = p.getNombre().toUpperCase();
             String nom = nombre.toUpperCase();
-            if(rest.contains(nom))
+            if(nomProd.contains(nom))
+                return true;
+        }
+        for (Individual i : ColProductoInd) {
+            String nomProd = i.getNombre().toUpperCase();
+            String nom = nombre.toUpperCase();
+            if(nomProd.contains(nom))
                 return true;
         }
     return false;
@@ -224,22 +246,31 @@ public class Restaurante extends Usuario{
         this.lstImagen = lstImagen;
     }
 
-    public Map getColCategoria() {
+    public ArrayList<Categoria> getColCategoria() {
         return ColCategoria;
     }
 
-    public void setColCategoria(Map ColCategoria) {
+    public void setColCategoria(ArrayList<Categoria> ColCategoria) {
         this.ColCategoria = ColCategoria;
     }
 
-    public Map getColProducto() {
-        return ColProducto;
+    public ArrayList<Individual> getColProductoInd() {
+        return ColProductoInd;
+    }
+    
+    
+    public ArrayList<Promocional> getColProductoProm() {
+        return ColProductoProm;
     }
 
-    public void setColProducto(Map ColProducto) {
-        this.ColProducto = ColProducto;
+    public void setColProductoInd(ArrayList<Individual> ColProductoInd) {
+        this.ColProductoInd = ColProductoInd;
     }
-
+    
+    public void setColProductoProm(ArrayList<Promocional> ColProductoProm) {
+        this.ColProductoProm = ColProductoProm;
+    }
+    
     public String getContrasenia() {
         return contrasenia;
     }

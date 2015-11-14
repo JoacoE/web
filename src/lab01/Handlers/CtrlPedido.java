@@ -226,8 +226,8 @@ public class CtrlPedido implements ICtrlPedido {
     @Override
     public DataProducto devListaProductos(){
         DataProducto dp = new DataProducto();
-        Map prods = this.memRestaurante.obtenerListaProductos();
-        Iterator it = prods.entrySet().iterator();
+        ArrayList<Producto> prods = this.memRestaurante.obtenerListaProductos();
+        Iterator it = prods.iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
             if(map.getValue() instanceof Individual){
@@ -287,10 +287,7 @@ public class CtrlPedido implements ICtrlPedido {
             Map.Entry users = (Map.Entry) user.next();
             if(users.getValue() instanceof Cliente){
                 Cliente client = (Cliente)users.getValue();
-                Iterator pedidos = client.getPedidos().entrySet().iterator();
-                while(pedidos.hasNext()){
-                    Map.Entry p = (Map.Entry) pedidos.next();
-                    Pedido ped = (Pedido)p.getValue();
+                for (Pedido ped : client.getPedidos()) {
                     DataPedido datped = ped.getDataPedido();
                     aux.add(datped);
                 }
@@ -353,10 +350,7 @@ public class CtrlPedido implements ICtrlPedido {
             if(users.getValue() instanceof Cliente){
                 Cliente client = (Cliente)users.getValue();
                 if(client.getNickname().equals(nickname)){
-                    Iterator pedidos = client.getPedidos().entrySet().iterator();
-                    while(pedidos.hasNext()){
-                        Map.Entry p = (Map.Entry) pedidos.next();
-                        Pedido ped = (Pedido)p.getValue();
+                    for (Pedido ped : client.getPedidos()) {
                         if(ped.getEstado() == Estados.RECIBIDO){
                             DataPedido datped = ped.getDataPedido();
                             aux.add(datped);
@@ -378,10 +372,7 @@ public class CtrlPedido implements ICtrlPedido {
             if(users.getValue() instanceof Cliente){
                 Cliente client = (Cliente)users.getValue();
                 if(client.getNickname().equals(nickname)){
-                    Iterator pedidos = client.getPedidos().entrySet().iterator();
-                    while(pedidos.hasNext()){
-                        Map.Entry p = (Map.Entry) pedidos.next();
-                        Pedido ped = (Pedido)p.getValue();
+                    for (Pedido ped : client.getPedidos()) {
                         DataPedido datped = ped.getDataPedido();
                         aux.add(datped);                 
                     }
@@ -402,10 +393,7 @@ public class CtrlPedido implements ICtrlPedido {
             Map.Entry cliente = (Map.Entry) clientes.next();
             if(cliente.getValue() instanceof Cliente){
                 Cliente c = (Cliente)cliente.getValue();
-                Iterator pedidos = c.getPedidos().entrySet().iterator();
-                while(pedidos.hasNext()){
-                    Map.Entry pedido = (Map.Entry)pedidos.next();
-                    Pedido p = (Pedido)pedido.getValue();
+                for (Pedido p : c.getPedidos()) {
                     if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == Estados.RECIBIDO))){
                         if(p.getEvaluacion() != null){
                             sumaPuntajes = sumaPuntajes + p.getEvaluacion().getPuntaje();
@@ -435,10 +423,7 @@ public class CtrlPedido implements ICtrlPedido {
             Map.Entry users = (Map.Entry) user.next();
             if(users.getValue() instanceof Cliente){
                 Cliente client = (Cliente)users.getValue();
-                Iterator peds = client.getPedidos().entrySet().iterator();
-                while(peds.hasNext()){
-                    Map.Entry ped = (Map.Entry) peds.next();
-                    Pedido p = (Pedido)ped.getValue();
+                for (Pedido p : client.getPedidos()) {
                     if(p.getId() == id){
                         p.setEvaluacion(ev);
                         rest = p.getDataPedido().getNickRest();
@@ -463,10 +448,7 @@ public class CtrlPedido implements ICtrlPedido {
             Map.Entry cliente = (Map.Entry) clientes.next();
             if(cliente.getValue() instanceof Cliente){
                 Cliente c = (Cliente)cliente.getValue();
-                Iterator pedidos = c.getPedidos().entrySet().iterator();
-                while(pedidos.hasNext()){
-                    Map.Entry pedido = (Map.Entry)pedidos.next();
-                    Pedido p = (Pedido)pedido.getValue();
+                for (Pedido p : c.getPedidos()) {
                     if((p.getDataPedido().getNickRest().equals(nickname) && (p.getEstado() == Estados.RECIBIDO))){
                         if(p.getEvaluacion() != null){
                             DtoEvaluacion ev = p.getEvaluacion().getDTOEvaluacion();
@@ -489,10 +471,7 @@ public class CtrlPedido implements ICtrlPedido {
             Map.Entry cliente = (Map.Entry)clientes.next();
             if(cliente.getValue() instanceof Cliente){
                 Cliente c = (Cliente)cliente.getValue();
-                Iterator pedidos = c.getPedidos().entrySet().iterator();
-                while(pedidos.hasNext()){
-                    Map.Entry pedido = (Map.Entry)pedidos.next();
-                    Pedido p = (Pedido)pedido.getValue();
+                for (Pedido p : c.getPedidos()) {
                     if(p.getId() == id){
                         if(p.getEvaluacion()!=null){
                             return true;
@@ -515,10 +494,7 @@ public class CtrlPedido implements ICtrlPedido {
             Map.Entry cliente = (Map.Entry)clientes.next();
             if(cliente.getValue() instanceof Cliente){
                 Cliente c = (Cliente)cliente.getValue();
-                Iterator pedidos = c.getPedidos().entrySet().iterator();
-                while(pedidos.hasNext()){
-                    Map.Entry pedido = (Map.Entry)pedidos.next();
-                    Pedido p = (Pedido)pedido.getValue();
+                for (Pedido p : c.getPedidos()) {
                     if(p.getId() == id){
                         if(p.getEvaluacion()!=null){
                             ret = p.getEvaluacion().getDTOEvaluacion();

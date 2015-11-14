@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import lab01.Clases.ImagenFondoMovil;
+//import lab01.Clases.ImagenFondoMovil;
 
 /**
  *
@@ -24,7 +24,7 @@ PreparedStatement pst = null;
      */
     public Home() {
         initComponents();
-    jDesktopPane2.setBorder(new ImagenFondoMovil());
+//    jDesktopPane2.setBorder(new ImagenFondoMovil());
             conn = Connect.ConnectBD();
 
     }
@@ -114,7 +114,7 @@ PreparedStatement pst = null;
                 JOptionPane.showMessageDialog(null, "Se conecto de la base");
             
             
-                Prueba lista = new Prueba();
+                listaPedidos lista = new listaPedidos();
                 jDesktopPane2.add(lista);
                 lista.show();
             }

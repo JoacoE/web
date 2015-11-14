@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:9002/pubprod?wsdl" uri="xml-resources/web-service-references/pubprod/wsdl/localhost_9002/pubprod.wsdl"/>
+    <system systemId="http://localhost:9002/pubprod?xsd=1" uri="xml-resources/web-service-references/pubprod/wsdl/localhost_9002/pubprod.xsd_1.xsd"/>
+    <system systemId="http://localhost:9003/pubped?wsdl" uri="xml-resources/web-service-references/pubped/wsdl/localhost_9003/pubped.wsdl"/>
+    <system systemId="http://localhost:9003/pubped?xsd=1" uri="xml-resources/web-service-references/pubped/wsdl/localhost_9003/pubped.xsd_1.xsd"/>
+    <system systemId="http://localhost:9001/pubusr?wsdl" uri="xml-resources/web-service-references/pubusr/wsdl/localhost_9001/pubusr.wsdl"/>
+    <system systemId="http://localhost:9001/pubusr?xsd=1" uri="xml-resources/web-service-references/pubusr/wsdl/localhost_9001/pubusr.xsd_1.xsd"/>
+    <system systemId="http://localhost:9001/pubusr?xsd=2" uri="xml-resources/web-service-references/pubusr/wsdl/localhost_9001/pubusr.xsd_2.xsd"/>
+</catalog>

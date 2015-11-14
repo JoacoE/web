@@ -3,10 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package Controlador;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +29,9 @@ import lab01.server.DataRestaurante;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 import lab01.server.DtoEvaluacion;
 import lab01.server.DataIndividual;
 import lab01.server.DataPromocional;
@@ -31,6 +43,7 @@ import lab01.server.DtoRegistrarCliente;
  * @author joaco
  */
 @WebServlet(name = "UsuarioServlet", urlPatterns = {"/usr"})
+@MultipartConfig
 public class UsuarioServlet extends HttpServlet {
 
     /**
@@ -44,7 +57,18 @@ public class UsuarioServlet extends HttpServlet {
      */
     private String nombre;
     private String mail;
-
+    private String userdir = System.getProperty("user.dir").concat("/Uploads");
+   
+    public void getCarpeta(){
+        boolean uploads = (new File(userdir).mkdir());
+        if(!uploads){
+            File directorio = new File(userdir);
+            if(!directorio.exists()){
+                throw new NullPointerException();
+            }
+        }
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -324,10 +348,9 @@ public class UsuarioServlet extends HttpServlet {
         }
         if(request.getParameter("btnReg") != null){//registrar cliente
             ProxyUsuario PU = ProxyUsuario.getInstance();
-
+            
             HttpSession session = request.getSession();
             //HImagenes HI = HImagenes.getInstance();
-            File imagen = null;
             String nickname, email, nombre, apellido, fecha, direccion, pwd, confirm;
             nickname = getNombre();
             email = getMail();
@@ -350,12 +373,28 @@ public class UsuarioServlet extends HttpServlet {
                     regCliente.setApellido(apellido);
                     regCliente.setFecha(fecha);
                     regCliente.setPwd(pwd);
-    //                if(imagen.exists()){
-                    //                    HI.guardarImagen(imagen, nickname);
-                    //                    regCliente.setImagen(nickname);
-                    //                }else{
-                    //                    regCliente.setImagen("");
-                    //                }
+                    if(request.getPart("imagen") != null){
+                        getCarpeta();
+                        Part filePart = request.getPart("imagen");
+                        String fileName = filePart.getSubmittedFileName();
+                        File imagen = new File(userdir,nickname);
+                        try(InputStream input = filePart.getInputStream()){
+                            Files.copy(input, imagen.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        }catch(Exception e){
+                            e = new IOException();
+                        }
+                        BufferedImage bufferImagen = ImageIO.read(imagen);
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        ImageIO.write(bufferImagen, "jpeg", baos);
+                        baos.flush();
+                        byte[] imageinbyteArray = baos.toByteArray();
+                        baos.close();
+                        String b64 = javax.xml.bind.DatatypeConverter.printBase64Binary(imageinbyteArray);
+//                        WritableRaster raster = bufferImagen.getRaster();
+//                        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
+                        regCliente.setImagen(b64);
+                    }
+
                     PU.registrarCliente(regCliente);
                     Iterator it3 = PU.retColCat().iterator();
                     ArrayList<DataCategoria> lista = new ArrayList<>();

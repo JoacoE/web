@@ -40,7 +40,7 @@ l<!DOCTYPE html>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="well well-sm">
-                            <form class="form-horizontal"action="usr" method="POST" onSubmit="validar()" accept-charset="UTF-8">
+                            <form class="form-horizontal"action="usr" method="POST" onSubmit="validar()" accept-charset="UTF-8" enctype="multipart/form-data">
                                 <fieldset>
                                     <legend class="text-center header">Registrarse</legend>
 
@@ -68,14 +68,14 @@ l<!DOCTYPE html>
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-key bigicon"></i></span>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" id="txtPass" name="txtPass" placeholder="Constraseña" required="required">
+                                            <input type="password" class="form-control" id="txtPass" name="txtPass" placeholder="Constrase?a" required="required">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-key bigicon"></i></span>
                                         <div class="col-md-8">
-                                            <input type="password" class="form-control" id="txtConfirmPass" name="txtConfirmPass" placeholder="Confirmar constraseña" required="required">
+                                            <input type="password" class="form-control" id="txtConfirmPass" name="txtConfirmPass" placeholder="Confirmar constrase?a" required="required">
                                         </div>
                                     </div>
 
@@ -89,7 +89,7 @@ l<!DOCTYPE html>
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-photo bigicon"></i></span>
                                         <label for="selIMg">Seleccionar imagen:</label>
-                                        <input type="file" name="imagen">
+                                        <input type="file" id="imagen" class="form-control" name="imagen">
                                         <p class="help-block"></p>
                                     </div>
                                     <div class="form-group">
@@ -111,7 +111,7 @@ l<!DOCTYPE html>
                                         var pass = document.getElementById("txtPass").value;
                                         var confirm = document.getElementById("txtConfirmPass").value;
                                         if(pass != confirm){
-                                            alert("Las contraseñas no coinciden");
+                                            alert("Las contrase?as no coinciden");
                                             return false
                                             
                                         }

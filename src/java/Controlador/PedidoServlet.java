@@ -136,6 +136,7 @@ public class PedidoServlet extends HttpServlet {
                 DataPedido dp = (DataPedido)it.next();
                 listaPed.add(dp);
             }
+            
             request.setAttribute("cliente", dc);
             request.setAttribute("lPedidos", listaPed);
             request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);

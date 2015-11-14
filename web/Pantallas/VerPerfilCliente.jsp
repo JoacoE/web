@@ -55,8 +55,11 @@
 
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
 
-                <option value="cliente" item="${dc}">
-                <div class="col-md-14 col-lg-14 " align="center"> <img alt="User Pic" src="<%=request.getContextPath()%>/Branding/img/${cliente.getImagen()}.jpeg" class="img-circle img-responsive"> </div>
+                <option id="dataCliente"value="cliente" item="${dc}">
+                    <option value="img" item="${imgCliente}">
+                       <div class="col-md-14 col-lg-14 " align="center">
+                           <img id="ImgCliente" alt="Red dot" src="" class="img-circle img-responsive"> </div>
+                    </option>
                 <br></br>
             </div>
         </div>
@@ -142,7 +145,9 @@
             </div>
         </div>
     </div>                       
-
+        <script>
+            document.getElementById("ImgCliente").src = "data:image/png;charset=utf-8;base64,"+'${ImgCliente}';
+        </script>                            
         <!-- jQuery Version 1.11.1 -->
         <script src="js/jquery.js"></script>
 
@@ -155,6 +160,8 @@
         <script src="js/libs/lightbox.js"></script>
         <script src="js/store.js"></script>
         <script src="../Branding/js/jquery.js"></script>
+        
+
     </body>
 
 </html>

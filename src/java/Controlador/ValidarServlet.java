@@ -62,8 +62,8 @@ public class ValidarServlet extends HttpServlet {
             input = null;
 
             try{
-                input = new FileInputStream("/home/joaco/NetBeansProjects/ServidorWeb/web/WEB-INF/config.testdata");
-                //input = new FileInputStream("/home/martin/NetBeansProjects/web/web/WEB-INF/config.testdata");
+                //input = new FileInputStream("/home/joaco/NetBeansProjects/ServidorWeb/web/WEB-INF/config.testdata");
+                input = new FileInputStream("/home/martin/NetBeansProjects/web/web/WEB-INF/config.testdata");
                 //input = new FileInputStream("/home/gera/NetBeansProjects/Lab02/Web/web/config.testdata");
 
                 prop.load(input);
@@ -80,14 +80,14 @@ public class ValidarServlet extends HttpServlet {
                     //HI.guardarImagen(Cuno, datos1.getNickname());
                     DtoRegistrarCliente dreg1 = new DtoRegistrarCliente(); //apellido,imagen,fecha,pwd
                     dreg1.setApellido("Costas");
-                    dreg1.setImagen("costas");
+//                    dreg1.setImagen("costas");
                     dreg1.setFecha("15/11/1983");
                     dreg1.setPwd("costas123");
                     ICU.registrarCliente(dreg1);
                 }else{
                     DtoRegistrarCliente dreg1 = new DtoRegistrarCliente();
                     dreg1.setApellido("Costas");
-                    dreg1.setImagen("");
+//                    dreg1.setImagen("");
                     dreg1.setFecha("15/11/1983");
                     dreg1.setPwd("costas123");
                     ICU.registrarCliente(dreg1);
@@ -104,14 +104,14 @@ public class ValidarServlet extends HttpServlet {
                     //HI.guardarImagen(Cdos, datos2.getNickname());
                     DtoRegistrarCliente dreg2 = new DtoRegistrarCliente();
                     dreg2.setApellido("Cotelo");
-                    dreg2.setImagen("roro");
+//                    dreg2.setImagen("roro");
                     dreg2.setFecha("02/08/1975");
                     dreg2.setPwd("12elroro");
                     ICU.registrarCliente(dreg2);
                 }else{
                     DtoRegistrarCliente dreg2 = new DtoRegistrarCliente();
                     dreg2.setApellido("Cotelo");
-                    dreg2.setImagen("");
+//                    dreg2.setImagen("");
                     dreg2.setFecha("02/08/1975");
                     dreg2.setPwd("12elroro");
                     ICU.registrarCliente(dreg2);
@@ -129,14 +129,14 @@ public class ValidarServlet extends HttpServlet {
                     //HI.guardarImagen(Ctres, datos3.getNickname());
                     DtoRegistrarCliente dreg3 = new DtoRegistrarCliente();
                     dreg3.setApellido("Garrido");
-                    dreg3.setImagen("chechi");
+//                    dreg3.setImagen("chechi");
                     dreg3.setFecha("12/09/1987");
                     dreg3.setPwd("ch4321");
                     ICU.registrarCliente(dreg3);
                 }else{
                     DtoRegistrarCliente dreg3 = new DtoRegistrarCliente();
                     dreg3.setApellido("Garrido");
-                    dreg3.setImagen("");
+//                    dreg3.setImagen("");
                     dreg3.setFecha("12/09/1987");
                     dreg3.setPwd("ch4321");
                     ICU.registrarCliente(dreg3);
@@ -154,14 +154,14 @@ public class ValidarServlet extends HttpServlet {
                     //HI.guardarImagen(Ccuatro, datos4.getNickname());
                     DtoRegistrarCliente dreg4 = new DtoRegistrarCliente();      
                     dreg4.setApellido("García");
-                    dreg4.setImagen("andy");
+//                    dreg4.setImagen("andy");
                     dreg4.setFecha("28/07/1951");
                     dreg4.setPwd("andy_la1");
                     ICU.registrarCliente(dreg4);
                 }else{
                     DtoRegistrarCliente dreg4 = new DtoRegistrarCliente();      
                     dreg4.setApellido("García");
-                    dreg4.setImagen("");
+//                    dreg4.setImagen("");
                     dreg4.setFecha("28/07/1951");
                     dreg4.setPwd("andy_la1");
                     ICU.registrarCliente(dreg4);
@@ -178,14 +178,14 @@ public class ValidarServlet extends HttpServlet {
                     //HI.guardarImagen(Ccinco, datos5.getNickname());
                     DtoRegistrarCliente dreg5 = new DtoRegistrarCliente();
                     dreg5.setApellido("Weiss");
-                    dreg5.setImagen("weiss");
+                    //dreg5.setImagen("weiss");
                     dreg5.setFecha("23/12/1978");
                     dreg5.setPwd("223_aweis");
                     ICU.registrarCliente(dreg5);
                 }else{
                     DtoRegistrarCliente dreg5 = new DtoRegistrarCliente();
                     dreg5.setApellido("Weiss");
-                    dreg5.setImagen("");
+//                    dreg5.setImagen("");
                     dreg5.setFecha("23/12/1978");
                     dreg5.setPwd("223_aweis");
                     ICU.registrarCliente(dreg5);

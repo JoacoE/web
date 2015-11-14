@@ -5,11 +5,14 @@
  */
 package Controlador;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lab01.server.*;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 
 /**
  *
@@ -136,8 +141,14 @@ public class PedidoServlet extends HttpServlet {
                 DataPedido dp = (DataPedido)it.next();
                 listaPed.add(dp);
             }
+//            BufferedImage img = ImageIO.read(new ByteArrayInputStream(dc.getImagen()));
+//            StringBuilder sb = new StringBuilder();
+//            sb.append("data:image/jpeg;base64,");
+//            sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(dc.getImagen(),false)));
+//            String img = sb.toString();
             request.setAttribute("cliente", dc);
             request.setAttribute("lPedidos", listaPed);
+            request.setAttribute("ImgCliente", dc.getImagen());
             request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
         }
         if(request.getParameter("comprar") != null){

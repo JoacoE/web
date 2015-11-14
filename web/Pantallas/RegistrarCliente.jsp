@@ -40,7 +40,7 @@ l<!DOCTYPE html>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="well well-sm">
-                            <form class="form-horizontal"action="usr" method="POST" onSubmit="validar()" accept-charset="UTF-8">
+                            <form class="form-horizontal"action="usr" method="POST" onSubmit="validar()" accept-charset="UTF-8" enctype="multipart/form-data">
                                 <fieldset>
                                     <legend class="text-center header">Registrarse</legend>
 
@@ -89,7 +89,7 @@ l<!DOCTYPE html>
                                     <div class="form-group">
                                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-photo bigicon"></i></span>
                                         <label for="selIMg">Seleccionar imagen:</label>
-                                        <input type="file" name="imagen">
+                                        <input type="file" id="imagen" class="form-control" name="imagen">
                                         <p class="help-block"></p>
                                     </div>
                                     <div class="form-group">

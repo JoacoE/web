@@ -6,9 +6,6 @@
 package lab01.Clases;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 
@@ -36,8 +33,9 @@ public class Restaurante extends Usuario{
         this.ColProductoInd = new ArrayList<>();
         this.ColProductoProm = new ArrayList<>();
 
-        if(lstImagenes == null){
-            this.lstImagen = null;
+        if(lstImagenes.get(0).equals("")){
+            this.lstImagen = new ArrayList<>();
+            this.lstImagen.add("");
         }else{
             this.lstImagen = new ArrayList<>(); //Esto puede ser cualquera
             this.lstImagen.addAll(lstImagenes);

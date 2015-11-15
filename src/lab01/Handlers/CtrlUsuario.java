@@ -120,13 +120,11 @@ public class CtrlUsuario implements ICtrlUsuario {
             while(cats.hasNext()){
                 Map.Entry cat = (Map.Entry) cats.next();
                 Categoria c = (Categoria)cat.getValue();
-                Iterator dcats = dt.getColCategoria().iterator();
-                while(dcats.hasNext()){
-                    DataCategoria dc = (DataCategoria)dcats.next();
+                for (DataCategoria dc : dt.getColCategoria()) {
                     if(c.getNombre().equals(dc.getNombre())){
                         categorias.add(c);
                     }
-                }                
+                }
             }
             Restaurante r = new Restaurante(dt.getNickname(),dt.getNombre(),dt.getEmail(),dt.getDireccion(), dt.getLstImagen(), categorias, dt.getPwd());
             HUsuario HU = HUsuario.getinstance();

@@ -9,4 +9,11 @@
             30
         </session-timeout>
     </session-config>
+    <servlet-mapping>
+        <servlet-name>ValidarServlet</servlet-name>
+        <url-pattern>/validar.do</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>validar.do</welcome-file>
+    </welcome-file-list>
 </web-app>

@@ -76,7 +76,6 @@ public class CtrlProducto implements ICtrlProducto {
         } else {
             return true;
         }
-
     }
 
     @Override
@@ -107,16 +106,11 @@ public class CtrlProducto implements ICtrlProducto {
 
     @Override
     public void armarPromo(DtoArmarPromo datos) {
-        Iterator it = this.Promo.iterator();
         HUsuario HU = HUsuario.getinstance();
         Restaurante r = HU.obtenerRestaurante(datos.getNickRest());
         ArrayList<Cantidad_Individual> ColCantIndividual = new ArrayList<>();
-        //Promocional pro = 
-        while (it.hasNext()) {
-            //Map.Entry map = (Map.Entry) it.next();
-            DataIndividual di = (DataIndividual)it.next();
+        for(DataIndividual di: this.Promo){
             Individual i = (Individual)r.getProducto(di.getDataNombre());
-            //String cant = (String) map.getValue().toString();
             int cantidad = di.getCantidad();
             Cantidad_Individual CI = new Cantidad_Individual(i, cantidad);
             ColCantIndividual.add(CI);
@@ -128,11 +122,7 @@ public class CtrlProducto implements ICtrlProducto {
         }else{
             Promocional pro = new Promocional(datos.getNombre(), datos.getDescripcion(), true, datos.getDescuento(), ColCantIndividual);
             pro.setPrecioPromo(datos.getDescuento());
-            if(!datos.getImagen().equals("")){
-                pro.setImagen(datos.getImagen());
-            }else{
-                pro.setImagen("");
-            }
+            pro.setImagen(datos.getImagen());
             r.addProducto(pro);
         }
     }

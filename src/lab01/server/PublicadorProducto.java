@@ -6,6 +6,7 @@
 package lab01.server;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -74,10 +75,7 @@ public class PublicadorProducto {
     @WebMethod
     public void setPromo(Integer idCtrlProducto, DataIndividual[] promo){
         ArrayList<DataIndividual> ret = new ArrayList();
-        for(int i=0; i<promo.length; i++){
-            ret.add(promo[i]);
-            i++;
-        }
+        ret.addAll(Arrays.asList(promo));
         Fabrica.getInstance().getICtrlProducto(idCtrlProducto).setPromo(ret);
     }
     

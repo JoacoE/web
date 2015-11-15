@@ -6,8 +6,14 @@
 package swing;
 
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,6 +38,22 @@ public class RegProducto extends javax.swing.JInternalFrame {
         CP = ProxyProducto.getInstance();
         ICU = ProxyUsuario.getInstance();
         cargarCBbox();
+    }
+    
+    public String fileABase64(File x){
+        String b64 = "";
+        try {
+            BufferedImage bufferImagen = ImageIO.read(x);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferImagen, "jpeg", baos);
+            baos.flush();
+            byte[] imageinbyteArray = baos.toByteArray();
+            baos.close();
+            b64 = javax.xml.bind.DatatypeConverter.printBase64Binary(imageinbyteArray);
+        }catch(IOException ex){
+            Logger.getLogger(CargarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b64;
     }
 
     /**
@@ -285,11 +307,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
                         di.setDataDescripcion(tbDesc.getText());
                         di.setDataPrecio(precio);
                         di.setCantidad(cantidad);
-                        if(!this.imagen.equals("")){
-                            di.setDataImagen(this.imagen);
-                        }else{
-                            di.setDataImagen("");
-                        }
+                        di.setDataImagen(this.imagen);
                         DtoRegistrarProducto datosi = new DtoRegistrarProducto();
                         datosi.setDi(di);
                         datosi.setNickRest(restaurante);
@@ -386,8 +404,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
             selector.setFileFilter(filtroImagen);
             selector.showOpenDialog(null);
             File archivo = selector.getSelectedFile();
-            String aux = (String) jcbRest.getSelectedItem();
-            this.imagen = aux.concat(this.tbNombre.getText());
+            this.imagen = fileABase64(archivo);
         }
         if(rbPromocional.isSelected()){
             JFileChooser selector = new JFileChooser();
@@ -395,8 +412,7 @@ public class RegProducto extends javax.swing.JInternalFrame {
             selector.setFileFilter(filtroImagen);
             selector.showOpenDialog(null);
             File archivo = selector.getSelectedFile();
-            String aux = (String) jcbRest.getSelectedItem();
-            this.imagen = aux.concat(this.tbNombre.getText());
+            this.imagen = fileABase64(archivo);
         }
     }//GEN-LAST:event_btnSeleccionarImagenActionPerformed
 

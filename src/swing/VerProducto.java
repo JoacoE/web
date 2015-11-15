@@ -179,24 +179,20 @@ public class VerProducto extends javax.swing.JInternalFrame {
 //       }
     
      private void cargarTabla(){
-        Iterator it = ICU.listaDataRestaurantes().iterator();
         String lista[]=new String[2];
-        while(it.hasNext()){
-            DataRestaurante dr = (DataRestaurante)it.next();
-            lista[1]=dr.getNickname();
+        for(DataRestaurante dr: ICU.listaDataRestaurantes()){
             List<DataIndividual> colInds = dr.getColIndividuales();
-            Iterator it2 = colInds.iterator();
-            while(it2.hasNext()){
-                DataIndividual di = (DataIndividual)it2.next();
+            for (DataIndividual di : colInds) {
                 lista[0] = di.getDataNombre();
+                lista[1]=dr.getNickname();
+                modelo.insertRow((int)jTabla.getRowCount(), lista);
             }
             List<DataPromocional> colProms = dr.getColPromocionales();
-            Iterator it3 = colProms.iterator();
-            while(it3.hasNext()){
-                DataPromocional dp = (DataPromocional)it3.next();
+            for (DataPromocional dp : colProms) {
                 lista[0] = dp.getDataNombre();
+                lista[1]=dr.getNickname();
+                modelo.insertRow((int)jTabla.getRowCount(), lista);
             }
-            modelo.insertRow((int)jTabla.getRowCount(), lista);
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

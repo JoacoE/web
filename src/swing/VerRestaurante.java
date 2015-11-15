@@ -6,18 +6,25 @@
 
 package swing;
 
-import java.io.File;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JSlider;
 import lab01.server.DataCategoria;
 import lab01.server.DataIndividual;
 import lab01.server.DataPromocional;
 import lab01.server.DataRestaurante;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -36,7 +43,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     public VerRestaurante(String restau) {
         ICU = ProxyUsuario.getInstance();
         CP = ProxyProducto.getInstance();
-        //max = (HI.getArrayImg(restau).size()) - 1;
+        max = (ICU.getRestauranteByNickname(restau).getLstImagen().size()) - 1;
         initComponents();
         this.tbNickNameCliente.setVisible(false);
         this.tbdireccionCliente.setVisible(false);
@@ -56,6 +63,19 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
     DefaultListModel model;
     DefaultListModel modelProd;
     String client;
+    
+    public ImageIcon base64ImageIcon(String x){
+        ImageIcon icon = null;
+        try{
+            byte[] btDataFile = Base64.decodeBase64(x);
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(btDataFile));
+            icon = new ImageIcon(image);
+        }catch(IOException ex){
+            Logger.getLogger(VerCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return icon;
+    }
+    
     //Restaurante c = ICU.getRestauranteByNickname(client);
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,35 +97,42 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         this.tbnombreCliente.setVisible(true);
         this.tbnombreCliente.setText(c.getNombre());
         this.lblNicknameCliente.setVisible(true);
-//        if(c.getLstImagen() != null){
-//            ArrayList<File> imagen = HI.getArrayImg(c.getNickname());
-//            max = imagen.size();
-//            if(max > 1){
-//                this.jSlider = new JSlider();
-//                this.jSlider.setMaximum(max);
-//                this.jSlider.setPaintTicks(true);
-//                this.jSlider.setVisible(true);
-//            }else{
-//                this.jSlider.setEnabled(false);
-//                this.jSlider.setVisible(false);
-//            }
-//            ImageIcon icon = new ImageIcon(imagen.get(0).getAbsolutePath());
-//            this.lblImagenes.setIcon(icon);
-//            this.lblImagenes.setVisible(true);
-//        }else{
-//            this.lblImagenes.setIcon(HI.getNoImage());
-//            this.lblImagenes.setVisible(true);
-//            this.jSlider.setEnabled(false);
-//            this.jSlider.setVisible(false);
-//        }
+        if(c.getLstImagen().size() > 0){
+            ArrayList<ImageIcon> imagen = new ArrayList<>();
+            for(String img: c.getLstImagen()){
+                imagen.add(base64ImageIcon(img));
+            }
+            max = imagen.size();
+            if(max > 1){
+                this.jSlider = new JSlider();
+                this.jSlider.setMaximum(max);
+                this.jSlider.setPaintTicks(true);
+                this.jSlider.setVisible(true);
+            }else{
+                this.jSlider.setEnabled(false);
+                this.jSlider.setVisible(false);
+            }
+            ImageIcon icon = imagen.get(0);
+            this.lblImagenes.setIcon(icon);
+            this.lblImagenes.setVisible(true);
+        }else{
+            URL imagePath = null;
+            try {
+                imagePath = new URL(getClass().getResource("/Helpers/Noimage.png").toString());
+                ImageIcon icon = new ImageIcon(imagePath);
+                this.lblImagenes.setIcon(icon);
+                this.lblImagenes.setVisible(true);
+                this.jSlider.setEnabled(false);
+                this.jSlider.setVisible(false);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(VerRestaurante.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         this.lblmailCliente.setVisible(true);
         this.lblnombreCliente.setVisible(true);
         model.clear();
         List<DataCategoria> cats = c.getColCategoria();
-        Iterator it = cats.iterator();
-        //Iterator itret = ret.entrySet().iterator();
-        while(it.hasNext()){
-            DataCategoria dc = (DataCategoria)it.next();
+        for (DataCategoria dc : cats) {
             model.addElement(dc.getNombre());
         }
         this.jlCat.setModel(model);
@@ -332,17 +359,13 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DataRestaurante c = ICU.getRestauranteByNickname(client);
         String prod = jListProd.getSelectedValue().toString();
-        Iterator dinds = c.getColIndividuales().iterator();
-        while(dinds.hasNext()){
-            DataIndividual di = (DataIndividual)dinds.next();
+        for (DataIndividual di : c.getColIndividuales()) {
             if(di.getDataNombre().equals(prod)){
                 VerInfoProd verProd = new VerInfoProd(di, c);
                 verProd.show();
             }
         }
-        Iterator dproms = c.getColPromocionales().iterator();
-        while(dproms.hasNext()){
-            DataPromocional dp = (DataPromocional)dproms.next();
+        for (DataPromocional dp : c.getColPromocionales()) {
             if(dp.getDataNombre().equals(prod)){
                 VerInfoProd verProd = new VerInfoProd(dp, c);
                 verProd.show();
@@ -356,15 +379,18 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
        
     private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
         // TODO add your handling code here:
-//        ArrayList<File> imagenes = HI.getArrayImg(this.nickname);
-//        JSlider source = (JSlider)evt.getSource();
-//        this.jSlider.setMaximum(max);
-//        this.jSlider.setPaintTicks(true);
-//        this.jSlider.setVisible(true);
-//        int posicion = (int)source.getValue();
-//        ImageIcon icons = new ImageIcon(imagenes.get(posicion).getAbsolutePath());
-//        this.lblImagenes.setIcon(icons);
-//        this.lblImagenes.setVisible(true);
+        ArrayList<ImageIcon> imagenes = new ArrayList<>();
+        for(String img: ICU.getRestauranteByNickname(this.client).getLstImagen()){
+            imagenes.add(base64ImageIcon(img));
+        }
+        JSlider source = (JSlider)evt.getSource();
+        this.jSlider.setMaximum(max);
+        this.jSlider.setPaintTicks(true);
+        this.jSlider.setVisible(true);
+        int posicion = (int)source.getValue();
+        ImageIcon icons = imagenes.get(posicion);
+        this.lblImagenes.setIcon(icons);
+        this.lblImagenes.setVisible(true);
     }//GEN-LAST:event_jSliderStateChanged
 
 

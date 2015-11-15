@@ -7,13 +7,21 @@
 package swing;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import lab01.server.DataCliente;
 import lab01.server.DataPedido;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -35,6 +43,18 @@ public class VerCliente extends javax.swing.JInternalFrame {
         cargarDatos();
     }
 
+    public ImageIcon base64ImageIcon(String x){
+        ImageIcon icon = null;
+        try{
+            byte[] btDataFile = Base64.decodeBase64(x);
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(btDataFile));
+            icon = new ImageIcon(image);
+        }catch(IOException ex){
+            Logger.getLogger(VerCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return icon;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -283,12 +303,18 @@ public class VerCliente extends javax.swing.JInternalFrame {
         this.lblmailCliente.setVisible(true);
         this.lblnombreCliente.setVisible(true);
         if(!c.getImagen().equals("")){
-            //ImageIcon icon = new ImageIcon(HI.getImagen(c.getNickname()).getAbsolutePath());
-            //this.lblVerImagenUsr.setIcon(icon);
-            //this.lblVerImagenUsr.setVisible(true);
+            this.lblVerImagenUsr.setIcon(base64ImageIcon(c.getImagen()));
+            this.lblVerImagenUsr.setVisible(true);
         }else{
-            //this.lblVerImagenUsr.setIcon(HI.getNoImgeUsuario());
-            //this.lblVerImagenUsr.setVisible(true);
+            URL imagePath = null;
+            try {
+                imagePath = new URL(getClass().getResource("/Helpers/generico.jpeg").toString());
+                ImageIcon icon = new ImageIcon(imagePath);
+                this.lblVerImagenUsr.setIcon(icon);
+                this.lblVerImagenUsr.setVisible(true);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(VerCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         cargarTabla();
     }                                   

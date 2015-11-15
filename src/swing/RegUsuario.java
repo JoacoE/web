@@ -4,13 +4,19 @@
  * and open the template in the editor.
  */
 package swing;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import lab01.server.DataRestaurante;
@@ -25,15 +31,29 @@ private ProxyUsuario ICU;
 private HashMap mapCat = new HashMap();
 DefaultListModel model;
 private boolean clientOrRestaurant;
-private ArrayList<File> lstImagen = new ArrayList<>();
 private ArrayList<String>  nombresImagenes = null;
-private String nombreImagen = null;
-private File img = null;
+private String nombreImagen = "";
 
     public RegUsuario() {
         initComponents();
         ICU = ProxyUsuario.getInstance();
         model = new DefaultListModel();
+    }
+    
+    public String fileABase64(File x){
+        String b64 = "";
+        try {
+            BufferedImage bufferImagen = ImageIO.read(x);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferImagen, "jpeg", baos);
+            baos.flush();
+            byte[] imageinbyteArray = baos.toByteArray();
+            baos.close();
+            b64 = javax.xml.bind.DatatypeConverter.printBase64Binary(imageinbyteArray);
+        }catch(IOException ex){
+            Logger.getLogger(CargarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b64;
     }
     
     //ButtonGroup buttonGroup1 = new ButtonGroup();
@@ -408,12 +428,8 @@ private File img = null;
             if (r == JFileChooser.APPROVE_OPTION) {
                 File archivos[] = selector.getSelectedFiles();
                 nombresImagenes = new ArrayList<>();
-                for (int i = 0; i < archivos.length; i++) {
-                    String indice = String.valueOf(i);
-                    String nuevoNombre = tbNickname.getText().concat(indice);
-                    File agregar = archivos[i];
-                    lstImagen.add(agregar);
-                    nombresImagenes.add(nuevoNombre);
+                for (File archivo : archivos) {
+                    nombresImagenes.add(fileABase64(archivo));
                 }
             }
         } 
@@ -422,8 +438,7 @@ private File img = null;
             JFileChooser selector = new JFileChooser();
             selector.setFileFilter(filtroImagen);
             selector.showOpenDialog(null);
-            img = selector.getSelectedFile();
-            nombreImagen = tbNickname.getText();;
+            nombreImagen = fileABase64(selector.getSelectedFile());
         }
     }//GEN-LAST:event_btnSelImagenActionPerformed
 

@@ -7,7 +7,6 @@ package swing;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;

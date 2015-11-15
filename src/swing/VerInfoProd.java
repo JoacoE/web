@@ -5,9 +5,17 @@
  */
 package swing;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -20,6 +28,7 @@ import lab01.server.DataPromocional;
 import lab01.server.DataRestaurante;
 import lab01.server.DtoActualizarIndividual;
 import lab01.server.DtoActualizarPromocional;
+import org.apache.commons.codec.binary.Base64;
 /**
  *
  * @author martin
@@ -46,12 +55,18 @@ public class VerInfoProd extends javax.swing.JFrame {
         modelo2 = (DefaultTableModel) jTablaPedidos.getModel();
         imagen = individual.getDataImagen();
         if(!individual.getDataImagen().equals("")){
-//            ImageIcon icon = new ImageIcon(HI.getImagen(individual.getDataImagen()).getAbsolutePath());
-//            this.lblImagen.setIcon(icon);
-//            this.lblImagen.setVisible(true);
+            this.lblImagen.setIcon(base64ImageIcon(individual.getDataImagen()));
+            this.lblImagen.setVisible(true);
         }else{
-//            this.lblImagen.setIcon(HI.getNoImage());
-//            this.lblImagen.setVisible(true);
+            URL imagePath = null;
+            try {
+                imagePath = new URL(getClass().getResource("/Helpers/Noimage.png").toString());
+                ImageIcon icon = new ImageIcon(imagePath);
+                this.lblImagen.setIcon(icon);
+                this.lblImagen.setVisible(true);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(VerInfoProd.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         this.nomprod = individual.getDataNombre();
         this.txtNomProd.setText(individual.getDataNombre());
@@ -87,12 +102,18 @@ public class VerInfoProd extends javax.swing.JFrame {
         this.res = dr;
         imagen = promo.getDataImagen();
         if(!promo.getDataImagen().equals("")){
-//            ImageIcon icon = new ImageIcon(HI.getImagen(promo.getDataImagen()).getAbsolutePath());
-//            this.lblImagen.setIcon(icon);
-//            this.lblImagen.setVisible(true);
+            this.lblImagen.setIcon(base64ImageIcon(promo.getDataImagen()));
+            this.lblImagen.setVisible(true);
         }else{
-//            this.lblImagen.setIcon(HI.getNoImage());
-//            this.lblImagen.setVisible(true);
+            URL imagePath = null;
+            try {
+                imagePath = new URL(getClass().getResource("/Helpers/Noimage.png").toString());
+                ImageIcon icon = new ImageIcon(imagePath);
+                this.lblImagen.setIcon(icon);
+                this.lblImagen.setVisible(true);
+            }catch (MalformedURLException ex){
+                Logger.getLogger(VerRestaurante.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         this.nomprod = promo.getDataNombre();
         this.txtNomProd.setText(promo.getDataNombre());
@@ -126,6 +147,34 @@ public class VerInfoProd extends javax.swing.JFrame {
     ProxyProducto ICP;
     
 
+    public String fileABase64(File x){
+        String b64 = "";
+        try {
+            BufferedImage bufferImagen = ImageIO.read(x);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferImagen, "jpeg", baos);
+            baos.flush();
+            byte[] imageinbyteArray = baos.toByteArray();
+            baos.close();
+            b64 = javax.xml.bind.DatatypeConverter.printBase64Binary(imageinbyteArray);
+        }catch(IOException ex){
+            Logger.getLogger(CargarDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b64;
+    }
+    
+    public ImageIcon base64ImageIcon(String x){
+        ImageIcon icon = null;
+        try{
+            byte[] btDataFile = Base64.decodeBase64(x);
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(btDataFile));
+            icon = new ImageIcon(image);
+        }catch(IOException ex){
+            Logger.getLogger(VerCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return icon;
+    }
+    
     private VerInfoProd() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -143,8 +192,6 @@ public class VerInfoProd extends javax.swing.JFrame {
         lblNomProd = new javax.swing.JLabel();
         txtNomProd = new javax.swing.JTextField();
         lblDescripcion = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        lblImagenProd = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescProd = new javax.swing.JTextArea();
         txtPrecioProd = new javax.swing.JTextField();
@@ -183,19 +230,6 @@ public class VerInfoProd extends javax.swing.JFrame {
         });
 
         lblDescripcion.setText("Descripción: ");
-
-        lblImagenProd.setText("ACA VA IMAGEN");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImagenProd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImagenProd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
 
         txtDescProd.setEditable(false);
         txtDescProd.setColumns(20);
@@ -238,9 +272,7 @@ public class VerInfoProd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDescripcion)
                             .addComponent(lblNomProd, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -258,26 +290,24 @@ public class VerInfoProd extends javax.swing.JFrame {
                     .addComponent(txtPrecioProd, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                     .addComponent(tbDescuento)
-                    .addComponent(jcEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jcEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNomProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDescripcion)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPrecioProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPrecioProd)))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDescripcion)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrecioProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrecioProd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEstadoPromo)
@@ -326,8 +356,8 @@ public class VerInfoProd extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,22 +427,25 @@ public class VerInfoProd extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jbImagen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jbImagen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(77, 77, 77)
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(76, 76, 76)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,16 +482,6 @@ public class VerInfoProd extends javax.swing.JFrame {
             int cant = di.getCantidad();
             String st = Integer.toString(cant);
             lista[1] = st;
-            /*Iterator dprods = r.getColProducto().entrySet().iterator();
-            while(dprods.hasNext()){
-                Map.Entry dprod = (Map.Entry) dprods.next();
-                if(dprod.getValue() instanceof DataIndividual){
-                    DataIndividual dind = (DataIndividual)dprod.getValue();
-                    if(dind.getDataNombre().equals(di.getDataNombre())){
-                        lista[2] = String.valueOf(dind.getCantidad());
-                    }
-                }
-            }*/
             modelo.insertRow((int) jTabla.getRowCount(), lista);
         }
     }
@@ -545,13 +568,8 @@ public class VerInfoProd extends javax.swing.JFrame {
                     datosi.setDi(di);
                     datosi.setNombre(this.nombre);
                     datosi.setNickRest(res.getNickname());
-//                    if(HI.getImagen(imagen).exists()){
-//                        datosi.setImagen(imagen);
-//                        ICP.actualizarIndividual(datosi);
-//                    }else{
-                        datosi.setImagen(imagen);
-                        ICP.actualizarIndividual(datosi);
-                    //}
+                    datosi.setImagen(imagen);
+                    ICP.actualizarIndividual(datosi);
                     JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -575,13 +593,8 @@ public class VerInfoProd extends javax.swing.JFrame {
                     datosp.setDp(dp);
                     datosp.setNombre(this.nombre);
                     datosp.setNickRest(res.getNickname());
-//                    if(HI.getImagen(imagen).exists()){
-//                        datosp.setImagen(imagen);
-//                        ICP.actualizarPromocional(datosp);
-//                    }else{
-                        datosp.setImagen(imagen);
-                        ICP.actualizarPromocional(datosp);
-                    //}
+                    datosp.setImagen(imagen);
+                    ICP.actualizarPromocional(datosp);
                     JOptionPane.showMessageDialog(null, "El producto se ha actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     JOptionPane.showMessageDialog(null, "No se ha actualizado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -599,12 +612,11 @@ public class VerInfoProd extends javax.swing.JFrame {
         selector.setFileFilter(filtroImagen);
         selector.showOpenDialog(null);
         File archivo = selector.getSelectedFile();
-        String aux = res.getNickname();
-        this.imagen = aux.concat(this.txtNomProd.getText());
-//        HI.guardarImagen(archivo, this.imagen);
-//        ImageIcon icon = new ImageIcon(HI.getImagen(imagen).getAbsolutePath());
-//        this.lblImagen.setIcon(icon);
-//        this.lblImagen.setVisible(true);
+        this.imagen = "";
+        this.imagen = fileABase64(archivo);
+        ImageIcon icon = base64ImageIcon(this.imagen);
+        this.lblImagen.setIcon(icon);
+        this.lblImagen.setVisible(true);
     }//GEN-LAST:event_jbImagenActionPerformed
 
     /**
@@ -648,7 +660,6 @@ public class VerInfoProd extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -662,7 +673,6 @@ public class VerInfoProd extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescuento;
     private javax.swing.JLabel lblEstadoPromo;
     private javax.swing.JLabel lblImagen;
-    private javax.swing.JLabel lblImagenProd;
     private javax.swing.JLabel lblNomProd;
     private javax.swing.JLabel lblPrecioProd;
     private javax.swing.JTextField tbDescuento;

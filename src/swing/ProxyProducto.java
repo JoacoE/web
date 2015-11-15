@@ -10,7 +10,6 @@ package swing;
  * @author joaquin
  */
 import java.util.ArrayList;
-import javax.jws.WebMethod;
 import lab01.server.DataIndividual;
 import lab01.server.DataIndividualArray;
 import lab01.server.DataPromocional;

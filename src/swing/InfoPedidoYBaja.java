@@ -6,7 +6,6 @@
 package swing;
 
 import java.util.Iterator;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.SwingUtilities;

@@ -6,8 +6,6 @@
 package swing;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -42,20 +40,16 @@ public class SeleccionarRestaurantePed extends javax.swing.JInternalFrame {
     
     public void cargarTree(){
         if (Raiz != null){
-            Iterator itC = ICU.retColCat().iterator();
-            while(itC.hasNext()){
-                DataCategoria cat= (DataCategoria)itC.next();
+            for (DataCategoria cat : ICU.retColCat()) {
                 DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(cat.getNombre());
                 modelo.insertNodeInto(nodo, Raiz, 0);
                 ArrayList<DataRestaurante> Crest = ICU.listaUsuPorCategoria(cat.getNombre());
                 if(Crest.isEmpty()){
                     DefaultMutableTreeNode vacio = new DefaultMutableTreeNode("Sin restaurantes");
                     modelo.insertNodeInto(vacio, nodo, 0);
-                    }
+                }
                 else{
-                    Iterator itR = Crest.iterator();
-                    while(itR.hasNext()){
-                        DataRestaurante dt = (DataRestaurante)itR.next();
+                    for (DataRestaurante dt : Crest) {
                         DefaultMutableTreeNode Res = new DefaultMutableTreeNode(dt.getNickname());
                         modelo.insertNodeInto(Res, nodo, 0);
                     }

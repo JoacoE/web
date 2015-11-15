@@ -259,6 +259,7 @@ public class CargarDatos extends javax.swing.JFrame {
                 res1.setEmail("mera@hotmail.com");
                 res1.setNickname("mera");
                 res1.setNombre("Pizzería Mera");
+                res1.getLstImagen().add("");
                 ICU.registrarRestaurante(res1);
 
                 DataRestaurante res2 = new DataRestaurante();

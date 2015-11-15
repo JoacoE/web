@@ -67,7 +67,34 @@
                                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 <!--                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
                                 </ol>
-                                <!--Aca van las imagenes del carrusel-->
+                                <div class="item active">
+                                <option value="restaurante">
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <option value="restaurante">
+                                        <c:set var="Imagen" value="${primera}"/>
+                                            <c:if test="${(Imagen == '') || (Imagen == null)}">
+                                                <img class="slide-image2" src="<%=request.getContextPath()%>/Branding/img/Noimagen.jpeg" alt="no imagen">
+                                            </c:if>
+                                            <c:if test="${(Imagen != '') || (Imagen != null)}">
+                                                <img class="slide-image" src="${Imagen}" alt="">
+                                            </c:if>
+                                        </div>
+                                        </option>
+                                    <c:forEach var="img" items="${imagenes}">
+                                    <div class="item">
+                                        <option value="restaurante">
+                                            <c:if test="${(Imagen == '') || (Imagen == null)}">
+                                                <img class="slide-image" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                            </c:if>
+                                            <c:if test="${(Imagen != '') || (Imagen != null)}">
+                                                <img class="slide-image2" src="${img}" alt="">
+                                            </c:if>    
+                                        </option>
+                                    </div>
+                                    </c:forEach>
+                                </option>
+                                </div>
                                 <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                 </a>
@@ -76,13 +103,14 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div><h1>
+                    <div>
+                        <h1>
                             <option value="restaurante">
                             <h2><c:out value="${restaurante.getNombre()}"/></h2>
                             <h2 hidden="true" id="nickrest"><c:out value="${restaurante.getNickname()}"/></h2>
                             </option>
-                        </h1></div>
+                        </h1>
+                    </div>
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <div class="tabbable">
@@ -110,7 +138,13 @@
                                         <c:forEach var="promo" items="${promocionales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail" >
-                                                    <!--Aca van las imagenes de los productos promocionales-->
+                                                    <c:set var="Imagen" value="${promo.getDataImagen()}"/>
+                                                    <c:if test="${Imagen == ''}">
+                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                    </c:if>
+                                                    <c:if test="${Imagen != ''}">
+                                                        <img src="data:image/png;charset=utf-8;base64,${promo.getDataImagen()}" alt="imagen">
+                                                    </c:if>
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
                                                         <h4 class="nombreProd">${promo.getDataNombre()}</h4>
@@ -128,7 +162,13 @@
                                         <c:forEach var="individ" items="${individuales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail">
-                                                    <!--Aca van las imagenes de los individuales-->
+                                                    <c:set var="Imagen" value="${individ.getDataImagen()}"/>
+                                                    <c:if test="${Imagen == ''}">
+                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                    </c:if>
+                                                    <c:if test="${Imagen != ''}">
+                                                        <img src="data:image/png;charset=utf-8;base64,${individ.getDataImagen()}" alt="imagen">
+                                                    </c:if>
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>
                                                         <h4 class="nombreProd">${individ.getDataNombre()}</h4>
@@ -210,6 +250,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
                 <div class="carrito col-md-3">
                     <div class="container-fluid">
                         <div class="row">
@@ -267,17 +309,15 @@
                                             %>
 
                                         </form>
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        <!--</div>-->
+                        </div>
                     </div> 
                 </div>
-
             </div>                                 
-        </div>            
-    </div>
+        </div>
     <!-- jQuery -->
     <!-- Bootstrap Core JavaScript -->
     <script src="../Branding/js/bootstrap.min.js"></script>
@@ -356,7 +396,6 @@
         });
 
     </script>
-
 </body>
 
 </html>

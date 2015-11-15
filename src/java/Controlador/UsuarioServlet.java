@@ -8,8 +8,6 @@
 package Controlador;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -201,10 +199,20 @@ public class UsuarioServlet extends HttpServlet {
                 DtoEvaluacion de = (DtoEvaluacion) evs.next();
                 evaluaciones.add(de);
             }
+            String decode = "data:image/png;charset=utf-8;base64,";
+            ArrayList<String> imagenes = new ArrayList<>();
+            for(String s: dr.getLstImagen()){
+                String agregar = decode.concat(s);
+                imagenes.add(agregar);
+            }
+            String primera = imagenes.get(0);
+            imagenes.remove(0);
             request.setAttribute("restaurante", dr);
             request.setAttribute("individuales", individuales);
             request.setAttribute("promocionales", promocionales);
             request.setAttribute("evaluaciones", evaluaciones);
+            request.setAttribute("primera", primera);
+            request.setAttribute("imagenes", imagenes);
             request.getRequestDispatcher("/Pantallas/VerInfoRestaurante.jsp").forward(request, response);
         }
         if(request.getParameter("list-group-item") != null){

@@ -64,7 +64,13 @@
                                 <div class="col-lg-4 col-sm-6 wraper-box">
                                     <div class="text-center box-restaurantes">
                                         <button class="btn btn-link" type="submit" name="restaurante" value="${listRestaurante.getNickname()}">
-                                         <!--Aca va el codigo de la imagen--> 
+                                        <c:set var="Imagen" value="${listRestaurante.getLstImagen()}"/>
+                                        <c:if test="${Imagen.get(0) == ''}">
+                                            <img src="<%=request.getContextPath()%>/Branding/img/defaultRes.jpeg"alt="no imagen">
+                                        </c:if>
+                                        <c:if test="${Imagen.get(0) != ''}">
+                                            <img src="data:image/png;charset=utf-8;base64,${Imagen.get(0)}" alt="imagen">
+                                        </c:if> 
                                             <option value="lista">
                                             <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
 

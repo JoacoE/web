@@ -66,7 +66,8 @@ public class Pedido {
     }
     
     public void setFecha() {
-        this.fecha = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        String hora = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date());
+        this.fecha = hora.concat(" hs");
     }
 
     public double getPrecio_total() {

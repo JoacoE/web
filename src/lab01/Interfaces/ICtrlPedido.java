@@ -36,6 +36,7 @@ public interface ICtrlPedido {
     public abstract DataPedido altaPedido();
     public abstract ArrayList<DataPedido> listDataPedidos();
     public abstract void actualizarEPedido(String nickname, long id, Estados estado);
+    public abstract void actualizarEPedidoCDatos(String nickname, long id, Estados estado, String fecha);
     public abstract void setDp(DataPedido dp);
     public abstract DataPedido getDp();
     public abstract void setMemoriaCliente(String nickname);

@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package lab01.Clases;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -103,6 +105,7 @@ public class Cliente extends Usuario{
     public void actualizarEstadoPedido(long id, Estados estado){
         this.getPedido(id).setEstado(estado);
     }
+    
     public ArrayList<Pedido> listaPedidos(){
     return this.pedidos;
     }

@@ -5,7 +5,9 @@
  */
 package lab01.Handlers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -22,6 +24,7 @@ import lab01.Clases.DataIndividual;
 import lab01.Clases.DataPedido;
 import lab01.Clases.DataProducto;
 import lab01.Clases.DataPromocional;
+import lab01.Clases.DtoHEstadoPedido;
 import lab01.Clases.Evaluacion;
 import lab01.Clases.Individual;
 import lab01.Clases.Pedido;
@@ -273,6 +276,8 @@ public class CtrlPedido implements ICtrlPedido {
             param.add(dc);
         }
         DataPedido newDP = new DataPedido(nuevo.getId(), this.getNickname(), this.getMailCliente(), nuevo.getFecha(), this.memRestaurante.getNickname(), param, this.getMonto(), nuevo.getEstado());
+        DtoHEstadoPedido inicioHistorial = new DtoHEstadoPedido(nuevo.getEstado().toString(), nuevo.getFecha());
+        newDP.actualizarHistorial(inicioHistorial);
         nuevo.setDataPedido(newDP);
         this.memCliente.setPedido(nuevo);
         return newDP;
@@ -337,7 +342,20 @@ public class CtrlPedido implements ICtrlPedido {
     public void actualizarEPedido(String nickname, long id, Estados estado){//usar listarDataPedido antes q esto xD
         HUsuario hu = HUsuario.getinstance();
         Cliente user = hu.obtenerUsuario(nickname);
+        String hActualizacion = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new Date());
         user.actualizarEstadoPedido(id, estado);
+        hActualizacion.concat(" hs");
+        DtoHEstadoPedido historial = new DtoHEstadoPedido(estado.toString(), hActualizacion);
+        user.getPedido(id).getDataPedido().actualizarHistorial(historial);
+    }
+    
+    @Override
+    public void actualizarEPedidoCDatos(String nickname, long id, Estados estado, String fecha){//usar listarDataPedido antes q esto xD
+        HUsuario hu = HUsuario.getinstance();
+        Cliente user = hu.obtenerUsuario(nickname);
+        user.actualizarEstadoPedido(id, estado);
+        DtoHEstadoPedido historial = new DtoHEstadoPedido(estado.toString(), fecha);
+        user.getPedido(id).getDataPedido().actualizarHistorial(historial);
     }
     
     @Override

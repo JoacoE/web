@@ -24,6 +24,7 @@ public class DataPedido {
     private String mailUsr;
     private String nickRest;
     private ArrayList<DataCarrito> ColCarrito;
+    private ArrayList<DtoHEstadoPedido> historial;
     
     public DataPedido(){}
     
@@ -41,6 +42,7 @@ public class DataPedido {
         }
         this.precio_total = precio_total;
         this.estado = estado;
+        this.historial = new ArrayList<>();
     }
     
     public long getId() {
@@ -126,5 +128,17 @@ public class DataPedido {
             return true;
         else 
             return false;
+    }
+    
+    public ArrayList<DtoHEstadoPedido> getHistorial(){
+        return this.historial;
+    }
+    
+    public void setHistorial(ArrayList<DtoHEstadoPedido> historial){
+        this.historial = historial;
+    }
+    
+    public void actualizarHistorial(DtoHEstadoPedido historial){
+        this.historial.add(historial);
     }
 }

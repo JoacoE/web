@@ -166,6 +166,11 @@ public class PublicadorPedido {
     }
     
     @WebMethod
+    public void actualizarEPedidoCDatos(Integer idCtrlPedido, String nickname, long id, Estados estado, String fecha){
+        Fabrica.getInstance().getICtrlPedido(idCtrlPedido).actualizarEPedidoCDatos(nickname, id, estado, fecha);
+    }
+    
+    @WebMethod
     public void setDp(Integer idCtrlPedido, DataPedido dp){
         Fabrica.getInstance().getICtrlPedido(idCtrlPedido).setDp(dp);
     }

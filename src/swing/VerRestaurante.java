@@ -97,7 +97,7 @@ public class VerRestaurante extends javax.swing.JInternalFrame {
         this.tbnombreCliente.setVisible(true);
         this.tbnombreCliente.setText(c.getNombre());
         this.lblNicknameCliente.setVisible(true);
-        if(c.getLstImagen().size() > 0){
+        if(!c.getLstImagen().get(0).equals("")){
             ArrayList<ImageIcon> imagen = new ArrayList<>();
             for(String img: c.getLstImagen()){
                 imagen.add(base64ImageIcon(img));

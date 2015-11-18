@@ -109,6 +109,10 @@ public class ProxyPedido {
         PP.actualizarEPedido(idCtrlPedido, nickname, id, estado);
     }
     
+    public void actualizarEPedidoCDatos(String nickname, long id, Estados estado, String fecha){
+        PP.actualizarEPedidoCDatos(idCtrlPedido, nickname, id, estado, fecha);
+    }
+    
     public void setDp(DataPedido dp){
         PP.setDp(idCtrlPedido, dp);
     }

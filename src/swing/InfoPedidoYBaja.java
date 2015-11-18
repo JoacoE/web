@@ -38,11 +38,12 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         String PTotal = Double.toString(dp.getPrecioTotal());
         lblPrecioTotal.setText(PTotal);
         jComboBox1.setVisible(false);
-        if("RECIBIDO".equals(datped.getEstado().toString())){
-            jbActualizar.setEnabled(false);
-        }
-        if(this.datped.getEstado() == Estados.ENVIADO || this.datped.getEstado() == Estados.RECIBIDO){
-            btnEliminar.setEnabled(false);
+        if(this.datped.getEstado() == Estados.ENVIADO){
+            this.btnEliminar.setEnabled(true);
+            this.btnEliminar.setVisible(true);
+        }else{
+            this.btnEliminar.setEnabled(false);
+            this.btnEliminar.setVisible(false);
         }
     }
     DefaultTableModel modelo;
@@ -331,6 +332,8 @@ public class InfoPedidoYBaja extends javax.swing.JFrame {
         // TODO add your handling code here:
         jComboBox1.setEditable(false);
         jComboBox1.setVisible(true);
+        HistorialPedido history = new HistorialPedido(datped.getHistorial());
+        history.setVisible(true);
         actualizarEstado();
         
          

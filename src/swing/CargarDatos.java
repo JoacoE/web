@@ -773,7 +773,7 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped1 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
 
-            ICPed.actualizarFechaPedido(ped1.getNickUsr(), ped1.getId(), "12/8/2014");
+            ICPed.actualizarFechaPedido(ped1.getNickUsr(), ped1.getId(), "24/11/2014 21:00 hs");
 
             ICPed.setNickname("roro");
             ICPed.setMemCliente();
@@ -783,8 +783,8 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped2 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
             
-            ICPed.actualizarFechaPedido(ped2.getNickUsr(), ped2.getId(), "19/8/2014");
-            ICPed.actualizarEPedido(ped2.getNickUsr(), ped2.getId(), Estados.ENVIADO);
+            ICPed.actualizarFechaPedido(ped2.getNickUsr(), ped2.getId(), "4/11/2014 21:05 hs");
+            ICPed.actualizarEPedidoCDatos(ped2.getNickUsr(), ped2.getId(), Estados.ENVIADO, "24/11/2014 21:50 hs");
 
             ICPed.setNickname("chechi");
             ICPed.setMemCliente();
@@ -795,8 +795,9 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped3 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
             
-            ICPed.actualizarFechaPedido(ped3.getNickUsr(), ped3.getId(), "19/8/2014");
-            ICPed.actualizarEPedido(ped3.getNickUsr(), ped3.getId(), Estados.RECIBIDO);
+            ICPed.actualizarFechaPedido(ped3.getNickUsr(), ped3.getId(), "19/8/2014 20:05 hs");
+            ICPed.actualizarEPedidoCDatos(ped3.getNickUsr(), ped3.getId(), Estados.ENVIADO, "19/8/2014 20:50 hs");
+            ICPed.actualizarEPedidoCDatos(ped3.getNickUsr(), ped3.getId(), Estados.RECIBIDO, "19/8/2014 22:05 hs");
 
             ICPed.setNickname("andy");
             ICPed.setMemCliente();
@@ -806,8 +807,9 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped4 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
             
-            ICPed.actualizarFechaPedido(ped4.getNickUsr(), ped4.getId(), "22/8/2014");
-            ICPed.actualizarEPedido(ped4.getNickUsr(), ped4.getId(), Estados.RECIBIDO);
+            ICPed.actualizarFechaPedido(ped4.getNickUsr(), ped4.getId(), "24/11/2014 21:05 hs");
+            ICPed.actualizarEPedidoCDatos(ped4.getNickUsr(), ped4.getId(), Estados.ENVIADO, "24/11/2014 21:50 hs");
+            ICPed.actualizarEPedidoCDatos(ped4.getNickUsr(), ped4.getId(), Estados.RECIBIDO, "24/11/2014 22:05 hs");
 
             ICPed.setNickname("weiss");
             ICPed.setMemCliente();
@@ -817,8 +819,9 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped5 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
             
-            ICPed.actualizarFechaPedido(ped5.getNickUsr(), ped5.getId(), "25/8/2014");
-            ICPed.actualizarEPedido(ped5.getNickUsr(), ped5.getId(), Estados.RECIBIDO);
+            ICPed.actualizarFechaPedido(ped5.getNickUsr(), ped5.getId(), "25/8/2014 21:05 hs");
+            ICPed.actualizarEPedidoCDatos(ped5.getNickUsr(), ped5.getId(), Estados.ENVIADO, "25/8/2014 22:05 hs");
+            ICPed.actualizarEPedidoCDatos(ped5.getNickUsr(), ped5.getId(), Estados.RECIBIDO, "25/8/2014 22:15 hs");
             
             
             ICPed.setNickname("roro");
@@ -830,8 +833,9 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped6 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
             
-            ICPed.actualizarFechaPedido(ped6.getNickUsr(), ped6.getId(), "20/9/2014");
-            ICPed.actualizarEPedido(ped6.getNickUsr(), ped6.getId(), Estados.RECIBIDO);
+            ICPed.actualizarFechaPedido(ped6.getNickUsr(), ped6.getId(), "25/8/2014 19:15 hs");
+            ICPed.actualizarEPedidoCDatos(ped6.getNickUsr(), ped6.getId(), Estados.ENVIADO, "25/8/2014 19:50 hs");
+            ICPed.actualizarEPedidoCDatos(ped6.getNickUsr(), ped6.getId(), Estados.RECIBIDO, "25/8/2014 20:05 hs");
             
             ICPed.setNickname("andy");
             ICPed.setMemCliente();
@@ -842,8 +846,9 @@ public class CargarDatos extends javax.swing.JFrame {
             DataPedido ped7 = ICPed.altaPedido();
             ICPed.limpiarCtrl();
             
-            ICPed.actualizarFechaPedido(ped7.getNickUsr(), ped7.getId(), "2/10/2014");
-            ICPed.actualizarEPedido(ped7.getNickUsr(), ped7.getId(), Estados.RECIBIDO);
+            ICPed.actualizarFechaPedido(ped7.getNickUsr(), ped7.getId(), "25/8/2014 02:05 hs");
+            ICPed.actualizarEPedidoCDatos(ped7.getNickUsr(), ped7.getId(), Estados.ENVIADO, "25/8/2014 02:57 hs");
+            ICPed.actualizarEPedidoCDatos(ped7.getNickUsr(), ped7.getId(), Estados.RECIBIDO, "25/8/2014 03:25 hs");
             
             //Evaluaciones
             

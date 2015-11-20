@@ -2,8 +2,6 @@ package Mobile;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import lab01.Clases.Estados;
-import lab01.server.DataPedido;
 
 
 /*
@@ -18,9 +16,7 @@ import lab01.server.DataPedido;
  */
 public class detallePedido extends javax.swing.JInternalFrame {
 
-    private ProxyPedido ICP;
     int fila = 0;
-    private DataPedido datped;
     
     public detallePedido() {
         initComponents();
@@ -174,7 +170,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(JOptionPane.showConfirmDialog(null,"Desea cancelar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
             JOptionPane.showMessageDialog(null, "El pedido se ha cancelado con éxito", "Éxito",JOptionPane.WARNING_MESSAGE);
-            ICP.cancelarPedido(this.datped.getId());
+            //ICP.cancelarPedido(this.datped.getId());
         }else{
             JOptionPane.showMessageDialog(null, "El pedido no ha sido cancelado","Informacion",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -186,28 +182,28 @@ public class detallePedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jComboBox1.setEditable(false);
         jComboBox1.setVisible(true);
-        datped.setEstado(lab01.server.Estados.ENVIADO);
+        //datped.setEstado(lab01.server.Estados.ENVIADO);
 
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        Estados es = null;
+        //Estados es = null;
         jComboBox1.setEditable(false);
 
         if("ENVIADO".equals(jComboBox1.getSelectedItem().toString())){
-            es = Estados.ENVIADO;
+            //es = Estados.ENVIADO;
 
         }
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
-            es =  Estados.RECIBIDO;
+            //es =  Estados.RECIBIDO;
         }
         if(JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-            ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(), datped.getEstado());
+            //ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(), datped.getEstado());
             jComboBox1.removeAllItems();
             jComboBox1.setVisible(false);
             jbActualizar.setEnabled(false);
-            lblEstado.setText(datped.getEstado().toString());
+            //lblEstado.setText(datped.getEstado().toString());
 
         }else{
             JOptionPane.showMessageDialog(null, "El pedido no se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
@@ -220,7 +216,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
         SwingUtilities.updateComponentTreeUI(this);
         this.revalidate();
         this.repaint();
-        datped.setEstado(lab01.server.Estados.ENVIADO);
+        //datped.setEstado(lab01.server.Estados.ENVIADO);
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 

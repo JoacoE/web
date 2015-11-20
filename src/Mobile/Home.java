@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import com.middleware.logic.Middleware;
 //import lab01.Clases.ImagenFondoMovil;
 
 /**
@@ -102,30 +103,37 @@ PreparedStatement pst = null;
     }//GEN-LAST:event_tbLoginActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        String sql = "select * from Usuarios where Usuario=? and Password=?";
-        try{
-            pst=conn.prepareStatement(sql);
-            pst.setString(1, tbLogin.getText());
-            pst.setString(2, tbPassword.getText());
-            
-            rs= pst.executeQuery();
-            
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Se conecto de la base");
-            
-            
-                listaPedidos lista = new listaPedidos();
-                jDesktopPane2.add(lista);
-                lista.show();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "No existe ese usuario");
-            }
-
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        Middleware gil = new Middleware();
+        if(gil.connection()){
+            System.out.print("WS ENABLED");
+        }else{
+            System.out.print("WS DISABLED");
         }
-        
+
+//        String sql = "select * from Usuarios where Usuario=? and Password=?";
+//        try{
+//            pst=conn.prepareStatement(sql);
+//            pst.setString(1, tbLogin.getText());
+//            pst.setString(2, tbPassword.getText());
+//            
+//            rs= pst.executeQuery();
+//            
+//            if(rs.next()){
+//                JOptionPane.showMessageDialog(null, "Se conecto de la base");
+//            
+//            
+//                //listaPedidos lista = new listaPedidos();
+//                //jDesktopPane2.add(lista);
+//                //lista.show();
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(null, "No existe ese usuario");
+//            }
+//
+//        }catch(Exception e){
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//        
         
         
                 // TODO add your handling code here:

@@ -86,7 +86,8 @@ public class Cliente extends Usuario{
     }
     
     public void quitarPedido(long id){
-        this.getPedidos().remove(id);
+        Pedido ped = this.getPedido(id);
+        this.getPedidos().remove(ped);
     }
     
     public void setPedido(Pedido p){

@@ -322,8 +322,8 @@ public class CtrlPedido implements ICtrlPedido {
                             prod.sumarStock(dc.getCantidad());
                         }
                         client.quitarPedido(id);
-                        ped.vaciarPedido();
-                        ped = null;
+//                        ped.vaciarPedido();
+//                        ped = null;
                     }else{
                         JOptionPane.showMessageDialog(null, "El pedido fue recibido y no puede eliminarse", "Informacion", JOptionPane.INFORMATION_MESSAGE);
                     }

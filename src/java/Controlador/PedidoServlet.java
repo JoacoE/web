@@ -6,10 +6,22 @@
 package Controlador;
 
 import java.io.IOException;
+import java.security.NoSuchProviderException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -229,8 +241,62 @@ public class PedidoServlet extends HttpServlet {
             request.setAttribute("carrito", listaCar);
             request.setAttribute("pedido", dp);
             request.getRequestDispatcher("/Pantallas/Transaccion.jsp").forward(request, response);
-            }                     
+
+            String nickUsu = dp.getNickUsr();
+                String mail = dp.getMailUsr();
+                String precioTotal = Double.toString(dp.getPrecioTotal());
+                String nickRest = dp.getNickRest();
+                String tipo, prod = "";
+                String fecha = dp.getFecha();
+                int hora, minutos;
+                String hour, min;
+
+                Calendar calendario = new GregorianCalendar();
+                hora = calendario.get(Calendar.HOUR_OF_DAY);
+                minutos = calendario.get(Calendar.MINUTE);
+                hour = Integer.toString(hora);
+                min = Integer.toString(minutos);
+
+                for (DataCarrito i : dp.getColCarrito()) {
+                    if (i.isPromo()) {
+                        tipo = "Promocional";
+                    } else {
+                        tipo = "Individual";
+                    }
+                    prod = prod + "    -Nombre: " + i.getNomProd() + "   -Tipo: " + tipo + "  - Cantidad: " + i.getCantidad() + "\n ";
+                }
+
+                try {
+                    this.enviarMail(fecha, prod, nickUsu, mail, precioTotal, nickRest, hour, min);
+                } catch (NoSuchProviderException | MessagingException ex) {
+                    Logger.getLogger(PedidoServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
         }
+    }
+    
+    
+        public void enviarMail(String fecha, String prod, String nickUsu, String mail, String precioTotal, String nickRest, String hora, String minutos) throws NoSuchProviderException, MessagingException {
+        Properties props = new Properties();
+        props.setProperty("mail.transport.protocol", "smtp");
+        props.setProperty("mail.smtp.host", "localhost");
+        props.setProperty("mail.smtp.user", "hola@hola.com");
+        props.setProperty("mail.smtp.port", "1025");
+        props.setProperty("mail.smtp.password", "");
+
+        Session mailSession = Session.getDefaultInstance(props, null);
+        Transport transport = mailSession.getTransport();
+        MimeMessage message = new MimeMessage(mailSession);
+        message.setSubject("[Quick Order]" + "[" + fecha + "  " + hora + ":" + minutos + "]");
+        message.setText("Asunto\n[QuickOrder]" + "[" + fecha + "  " + hora + ":" + minutos + "]\n\nEstimado/a " + nickUsu + ". Su pedido ha sido realizado con exito.\n"
+                + "--Detalle del pedido\n-Productos:\n " + prod + "- Precio Total: " + precioTotal
+                + "\n\nGracias por preferirnos,\nSaludos\n" + nickRest);
+
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
+        transport.connect();
+        transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+        transport.close();
     }
 
     /**

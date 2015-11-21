@@ -5,8 +5,18 @@
  */
 package lab01.server;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -32,12 +42,78 @@ import lab01.Handlers.Fabrica;
 public class PublicadorUsuario {
     
     private Endpoint endpoint = null;
+    private Properties prop;
+    private InputStream input;
+    private String jarDir;
+    private String propertiesFile;
+    private String propFilePath;
     
-    public PublicadorUsuario(){}
+    public PublicadorUsuario(){
+        try {
+            CodeSource codeSource = PublicadorProducto.class.getProtectionDomain().getCodeSource();
+            File jarFile;
+            jarFile = new File(codeSource.getLocation().toURI().getPath());
+            jarDir = jarFile.getParentFile().getPath();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PublicadorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        prop = new Properties();
+        input = null;
+        propertiesFile = "PublicadorUsr.properties";
+    }
+    
+    public boolean existCfgFile(){
+        File cfg = new File(jarDir,propertiesFile);
+        if(cfg.exists()){
+            return true;
+        }
+        return false;
+    }
+    
+    public void createCfgFile(){
+        try{
+            CodeSource codeSource = PublicadorProducto.class.getProtectionDomain().getCodeSource();
+            File jarFile = new File(codeSource.getLocation().toURI().getPath());
+            jarDir = jarFile.getParentFile().getPath();
+            File cfg = new File(jarDir,propertiesFile);
+            prop.setProperty("Ip", "127.0.0.1");
+            prop.setProperty("Port", "9001");
+            prop.setProperty("DeployName", "pubusr");
+            FileWriter writer = new FileWriter(cfg);
+            prop.store(writer, "Endpoint Settings");
+            writer.close();
+            propFilePath = cfg.getAbsolutePath();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(PublicadorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PublicadorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @WebMethod(exclude = true)
     public void publicUsr(){
-         endpoint = Endpoint.publish("http://localhost:9001/pubusr", this);
+        try{
+            if(!existCfgFile()){
+                createCfgFile();
+            }
+            input = new FileInputStream(propFilePath);
+            prop.load(input);
+            String ip = prop.getProperty("Ip");
+            String puerto = prop.getProperty("Port");
+            String deployname = prop.getProperty("DeployName");
+            String url = "http://"+ip+":"+puerto+"/"+deployname;
+            endpoint = Endpoint.publish(url, this);
+        }catch(IOException ex){
+            ex.printStackTrace();
+	}finally{
+            if (input != null) {
+                try {
+                    input.close();
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+	}
     }
     
     @WebMethod(exclude = true)

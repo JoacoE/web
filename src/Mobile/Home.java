@@ -59,7 +59,7 @@ public class Home extends javax.swing.JFrame {
         jpHome.add(jLabel3);
         jLabel3.setBounds(20, 100, 290, 100);
 
-        tbLogin.setText("User o Email");
+        tbLogin.setText("mera");
         tbLogin.setToolTipText("User o Email");
         tbLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +69,7 @@ public class Home extends javax.swing.JFrame {
         jpHome.add(tbLogin);
         tbLogin.setBounds(70, 280, 190, 28);
 
-        tbPassword.setText("Password");
+        tbPassword.setText("abc12");
         jpHome.add(tbPassword);
         tbPassword.setBounds(70, 320, 190, 28);
 
@@ -209,7 +209,7 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FondoMovil;
-    private javax.swing.JDesktopPane MobileFondo;
+    public static javax.swing.JDesktopPane MobileFondo;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jpHome;

@@ -5,7 +5,15 @@
  */
 package Controlador;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lab01.server.DataCategoria;
 import lab01.server.DataCliente;
 import lab01.server.DataIndividual;
@@ -26,13 +34,28 @@ public class ProxyUsuario {
     
     private Integer idCtrlUsuario;
     private static ProxyUsuario instance = null;
-    private final PublicadorUsuario CU;
+    private PublicadorUsuario CU;
+    private Properties prop;
+    private InputStream input;
+    private URL url;
     
     private ProxyUsuario(){
-        idCtrlUsuario = null;
-        PublicadorUsuarioService servicio = new PublicadorUsuarioService();
-        CU = servicio.getPublicadorUsuarioPort();
-        idCtrlUsuario = CU.getId();
+        try{
+            prop = new Properties();
+            String userpath = System.getProperty("user.home");
+            input = new FileInputStream(userpath+"/.QuickOrder/WebServerConfigs/ProxyUsr.properties");
+            prop.load(input);
+            String ip = prop.getProperty("Ip");
+            String puerto = prop.getProperty("Port");
+            String deployname = prop.getProperty("DeployName");
+            url = new URL("http://"+ip+":"+puerto+"/"+deployname);
+            idCtrlUsuario = null;
+            PublicadorUsuarioService servicio = new PublicadorUsuarioService(url);
+            CU = servicio.getPublicadorUsuarioPort();
+            idCtrlUsuario = CU.getId();
+        } catch (IOException ex) {
+            Logger.getLogger(ProxyUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static ProxyUsuario getInstance(){

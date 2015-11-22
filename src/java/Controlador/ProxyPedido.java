@@ -5,7 +5,14 @@
  */
 package Controlador;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lab01.server.DataCategoria;
 import lab01.server.DataRestaurante;
 import lab01.server.DataCliente;
@@ -23,13 +30,28 @@ import lab01.server.PublicadorPedidoService;
 public class ProxyPedido {
     private Integer idCtrlPedido;
     private static ProxyPedido instance = null;
-    private final PublicadorPedido PP;
+    private PublicadorPedido PP;
+    private Properties prop;
+    private InputStream input;
+    private URL url;
     
     private ProxyPedido(){
-        idCtrlPedido = null;
-        PublicadorPedidoService servicio = new PublicadorPedidoService();
-        PP = servicio.getPublicadorPedidoPort();
-        idCtrlPedido = PP.getId();
+        try{
+            prop = new Properties();
+            String quickorderpath = System.getProperty("user.home");
+            input = new FileInputStream(quickorderpath+"/.QuickOrder/WebServerConfigs/ProxyPed.properties");
+            prop.load(input);
+            String ip = prop.getProperty("Ip");
+            String puerto = prop.getProperty("Port");
+            String deployname = prop.getProperty("DeployName");
+            url = new URL("http://"+ip+":"+puerto+"/"+deployname);
+            idCtrlPedido = null;
+            PublicadorPedidoService servicio = new PublicadorPedidoService(url);
+            PP = servicio.getPublicadorPedidoPort();
+            idCtrlPedido = PP.getId();
+        } catch (IOException ex) {
+            Logger.getLogger(ProxyPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static ProxyPedido getInstance(){

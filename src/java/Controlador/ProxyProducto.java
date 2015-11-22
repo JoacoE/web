@@ -9,7 +9,14 @@ package Controlador;
  *
  * @author joaquin
  */
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lab01.server.DataIndividual;
 import lab01.server.DataIndividualArray;
 import lab01.server.DataPromocional;
@@ -25,22 +32,37 @@ import lab01.server.PublicadorProductoService;
  */
 public class ProxyProducto {
     
-private Integer idCtrlProducto;
-private static ProxyProducto instance = null;
-private final PublicadorProducto CP;
+    private Integer idCtrlProducto;
+    private static ProxyProducto instance = null;
+    private PublicadorProducto CP;
+    private Properties prop;
+    private InputStream input;
+    private URL url;
 
-private ProxyProducto(){
-    idCtrlProducto = null;
-    PublicadorProductoService servicio = new PublicadorProductoService();
-    CP = servicio.getPublicadorProductoPort();
-    idCtrlProducto = CP.getId();
-}
-
-public static ProxyProducto getInstance(){
-    if(ProxyProducto.instance == null){
-        ProxyProducto.instance = new ProxyProducto();
+    private ProxyProducto(){
+        try{
+            prop = new Properties();
+            String userpath = System.getProperty("user.home");
+            input = new FileInputStream(userpath+"/.QuickOrder/WebServerConfigs/ProxyProd.properties");
+            prop.load(input);
+            String ip = prop.getProperty("Ip");
+            String puerto = prop.getProperty("Port");
+            String deployname = prop.getProperty("DeployName");
+            url = new URL("http://"+ip+":"+puerto+"/"+deployname);
+            idCtrlProducto = null;
+            PublicadorProductoService servicio = new PublicadorProductoService(url);
+            CP = servicio.getPublicadorProductoPort();
+            idCtrlProducto = CP.getId();
+        }catch (IOException ex) {
+            Logger.getLogger(ProxyProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    return ProxyProducto.instance;
+
+    public static ProxyProducto getInstance(){
+        if(ProxyProducto.instance == null){
+            ProxyProducto.instance = new ProxyProducto();
+        }
+        return ProxyProducto.instance;
     }    
     
     public void registrarProducto(DtoRegistrarProducto datos){

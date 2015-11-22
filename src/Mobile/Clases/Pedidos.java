@@ -1,7 +1,7 @@
 package Mobile.Clases;
 
-import com.middleware.dtos.DataCarrito;
-import com.middleware.dtos.Estados;
+//import com.middleware.dtos.DataCarrito;
+//import com.middleware.dtos.Estados;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
@@ -18,8 +18,8 @@ public class Pedidos implements Serializable{
     private long id;
     private String fecha; 
     private double precio_total;
-    @Enumerated(EnumType.STRING)
-    private Estados estado;
+    //@Enumerated(EnumType.STRING)
+    private String estado;
     private String nickUsr;
     private String mailUsr;
     private String nickRest;
@@ -30,7 +30,7 @@ public class Pedidos implements Serializable{
     public Pedidos() {
     }
 
-    public Pedidos(long id, String fecha, double precio_total, Estados estado, String nickUsr, String mailUsr, String nickRest, ArrayList<prodCarrito> ColCarrito) {
+    public Pedidos(long id, String fecha, double precio_total, String estado, String nickUsr, String mailUsr, String nickRest, ArrayList<prodCarrito> ColCarrito) {
         this.id = id;
         this.fecha = fecha;
         this.precio_total = precio_total;
@@ -65,11 +65,11 @@ public class Pedidos implements Serializable{
         this.precio_total = precio_total;
     }
 
-    public Estados getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estados estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

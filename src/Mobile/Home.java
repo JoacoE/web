@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Mobile;
+import Mobile.Clases.Pedidos;
 import java.awt.*;
 import javax.swing.*;
 //import java.sql.Connection;
@@ -15,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import Mobile.Clases.Usuarios;
 import Mobile.Controlador.Controlador;
+import java.util.ArrayList;
 //import lab01.Clases.ImagenFondoMovil;
 
 /**
@@ -28,6 +30,7 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
+        
 //    jDesktopPane2.setBorder(new ImagenFondoMovil());
 //            conn = Connect.ConnectBD();
 
@@ -102,10 +105,11 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_tbLoginActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        Controlador c = new Controlador();
+        Controlador c = Controlador.getInstance();
         String user = this.tbLogin.getText();
         String pass = this.tbPassword.getText();
         if(c.iniciarSesion(user, pass)){
+            ArrayList<Pedidos> lstped= c.getLstPedidos(user);
             listaPedidos listaPed = new listaPedidos();
             MobileFondo.add(listaPed);
             listaPed.show();

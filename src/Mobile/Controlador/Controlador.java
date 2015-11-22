@@ -1,7 +1,7 @@
 package Mobile.Controlador;
 import Mobile.Clases.*;
 import Mobile.listaPedidos;
-import com.middleware.dtos.*;
+//import com.middleware.dtos.*;
 import com.middleware.logic.Middleware;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -10,12 +10,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import lab01.server.DataCliente;
+import lab01.server.DataPedido;
 import lab01.server.DataRestaurante;
 
 
 public class Controlador {
+    private static Controlador cont;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("MobileQuickOrderPU");
     Middleware mid = new Middleware();
+    private String RestLog;
     private ArrayList<Usuarios> rests;
     private ArrayList<Pedidos> peds;
     
@@ -25,9 +29,26 @@ public class Controlador {
         return em;
     }
     
+    
     public Controlador(){
+        RestLog = "";
         rests = new ArrayList<>();
         peds = new ArrayList<>();
+    }
+
+    public static Controlador getInstance(){
+        if (cont == null){
+            cont = new Controlador();
+        }
+        return cont;
+    }
+    
+    public String getRestLog() {
+        return RestLog;
+    }
+
+    public void setRestLog(String RestLog) {
+        this.RestLog = RestLog;
     }
     
     public boolean iniciarSesionWS(String user, String password){
@@ -54,6 +75,7 @@ public class Controlador {
             for (Usuarios r : rests){
                 if (r.getNickRest().equals(user) || r.getMailRest().equals(user)){
                     if (r.getPassRest().equals(password)){
+                        setRestLog(user);                        
                         return true;
                     }
                     else
@@ -81,6 +103,7 @@ public class Controlador {
                 try{
                     usu = em.find(Usuarios.class, user);
                     if (usu.getPassRest().equals(password)){
+                        setRestLog(user);
                         existe = true;
                     }
                     else{
@@ -96,5 +119,36 @@ public class Controlador {
 
     public void cerrarSesion(){
 
-    }   
+    }
+    
+    public ArrayList<Pedidos> getLstPedidos(String RestLog){
+        try{
+            for(DataPedido dp: mid.listDataPedidos()){
+                Pedidos p = new Pedidos();
+                p.setId(dp.getId());
+                String est = dp.getEstado().toString();
+                p.setEstado(est);
+                p.setNickUsr(dp.getNickUsr());
+                DataCliente dc = mid.getUsuarioByNickname(dp.getNickUsr());
+                p.setDireccion(dc.getDireccion());
+                p.setFecha(dp.getFecha());
+                p.setMailUsr(dp.getMailUsr());
+                p.setNickRest(dp.getNickRest());
+                p.setPrecio_total(dp.getPrecioTotal());
+                peds.add(p);
+                EntityManager em= getEntityManager();
+                if(!em.contains(p)){
+                    em.getTransaction().begin();
+                    em.persist(p);
+                    em.getTransaction().commit();
+                    em.close();    
+                }
+        }
+        
+        
+    }   catch (Exception ex) {
+    //IR CONTRA LA BASE    
+    }
+        return peds;
+    }
 }

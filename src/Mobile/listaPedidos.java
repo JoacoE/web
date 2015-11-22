@@ -1,5 +1,7 @@
 package Mobile;
 
+import Mobile.Clases.Pedidos;
+import Mobile.Controlador.Controlador;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
@@ -9,17 +11,18 @@ import javax.swing.table.DefaultTableModel;
 
 public class listaPedidos extends javax.swing.JInternalFrame {
 //
-//    DefaultTableModel model;
+    DefaultTableModel model;
 //    ProxyPedido ICP;
 //    ProxyUsuario ICU;
-//    DataPedido ped;
+      Pedidos ped;
 //    private ArrayList<DataPedido> listaPedidos;
 //    
     public listaPedidos() {
         initComponents();
 //        ICP = ProxyPedido.getInstance();
-//        model = (DefaultTableModel)tblPedidos.getModel();
-//        CargarTabla();
+//          Controlador c = Controlador.getInstance();
+        model = (DefaultTableModel)tblPedidos.getModel();
+        CargarTabla();
 //        this.setVisible(true);
     }
 
@@ -49,10 +52,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
 
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Estado", "Cliente", "Dirección"
@@ -62,7 +62,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -117,28 +117,28 @@ public class listaPedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
-        
+        dispose();        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-//    public void CargarTabla(){
-//        ArrayList<lab01.server.DataPedido> lp =ICP.listDataPedidos();
-//        Iterator it = lp.iterator();
-//        String lista[]=new String[5];
-//            while(it.hasNext()){
+    public void CargarTabla(){
+        Controlador c = Controlador.getInstance();
+        ArrayList<Pedidos> lstped= c.getLstPedidos(c.getRestLog());
+        Iterator it = lstped.iterator();
+        String lista[]=new String[5];
+            while(it.hasNext()){
 //                DataCliente dc = ICU.getUsuarioByNickname(ped.getNickUsr());
-//            \    ped = (DataPedido)it.next();
-//                String id = String.valueOf(ped.getId());
-//                lista[0]= id;
-//                lista[1]= ped.getEstado().toString();
-//                lista[2]= ped.getNickUsr();
-//                lista[3]= dc.getDireccion();
-//                model.insertRow((int)tblPedidos.getRowCount(), lista);
-//                
-//            }
-//                        
-//        
-//    }
+                ped = (Pedidos)it.next();
+                String id = String.valueOf(ped.getId());
+                lista[0]= id;
+                lista[1]= ped.getEstado();
+                lista[2]= ped.getNickUsr();
+                lista[3]= ped.getDireccion();
+                model.insertRow((int)tblPedidos.getRowCount(), lista);
+                
+            }
+                        
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;

@@ -135,7 +135,9 @@ public class Controlador {
                 p.setMailUsr(dp.getMailUsr());
                 p.setNickRest(dp.getNickRest());
                 p.setPrecio_total(dp.getPrecioTotal());
-                peds.add(p);
+                if (p.getNickRest().equals(RestLog)){
+                    peds.add(p);
+                }
                 EntityManager em= getEntityManager();
                 if(!em.contains(p)){
                     em.getTransaction().begin();

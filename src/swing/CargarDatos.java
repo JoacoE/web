@@ -259,6 +259,7 @@ public class CargarDatos extends javax.swing.JFrame {
                 res1.setEmail("mera@hotmail.com");
                 res1.setNickname("mera");
                 res1.setNombre("Pizzería Mera");
+                res1.setPwd("abc12");
                 res1.getLstImagen().add("");
                 ICU.registrarRestaurante(res1);
 
@@ -271,6 +272,7 @@ public class CargarDatos extends javax.swing.JFrame {
                 res2.setEmail("bar.rossel@gmail.com");
                 res2.setNickname("rossell");
                 res2.setNombre("Bar Rossell");
+                res2.setPwd("abc13");
                 ArrayList<String> arraystring2 = new ArrayList<>();
                 File Runo = new File(prop.getProperty("Rimagen1"));
                 File Rdos = new File(prop.getProperty("Rimagen2"));
@@ -300,6 +302,7 @@ public class CargarDatos extends javax.swing.JFrame {
                 res3.setEmail("bocatti@gmail.com");
                 res3.setNickname("bocatti");
                 res3.setNombre("Empanadas Bocatti");
+                res3.setPwd("abc14");
                 ArrayList<File> arrayfile3 = new ArrayList<>();
                 ArrayList<String> arraystring3 = new ArrayList<>();
                 File Rtres = new File(prop.getProperty("Rimagen3"));
@@ -350,6 +353,7 @@ public class CargarDatos extends javax.swing.JFrame {
                 res4.setEmail("wok.in.box@hotmail.com");
                 res4.setNickname("winb");
                 res4.setNombre("Wok in Box");
+                res4.setPwd("abc15");
                 ArrayList<File> arrayfile4 = new ArrayList<>();
                 ArrayList<String> arraystring4 = new ArrayList<>();
                 File Rseis = new File(prop.getProperty("Rimagen6"));
@@ -372,6 +376,29 @@ public class CargarDatos extends javax.swing.JFrame {
                 }if(!Rseis.exists() && !Rsiete.exists()){
                     ICU.registrarRestaurante(res4);
                 }          
+                
+                DataRestaurante res5 = new DataRestaurante();
+                res5.getColCategoria().add((DataCategoria) cats.get("Bebidas"));
+                res5.getColCategoria().add((DataCategoria) cats.get("Pizzas"));
+                res5.setDireccion("Pedernal 2334");
+                res5.setEmail("cervantes@gmail.com");
+                res5.setNickname("cervantes");
+                res5.setNombre("Pizzeria Cervantes");
+                res5.setPwd("abc16");
+                res5.getLstImagen().add("");
+                ICU.registrarRestaurante(res5);
+
+                
+                DataRestaurante res6 = new DataRestaurante();
+                res6.getColCategoria().add((DataCategoria) cats.get("Sushi"));
+                res6.getColCategoria().add((DataCategoria) cats.get("Bebidas"));
+                res6.setDireccion("Garibaldi 2323");
+                res6.setEmail("latregua@gmail.com");
+                res6.setNickname("latregua");
+                res6.setNombre("La Tregua");
+                res6.setPwd("abc17");
+                res6.getLstImagen().add("");
+                ICU.registrarRestaurante(res6);
 
             //PRODUCTOS INDIVIDUALES
 
@@ -662,6 +689,60 @@ public class CargarDatos extends javax.swing.JFrame {
             }else{
                 ICProd.registrarProducto(prod16);
             }
+            
+            DataIndividual di17 = new DataIndividual();
+            di17.setDataNombre("Pizza cervantes completa");
+            di17.setDataDescripcion("Pizza con muzzarela con dos gustos");
+            di17.setDataPrecio(220.0);
+            di17.setDataImagen("");
+            di17.setCantidad(100);
+            DtoRegistrarProducto prod17 = new DtoRegistrarProducto();
+            prod17.setDi(di17);
+            prod17.setNickRest("cervantes");
+            prod17.setPromo(false);
+            File Idiecisiete = new File(prop.getProperty("Iimagen17"));
+            if(Idiecisiete.exists()){
+                prod17.getDi().setDataImagen(fileABase64(Idiecisiete));
+                ICProd.registrarProducto(prod17);
+            }else{
+                ICProd.registrarProducto(prod17);
+            }
+            
+            DataIndividual di18 = new DataIndividual();
+            di18.setDataNombre("Lemenyun cerva");
+            di18.setDataDescripcion("Lemenyun gigante con muzza");
+            di18.setDataPrecio(60.0);
+            di18.setDataImagen("");
+            di18.setCantidad(100);
+            DtoRegistrarProducto prod18 = new DtoRegistrarProducto();
+            prod18.setDi(di18);
+            prod18.setNickRest("cervantes");
+            prod18.setPromo(false);
+            File Idieciocho = new File(prop.getProperty("Iimagen18"));
+            if(Idieciocho.exists()){
+                prod18.getDi().setDataImagen(fileABase64(Idieciocho));
+                ICProd.registrarProducto(prod18);
+            }else{
+                ICProd.registrarProducto(prod18);
+            }
+            
+            DataIndividual di19 = new DataIndividual();
+            di19.setDataNombre("Sushi la Tregua");
+            di19.setDataDescripcion("14 elementos de sushi con el mejor salmon");
+            di19.setDataPrecio(240.0);
+            di19.setDataImagen("");
+            di19.setCantidad(45);
+            DtoRegistrarProducto prod19 = new DtoRegistrarProducto();
+            prod19.setDi(di19);
+            prod19.setNickRest("latregua");
+            prod19.setPromo(false);
+            File Idiecinueve = new File(prop.getProperty("Iimagen19"));
+            if(Idiecinueve.exists()){
+                prod19.getDi().setDataImagen(fileABase64(Idiecinueve));
+                ICProd.registrarProducto(prod19);
+            }else{
+                ICProd.registrarProducto(prod19);
+            }            
             
             // Productos Promocionales
             

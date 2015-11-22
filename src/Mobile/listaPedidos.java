@@ -145,7 +145,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
 //        detallePedido detallePed;
         detallePedido detallePed = new detallePedido(ped);
 //        detallePed.show();
-                
+        this.dispose();  
         Home.MobileFondo.add(detallePed);
         detallePed.show();
 //        this.setVisible(false);

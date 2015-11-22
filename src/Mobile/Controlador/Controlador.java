@@ -161,15 +161,15 @@ public class Controlador {
         }        
         
     }   catch (Exception ex) {
-//            EntityManager em= getEntityManager();
-//            Pedidos ped = null;
-//                try{
-//                    //falta recorrer todos los pedidos con ese restaurante
-//                    ped = em.find(Pedidos.class, getRestLog());
-//                    peds.add(ped);
-//                }catch (Exception e){
-//                    JOptionPane.showMessageDialog(null, e);
-//                }
+            EntityManager em= getEntityManager();
+            Pedidos ped = null;
+                try{
+                    //falta recorrer todos los pedidos con ese restaurante
+                    ped = em.find(Pedidos.class, getRestLog());
+                    peds.add(ped);
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, e);
+                }
     //IR CONTRA LA BASE    
     }
         return peds;

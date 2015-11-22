@@ -100,10 +100,6 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbLoginActionPerformed
-
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         Controlador c = Controlador.getInstance();
         String user = this.tbLogin.getText();
@@ -113,64 +109,67 @@ public class Home extends javax.swing.JFrame {
             listaPedidos listaPed = new listaPedidos();
             MobileFondo.add(listaPed);
             listaPed.show();
-//            jpHome.setVisible(false);
+            //            jpHome.setVisible(false);
         }
         else
         {
             JOptionPane.showMessageDialog(null, "No existe ese usuario");
-        }    
+        }
 
-//        Middleware gil = new Middleware();
-//
-//        if(gil.connection()){
-//            System.out.print("WS ENABLED");
-//        }else{
-//            System.out.print("WS DISABLED");
-//            
-//            Usuarios usu = null;
-//            try{
-//                usu = em.find(Usuarios.class, tbLogin.getText());
-//                if (usu.getPassRest().equals(tbPassword.getText())){
-//                    listaPedidos listaPed = new listaPedidos();
-//                    MobileFondo.add(listaPed);
-//                    listaPed.show();
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Password incorrecta");
-//                }
-//            }catch (Exception ex){
-//                JOptionPane.showMessageDialog(null, ex);
-//            }
-//        }
+        //        Middleware gil = new Middleware();
+        //
+        //        if(gil.connection()){
+            //            System.out.print("WS ENABLED");
+            //        }else{
+            //            System.out.print("WS DISABLED");
+            //
+            //            Usuarios usu = null;
+            //            try{
+                //                usu = em.find(Usuarios.class, tbLogin.getText());
+                //                if (usu.getPassRest().equals(tbPassword.getText())){
+                    //                    listaPedidos listaPed = new listaPedidos();
+                    //                    MobileFondo.add(listaPed);
+                    //                    listaPed.show();
+                    //                }
+                //                else{
+                    //                    JOptionPane.showMessageDialog(null, "Password incorrecta");
+                    //                }
+                //            }catch (Exception ex){
+                //                JOptionPane.showMessageDialog(null, ex);
+                //            }
+            //        }
 
-//        String sql = "select * from Usuarios where Usuario=? and Password=?";
-//        try{
-//            pst=conn.prepareStatement(sql);
-//            pst.setString(1, tbLogin.getText());
-//            pst.setString(2, tbPassword.getText());
-//            
-//            rs= pst.executeQuery();
-//            
-//            if(rs.next()){
-//                JOptionPane.showMessageDialog(null, "Se conecto de la base");
-//            
-//            
-//                //listaPedidos lista = new listaPedidos();
-//                //jDesktopPane2.add(lista);
-//                //lista.show();
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(null, "No existe ese usuario");
-//            }
-//
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, e);
-//        }
-//        
-        
-        
-                // TODO add your handling code here:
+        //        String sql = "select * from Usuarios where Usuario=? and Password=?";
+        //        try{
+            //            pst=conn.prepareStatement(sql);
+            //            pst.setString(1, tbLogin.getText());
+            //            pst.setString(2, tbPassword.getText());
+            //
+            //            rs= pst.executeQuery();
+            //
+            //            if(rs.next()){
+                //                JOptionPane.showMessageDialog(null, "Se conecto de la base");
+                //
+                //
+                //                //listaPedidos lista = new listaPedidos();
+                //                //jDesktopPane2.add(lista);
+                //                //lista.show();
+                //            }
+            //            else{
+                //                JOptionPane.showMessageDialog(null, "No existe ese usuario");
+                //            }
+            //
+            //        }catch(Exception e){
+            //            JOptionPane.showMessageDialog(null, e);
+            //        }
+        //
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void tbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbLoginActionPerformed
 
     /**
      * @param args the command line arguments

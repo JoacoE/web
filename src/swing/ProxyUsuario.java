@@ -5,7 +5,19 @@
  */
 package swing;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.security.CodeSource;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lab01.server.DataCategoria;
 import lab01.server.DataCliente;
 import lab01.server.DataIndividual;
@@ -26,13 +38,65 @@ public class ProxyUsuario {
     
     private Integer idCtrlUsuario;
     private static ProxyUsuario instance = null;
-    private final PublicadorUsuario CU;
+    private PublicadorUsuario CU = null;
+    private Properties prop;
+    private InputStream input;
+    private String jarDir;
+    private String propertiesFile;
+    private String propFilePath;
+    
+    public boolean existCfgFile(){
+        File cfg = new File(jarDir,propertiesFile);
+        if(cfg.exists()){
+            return true;
+        }
+        return false;
+    }
+    
+    public void createCfgFile(){
+        try{
+            File cfg = new File(jarDir,propertiesFile);
+            prop.setProperty("Ip", "127.0.0.1");
+            prop.setProperty("Port", "9001");
+            prop.setProperty("DeployName", "pubusr");
+            FileWriter writer = new FileWriter(cfg);
+            prop.store(writer, "Swing Client Settings");
+            writer.close();
+            propFilePath = cfg.getAbsolutePath();
+        } catch (IOException ex) {
+            Logger.getLogger(ProxyProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private ProxyUsuario(){
-        idCtrlUsuario = null;
-        PublicadorUsuarioService servicio = new PublicadorUsuarioService();
-        CU = servicio.getPublicadorUsuarioPort();
-        idCtrlUsuario = CU.getId();
+        try {
+            CodeSource codeSource = ProxyProducto.class.getProtectionDomain().getCodeSource();
+            File jarFile;
+            jarFile = new File(codeSource.getLocation().toURI().getPath());
+            jarDir = jarFile.getParentFile().getPath();
+            propertiesFile = "ProxyUsu.properties";
+            prop = new Properties();
+            input = null;
+            if(!existCfgFile()){
+                createCfgFile();
+            }
+            input = new FileInputStream(propFilePath);
+            prop.load(input);
+            String ip = prop.getProperty("Ip");
+            String puerto = prop.getProperty("Port");
+            String deployname = prop.getProperty("DeployName");
+            URL url = new URL("http://"+ip+":"+puerto+"/"+deployname);
+            idCtrlUsuario = null;
+            PublicadorUsuarioService servicio = new PublicadorUsuarioService(url);
+            CU = servicio.getPublicadorUsuarioPort();
+            idCtrlUsuario = CU.getId();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(ProxyUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ProxyUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ProxyUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static ProxyUsuario getInstance(){

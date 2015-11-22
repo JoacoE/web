@@ -3,33 +3,24 @@ package Mobile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
-import lab01.Clases.DataPedido;
-import lab01.server.DataCliente;
+//import lab01.Clases.DataPedido;
+//import lab01.server.DataCliente;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author martin
- */
 public class listaPedidos extends javax.swing.JInternalFrame {
-
-    DefaultTableModel model;
-    ProxyPedido ICP;
-    ProxyUsuario ICU;
-    DataPedido ped;
-    private ArrayList<DataPedido> listaPedidos;
-    
+//
+//    DefaultTableModel model;
+//    ProxyPedido ICP;
+//    ProxyUsuario ICU;
+//    DataPedido ped;
+//    private ArrayList<DataPedido> listaPedidos;
+//    
     public listaPedidos() {
         initComponents();
-        ICP = ProxyPedido.getInstance();
-        model = (DefaultTableModel)tblPedidos.getModel();
-        CargarTabla();
-        this.setVisible(true);
+//        ICP = ProxyPedido.getInstance();
+//        model = (DefaultTableModel)tblPedidos.getModel();
+//        CargarTabla();
+//        this.setVisible(true);
     }
 
     /**
@@ -45,6 +36,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -85,6 +77,13 @@ public class listaPedidos extends javax.swing.JInternalFrame {
 
         jScrollPane2.setViewportView(jScrollPane1);
 
+        jButton1.setText("Cerrar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Salir");
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
@@ -99,37 +98,49 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(jButton1)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void CargarTabla(){
-        ArrayList<lab01.server.DataPedido> lp =ICP.listDataPedidos();
-        Iterator it = lp.iterator();
-        String lista[]=new String[5];
-            while(it.hasNext()){
-                DataCliente dc = ICU.getUsuarioByNickname(ped.getNickUsr());
-                ped = (DataPedido)it.next();
-                String id = String.valueOf(ped.getId());
-                lista[0]= id;
-                lista[1]= ped.getEstado().toString();
-                lista[2]= ped.getNickUsr();
-                lista[3]= dc.getDireccion();
-                model.insertRow((int)tblPedidos.getRowCount(), lista);
-                
-            }
-                        
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
         
-    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+//    public void CargarTabla(){
+//        ArrayList<lab01.server.DataPedido> lp =ICP.listDataPedidos();
+//        Iterator it = lp.iterator();
+//        String lista[]=new String[5];
+//            while(it.hasNext()){
+//                DataCliente dc = ICU.getUsuarioByNickname(ped.getNickUsr());
+//            \    ped = (DataPedido)it.next();
+//                String id = String.valueOf(ped.getId());
+//                lista[0]= id;
+//                lista[1]= ped.getEstado().toString();
+//                lista[2]= ped.getNickUsr();
+//                lista[3]= dc.getDireccion();
+//                model.insertRow((int)tblPedidos.getRowCount(), lista);
+//                
+//            }
+//                        
+//        
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

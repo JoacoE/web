@@ -6,10 +6,15 @@
 package Mobile;
 import java.awt.*;
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import com.middleware.logic.Middleware;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import Mobile.Clases.Usuarios;
+import Mobile.Controlador.Controlador;
 //import lab01.Clases.ImagenFondoMovil;
 
 /**
@@ -17,16 +22,14 @@ import com.middleware.logic.Middleware;
  * @author gera
  */
 public class Home extends javax.swing.JFrame {
-Connection conn = null;
-ResultSet rs = null;
-PreparedStatement pst = null;
-    /**
-     * Creates new form Home
-     */
+//
+//EntityManagerFactory emf = Persistence.createEntityManagerFactory("MobileQuickOrderPU");
+//EntityManager em = emf.createEntityManager();
+
     public Home() {
         initComponents();
 //    jDesktopPane2.setBorder(new ImagenFondoMovil());
-            conn = Connect.ConnectBD();
+//            conn = Connect.ConnectBD();
 
     }
 
@@ -39,20 +42,18 @@ PreparedStatement pst = null;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jpHome = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         tbLogin = new javax.swing.JTextField();
         tbPassword = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         FondoMovil = new javax.swing.JLabel();
-        jDesktopPane2 = new javax.swing.JDesktopPane();
+        MobileFondo = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(null);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("/home/gera/Escritorio/titulomovil.png")); // NOI18N
-        jPanel1.add(jLabel3);
+        jpHome.setLayout(null);
+        jpHome.add(jLabel3);
         jLabel3.setBounds(20, 100, 290, 100);
 
         tbLogin.setText("User o Email");
@@ -62,11 +63,11 @@ PreparedStatement pst = null;
                 tbLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(tbLogin);
+        jpHome.add(tbLogin);
         tbLogin.setBounds(70, 280, 190, 28);
 
         tbPassword.setText("Password");
-        jPanel1.add(tbPassword);
+        jpHome.add(tbPassword);
         tbPassword.setBounds(70, 320, 190, 28);
 
         btnIngresar.setText("Ingresar");
@@ -75,24 +76,22 @@ PreparedStatement pst = null;
                 btnIngresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIngresar);
+        jpHome.add(btnIngresar);
         btnIngresar.setBounds(92, 380, 140, 30);
-
-        FondoMovil.setIcon(new javax.swing.ImageIcon("/home/gera/Escritorio/mobile2.png")); // NOI18N
-        jPanel1.add(FondoMovil);
-        FondoMovil.setBounds(0, 0, 330, 660);
-        jPanel1.add(jDesktopPane2);
-        jDesktopPane2.setBounds(20, 70, 290, 520);
+        jpHome.add(FondoMovil);
+        FondoMovil.setBounds(0, 0, 0, 660);
+        jpHome.add(MobileFondo);
+        MobileFondo.setBounds(20, 70, 290, 520);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jpHome, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -103,12 +102,42 @@ PreparedStatement pst = null;
     }//GEN-LAST:event_tbLoginActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        Middleware gil = new Middleware();
-        if(gil.connection()){
-            System.out.print("WS ENABLED");
-        }else{
-            System.out.print("WS DISABLED");
+        Controlador c = new Controlador();
+        String user = this.tbLogin.getText();
+        String pass = this.tbPassword.getText();
+        if(c.iniciarSesion(user, pass)){
+            listaPedidos listaPed = new listaPedidos();
+            MobileFondo.add(listaPed);
+            listaPed.show();
+//            jpHome.setVisible(false);
         }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No existe ese usuario");
+        }    
+
+//        Middleware gil = new Middleware();
+//
+//        if(gil.connection()){
+//            System.out.print("WS ENABLED");
+//        }else{
+//            System.out.print("WS DISABLED");
+//            
+//            Usuarios usu = null;
+//            try{
+//                usu = em.find(Usuarios.class, tbLogin.getText());
+//                if (usu.getPassRest().equals(tbPassword.getText())){
+//                    listaPedidos listaPed = new listaPedidos();
+//                    MobileFondo.add(listaPed);
+//                    listaPed.show();
+//                }
+//                else{
+//                    JOptionPane.showMessageDialog(null, "Password incorrecta");
+//                }
+//            }catch (Exception ex){
+//                JOptionPane.showMessageDialog(null, ex);
+//            }
+//        }
 
 //        String sql = "select * from Usuarios where Usuario=? and Password=?";
 //        try{
@@ -176,10 +205,10 @@ PreparedStatement pst = null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FondoMovil;
+    private javax.swing.JDesktopPane MobileFondo;
     private javax.swing.JButton btnIngresar;
-    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jpHome;
     private javax.swing.JTextField tbLogin;
     private javax.swing.JTextField tbPassword;
     // End of variables declaration//GEN-END:variables

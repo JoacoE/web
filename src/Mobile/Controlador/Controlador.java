@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import lab01.server.DataCarrito;
 import lab01.server.DataCliente;
 import lab01.server.DataPedido;
 import lab01.server.DataRestaurante;
@@ -30,13 +31,14 @@ public class Controlador {
     }
     
     
-    public Controlador(){
+    private Controlador(){
         RestLog = "";
         rests = new ArrayList<>();
         peds = new ArrayList<>();
     }
 
-    public static Controlador getInstance(){
+    public
+        static Controlador getInstance(){
         if (cont == null){
             cont = new Controlador();
         }
@@ -135,7 +137,17 @@ public class Controlador {
                 p.setMailUsr(dp.getMailUsr());
                 p.setNickRest(dp.getNickRest());
                 p.setPrecio_total(dp.getPrecioTotal());
-                
+                ArrayList<ProdCarrito> aux = new ArrayList<>();
+                for(DataCarrito dcarr: dp.getColCarrito()){
+                    ProdCarrito pc = new ProdCarrito();
+                    pc.setNomProd(dcarr.getNomProd());
+                    pc.setCantidad(dcarr.getCantidad());
+                    pc.setPrecio(dcarr.getPrecio());
+                    pc.setPromo(dcarr.isPromo());
+                    aux.add(pc);
+                }
+                p.setColCarrito(aux);
+
                 if (p.getNickRest().equals(RestLog)){
                     peds.add(p);
                 }
@@ -149,17 +161,28 @@ public class Controlador {
         }        
         
     }   catch (Exception ex) {
-            EntityManager em= getEntityManager();
-            Pedidos ped = null;
-                try{
-                    //falta recorrer todos los pedidos con ese restaurante
-                    ped = em.find(Pedidos.class, getRestLog());
-                    peds.add(ped);
-                }catch (Exception e){
-                    JOptionPane.showMessageDialog(null, e);
-                }
+//            EntityManager em= getEntityManager();
+//            Pedidos ped = null;
+//                try{
+//                    //falta recorrer todos los pedidos con ese restaurante
+//                    ped = em.find(Pedidos.class, getRestLog());
+//                    peds.add(ped);
+//                }catch (Exception e){
+//                    JOptionPane.showMessageDialog(null, e);
+//                }
     //IR CONTRA LA BASE    
     }
         return peds;
     }
+    
+    public Pedidos getPedidoById(long id){
+        for(Pedidos p : this.peds){
+            if (p.getId() == id){
+                return p;
+            }
+        }
+        throw new NullPointerException();
+    }
+    
+    
 }

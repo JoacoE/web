@@ -1,9 +1,13 @@
 package Mobile;
 
 import Mobile.Clases.Pedidos;
+import Mobile.Clases.ProdCarrito;
 import Mobile.Controlador.Controlador;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 
 /*
@@ -17,9 +21,10 @@ import javax.swing.SwingUtilities;
  * @author martin
  */
 public class detallePedido extends javax.swing.JInternalFrame {
-
+    DefaultTableModel model;
     int fila = 0;
-    
+    ProdCarrito prodC;
+
     public detallePedido(Pedidos ped) {
         initComponents();
         Controlador c = Controlador.getInstance();
@@ -30,7 +35,35 @@ public class detallePedido extends javax.swing.JInternalFrame {
         lblEst.setText(ped.getEstado());
         String PTotal = Double.toString(ped.getPrecio_total());
         lblTot.setText(PTotal);
+        model = (DefaultTableModel)tblProdPedido.getModel();
+        CargarTabla(ped);
     }
+    
+    
+        public void CargarTabla(Pedidos ped){
+        Controlador c = Controlador.getInstance();
+        ArrayList<Pedidos> lstped= c.getLstPedidos(c.getRestLog());
+        Iterator it = lstped.iterator();
+        String lista[]=new String[5];
+            for (ProdCarrito pc : ped.getColCarrito()){
+//                DataCliente dc = ICU.getUsuarioByNickname(ped.getNickUsr());
+                
+//                String id = String.valueOf(prodC.getId());
+                lista[0]= pc.getNomProd();
+                String cant = String.valueOf(pc.getCantidad());
+                lista[1]= cant;
+                if (pc.isPromo()){
+                   lista[2]= "Si";
+                }
+                else{
+                    lista[2]= "No";
+                }
+                String subTot = Double.toString(pc.getPrecio());
+                lista[3]= subTot;
+                model.insertRow((int)tblProdPedido.getRowCount(), lista);           
+            }        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,16 +161,6 @@ public class detallePedido extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("Total:");
-
-        lblIdPed.setText("jLabel2");
-
-        lblCli.setText("jLabel3");
-
-        lblDir.setText("jLabel4");
-
-        lblEst.setText("jLabel5");
-
-        lblTot.setText("jLabel6");
 
         jMenu1.setText("Salir");
         jMenuBar1.add(jMenu1);

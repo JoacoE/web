@@ -2,9 +2,13 @@ package Mobile;
 
 import Mobile.Clases.Pedidos;
 import Mobile.Controlador.Controlador;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import lab01.server.DataPedido;
 //import lab01.Clases.DataPedido;
 //import lab01.server.DataCliente;
 
@@ -73,6 +77,11 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPedidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPedidos);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -120,6 +129,27 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         dispose();        
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tblPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidosMouseClicked
+        Controlador c = Controlador.getInstance();
+        String idPedido = null;
+        long id = 0;
+        JTable tab = (JTable)evt.getSource();
+        Point point = evt.getPoint();
+        int fila = tab.rowAtPoint(point);
+        if(evt.getClickCount() == 1){
+            idPedido = this.tblPedidos.getValueAt(fila,0).toString();
+            id = Long.parseLong(idPedido);
+            ped = c.getPedidoById(id);
+        }
+        
+//        detallePedido detallePed;
+        detallePedido detallePed = new detallePedido(ped);
+//        detallePed.show();
+        detallePed.setVisible(true);
+//        this.setVisible(false);
+
+    }//GEN-LAST:event_tblPedidosMouseClicked
+
     public void CargarTabla(){
         Controlador c = Controlador.getInstance();
         ArrayList<Pedidos> lstped= c.getLstPedidos(c.getRestLog());
@@ -133,11 +163,8 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                 lista[1]= ped.getEstado();
                 lista[2]= ped.getNickUsr();
                 lista[3]= ped.getDireccion();
-                model.insertRow((int)tblPedidos.getRowCount(), lista);
-                
-            }
-                        
-        
+                model.insertRow((int)tblPedidos.getRowCount(), lista);           
+            }        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

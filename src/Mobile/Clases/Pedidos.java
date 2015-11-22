@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -25,12 +26,13 @@ public class Pedidos implements Serializable{
     private String nickRest;
     private String direccion;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private ArrayList<prodCarrito> ColCarrito;
+    @JoinColumn(name="Ped_ID")
+    private ArrayList<ProdCarrito> ColCarrito;
 
     public Pedidos() {
     }
 
-    public Pedidos(long id, String fecha, double precio_total, String estado, String nickUsr, String mailUsr, String nickRest, ArrayList<prodCarrito> ColCarrito) {
+    public Pedidos(long id, String fecha, double precio_total, String estado, String nickUsr, String mailUsr, String nickRest, ArrayList<ProdCarrito> ColCarrito) {
         this.id = id;
         this.fecha = fecha;
         this.precio_total = precio_total;
@@ -104,16 +106,18 @@ public class Pedidos implements Serializable{
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
     
-    public ArrayList<prodCarrito> getColCarrito() {
+    public ArrayList<ProdCarrito> getColCarrito() {
         return ColCarrito;
     }
 
-    public void setColCarrito(ArrayList<prodCarrito> ColCarrito) {
-        this.ColCarrito = ColCarrito;
+    public void setColCarrito(ArrayList<ProdCarrito> ColCarrito) {
+        this.ColCarrito = new ArrayList<>();
+        this.ColCarrito.addAll(ColCarrito);
     }
     
-    
+    public void addProducto(ProdCarrito pc){
+        this.ColCarrito.add(pc);
+    }
     
 }

@@ -1,5 +1,7 @@
 package Mobile;
 
+import Mobile.Clases.Pedidos;
+import Mobile.Controlador.Controlador;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -18,8 +20,16 @@ public class detallePedido extends javax.swing.JInternalFrame {
 
     int fila = 0;
     
-    public detallePedido() {
+    public detallePedido(Pedidos ped) {
         initComponents();
+        Controlador c = Controlador.getInstance();
+        String id = String.valueOf(ped.getId());
+        lblIdPed.setText(id);
+        lblCli.setText(ped.getNickUsr());
+        lblDir.setText(ped.getDireccion());
+        lblEst.setText(ped.getEstado());
+        String PTotal = Double.toString(ped.getPrecio_total());
+        lblTot.setText(PTotal);
     }
 
     /**
@@ -43,6 +53,11 @@ public class detallePedido extends javax.swing.JInternalFrame {
         jbActualizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
+        lblIdPed = new javax.swing.JLabel();
+        lblCli = new javax.swing.JLabel();
+        lblDir = new javax.swing.JLabel();
+        lblEst = new javax.swing.JLabel();
+        lblTot = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -114,6 +129,16 @@ public class detallePedido extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Total:");
 
+        lblIdPed.setText("jLabel2");
+
+        lblCli.setText("jLabel3");
+
+        lblDir.setText("jLabel4");
+
+        lblEst.setText("jLabel5");
+
+        lblTot.setText("jLabel6");
+
         jMenu1.setText("Salir");
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
@@ -135,6 +160,12 @@ public class detallePedido extends javax.swing.JInternalFrame {
                     .addComponent(lblNickCliente)
                     .addComponent(lblEstado)
                     .addComponent(lblIdPedido))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIdPed)
+                    .addComponent(lblCli)
+                    .addComponent(lblDir)
+                    .addComponent(lblEst))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
@@ -143,23 +174,35 @@ public class detallePedido extends javax.swing.JInternalFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar)
                     .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTot)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblIdPedido)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIdPedido)
+                    .addComponent(lblIdPed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNickCliente)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNickCliente)
+                    .addComponent(lblCli))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblDireccion)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDireccion)
+                    .addComponent(lblDir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblEstado)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEstado)
+                    .addComponent(lblEst))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblTot))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(btnEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,10 +281,15 @@ public class detallePedido extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbActualizar;
+    private javax.swing.JLabel lblCli;
+    private javax.swing.JLabel lblDir;
     private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblEst;
     private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblIdPed;
     private javax.swing.JLabel lblIdPedido;
     private javax.swing.JLabel lblNickCliente;
+    private javax.swing.JLabel lblTot;
     private javax.swing.JTable tblProdPedido;
     // End of variables declaration//GEN-END:variables
 }

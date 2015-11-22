@@ -135,6 +135,7 @@ public class Controlador {
                 p.setMailUsr(dp.getMailUsr());
                 p.setNickRest(dp.getNickRest());
                 p.setPrecio_total(dp.getPrecioTotal());
+                
                 if (p.getNickRest().equals(RestLog)){
                     peds.add(p);
                 }
@@ -145,10 +146,18 @@ public class Controlador {
                     em.getTransaction().commit();
                     em.close();    
                 }
-        }
-        
+        }        
         
     }   catch (Exception ex) {
+            EntityManager em= getEntityManager();
+            Pedidos ped = null;
+                try{
+                    //falta recorrer todos los pedidos con ese restaurante
+                    ped = em.find(Pedidos.class, getRestLog());
+                    peds.add(ped);
+                }catch (Exception e){
+                    JOptionPane.showMessageDialog(null, e);
+                }
     //IR CONTRA LA BASE    
     }
         return peds;

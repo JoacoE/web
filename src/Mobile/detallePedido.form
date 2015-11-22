@@ -60,6 +60,13 @@
                   <Component id="lblEstado" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="lblIdPedido" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblIdPed" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCli" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDir" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEst" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -70,6 +77,8 @@
                   <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
                   <Component id="jbActualizar" min="-2" pref="157" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblTot" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -78,17 +87,32 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblIdPedido" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblIdPedido" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIdPed" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblNickCliente" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNickCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCli" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblDireccion" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDir" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblEstado" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEst" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTot" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
               <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -185,6 +209,31 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Total:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIdPed">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel2"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCli">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel3"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel4"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEst">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTot">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel6"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class prodCarrito implements Serializable{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+//    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int idProdc;
     private String nomProd;
     private boolean promo;

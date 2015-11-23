@@ -126,7 +126,9 @@ public class listaPedidos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();        
+        Controlador c = Controlador.getInstance();
+        c.cerrarSesion();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tblPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidosMouseClicked
@@ -154,12 +156,10 @@ public class listaPedidos extends javax.swing.JInternalFrame {
 
     public void CargarTabla(){
         Controlador c = Controlador.getInstance();
-        ArrayList<Pedidos> lstped= c.getLstPedidos(c.getRestLog());
-        Iterator it = lstped.iterator();
+        
         String lista[]=new String[5];
-            while(it.hasNext()){
+        for (Pedidos ped : c.getPeds()){
 //                DataCliente dc = ICU.getUsuarioByNickname(ped.getNickUsr());
-                ped = (Pedidos)it.next();
                 String id = String.valueOf(ped.getId());
                 lista[0]= id;
                 lista[1]= ped.getEstado();

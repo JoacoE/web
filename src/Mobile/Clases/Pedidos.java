@@ -117,6 +117,7 @@ public class Pedidos implements Serializable{
     }
     
     public void addProducto(ProdCarrito pc){
+        this.ColCarrito = new ArrayList<>();
         this.ColCarrito.add(pc);
     }
     

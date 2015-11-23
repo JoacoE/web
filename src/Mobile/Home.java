@@ -105,7 +105,7 @@ public class Home extends javax.swing.JFrame {
         String user = this.tbLogin.getText();
         String pass = this.tbPassword.getText();
         if(c.iniciarSesion(user, pass)){
-            ArrayList<Pedidos> lstped= c.getLstPedidos(user);
+            c.getLstPedidos();
             listaPedidos listaPed = new listaPedidos();
             MobileFondo.add(listaPed);
             listaPed.show();

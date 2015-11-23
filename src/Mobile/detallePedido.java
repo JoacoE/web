@@ -43,7 +43,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
     
         public void CargarTabla(Pedidos ped){
         Controlador c = Controlador.getInstance();
-        ArrayList<Pedidos> lstped= c.getLstPedidos(c.getRestLog());
+        ArrayList<Pedidos> lstped= c.getPeds();
         Iterator it = lstped.iterator();
         String lista[]=new String[5];
             for (ProdCarrito pc : ped.getColCarrito()){

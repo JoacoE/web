@@ -245,7 +245,20 @@ public class Controlador {
     
     public void actualizarEstadoPed(String nickname, long id, String est){
         try {
-            mid.actualizarEPedido(RestLog, id, est);
+            mid.actualizarEPedido(nickname, id, est);
+            EntityManager em= getEntityManager();
+            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
+            List<Pedidos> lstped = null;
+            lstped = q.getResultList();
+            for (Pedidos p : lstped){
+                if (p.getId() ==(id)){
+                    Pedidos pedido = em.find(Pedidos.class, p.getId());
+                    em.getTransaction().begin();
+                    pedido.setEstado(est);
+                    em.getTransaction().commit();
+                    em.close();
+                }
+            }
         } catch (Exception ex) {
             EntityManager em= getEntityManager();
             TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);

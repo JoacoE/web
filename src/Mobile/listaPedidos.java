@@ -44,6 +44,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        btnSync = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -93,6 +94,13 @@ public class listaPedidos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSync.setText("Sincronizar");
+        btnSync.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSyncMouseClicked(evt);
+            }
+        });
+
         jMenu1.setText("Salir");
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
@@ -109,7 +117,9 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(106, 106, 106)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSync, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,9 +127,11 @@ public class listaPedidos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
+                .addGap(52, 52, 52)
+                .addComponent(btnSync)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,12 +159,17 @@ public class listaPedidos extends javax.swing.JInternalFrame {
 //        detallePedido detallePed;
         detallePedido detallePed = new detallePedido(ped);
 //        detallePed.show();
-        this.dispose();  
+//        this.dispose();  
         Home.MobileFondo.add(detallePed);
         detallePed.show();
 //        this.setVisible(false);
 
     }//GEN-LAST:event_tblPedidosMouseClicked
+
+    private void btnSyncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSyncMouseClicked
+        Controlador c = Controlador.getInstance();
+        c.syncEstados();
+    }//GEN-LAST:event_btnSyncMouseClicked
 
     public void CargarTabla(){
         Controlador c = Controlador.getInstance();
@@ -169,6 +186,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
             }        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSync;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;

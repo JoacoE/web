@@ -243,5 +243,59 @@ public class Controlador {
         throw new NullPointerException();
     }
     
+    public void actualizarEstadoPed(String nickname, long id, String est){
+        try {
+            mid.actualizarEPedido(RestLog, id, est);
+        } catch (Exception ex) {
+            EntityManager em= getEntityManager();
+            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
+            List<Pedidos> lstped = null;
+            lstped = q.getResultList();
+            for (Pedidos p : lstped){
+                if (p.getId() ==(id)){
+                    Pedidos pedido = em.find(Pedidos.class, p.getId());
+                    em.getTransaction().begin();
+                    pedido.setEstado(est);
+                    
+//                    em.merge(est);
+                    em.getTransaction().commit();
+                    em.close();
+                }
+            }
+        }
+    }
+    
+    public void syncEstados(){
+        try {
+            EntityManager em = getEntityManager();
+            ArrayList<DataPedido> aux = new ArrayList<>();
+            ArrayList<Pedidos> aux2 = new ArrayList<>();
+            List<Pedidos> lstped = null;
+                    
+            for (DataPedido dp :mid.listDataPedidos()){
+                if(dp.getNickRest().equals(RestLog)){
+                    aux.add(dp);
+                }
+            }
+            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);               
+            lstped = q.getResultList();
+            for (Pedidos p : lstped){
+                if (p.getNickRest().equals(this.RestLog)){
+                    aux2.add(p);
+                }
+            }
+            for (Pedidos p : aux2){
+                for (DataPedido dp : aux){
+                    if(p.getFecha()== dp.getFecha() && dp.getMailUsr().equals(p.getMailUsr()) && dp.getNickRest().equals(p.getNickRest()) && dp.getPrecioTotal() == p.getPrecio_total()){
+                        if(!dp.getEstado().toString().equals(p.getEstado())){
+                            mid.actualizarEPedido(p.getNickUsr(), dp.getId(), p.getEstado());
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showInternalMessageDialog(null, "No hay conexion");
+        }
+    }
     
 }

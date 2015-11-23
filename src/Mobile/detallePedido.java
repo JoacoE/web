@@ -8,6 +8,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import lab01.server.Estados;
 
 
 /*
@@ -24,7 +25,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     int fila = 0;
     ProdCarrito prodC;
-
+    Pedidos p;
     public detallePedido(Pedidos ped) {
         initComponents();
         Controlador c = Controlador.getInstance();
@@ -35,6 +36,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
         lblEst.setText(ped.getEstado());
         String PTotal = Double.toString(ped.getPrecio_total());
         lblTot.setText(PTotal);
+        p = ped;
         model = (DefaultTableModel)tblProdPedido.getModel();
         CargarTabla(ped);
         actualizarEstado(ped);
@@ -238,21 +240,22 @@ public class detallePedido extends javax.swing.JInternalFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        //Estados es = null;
+        Estados es = null;
         jComboBox1.setEditable(false);
-
+        Controlador c = Controlador.getInstance();
         if("ENVIADO".equals(jComboBox1.getSelectedItem().toString())){
-            //es = Estados.ENVIADO;
+            es = Estados.ENVIADO;
 
         }
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
-            //es =  Estados.RECIBIDO;
+            es =  Estados.RECIBIDO;
         }
         if(JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
             //ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(), datped.getEstado());
             jComboBox1.removeAllItems();
             jComboBox1.setVisible(false);
             jbActualizar.setEnabled(false);
+            c.actualizarEstadoPed(p.getNickUsr(), p.getId(),es.toString());
             //lblEstado.setText(datped.getEstado().toString());
 
         }else{

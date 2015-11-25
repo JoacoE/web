@@ -95,8 +95,8 @@ public class PublicadorPedido {
             if(!existCfgFile()){
                 createCfgFile();
             }
-            String pathArchivo = jarDir+"/"+propertiesFile;
-            input = new FileInputStream(pathArchivo);
+            File Archivo = new File(jarDir,propertiesFile);
+            input = new FileInputStream(Archivo);
             prop.load(input);
             String ip = prop.getProperty("Ip");
             String puerto = prop.getProperty("Port");

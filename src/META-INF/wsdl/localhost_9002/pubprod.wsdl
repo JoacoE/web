@@ -4,6 +4,15 @@
 <xsd:import namespace="http://server.lab01/" schemaLocation="http://localhost:9002/pubprod?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="getId"></message>
+<message name="getIdResponse">
+<part name="return" type="xsd:int"></part>
+</message>
+<message name="registrarProducto">
+<part name="arg0" type="xsd:int"></part>
+<part name="arg1" type="tns:dtoRegistrarProducto"></part>
+</message>
+<message name="registrarProductoResponse"></message>
 <message name="existeRestaurante">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -52,16 +61,21 @@
 <message name="getProdPromocionalXNombreResponse">
 <part name="return" type="tns:dataPromocional"></part>
 </message>
-<message name="registrarProducto">
-<part name="arg0" type="xsd:int"></part>
-<part name="arg1" type="tns:dtoRegistrarProducto"></part>
+<message name="existCfgFile"></message>
+<message name="existCfgFileResponse">
+<part name="return" type="xsd:boolean"></part>
 </message>
-<message name="registrarProductoResponse"></message>
-<message name="getId"></message>
-<message name="getIdResponse">
-<part name="return" type="xsd:int"></part>
-</message>
+<message name="createCfgFile"></message>
+<message name="createCfgFileResponse"></message>
 <portType name="PublicadorProducto">
+<operation name="getId">
+<input wsam:Action="http://server.lab01/PublicadorProducto/getIdRequest" message="tns:getId"></input>
+<output wsam:Action="http://server.lab01/PublicadorProducto/getIdResponse" message="tns:getIdResponse"></output>
+</operation>
+<operation name="registrarProducto" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorProducto/registrarProductoRequest" message="tns:registrarProducto"></input>
+<output wsam:Action="http://server.lab01/PublicadorProducto/registrarProductoResponse" message="tns:registrarProductoResponse"></output>
+</operation>
 <operation name="existeRestaurante" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorProducto/existeRestauranteRequest" message="tns:existeRestaurante"></input>
 <output wsam:Action="http://server.lab01/PublicadorProducto/existeRestauranteResponse" message="tns:existeRestauranteResponse"></output>
@@ -94,17 +108,35 @@
 <input wsam:Action="http://server.lab01/PublicadorProducto/getProdPromocionalXNombreRequest" message="tns:getProdPromocionalXNombre"></input>
 <output wsam:Action="http://server.lab01/PublicadorProducto/getProdPromocionalXNombreResponse" message="tns:getProdPromocionalXNombreResponse"></output>
 </operation>
-<operation name="registrarProducto" parameterOrder="arg0 arg1">
-<input wsam:Action="http://server.lab01/PublicadorProducto/registrarProductoRequest" message="tns:registrarProducto"></input>
-<output wsam:Action="http://server.lab01/PublicadorProducto/registrarProductoResponse" message="tns:registrarProductoResponse"></output>
+<operation name="existCfgFile">
+<input wsam:Action="http://server.lab01/PublicadorProducto/existCfgFileRequest" message="tns:existCfgFile"></input>
+<output wsam:Action="http://server.lab01/PublicadorProducto/existCfgFileResponse" message="tns:existCfgFileResponse"></output>
 </operation>
-<operation name="getId">
-<input wsam:Action="http://server.lab01/PublicadorProducto/getIdRequest" message="tns:getId"></input>
-<output wsam:Action="http://server.lab01/PublicadorProducto/getIdResponse" message="tns:getIdResponse"></output>
+<operation name="createCfgFile">
+<input wsam:Action="http://server.lab01/PublicadorProducto/createCfgFileRequest" message="tns:createCfgFile"></input>
+<output wsam:Action="http://server.lab01/PublicadorProducto/createCfgFileResponse" message="tns:createCfgFileResponse"></output>
 </operation>
 </portType>
 <binding name="PublicadorProductoPortBinding" type="tns:PublicadorProducto">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="getId">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="registrarProducto">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
 <operation name="existeRestaurante">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -177,7 +209,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="registrarProducto">
+<operation name="existCfgFile">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -186,7 +218,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="getId">
+<operation name="createCfgFile">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>

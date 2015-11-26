@@ -5,9 +5,9 @@
     <class>Mobile.Clases.Clientes</class>
     <class>Mobile.Clases.Pedidos</class>
     <class>Mobile.Clases.Usuarios</class>
-    <class>Mobile.Clases.prodCarrito</class>
+    <class>Mobile.Clases.ProdCarrito</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:/home/gera/NetBeansProjects/Ultima/Mobile/web/QuickOrderDB.sqlite"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:/home/martin/mobile2/QuickOrderDB.sqlite"/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.user" value=""/>

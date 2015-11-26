@@ -3,11 +3,13 @@ package Mobile;
 import Mobile.Clases.Pedidos;
 import Mobile.Clases.ProdCarrito;
 import Mobile.Controlador.Controlador;
+import static Mobile.Home.jDesktopPane1;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import lab01.server.Estados;
 
 
 /*
@@ -24,6 +26,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     int fila = 0;
     ProdCarrito prodC;
+    Pedidos p;
 
     public detallePedido(Pedidos ped) {
         initComponents();
@@ -35,14 +38,16 @@ public class detallePedido extends javax.swing.JInternalFrame {
         lblEst.setText(ped.getEstado());
         String PTotal = Double.toString(ped.getPrecio_total());
         lblTot.setText(PTotal);
+        p = ped;
         model = (DefaultTableModel)tblProdPedido.getModel();
         CargarTabla(ped);
+        actualizarEstado(ped);
     }
     
     
         public void CargarTabla(Pedidos ped){
         Controlador c = Controlador.getInstance();
-        ArrayList<Pedidos> lstped= c.getLstPedidos(c.getRestLog());
+        ArrayList<Pedidos> lstped= c.getPeds();
         Iterator it = lstped.iterator();
         String lista[]=new String[5];
             for (ProdCarrito pc : ped.getColCarrito()){
@@ -61,7 +66,8 @@ public class detallePedido extends javax.swing.JInternalFrame {
                 String subTot = Double.toString(pc.getPrecio());
                 lista[3]= subTot;
                 model.insertRow((int)tblProdPedido.getRowCount(), lista);           
-            }        
+            }
+        jComboBox1.setVisible(false);
     }
     
 
@@ -82,7 +88,6 @@ public class detallePedido extends javax.swing.JInternalFrame {
         jScrollPane = new javax.swing.JScrollPane();
         tblProdPedido = new javax.swing.JTable();
         lblEstado = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
         jbActualizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -94,12 +99,14 @@ public class detallePedido extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setMaximumSize(new java.awt.Dimension(320, 480));
         setMinimumSize(new java.awt.Dimension(320, 480));
+        setPreferredSize(new java.awt.Dimension(320, 480));
 
         lblIdPedido.setText("Id Pedido:");
 
@@ -136,14 +143,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
 
         lblEstado.setText("Estado:");
 
-        btnEliminar.setText("Dar de Baja el pedido");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
-        jbActualizar.setText("Actualizar el pedido");
+        jbActualizar.setText("Actualizar pedido");
         jbActualizar.setFocusable(false);
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,8 +163,21 @@ public class detallePedido extends javax.swing.JInternalFrame {
         jLabel1.setText("Total:");
 
         jMenu1.setText("Salir");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Volver");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -192,11 +205,10 @@ public class detallePedido extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar)
-                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbActualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTot)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -226,59 +238,62 @@ public class detallePedido extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblTot))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(null,"Desea cancelar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
-            JOptionPane.showMessageDialog(null, "El pedido se ha cancelado con éxito", "Éxito",JOptionPane.WARNING_MESSAGE);
-            //ICP.cancelarPedido(this.datped.getId());
-        }else{
-            JOptionPane.showMessageDialog(null, "El pedido no ha sido cancelado","Informacion",JOptionPane.INFORMATION_MESSAGE);
-        }
-
-        this.dispose();
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
+        //actualizarEstado();
         jComboBox1.setEditable(false);
         jComboBox1.setVisible(true);
         //datped.setEstado(lab01.server.Estados.ENVIADO);
 
     }//GEN-LAST:event_jbActualizarActionPerformed
-
+    public void actualizarEstado(Pedidos ped){
+        if ("PREPARACION".equals(ped.getEstado())){
+            jComboBox1.addItem("ENVIADO");
+            jComboBox1.addItem("RECIBIDO");
+            
+        }else{
+             if("ENVIADO".equals(ped.getEstado())){
+                 jComboBox1.addItem("RECIBIDO");
+             }
+            if("RECIBIDO".equals(ped.getEstado())){
+                 jbActualizar.setEnabled(false);
+             }
+         }
+    }
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        //Estados es = null;
+        Estados es = null;
         jComboBox1.setEditable(false);
-
+        Controlador c = Controlador.getInstance();
         if("ENVIADO".equals(jComboBox1.getSelectedItem().toString())){
-            //es = Estados.ENVIADO;
+            es = Estados.ENVIADO;
 
         }
         if("RECIBIDO".equals(jComboBox1.getSelectedItem().toString())){
-            //es =  Estados.RECIBIDO;
+            es =  Estados.RECIBIDO;
         }
-        if(JOptionPane.showConfirmDialog(null,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+        if(JOptionPane.showInternalConfirmDialog(jDesktopPane1,"Desea actualizar el pedido?","Confirmación",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
             //ICP.actualizarEPedido(datped.getNickUsr(), datped.getId(), datped.getEstado());
             jComboBox1.removeAllItems();
             jComboBox1.setVisible(false);
             jbActualizar.setEnabled(false);
+            c.actualizarEstadoPed(p.getNickUsr(), p.getId(),es.toString());
+            JOptionPane.showInternalMessageDialog(jDesktopPane1, "El pedido se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
             //lblEstado.setText(datped.getEstado().toString());
 
         }else{
-            JOptionPane.showMessageDialog(null, "El pedido no se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showInternalMessageDialog(jDesktopPane1, "El pedido no se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
         }
 
         if(jComboBox1.getItemCount() !=1){
@@ -288,18 +303,34 @@ public class detallePedido extends javax.swing.JInternalFrame {
         SwingUtilities.updateComponentTreeUI(this);
         this.revalidate();
         this.repaint();
+        //actualizarEstado();
         //datped.setEstado(lab01.server.Estados.ENVIADO);
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        Controlador c = Controlador.getInstance();
+        c.cerrarSesion();
+        this.setVisible(false);
+        login l = new login();
+        Home.jDesktopPane1.add(l);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        this.setVisible(false);
+        listaPedidos l = new listaPedidos();
+        Home.jDesktopPane1.add(l);
+        l.show();// TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPane1;

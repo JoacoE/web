@@ -10,6 +10,7 @@
 <xs:element name="mailUsr" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="nickRest" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="ColCarrito" type="tns:dataCarrito" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="historial" type="tns:dtoHEstadoPedido" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -19,6 +20,13 @@
 <xs:element name="promo" type="xs:boolean"></xs:element>
 <xs:element name="cantidad" type="xs:int"></xs:element>
 <xs:element name="precio" type="xs:double"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoHEstadoPedido">
+<xs:sequence>
+<xs:element name="estado" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fyhora" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -72,7 +80,7 @@
 <xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="direccion" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="imagen" type="xs:base64Binary" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="fNac" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="pwd" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>

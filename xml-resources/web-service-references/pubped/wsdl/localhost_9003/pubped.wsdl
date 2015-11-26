@@ -4,6 +4,16 @@
 <xsd:import namespace="http://server.lab01/" schemaLocation="http://localhost:9003/pubped?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="getId"></message>
+<message name="getIdResponse">
+<part name="return" type="xsd:int"></part>
+</message>
+<message name="existCfgFile"></message>
+<message name="existCfgFileResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="createCfgFile"></message>
+<message name="createCfgFileResponse"></message>
 <message name="setNickname">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -97,6 +107,14 @@
 <part name="arg3" type="tns:estados"></part>
 </message>
 <message name="actualizarEPedidoResponse"></message>
+<message name="actualizarEPedidoCDatos">
+<part name="arg0" type="xsd:int"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:long"></part>
+<part name="arg3" type="tns:estados"></part>
+<part name="arg4" type="xsd:string"></part>
+</message>
+<message name="actualizarEPedidoCDatosResponse"></message>
 <message name="setDp">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="tns:dataPedido"></part>
@@ -175,11 +193,19 @@
 <part name="arg3" type="xsd:string"></part>
 </message>
 <message name="actualizarFechaPedidoResponse"></message>
-<message name="getId"></message>
-<message name="getIdResponse">
-<part name="return" type="xsd:int"></part>
-</message>
 <portType name="PublicadorPedido">
+<operation name="getId">
+<input wsam:Action="http://server.lab01/PublicadorPedido/getIdRequest" message="tns:getId"></input>
+<output wsam:Action="http://server.lab01/PublicadorPedido/getIdResponse" message="tns:getIdResponse"></output>
+</operation>
+<operation name="existCfgFile">
+<input wsam:Action="http://server.lab01/PublicadorPedido/existCfgFileRequest" message="tns:existCfgFile"></input>
+<output wsam:Action="http://server.lab01/PublicadorPedido/existCfgFileResponse" message="tns:existCfgFileResponse"></output>
+</operation>
+<operation name="createCfgFile">
+<input wsam:Action="http://server.lab01/PublicadorPedido/createCfgFileRequest" message="tns:createCfgFile"></input>
+<output wsam:Action="http://server.lab01/PublicadorPedido/createCfgFileResponse" message="tns:createCfgFileResponse"></output>
+</operation>
 <operation name="setNickname" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorPedido/setNicknameRequest" message="tns:setNickname"></input>
 <output wsam:Action="http://server.lab01/PublicadorPedido/setNicknameResponse" message="tns:setNicknameResponse"></output>
@@ -244,6 +270,10 @@
 <input wsam:Action="http://server.lab01/PublicadorPedido/actualizarEPedidoRequest" message="tns:actualizarEPedido"></input>
 <output wsam:Action="http://server.lab01/PublicadorPedido/actualizarEPedidoResponse" message="tns:actualizarEPedidoResponse"></output>
 </operation>
+<operation name="actualizarEPedidoCDatos" parameterOrder="arg0 arg1 arg2 arg3 arg4">
+<input wsam:Action="http://server.lab01/PublicadorPedido/actualizarEPedidoCDatosRequest" message="tns:actualizarEPedidoCDatos"></input>
+<output wsam:Action="http://server.lab01/PublicadorPedido/actualizarEPedidoCDatosResponse" message="tns:actualizarEPedidoCDatosResponse"></output>
+</operation>
 <operation name="setDp" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorPedido/setDpRequest" message="tns:setDp"></input>
 <output wsam:Action="http://server.lab01/PublicadorPedido/setDpResponse" message="tns:setDpResponse"></output>
@@ -296,13 +326,36 @@
 <input wsam:Action="http://server.lab01/PublicadorPedido/actualizarFechaPedidoRequest" message="tns:actualizarFechaPedido"></input>
 <output wsam:Action="http://server.lab01/PublicadorPedido/actualizarFechaPedidoResponse" message="tns:actualizarFechaPedidoResponse"></output>
 </operation>
-<operation name="getId">
-<input wsam:Action="http://server.lab01/PublicadorPedido/getIdRequest" message="tns:getId"></input>
-<output wsam:Action="http://server.lab01/PublicadorPedido/getIdResponse" message="tns:getIdResponse"></output>
-</operation>
 </portType>
 <binding name="PublicadorPedidoPortBinding" type="tns:PublicadorPedido">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="getId">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="existCfgFile">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="createCfgFile">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
 <operation name="setNickname">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -447,6 +500,15 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
+<operation name="actualizarEPedidoCDatos">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
 <operation name="setDp">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -556,15 +618,6 @@
 </output>
 </operation>
 <operation name="actualizarFechaPedido">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
-</output>
-</operation>
-<operation name="getId">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>

@@ -4,21 +4,6 @@
  * and open the template in the editor.
  */
 package Mobile;
-import Mobile.Clases.Pedidos;
-import java.awt.*;
-import javax.swing.*;
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-import com.middleware.logic.Middleware;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import Mobile.Clases.Usuarios;
-import Mobile.Controlador.Controlador;
-import java.util.ArrayList;
-//import lab01.Clases.ImagenFondoMovil;
-
 /**
  *
  * @author gera
@@ -30,6 +15,7 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
+        
         
 //    jDesktopPane2.setBorder(new ImagenFondoMovil());
 //            conn = Connect.ConnectBD();
@@ -47,130 +33,65 @@ public class Home extends javax.swing.JFrame {
 
         jpHome = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        tbLogin = new javax.swing.JTextField();
-        tbPassword = new javax.swing.JTextField();
-        btnIngresar = new javax.swing.JButton();
         FondoMovil = new javax.swing.JLabel();
-        MobileFondo = new javax.swing.JDesktopPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jpHome.setMaximumSize(new java.awt.Dimension(320, 480));
+        jpHome.setMinimumSize(new java.awt.Dimension(320, 480));
+        jpHome.setRequestFocusEnabled(false);
         jpHome.setLayout(null);
         jpHome.add(jLabel3);
         jLabel3.setBounds(20, 100, 290, 100);
-
-        tbLogin.setText("mera");
-        tbLogin.setToolTipText("User o Email");
-        tbLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbLoginActionPerformed(evt);
-            }
-        });
-        jpHome.add(tbLogin);
-        tbLogin.setBounds(70, 280, 190, 28);
-
-        tbPassword.setText("abc12");
-        jpHome.add(tbPassword);
-        tbPassword.setBounds(70, 320, 190, 28);
-
-        btnIngresar.setText("Ingresar");
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
-            }
-        });
-        jpHome.add(btnIngresar);
-        btnIngresar.setBounds(92, 380, 140, 30);
         jpHome.add(FondoMovil);
         FondoMovil.setBounds(0, 0, 0, 660);
-        jpHome.add(MobileFondo);
-        MobileFondo.setBounds(20, 70, 290, 520);
+
+        jDesktopPane1.setMaximumSize(new java.awt.Dimension(320, 480));
+        jDesktopPane1.setMinimumSize(new java.awt.Dimension(320, 480));
+        jpHome.add(jDesktopPane1);
+        jDesktopPane1.setBounds(10, 10, 320, 480);
+        jDesktopPane1.getAccessibleContext().setAccessibleName("");
+
+        jMenu1.setText("Usuario");
+
+        jMenuItem1.setText("Iniciar Sesion");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpHome, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbLoginActionPerformed
-
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        Controlador c = Controlador.getInstance();
-        String user = this.tbLogin.getText();
-        String pass = this.tbPassword.getText();
-        if(c.iniciarSesion(user, pass)){
-            ArrayList<Pedidos> lstped= c.getLstPedidos(user);
-            listaPedidos listaPed = new listaPedidos();
-            MobileFondo.add(listaPed);
-            listaPed.show();
-//            jpHome.setVisible(false);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "No existe ese usuario");
-        }    
-
-//        Middleware gil = new Middleware();
-//
-//        if(gil.connection()){
-//            System.out.print("WS ENABLED");
-//        }else{
-//            System.out.print("WS DISABLED");
-//            
-//            Usuarios usu = null;
-//            try{
-//                usu = em.find(Usuarios.class, tbLogin.getText());
-//                if (usu.getPassRest().equals(tbPassword.getText())){
-//                    listaPedidos listaPed = new listaPedidos();
-//                    MobileFondo.add(listaPed);
-//                    listaPed.show();
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Password incorrecta");
-//                }
-//            }catch (Exception ex){
-//                JOptionPane.showMessageDialog(null, ex);
-//            }
-//        }
-
-//        String sql = "select * from Usuarios where Usuario=? and Password=?";
-//        try{
-//            pst=conn.prepareStatement(sql);
-//            pst.setString(1, tbLogin.getText());
-//            pst.setString(2, tbPassword.getText());
-//            
-//            rs= pst.executeQuery();
-//            
-//            if(rs.next()){
-//                JOptionPane.showMessageDialog(null, "Se conecto de la base");
-//            
-//            
-//                //listaPedidos lista = new listaPedidos();
-//                //jDesktopPane2.add(lista);
-//                //lista.show();
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(null, "No existe ese usuario");
-//            }
-//
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, e);
-//        }
-//        
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        login l =  new login();
+        jDesktopPane1.add(l);
+        jDesktopPane1.show();
         
-        
-                // TODO add your handling code here:
-    }//GEN-LAST:event_btnIngresarActionPerformed
+        //l.toFront();
+
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,11 +130,11 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FondoMovil;
-    public static javax.swing.JDesktopPane MobileFondo;
-    private javax.swing.JButton btnIngresar;
+    public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jpHome;
-    private javax.swing.JTextField tbLogin;
-    private javax.swing.JTextField tbPassword;
     // End of variables declaration//GEN-END:variables
 }

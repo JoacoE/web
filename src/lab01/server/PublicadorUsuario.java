@@ -49,9 +49,8 @@ public class PublicadorUsuario {
     public PublicadorUsuario(){
         String usrpath = System.getProperty("user.home");
         File folder = new File(usrpath+"/.QuickOrder/CentralServer");
-        File parentfldr = folder.getParentFile();
-        if(!parentfldr.exists() && !parentfldr.mkdirs()){
-            throw new IllegalStateException("Couldn't create dir: " + parentfldr);
+        if(!folder.exists() && !folder.mkdirs()){
+            throw new IllegalStateException("Couldn't create dir: " + folder);
         }
         cfgFolder = folder.getPath();
         prop = new Properties();

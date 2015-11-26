@@ -15,9 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -42,12 +40,12 @@ public class ProxyProducto {
     private PublicadorProducto CP;
     private Properties prop;
     private InputStream input;
-    private String jarDir;
+    private String cfgFolder;
     private String propertiesFile;
     private String propFilePath;
     
     public boolean existCfgFile(){
-        File cfg = new File(jarDir,propertiesFile);
+        File cfg = new File(cfgFolder,propertiesFile);
         if(cfg.exists()){
             return true;
         }
@@ -56,12 +54,12 @@ public class ProxyProducto {
     
     public void createCfgFile(){
         try{
-            File cfg = new File(jarDir,propertiesFile);
+            File cfg = new File(cfgFolder,propertiesFile);
             prop.setProperty("Ip", "127.0.0.1");
             prop.setProperty("Port", "9002");
             prop.setProperty("DeployName", "pubprod");
             FileWriter writer = new FileWriter(cfg);
-            prop.store(writer, "Swing Client Settings");
+            prop.store(writer, "WorkStation Client Settings");
             writer.close();
             propFilePath = cfg.getAbsolutePath();
         } catch (IOException ex) {
@@ -71,17 +69,19 @@ public class ProxyProducto {
 
     private ProxyProducto(){
         try {
-            CodeSource codeSource = ProxyProducto.class.getProtectionDomain().getCodeSource();
-            File jarFile;
-            jarFile = new File(codeSource.getLocation().toURI().getPath());
-            jarDir = jarFile.getParentFile().getPath();
+            String usrpath = System.getProperty("user.home");
+            File folder = new File(usrpath+"/.QuickOrder/WorkStation");
+            if(!folder.exists() && !folder.mkdirs()){
+                throw new IllegalStateException("Couldn't create dir: " + folder);
+            }
+            cfgFolder = folder.getPath();
             propertiesFile = "ProxyProd.properties";
             prop = new Properties();
             input = null;
             if(!existCfgFile()){
                 createCfgFile();
             }
-            File Archivo = new File(jarDir,propertiesFile);
+            File Archivo = new File(cfgFolder,propertiesFile);
             input = new FileInputStream(Archivo);
             prop.load(input);
             String ip = prop.getProperty("Ip");
@@ -92,8 +92,6 @@ public class ProxyProducto {
             PublicadorProductoService servicio = new PublicadorProductoService(url);
             CP = servicio.getPublicadorProductoPort();
             idCtrlProducto = CP.getId();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(ProxyProducto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ProxyProducto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

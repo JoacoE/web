@@ -12,15 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.CodeSource;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.jws.WebMethod;
-import javax.xml.ws.Endpoint;
 import lab01.server.DataCategoria;
 import lab01.server.DataRestaurante;
 import lab01.server.DataCliente;
@@ -42,12 +37,12 @@ public class ProxyPedido {
     private PublicadorPedido PP;
     private Properties prop;
     private InputStream input;
-    private String jarDir;
+    private String cfgFolder;
     private String propertiesFile;
     private String propFilePath;
     
     public boolean existCfgFile(){
-        File cfg = new File(jarDir,propertiesFile);
+        File cfg = new File(cfgFolder,propertiesFile);
         if(cfg.exists()){
             return true;
         }
@@ -56,12 +51,12 @@ public class ProxyPedido {
     
     public void createCfgFile(){
         try{
-            File cfg = new File(jarDir,propertiesFile);
+            File cfg = new File(cfgFolder,propertiesFile);
             prop.setProperty("Ip", "127.0.0.1");
             prop.setProperty("Port", "9003");
             prop.setProperty("DeployName", "pubped");
             FileWriter writer = new FileWriter(cfg);
-            prop.store(writer, "Swing Client Settings");
+            prop.store(writer, "WorkStation Client Settings");
             writer.close();
             propFilePath = cfg.getAbsolutePath();
         } catch (IOException ex) {
@@ -71,17 +66,19 @@ public class ProxyPedido {
 
     private ProxyPedido(){
         try {
-            CodeSource codeSource = ProxyPedido.class.getProtectionDomain().getCodeSource();
-            File jarFile;
-            jarFile = new File(codeSource.getLocation().toURI().getPath());
-            jarDir = jarFile.getParentFile().getPath();
+            String usrpath = System.getProperty("user.home");
+            File folder = new File(usrpath+"/.QuickOrder/WorkStation");
+            if(!folder.exists() && !folder.mkdirs()){
+                throw new IllegalStateException("Couldn't create dir: " + folder);
+            }
+            cfgFolder = folder.getPath();
             propertiesFile = "ProxyPed.properties";
             prop = new Properties();
             input = null;
             if(!existCfgFile()){
                 createCfgFile();
             }
-            File Archivo = new File(jarDir,propertiesFile);
+            File Archivo = new File(cfgFolder,propertiesFile);
             input = new FileInputStream(Archivo);
             prop.load(input);
             String ip = prop.getProperty("Ip");
@@ -92,8 +89,6 @@ public class ProxyPedido {
             PublicadorPedidoService servicio = new PublicadorPedidoService(url);
             PP = servicio.getPublicadorPedidoPort();
             idCtrlPedido = PP.getId();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(ProxyPedido.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ProxyPedido.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {

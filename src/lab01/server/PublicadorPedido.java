@@ -10,8 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
@@ -43,26 +41,25 @@ public class PublicadorPedido {
     private Endpoint endpoint = null;
     private Properties prop;
     private InputStream input;
-    private String jarDir;
+    private String cfgFolder;
     private String propertiesFile;
     private String propFilePath;
     
     public PublicadorPedido(){
-        try {
-            CodeSource codeSource = PublicadorProducto.class.getProtectionDomain().getCodeSource();
-            File jarFile;
-            jarFile = new File(codeSource.getLocation().toURI().getPath());
-            jarDir = jarFile.getParentFile().getPath();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(PublicadorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        String usrpath = System.getProperty("user.home");
+        File folder = new File(usrpath+"/.QuickOrder/CentralServer");
+        File parentfldr = folder.getParentFile();
+        if(!parentfldr.exists() && !parentfldr.mkdirs()){
+            throw new IllegalStateException("Couldn't create dir: " + parentfldr);
         }
+        cfgFolder = folder.getPath();
         prop = new Properties();
         input = null;
         propertiesFile = "PublicadorPed.properties";
     }
     
     public boolean existCfgFile(){
-        File cfg = new File(jarDir,propertiesFile);
+        File cfg = new File(cfgFolder,propertiesFile);
         if(cfg.exists()){
             return true;
         }
@@ -71,10 +68,7 @@ public class PublicadorPedido {
     
     public void createCfgFile(){
         try{
-            CodeSource codeSource = PublicadorProducto.class.getProtectionDomain().getCodeSource();
-            File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            jarDir = jarFile.getParentFile().getPath();
-            File cfg = new File(jarDir,propertiesFile);
+            File cfg = new File(cfgFolder,propertiesFile);
             prop.setProperty("Ip", "127.0.0.1");
             prop.setProperty("Port", "9003");
             prop.setProperty("DeployName", "pubped");
@@ -82,8 +76,6 @@ public class PublicadorPedido {
             prop.store(writer, "Endpoint Settings");
             writer.close();
             propFilePath = cfg.getAbsolutePath();
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(PublicadorProducto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(PublicadorProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,7 +87,7 @@ public class PublicadorPedido {
             if(!existCfgFile()){
                 createCfgFile();
             }
-            File Archivo = new File(jarDir,propertiesFile);
+            File Archivo = new File(cfgFolder,propertiesFile);
             input = new FileInputStream(Archivo);
             prop.load(input);
             String ip = prop.getProperty("Ip");

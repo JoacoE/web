@@ -392,6 +392,7 @@ private String nombreImagen = "";
                         DataRestaurante dt = new DataRestaurante();
                         dt.setNickname(nickname);
                         dt.setNombre(nombre);
+                        dt.setEmail(mail);
                         dt.setDireccion(direccion);
                         dt.getLstImagen().addAll(nombresImagenes);
                         dt.getColCategoria().addAll(ICU.getLstCat());

@@ -3,102 +3,114 @@
 
 //CLIENTES
 //Cliente 1
-Cimagen1=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/costas.jpeg
+Cimagen1=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/costas.jpeg
 
 //Cliente 2
-Cimagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/roro.jpeg
+Cimagen2=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/roro.jpeg
 
 //Cliente 3
-Cimagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/chechi.jpeg
+Cimagen3=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/chechi.jpeg
 
 //Cliente 4
-Cimagen4=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/andy.jpeg
+Cimagen4=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/andy.jpeg
 
 //Cliente 5
-Cimagen5=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/weiss.jpeg
+Cimagen5=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/weiss.jpeg
 
 //RESTAURANTES
 //Restaurante 1
 //no tiene imagenes
 
 //Restaurante 2
-Rimagen1=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rlogo.jpeg
-Rimagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/rossell.jpeg
+Rimagen1=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/rlogo.jpeg
+Rimagen2=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/rossell.jpeg
 
 //Restaurante 3
-Rimagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/blogo.jpeg
-Rimagen4=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/caprese.jpeg
-Rimagen5=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/cyq.jpeg
+Rimagen3=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/blogo.jpeg
+Rimagen4=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/caprese.jpeg
+Rimagen5=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/cyq.jpeg
 
 //Restaurante 4
-Rimagen6=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wlogo.jpeg
-Rimagen7=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wokbox.jpeg
+Rimagen6=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/wlogo.jpeg
+Rimagen7=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/wokbox.jpeg
 
 //PRODUCTOS INDIVIDUALES
 //Producto 1
 Iimagen1=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Producto 2
-Iimagen2=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/milanesacarne.jpeg
+Iimagen2=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/milanesacarne.jpeg
 
 //Producto 3
-Iimagen3=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/canadiense.jpeg
+Iimagen3=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/canadiense.jpeg
 
 //Producto 4
 Iimagen4=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Producto 5
 Iimagen5=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Producto 6
-Iimagen6=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/acaballo.jpeg
+Iimagen6=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/acaballo.jpeg
 
 //Producto 7
 Iimagen7=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Producto 8
-Iimagen8=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/agnolotis.jpeg
+Iimagen8=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/agnolotis.jpeg
 
 //Producto 9
-Iimagen9=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/empacarne.jpeg
+Iimagen9=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/empacarne.jpeg
 
 //Producto 10
 Iimagen10=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Producto 11
-Iimagen11=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/cyq.jpeg
+Iimagen11=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/cyq.jpeg
 
 //Producto 12
-Iimagen12=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/caprese.jpeg
+Iimagen12=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/caprese.jpeg
 
 //Producto 13
-Iimagen13=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/tahiwok.jpeg
+Iimagen13=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/tahiwok.jpeg
 
 //Producto 14
 Iimagen14=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Producto 15
-Iimagen15=/home/joaco/NetBeansProjects/Swing/ImgenesPrueba/wokpollo.jpeg
+Iimagen15=/home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/wokpollo.jpeg
 
 //Producto 16
 Iimagen16=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
+
+//Producto 17
+Iimagen17=
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
+
+//Producto 18
+Iimagen18=
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
+
+//Producto 19
+Iimagen19=
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //PRODUCTOS PROMOCIONALES
 //Promocional 1
 Pimagen1=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Promocional 2
 Pimagen2=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/
 
 //Promocional 3
 Pimagen3=
-//home/joaco/NetBeansProjects/Swing/ImgenesPrueba/
+//home/joaco/NetBeansProjects/EstacionDeTrabajo/ImgenesPrueba/

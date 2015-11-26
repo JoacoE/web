@@ -7,27 +7,35 @@
 <xsd:import namespace="http://jaxb.dev.java.net/array" schemaLocation="http://localhost:9001/pubusr?xsd=2"></xsd:import>
 </xsd:schema>
 </types>
-<message name="setNickname">
+<message name="existCfgFile"></message>
+<message name="existCfgFileResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="createCfgFile"></message>
+<message name="createCfgFileResponse"></message>
+<message name="getRestauranteByNickname">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="xsd:string"></part>
 </message>
-<message name="setNicknameResponse"></message>
-<message name="setCat">
-<part name="arg0" type="xsd:int"></part>
-<part xmlns:ns1="http://jaxb.dev.java.net/array" name="arg1" type="ns1:stringArray"></part>
+<message name="getRestauranteByNicknameResponse">
+<part name="return" type="tns:dataRestaurante"></part>
 </message>
-<message name="setCatResponse"></message>
-<message name="getNickname">
+<message name="listaDataRestaurantes">
 <part name="arg0" type="xsd:int"></part>
 </message>
-<message name="getNicknameResponse">
-<part name="return" type="xsd:string"></part>
+<message name="listaDataRestaurantesResponse">
+<part name="return" type="tns:dataRestauranteArray"></part>
 </message>
-<message name="devListaDC">
+<message name="registrarCat">
+<part name="arg0" type="xsd:int"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="registrarCatResponse"></message>
+<message name="retColCat">
 <part name="arg0" type="xsd:int"></part>
 </message>
-<message name="devListaDCResponse">
-<part name="return" type="tns:dataClienteArray"></part>
+<message name="retColCatResponse">
+<part name="return" type="tns:dataCategoriaArray"></part>
 </message>
 <message name="listaUsuPorCategoria">
 <part name="arg0" type="xsd:int"></part>
@@ -127,50 +135,56 @@
 <message name="getUsuarioByNicknameResponse">
 <part name="return" type="tns:dataCliente"></part>
 </message>
-<message name="getRestauranteByNickname">
+<message name="setNickname">
 <part name="arg0" type="xsd:int"></part>
 <part name="arg1" type="xsd:string"></part>
 </message>
-<message name="getRestauranteByNicknameResponse">
-<part name="return" type="tns:dataRestaurante"></part>
+<message name="setNicknameResponse"></message>
+<message name="setCat">
+<part name="arg0" type="xsd:int"></part>
+<part xmlns:ns1="http://jaxb.dev.java.net/array" name="arg1" type="ns1:stringArray"></part>
 </message>
-<message name="listaDataRestaurantes">
+<message name="setCatResponse"></message>
+<message name="getNickname">
 <part name="arg0" type="xsd:int"></part>
 </message>
-<message name="listaDataRestaurantesResponse">
-<part name="return" type="tns:dataRestauranteArray"></part>
+<message name="getNicknameResponse">
+<part name="return" type="xsd:string"></part>
 </message>
-<message name="registrarCat">
-<part name="arg0" type="xsd:int"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="registrarCatResponse"></message>
-<message name="retColCat">
+<message name="devListaDC">
 <part name="arg0" type="xsd:int"></part>
 </message>
-<message name="retColCatResponse">
-<part name="return" type="tns:dataCategoriaArray"></part>
+<message name="devListaDCResponse">
+<part name="return" type="tns:dataClienteArray"></part>
 </message>
 <message name="getId"></message>
 <message name="getIdResponse">
 <part name="return" type="xsd:int"></part>
 </message>
 <portType name="PublicadorUsuario">
-<operation name="setNickname" parameterOrder="arg0 arg1">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/setNicknameRequest" message="tns:setNickname"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/setNicknameResponse" message="tns:setNicknameResponse"></output>
+<operation name="existCfgFile">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/existCfgFileRequest" message="tns:existCfgFile"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/existCfgFileResponse" message="tns:existCfgFileResponse"></output>
 </operation>
-<operation name="setCat" parameterOrder="arg0 arg1">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/setCatRequest" message="tns:setCat"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/setCatResponse" message="tns:setCatResponse"></output>
+<operation name="createCfgFile">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/createCfgFileRequest" message="tns:createCfgFile"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/createCfgFileResponse" message="tns:createCfgFileResponse"></output>
 </operation>
-<operation name="getNickname">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/getNicknameRequest" message="tns:getNickname"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/getNicknameResponse" message="tns:getNicknameResponse"></output>
+<operation name="getRestauranteByNickname" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/getRestauranteByNicknameRequest" message="tns:getRestauranteByNickname"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/getRestauranteByNicknameResponse" message="tns:getRestauranteByNicknameResponse"></output>
 </operation>
-<operation name="devListaDC">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/devListaDCRequest" message="tns:devListaDC"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/devListaDCResponse" message="tns:devListaDCResponse"></output>
+<operation name="listaDataRestaurantes">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/listaDataRestaurantesRequest" message="tns:listaDataRestaurantes"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/listaDataRestaurantesResponse" message="tns:listaDataRestaurantesResponse"></output>
+</operation>
+<operation name="registrarCat" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatRequest" message="tns:registrarCat"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatResponse" message="tns:registrarCatResponse"></output>
+</operation>
+<operation name="retColCat">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/retColCatRequest" message="tns:retColCat"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/retColCatResponse" message="tns:retColCatResponse"></output>
 </operation>
 <operation name="listaUsuPorCategoria" parameterOrder="arg0 arg1">
 <input wsam:Action="http://server.lab01/PublicadorUsuario/listaUsuPorCategoriaRequest" message="tns:listaUsuPorCategoria"></input>
@@ -232,21 +246,21 @@
 <input wsam:Action="http://server.lab01/PublicadorUsuario/getUsuarioByNicknameRequest" message="tns:getUsuarioByNickname"></input>
 <output wsam:Action="http://server.lab01/PublicadorUsuario/getUsuarioByNicknameResponse" message="tns:getUsuarioByNicknameResponse"></output>
 </operation>
-<operation name="getRestauranteByNickname" parameterOrder="arg0 arg1">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/getRestauranteByNicknameRequest" message="tns:getRestauranteByNickname"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/getRestauranteByNicknameResponse" message="tns:getRestauranteByNicknameResponse"></output>
+<operation name="setNickname" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/setNicknameRequest" message="tns:setNickname"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/setNicknameResponse" message="tns:setNicknameResponse"></output>
 </operation>
-<operation name="listaDataRestaurantes">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/listaDataRestaurantesRequest" message="tns:listaDataRestaurantes"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/listaDataRestaurantesResponse" message="tns:listaDataRestaurantesResponse"></output>
+<operation name="setCat" parameterOrder="arg0 arg1">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/setCatRequest" message="tns:setCat"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/setCatResponse" message="tns:setCatResponse"></output>
 </operation>
-<operation name="registrarCat" parameterOrder="arg0 arg1">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatRequest" message="tns:registrarCat"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/registrarCatResponse" message="tns:registrarCatResponse"></output>
+<operation name="getNickname">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/getNicknameRequest" message="tns:getNickname"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/getNicknameResponse" message="tns:getNicknameResponse"></output>
 </operation>
-<operation name="retColCat">
-<input wsam:Action="http://server.lab01/PublicadorUsuario/retColCatRequest" message="tns:retColCat"></input>
-<output wsam:Action="http://server.lab01/PublicadorUsuario/retColCatResponse" message="tns:retColCatResponse"></output>
+<operation name="devListaDC">
+<input wsam:Action="http://server.lab01/PublicadorUsuario/devListaDCRequest" message="tns:devListaDC"></input>
+<output wsam:Action="http://server.lab01/PublicadorUsuario/devListaDCResponse" message="tns:devListaDCResponse"></output>
 </operation>
 <operation name="getId">
 <input wsam:Action="http://server.lab01/PublicadorUsuario/getIdRequest" message="tns:getId"></input>
@@ -255,7 +269,7 @@
 </portType>
 <binding name="PublicadorUsuarioPortBinding" type="tns:PublicadorUsuario">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="setNickname">
+<operation name="existCfgFile">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -264,7 +278,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="setCat">
+<operation name="createCfgFile">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -273,7 +287,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="getNickname">
+<operation name="getRestauranteByNickname">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -282,7 +296,25 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="devListaDC">
+<operation name="listaDataRestaurantes">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="registrarCat">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://server.lab01/"></soap:body>
+</output>
+</operation>
+<operation name="retColCat">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -426,7 +458,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="getRestauranteByNickname">
+<operation name="setNickname">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -435,7 +467,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="listaDataRestaurantes">
+<operation name="setCat">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -444,7 +476,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="registrarCat">
+<operation name="getNickname">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
@@ -453,7 +485,7 @@
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>
 </output>
 </operation>
-<operation name="retColCat">
+<operation name="devListaDC">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://server.lab01/"></soap:body>

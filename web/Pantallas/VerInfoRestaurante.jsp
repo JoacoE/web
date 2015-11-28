@@ -74,7 +74,7 @@
                                         <option value="restaurante">
                                         <c:set var="Imagen" value="${primera}"/>
                                             <c:if test="${(Imagen == '') || (Imagen == null)}">
-                                                <img class="slide-image2" src="<%=request.getContextPath()%>/Branding/img/Noimagen.jpeg" alt="no imagen">
+                                                <img class="slide-image2"  src="<%=request.getContextPath()%>/Branding/img/Noimagen.jpeg" alt="no imagen">
                                             </c:if>
                                             <c:if test="${(Imagen != '') || (Imagen != null)}">
                                                 <img class="slide-image" src="${Imagen}" alt="">
@@ -133,17 +133,17 @@
                                     <br></br>
                                     <div class="row text-center"><h3>Productos promocionales</h3>
                                         <div class="indbanner">
-                                            <img class="promobannerimg"src="<%=request.getContextPath()%>/Branding/img/promobanner.png" alt="no imagen">
+                                            <img class="promobannerimg" height="200" width="200" src="<%=request.getContextPath()%>/Branding/img/promobanner.png" alt="no imagen">
                                         </div>
                                         <c:forEach var="promo" items="${promocionales}">
                                             <div class="col-sm-4 col-lg-4 col-md-4">
                                                 <div class="thumbnail" >
                                                     <c:set var="Imagen" value="${promo.getDataImagen()}"/>
                                                     <c:if test="${Imagen == ''}">
-                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                        <img height="200" width="200" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
                                                     </c:if>
                                                     <c:if test="${Imagen != ''}">
-                                                        <img src="data:image/png;charset=utf-8;base64,${promo.getDataImagen()}" alt="imagen">
+                                                        <img height="200" width="200" src="data:image/png;charset=utf-8;base64,${promo.getDataImagen()}" alt="imagen">
                                                     </c:if>
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>

@@ -20,7 +20,7 @@ public class Home extends javax.swing.JFrame {
     public Home() {
         initComponents();
         jDesktopPane1.setBorder(new ImagenFondoMovil());
-        
+        existeconexion();
     }
     
     public void existeconexion(){

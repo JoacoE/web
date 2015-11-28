@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.*;
 import javax.mail.Session;
 import javax.mail.internet.*;
 import java.lang.String;
@@ -101,13 +102,18 @@ public class PedidoServlet extends HttpServlet {
             request.setAttribute("carrito", listaCar);
             request.setAttribute("pedido", pedi);
             request.setAttribute("recibido", estado);
-            request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+            if (sesion.getAttribute("iniciada") == "true") {
+                request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/Pantallas/Error.jsp").forward(request, response);
+            }
         }
         
         if(request.getParameter("pedido") != null){//trae informacion del pedido
             ArrayList<DataCarrito> listaCar = new ArrayList<>();
             ProxyPedido PP = ProxyPedido.getInstance();
             ProxyProducto PU = ProxyProducto.getInstance();
+            HttpSession session = request.getSession();
             String idPed = (String)request.getParameter("pedido");
             long idPedi = Long.parseLong(idPed);
             ArrayList<DataPedido> pedidos = PP.listDataPedidos();
@@ -132,7 +138,11 @@ public class PedidoServlet extends HttpServlet {
             request.setAttribute("carrito", listaCar);
             request.setAttribute("pedido", pedi);
             request.setAttribute("recibido", estado);
-            request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+            if (session.getAttribute("iniciada") == "true") {
+                request.getRequestDispatcher("/Pantallas/VerPedido.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/Pantallas/Error.jsp").forward(request, response);
+            }
         }
         
         if(request.getParameter("pedidosUsuario") != null){//trae informacion del cliente
@@ -152,7 +162,11 @@ public class PedidoServlet extends HttpServlet {
             
             request.setAttribute("cliente", dc);
             request.setAttribute("lPedidos", listaPed);
-            request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
+            if (session.getAttribute("iniciada") == "true") {
+                request.getRequestDispatcher("/Pantallas/VerPerfilCliente.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/Pantallas/Error.jsp").forward(request, response);
+            }
         }
         if(request.getParameter("comprar") != null){
             ArrayList<DataCarrito> listaCar = new ArrayList<>();

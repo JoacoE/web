@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package Mobile;
+
+import com.middleware.logic.Middleware;
+import java.awt.BorderLayout;
+
 /**
  *
  * @author gera
@@ -15,13 +19,20 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
+        jDesktopPane1.setBorder(new ImagenFondoMovil());
         
-        
-//    jDesktopPane2.setBorder(new ImagenFondoMovil());
-//            conn = Connect.ConnectBD();
-
     }
-
+    
+    public void existeconexion(){
+        Middleware mid = new Middleware();
+        if (mid.connection()){
+            lblConexion.setVisible(false);
+        }
+        else
+        {
+            lblConexion.setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +43,11 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jpHome = new javax.swing.JPanel();
+        lblConexion = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         FondoMovil = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -45,6 +58,12 @@ public class Home extends javax.swing.JFrame {
         jpHome.setMinimumSize(new java.awt.Dimension(320, 480));
         jpHome.setRequestFocusEnabled(false);
         jpHome.setLayout(null);
+
+        lblConexion.setText("No tiene conexion");
+        jpHome.add(lblConexion);
+        lblConexion.setBounds(19, 70, 290, 18);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("/home/gera/Escritorio/titulomovil.png")); // NOI18N
         jpHome.add(jLabel3);
         jLabel3.setBounds(20, 100, 290, 100);
         jpHome.add(FondoMovil);
@@ -53,8 +72,12 @@ public class Home extends javax.swing.JFrame {
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(320, 480));
         jDesktopPane1.setMinimumSize(new java.awt.Dimension(320, 480));
         jpHome.add(jDesktopPane1);
-        jDesktopPane1.setBounds(10, 10, 320, 480);
+        jDesktopPane1.setBounds(20, 70, 290, 520);
         jDesktopPane1.getAccessibleContext().setAccessibleName("");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/gera/Escritorio/mobile2.png")); // NOI18N
+        jpHome.add(jLabel1);
+        jLabel1.setBounds(0, 0, 330, 650);
 
         jMenu1.setText("Usuario");
 
@@ -74,18 +97,21 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpHome, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        login l =  new login();
+        login l =  new login(this);
+        l.setLocation(40,150);
         jDesktopPane1.add(l);
         jDesktopPane1.show();
         
@@ -131,10 +157,12 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FondoMovil;
     public static javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jpHome;
+    private javax.swing.JLabel lblConexion;
     // End of variables declaration//GEN-END:variables
 }

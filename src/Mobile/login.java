@@ -6,19 +6,24 @@
 package Mobile;
 import Mobile.Controlador.Controlador;
 import static Mobile.Home.jDesktopPane1;
+import java.awt.BorderLayout;
 //import static Mobile.Home.MobileFondo;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 /**
  *
  * @author martin
  */
 public class login extends javax.swing.JInternalFrame {
-
+private Home h;
     /**
      * Creates new form login
      */
-    public login() {
+    public login(Home h) {
         initComponents();
+        
+        this.h = h;
+        this.h.existeconexion();
         this.show();
 
     }
@@ -37,11 +42,13 @@ public class login extends javax.swing.JInternalFrame {
         txtPass = new javax.swing.JPasswordField();
         btnIngresar = new javax.swing.JButton();
 
+        setAlignmentX(15);
+        setAlignmentY(30);
         setFocusable(false);
-        setMaximumSize(new java.awt.Dimension(320, 480));
-        setMinimumSize(new java.awt.Dimension(320, 480));
+        setMaximumSize(new java.awt.Dimension(208, 202));
+        setMinimumSize(new java.awt.Dimension(208, 202));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(320, 480));
+        setPreferredSize(new java.awt.Dimension(208, 202));
 
         txtuser.setToolTipText("Ingrese user o mail");
 
@@ -59,40 +66,34 @@ public class login extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtuser, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(txtPass)
-                    .addComponent(btnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(34, 34, 34)
                 .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addComponent(btnIngresar)
-                .addContainerGap(245, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -106,7 +107,8 @@ public class login extends javax.swing.JInternalFrame {
         String pass = this.txtPass.getText();
         if(c.iniciarSesion(user, pass)){
             c.getLstPedidos();
-            listaPedidos listaPed = new listaPedidos();
+            listaPedidos listaPed = new listaPedidos(h);
+            listaPed.setLocation(0, 150);
             this.setVisible(false);
             //listaPed.add(listaPed);
             Home.jDesktopPane1.add(listaPed);

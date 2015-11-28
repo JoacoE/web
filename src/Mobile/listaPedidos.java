@@ -14,11 +14,14 @@ public class listaPedidos extends javax.swing.JInternalFrame {
 //    ProxyUsuario ICU;
       Pedidos ped;
 //    private ArrayList<DataPedido> listaPedidos;
-//    
-    public listaPedidos() {
+      private Home h;
+      
+    public listaPedidos(Home h) {
         initComponents();
 //        ICP = ProxyPedido.getInstance();
 //          Controlador c = Controlador.getInstance();
+        this.h=h;
+        this.h.existeconexion();
         model = (DefaultTableModel)tblPedidos.getModel();
         CargarTabla();
 //        this.setVisible(true);
@@ -45,10 +48,10 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
-        setMaximumSize(new java.awt.Dimension(320, 480));
-        setMinimumSize(new java.awt.Dimension(320, 480));
+        setMaximumSize(new java.awt.Dimension(341, 298));
+        setMinimumSize(new java.awt.Dimension(341, 298));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(320, 480));
+        setPreferredSize(new java.awt.Dimension(341, 298));
 
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +123,7 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
+                        .addGap(108, 108, 108)
                         .addComponent(btnSync, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12))
         );
@@ -129,9 +132,9 @@ public class listaPedidos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
                 .addComponent(btnSync)
-                .addGap(176, 176, 176))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,7 +152,8 @@ public class listaPedidos extends javax.swing.JInternalFrame {
             id = Long.parseLong(idPedido);
             ped = c.getPedidoById(id);
             this.setVisible(false);
-            detallePedido detallePed = new detallePedido(ped);
+            detallePedido detallePed = new detallePedido(ped,h);
+            detallePed.setLocation(0, 150);
             Home.jDesktopPane1.add(detallePed);
             detallePed.show();
         }
@@ -159,7 +163,8 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         Controlador c = Controlador.getInstance();
         c.cerrarSesion();
         this.setVisible(false);
-        login l = new login();
+        login l = new login(h);
+        l.setLocation(40, 150);
         Home.jDesktopPane1.add(l);         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1MouseClicked
 
@@ -179,12 +184,13 @@ public class listaPedidos extends javax.swing.JInternalFrame {
     public void CargarTabla(){
         Controlador c = Controlador.getInstance();
         String lista[]=new String[5];
-        for (Pedidos ped : c.getPeds()){
-            String id = String.valueOf(ped.getId());
+        c.getLstPedidos();
+        for (Pedidos ped1 : c.getPeds()){
+            String id = String.valueOf(ped1.getId());
             lista[0]= id;
-            lista[1]= ped.getEstado();
-            lista[2]= ped.getNickUsr();
-            lista[3]= ped.getDireccion();
+            lista[1]= ped1.getEstado();
+            lista[2]= ped1.getNickUsr();
+            lista[3]= ped1.getDireccion();
             model.insertRow((int)tblPedidos.getRowCount(), lista);           
         }
     }

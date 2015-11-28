@@ -27,9 +27,11 @@ public class detallePedido extends javax.swing.JInternalFrame {
     int fila = 0;
     ProdCarrito prodC;
     Pedidos p;
-
-    public detallePedido(Pedidos ped) {
+private Home h;
+    public detallePedido(Pedidos ped, Home h) {
         initComponents();
+        this.h=h;
+        this.h.existeconexion();
         Controlador c = Controlador.getInstance();
         String id = String.valueOf(ped.getId());
         lblIdPed.setText(id);
@@ -104,9 +106,9 @@ public class detallePedido extends javax.swing.JInternalFrame {
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
-        setMaximumSize(new java.awt.Dimension(320, 480));
-        setMinimumSize(new java.awt.Dimension(320, 480));
-        setPreferredSize(new java.awt.Dimension(320, 480));
+        setMaximumSize(new java.awt.Dimension(313, 414));
+        setMinimumSize(new java.awt.Dimension(313, 414));
+        setPreferredSize(new java.awt.Dimension(313, 414));
 
         lblIdPedido.setText("Id Pedido:");
 
@@ -242,7 +244,7 @@ public class detallePedido extends javax.swing.JInternalFrame {
                 .addComponent(jbActualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,10 +290,14 @@ public class detallePedido extends javax.swing.JInternalFrame {
             jComboBox1.removeAllItems();
             jComboBox1.setVisible(false);
             jbActualizar.setEnabled(false);
-            c.actualizarEstadoPed(p.getNickUsr(), p.getId(),es.toString());
+            c.actualizarEstadoPed(p, es.toString());
             JOptionPane.showInternalMessageDialog(jDesktopPane1, "El pedido se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
             //lblEstado.setText(datped.getEstado().toString());
-
+            this.setVisible(false);
+            listaPedidos l = new listaPedidos(h);
+            l.setLocation(0, 150);
+            Home.jDesktopPane1.add(l);
+            l.show();
         }else{
             JOptionPane.showInternalMessageDialog(jDesktopPane1, "El pedido no se ha actualizado","Informacion",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -312,13 +318,15 @@ public class detallePedido extends javax.swing.JInternalFrame {
         Controlador c = Controlador.getInstance();
         c.cerrarSesion();
         this.setVisible(false);
-        login l = new login();
+        login l = new login(h);
+        l.setLocation(40, 150);
         Home.jDesktopPane1.add(l);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         this.setVisible(false);
-        listaPedidos l = new listaPedidos();
+        listaPedidos l = new listaPedidos(h);
+        l.setLocation(0, 150);
         Home.jDesktopPane1.add(l);
         l.show();// TODO add your handling code here:
     }//GEN-LAST:event_jMenu3MouseClicked

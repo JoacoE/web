@@ -9,14 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Pedidos implements Serializable{
+    
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     private String fecha; 
     private double precio_total;
     //@Enumerated(EnumType.STRING)
@@ -32,7 +37,7 @@ public class Pedidos implements Serializable{
     public Pedidos() {
     }
 
-    public Pedidos(long id, String fecha, double precio_total, String estado, String nickUsr, String mailUsr, String nickRest, ArrayList<ProdCarrito> ColCarrito) {
+    public Pedidos(int id, String fecha, double precio_total, String estado, String nickUsr, String mailUsr, String nickRest, ArrayList<ProdCarrito> ColCarrito) {
         this.id = id;
         this.fecha = fecha;
         this.precio_total = precio_total;
@@ -43,11 +48,11 @@ public class Pedidos implements Serializable{
         this.ColCarrito = ColCarrito;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

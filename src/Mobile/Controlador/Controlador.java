@@ -1,4 +1,5 @@
 package Mobile.Controlador;
+
 import Mobile.Clases.*;
 import static Mobile.Home.jDesktopPane1;
 //import com.middleware.dtos.*;
@@ -18,36 +19,33 @@ import lab01.server.DataCliente;
 import lab01.server.DataPedido;
 import lab01.server.DataRestaurante;
 
-
 public class Controlador {
+
     private static Controlador cont;
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("MobileQuickOrderPU");
     Middleware mid = new Middleware();
     private String RestLog;
     private ArrayList<Usuarios> rests;
     private ArrayList<Pedidos> peds;
-    
-    
-    public EntityManager getEntityManager(){
+
+    public EntityManager getEntityManager() {
         EntityManager em = emf.createEntityManager();
         return em;
     }
-    
-    
-    private Controlador(){
+
+    private Controlador() {
         RestLog = "";
         rests = new ArrayList<>();
         peds = new ArrayList<>();
     }
 
-    public
-        static Controlador getInstance(){
-        if (cont == null){
+    public static Controlador getInstance() {
+        if (cont == null) {
             cont = new Controlador();
         }
         return cont;
     }
-    
+
     public String getRestLog() {
         return RestLog;
     }
@@ -71,41 +69,37 @@ public class Controlador {
     public void setPeds(ArrayList<Pedidos> peds) {
         this.peds = peds;
     }
-    
-    
-    
-    public boolean iniciarSesionWS(String user, String password){
-        try{            
-            for(DataRestaurante dr: mid.listaDataRestaurantes()){
+
+    public boolean iniciarSesionWS(String user, String password) {
+        try {
+            for (DataRestaurante dr : mid.listaDataRestaurantes()) {
                 Usuarios u = new Usuarios();
                 u.setNickRest(dr.getNickname());
                 u.setPassRest(dr.getPwd());
                 u.setMailRest(dr.getEmail());
                 rests.add(u);
-                EntityManager em= getEntityManager();
+                EntityManager em = getEntityManager();
                 Usuarios usu = null;
                 usu = em.find(Usuarios.class, dr.getNickname());
 //                
-                if (usu == null){
+                if (usu == null) {
 //                em.
 //                if(!em.contains(u)){
                     em.getTransaction().begin();
                     em.persist(u);
                     em.getTransaction().commit();
-                    em.close();    
+                    em.close();
                 }
-                
+
             }
-            for (Usuarios r : rests){
-                if (r.getNickRest().equals(user) || r.getMailRest().equals(user)){
-                    if (r.getPassRest().equals(password)){
-                        setRestLog(user);                        
+            for (Usuarios r : rests) {
+                if (r.getNickRest().equals(user) || r.getMailRest().equals(user)) {
+                    if (r.getPassRest().equals(password)) {
+                        setRestLog(user);
                         return true;
-                    }
-                    else
-                    {
+                    } else {
                         JOptionPane.showInternalMessageDialog(jDesktopPane1, "Password incorrecta");
-                    }    
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -113,54 +107,75 @@ public class Controlador {
         }
         return false;
     }
-    
-    public boolean iniciarSesion(String user, String password){
-        
-        if (mid.connection()){
+
+    public boolean iniciarSesion(String user, String password) {
+
+        if (mid.connection()) {
             return iniciarSesionWS(user, password);
-        }    
-        else
-        {
-            boolean existe= false;
-            EntityManager em= getEntityManager();
+        } else {
+            boolean existe = false;
+            EntityManager em = getEntityManager();
 //            Usuarios usu = null;
-                try{
+            try {
 //                    usu = em.find(Usuarios.class, user);
-                    Query query = em.createQuery("SELECT u FROM Usuarios u", Usuarios.class);
+                Query query = em.createQuery("SELECT u FROM Usuarios u", Usuarios.class);
 //                    Usuarios usu = (Usuarios)query.setParameter("nickname", user).getSingleResult();
-                    List<Usuarios> usu = query.getResultList();
-                    for (Usuarios u : usu){
-                        if (u.getNickRest().equals(user)){
-                            if (u.getPassRest().equals(password)){
-                                setRestLog(user);
-                                existe = true;
-                            }
-                            else
-                            {
-                                JOptionPane.showMessageDialog(jDesktopPane1, "Password incorrecta");
-                            }  
+                List<Usuarios> usu = query.getResultList();
+                for (Usuarios u : usu) {
+                    if (u.getNickRest().equals(user)) {
+                        if (u.getPassRest().equals(password)) {
+                            setRestLog(user);
+                            existe = true;
+                        } else {
+                            JOptionPane.showMessageDialog(jDesktopPane1, "Password incorrecta");
                         }
-                        
                     }
-                }catch (Exception ex){
-                    JOptionPane.showInternalMessageDialog(jDesktopPane1, ex);
+
                 }
+            } catch (Exception ex) {
+                JOptionPane.showInternalMessageDialog(jDesktopPane1, ex);
+            }
             return existe;
         }
     }
 
-
-    public void cerrarSesion(){
-        this.RestLog= "";
+    public void cerrarSesion() {
+        this.RestLog = "";
         this.peds.clear();
 //        this.rests = null;
     }
+
+    public boolean extActEstadoPed(Pedidos p){
+        EntityManager em = getEntityManager();
+        TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
+        List<Pedidos> lstpedBase = q.getResultList();
+        if (!lstpedBase.isEmpty()) {
+            for (Pedidos pBase : lstpedBase) {
+                if ((pBase.getMailUsr().equals(p.getMailUsr())) && (pBase.getNickRest().equals(p.getNickRest())) && (pBase.getPrecio_total() == p.getPrecio_total())) {
+                    if (!pBase.getEstado().toString().equals(p.getEstado())) {
+                        em.getTransaction().begin();
+                        pBase.setEstado(p.getEstado().toString());
+                        em.getTransaction().commit();
+                        em.close();
+                        return true;
+                    }else{
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        return false;
+    }
     
-    public void getLstPedidos(){
-        try{
-            for(DataPedido dp: mid.listDataPedidos()){
+    public void getLstPedidos() {
+        try {
+            this.peds.clear();
+            int id = 1;
+            List<Pedidos> pedServer = new ArrayList<>();
+            for (DataPedido dp : mid.listDataPedidos()) {
                 Pedidos p = new Pedidos();
-                p.setId(dp.getId());
+                p.setId(id);
                 String est = dp.getEstado().toString();
                 p.setEstado(est);
                 p.setNickUsr(dp.getNickUsr());
@@ -171,7 +186,7 @@ public class Controlador {
                 p.setNickRest(dp.getNickRest());
                 p.setPrecio_total(dp.getPrecioTotal());
 //                ArrayList<ProdCarrito> aux = new ArrayList<>();
-                for(DataCarrito dcarr: dp.getColCarrito()){
+                for (DataCarrito dcarr : dp.getColCarrito()) {
                     ProdCarrito pc = new ProdCarrito();
                     pc.setNomProd(dcarr.getNomProd());
                     pc.setCantidad(dcarr.getCantidad());
@@ -182,94 +197,92 @@ public class Controlador {
                 }
 //                p.setColCarrito(aux);
 
-                if (p.getNickRest().equals(RestLog)){
+                if (p.getNickRest().equals(RestLog)) {
                     peds.add(p);
                 }
-                EntityManager em= getEntityManager();
-                
-                
-                Pedidos ped = null;
-                ped = em.find(Pedidos.class, p.getId());
-//                
-                if (ped == null){
-                
-                
-//                if(!em.contains(p)){
+                pedServer.add(p);
+                id++;
+            }
+            for(Pedidos p : pedServer){
+                boolean existe = extActEstadoPed(p);
+                if(!existe){
+                    EntityManager em = getEntityManager();
                     em.getTransaction().begin();
                     em.persist(p);
-                    em.getTransaction().commit();
-                    em.close();    
-                }
-        }        
-        
-    }   catch (Exception ex) {
-            EntityManager em= getEntityManager();
-            Pedidos ped = null;
-            List<Pedidos> lstped = null;
-                try{
-                    //falta recorrer todos los pedidos con ese restaurante
-                    TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
-                    
-                    lstped = q.getResultList();
-                    peds.clear();
-                    for (Pedidos p : lstped){
-                        if (p.getNickRest().equals(this.RestLog)){
-                            agregarPed(p);
-                        }
-                    }
-                }catch (Exception e){
-                    JOptionPane.showInternalMessageDialog(jDesktopPane1, e);
-                }
-    //IR CONTRA LA BASE    
-    }
-        
-    }
-    
-    public void agregarPed(Pedidos p){
-        if(this.peds == null){
-            peds = new ArrayList<>();
-        }
-        peds.add(p);
-    }
-            
-            
-            
-    public Pedidos getPedidoById(long id){
-        for(Pedidos p : this.peds){
-            if (p.getId() == id){
-                return p;
-            }
-        }
-        throw new NullPointerException();
-    }
-    
-    public void actualizarEstadoPed(String nickname, long id, String est){
-        try {
-            mid.actualizarEPedido(nickname, id, est);
-            EntityManager em= getEntityManager();
-            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
-            List<Pedidos> lstped = null;
-            lstped = q.getResultList();
-            for (Pedidos p : lstped){
-                if (p.getId() ==(id)){
-                    Pedidos pedido = em.find(Pedidos.class, p.getId());
-                    em.getTransaction().begin();
-                    pedido.setEstado(est);
                     em.getTransaction().commit();
                     em.close();
                 }
             }
         } catch (Exception ex) {
-            EntityManager em= getEntityManager();
+            EntityManager em = getEntityManager();
+            Pedidos ped = null;
+            List<Pedidos> lstped = null;
+            try {
+                //falta recorrer todos los pedidos con ese restaurante
+                TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
+                lstped = q.getResultList();
+                peds.clear();
+                for (Pedidos p : lstped) {
+                    if (p.getNickRest().equals(this.RestLog)) {
+                        agregarPed(p);
+                    }
+                }
+            } catch (Exception e) {
+                JOptionPane.showInternalMessageDialog(jDesktopPane1, e);
+            }
+        }
+    }
+
+    public void agregarPed(Pedidos p) {
+        if (this.peds == null) {
+            peds = new ArrayList<>();
+        }
+        peds.add(p);
+    }
+
+    public Pedidos getPedidoById(long id) {
+        for (Pedidos p : this.peds) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        throw new NullPointerException();
+    }
+
+    public void actualizarEstadoPed(Pedidos p, String estado) {
+        try {
+            long iddp = 0;
+            for (DataPedido dp : mid.listDataPedidos()){
+                if ((dp.getMailUsr().equals(p.getMailUsr())) && (dp.getNickRest().equals(p.getNickRest())) && (dp.getPrecioTotal() == p.getPrecio_total())) {
+                    iddp = dp.getId();
+                }
+
+            }    
+            mid.actualizarEPedido(p.getNickUsr(), iddp, estado);
+            EntityManager em = getEntityManager();
             TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
             List<Pedidos> lstped = null;
             lstped = q.getResultList();
-            for (Pedidos p : lstped){
-                if (p.getId() ==(id)){
+            for (Pedidos ped : lstped) {
+                if (ped.getId() == p.getId()) {
                     Pedidos pedido = em.find(Pedidos.class, p.getId());
                     em.getTransaction().begin();
-                    pedido.setEstado(est);
-                    
+                    pedido.setEstado(estado);
+                    em.getTransaction().commit();
+                    em.close();
+                }
+            }
+        } catch (Exception ex) {
+            EntityManager em = getEntityManager();
+            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
+            List<Pedidos> lstped = null;
+            lstped = q.getResultList();
+            for (Pedidos pBase : lstped) {
+                if (pBase.getId() == p.getId()) {
+                    Pedidos pedido = em.find(Pedidos.class, p.getId());
+                    em.getTransaction().begin();
+                    pedido.setEstado(estado);
+
 //                    em.merge(est);
                     em.getTransaction().commit();
                     em.close();
@@ -277,30 +290,30 @@ public class Controlador {
             }
         }
     }
-    
-    public void syncEstados(){
+
+    public void syncEstados() {
         try {
             EntityManager em = getEntityManager();
             ArrayList<DataPedido> aux = new ArrayList<>();
             ArrayList<Pedidos> aux2 = new ArrayList<>();
             List<Pedidos> lstped = null;
-                    
-            for (DataPedido dp :mid.listDataPedidos()){
-                if(dp.getNickRest().equals(RestLog)){
+
+            for (DataPedido dp : mid.listDataPedidos()) {
+                if (dp.getNickRest().equals(RestLog)) {
                     aux.add(dp);
                 }
             }
-            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);               
+            TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
             lstped = q.getResultList();
-            for (Pedidos p : lstped){
-                if (p.getNickRest().equals(this.RestLog)){
+            for (Pedidos p : lstped) {
+                if (p.getNickRest().equals(this.RestLog)) {
                     aux2.add(p);
                 }
             }
-            for (Pedidos p : aux2){
-                for (DataPedido dp : aux){
-                    if(dp.getMailUsr().equals(p.getMailUsr()) && dp.getNickRest().equals(p.getNickRest()) && dp.getPrecioTotal() == p.getPrecio_total()){
-                        if(!dp.getEstado().toString().equals(p.getEstado())){
+            for (Pedidos p : aux2) {
+                for (DataPedido dp : aux) {
+                    if (dp.getMailUsr().equals(p.getMailUsr()) && dp.getNickRest().equals(p.getNickRest()) && dp.getPrecioTotal() == p.getPrecio_total()) {
+                        if (!dp.getEstado().toString().equals(p.getEstado())) {
                             mid.actualizarEPedido(p.getNickUsr(), dp.getId(), p.getEstado());
                         }
                     }
@@ -311,5 +324,5 @@ public class Controlador {
             JOptionPane.showInternalMessageDialog(jDesktopPane1, "No hay conexion");
         }
     }
-    
+
 }

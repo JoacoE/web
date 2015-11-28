@@ -12,4 +12,11 @@
     <system systemId="http://localhost:9002/pubprod?xsd=1" uri="wsdl/localhost_9002/pubprod.xsd_1.xsd"/>
     <system systemId="http://localhost:9003/pubped?wsdl" uri="wsdl/localhost_9003/pubped.wsdl"/>
     <system systemId="http://localhost:9003/pubped?xsd=1" uri="wsdl/localhost_9003/pubped.xsd_1.xsd"/>
+    <system systemId="http://192.168.1.46:9001/pubusr?wsdl" uri="wsdl/192.168.1.46_9001/pubusr.wsdl"/>
+    <system systemId="http://192.168.1.46:9001/pubusr?xsd=1" uri="wsdl/192.168.1.46_9001/pubusr.xsd_1.xsd"/>
+    <system systemId="http://192.168.1.46:9001/pubusr?xsd=2" uri="wsdl/192.168.1.46_9001/pubusr.xsd_2.xsd"/>
+    <system systemId="http://192.168.1.46:9002/pubprod?wsdl" uri="wsdl/192.168.1.46_9002/pubprod.wsdl"/>
+    <system systemId="http://192.168.1.46:9002/pubprod?xsd=1" uri="wsdl/192.168.1.46_9002/pubprod.xsd_1.xsd"/>
+    <system systemId="http://192.168.1.46:9003/pubped?wsdl" uri="wsdl/192.168.1.46_9003/pubped.wsdl"/>
+    <system systemId="http://192.168.1.46:9003/pubped?xsd=1" uri="wsdl/192.168.1.46_9003/pubped.xsd_1.xsd"/>
 </catalog>

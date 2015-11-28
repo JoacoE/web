@@ -3,9 +3,9 @@
   <services>
   </services>
   <clients>
-    <client name="pubusr">
-      <wsdl-url>http://localhost:9001/pubusr?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_9001/pubusr.wsdl</local-wsdl-file>
+    <client name="pubprod">
+      <wsdl-url>http://192.168.1.46:9002/pubprod?wsdl</wsdl-url>
+      <local-wsdl-file>192.168.1.46_9002/pubprod.wsdl</local-wsdl-file>
       <package-name forceReplace="true">lab01.server</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <use-dispatch>true</use-dispatch>
@@ -24,7 +24,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:9001/pubusr?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://192.168.1.46:9002/pubprod?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -40,9 +40,9 @@
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="pubprod">
-      <wsdl-url>http://localhost:9002/pubprod?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_9002/pubprod.wsdl</local-wsdl-file>
+    <client name="pubusr">
+      <wsdl-url>http://192.168.1.46:9001/pubusr?wsdl</wsdl-url>
+      <local-wsdl-file>192.168.1.46_9001/pubusr.wsdl</local-wsdl-file>
       <package-name forceReplace="true">lab01.server</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <use-dispatch>true</use-dispatch>
@@ -61,7 +61,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:9002/pubprod?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://192.168.1.46:9001/pubusr?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -78,8 +78,8 @@
       </wsimport-options>
     </client>
     <client name="pubped">
-      <wsdl-url>http://localhost:9003/pubped?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_9003/pubped.wsdl</local-wsdl-file>
+      <wsdl-url>http://192.168.1.46:9003/pubped?wsdl</wsdl-url>
+      <local-wsdl-file>192.168.1.46_9003/pubped.wsdl</local-wsdl-file>
       <package-name forceReplace="true">lab01.server</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <use-dispatch>true</use-dispatch>
@@ -98,7 +98,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:9003/pubped?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://192.168.1.46:9003/pubped?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

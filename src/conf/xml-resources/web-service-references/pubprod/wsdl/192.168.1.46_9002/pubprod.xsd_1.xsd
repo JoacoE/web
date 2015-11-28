@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://server.lab01/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://server.lab01/">
+
+<xs:complexType name="dataIndividual">
+<xs:sequence>
+<xs:element name="DataNombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="DataDescripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="DataPrecio" type="xs:double"></xs:element>
+<xs:element name="DataImagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="cantidad" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoActualizarPromocional">
+<xs:sequence>
+<xs:element name="dp" type="tns:dataPromocional" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickRest" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataPromocional">
+<xs:sequence>
+<xs:element name="DataActiva" type="xs:boolean"></xs:element>
+<xs:element name="DataDescuento" type="xs:double"></xs:element>
+<xs:element name="DataNombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="DataDescripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="DataPrecio" type="xs:double"></xs:element>
+<xs:element name="DataImagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="ColDatIndividual" type="tns:dataIndividual" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoActualizarIndividual">
+<xs:sequence>
+<xs:element name="di" type="tns:dataIndividual" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nickRest" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoArmarPromo">
+<xs:sequence>
+<xs:element name="nickRest" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descuento" type="xs:double"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtoRegistrarProducto">
+<xs:sequence>
+<xs:element name="di" type="tns:dataIndividual" minOccurs="0"></xs:element>
+<xs:element name="nickRest" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="promo" type="xs:boolean"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataIndividualArray" final="#all">
+<xs:sequence>
+<xs:element name="item" type="tns:dataIndividual" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -26,26 +26,10 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-pubusr" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/pubusr"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pubusr" destdir="${build.generated.dir}/jax-wsCache/pubusr" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pubusr/wsdl/localhost_9001/pubusr.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9001/pubusr?wsdl" xnocompile="true" xendorsed="true" package="lab01.server">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pubusr/wsdl/localhost_9001/pubusr.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/pubusr"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/pubusr">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-pubusr" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/lab01/server"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/pubusr"/>
-    </target>
     <target name="wsimport-client-pubprod" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/pubprod"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pubprod" destdir="${build.generated.dir}/jax-wsCache/pubprod" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pubprod/wsdl/localhost_9002/pubprod.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9002/pubprod?wsdl" xnocompile="true" xendorsed="true" package="lab01.server">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pubprod/wsdl/localhost_9002/pubprod.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pubprod" destdir="${build.generated.dir}/jax-wsCache/pubprod" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pubprod/wsdl/192.168.1.46_9002/pubprod.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.1.46:9002/pubprod?wsdl" xnocompile="true" xendorsed="true" package="lab01.server">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pubprod/wsdl/192.168.1.46_9002/pubprod.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/pubprod"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
@@ -58,10 +42,26 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/lab01/server"/>
         <delete dir="${build.generated.dir}/jax-wsCache/pubprod"/>
     </target>
+    <target name="wsimport-client-pubusr" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/pubusr"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pubusr" destdir="${build.generated.dir}/jax-wsCache/pubusr" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pubusr/wsdl/192.168.1.46_9001/pubusr.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.1.46:9001/pubusr?wsdl" xnocompile="true" xendorsed="true" package="lab01.server">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pubusr/wsdl/192.168.1.46_9001/pubusr.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/pubusr"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/pubusr">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-pubusr" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/lab01/server"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/pubusr"/>
+    </target>
     <target name="wsimport-client-pubped" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/pubped"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pubped" destdir="${build.generated.dir}/jax-wsCache/pubped" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pubped/wsdl/localhost_9003/pubped.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9003/pubped?wsdl" xnocompile="true" xendorsed="true" package="lab01.server">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pubped/wsdl/localhost_9003/pubped.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/pubped" destdir="${build.generated.dir}/jax-wsCache/pubped" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/pubped/wsdl/192.168.1.46_9003/pubped.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://192.168.1.46:9003/pubped?wsdl" xnocompile="true" xendorsed="true" package="lab01.server">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/pubped/wsdl/192.168.1.46_9003/pubped.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/pubped"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
@@ -74,5 +74,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/lab01/server"/>
         <delete dir="${build.generated.dir}/jax-wsCache/pubped"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-pubusr, wsimport-client-pubprod, wsimport-client-pubped"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-pubprod, wsimport-client-pubusr, wsimport-client-pubped"/>
 </project>

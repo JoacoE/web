@@ -41,17 +41,16 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
         btnSync = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        btnCerrarSesion = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
-        setMaximumSize(new java.awt.Dimension(341, 298));
-        setMinimumSize(new java.awt.Dimension(341, 298));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        setMaximumSize(new java.awt.Dimension(294, 298));
+        setMinimumSize(new java.awt.Dimension(294, 298));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(341, 298));
+        setPreferredSize(new java.awt.Dimension(294, 298));
 
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,35 +96,26 @@ public class listaPedidos extends javax.swing.JInternalFrame {
             }
         });
 
-        jMenu1.setText("Salir");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
+                        .addComponent(btnCerrarSesion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(btnSync, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,8 +123,10 @@ public class listaPedidos extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnSync)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSync)
+                    .addComponent(btnCerrarSesion))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,27 +151,23 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblPedidosMouseClicked
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        Controlador c = Controlador.getInstance();
-        c.cerrarSesion();
-        this.setVisible(false);
-        login l = new login(h);
-        l.setLocation(40, 150);
-        Home.jDesktopPane1.add(l);         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1MouseClicked
-
     private void btnSyncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSyncMouseClicked
         Controlador c = Controlador.getInstance();
         c.syncEstados();
     }//GEN-LAST:event_btnSyncMouseClicked
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
     private void btnSyncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSyncActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSyncActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        Controlador c = Controlador.getInstance();
+        c.cerrarSesion();
+        this.setVisible(false);
+        login l = new login(h);
+        l.setLocation(40, 150);
+        Home.jDesktopPane1.add(l);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     public void CargarTabla(){
         Controlador c = Controlador.getInstance();
@@ -195,11 +183,9 @@ public class listaPedidos extends javax.swing.JInternalFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnSync;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblPedidos;

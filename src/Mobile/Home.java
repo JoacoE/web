@@ -43,14 +43,12 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jpHome = new javax.swing.JPanel();
+        btnSesion = new javax.swing.JButton();
         lblConexion = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         FondoMovil = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,11 +57,21 @@ public class Home extends javax.swing.JFrame {
         jpHome.setRequestFocusEnabled(false);
         jpHome.setLayout(null);
 
-        lblConexion.setText("No tiene conexion");
+        btnSesion.setText("Iniciar sesion");
+        btnSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSesionActionPerformed(evt);
+            }
+        });
+        jpHome.add(btnSesion);
+        btnSesion.setBounds(110, 290, 120, 30);
+
+        lblConexion.setForeground(new java.awt.Color(255, 0, 0));
+        lblConexion.setText("ATENCION: No tiene conexion");
         jpHome.add(lblConexion);
         lblConexion.setBounds(19, 70, 290, 18);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("/home/gera/Escritorio/titulomovil.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/titulomovil.png"))); // NOI18N
         jpHome.add(jLabel3);
         jLabel3.setBounds(20, 100, 290, 100);
         jpHome.add(FondoMovil);
@@ -75,23 +83,9 @@ public class Home extends javax.swing.JFrame {
         jDesktopPane1.setBounds(20, 70, 290, 520);
         jDesktopPane1.getAccessibleContext().setAccessibleName("");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/gera/Escritorio/mobile2.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Helpers/mobile2.png"))); // NOI18N
         jpHome.add(jLabel1);
         jLabel1.setBounds(0, 0, 330, 650);
-
-        jMenu1.setText("Usuario");
-
-        jMenuItem1.setText("Iniciar Sesion");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,15 +103,13 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
+        btnSesion.hide();
         login l =  new login(this);
         l.setLocation(40,150);
         jDesktopPane1.add(l);
         jDesktopPane1.show();
-        
-        //l.toFront();
-
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_btnSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,12 +148,10 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FondoMovil;
+    private javax.swing.JButton btnSesion;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jpHome;
     private javax.swing.JLabel lblConexion;
     // End of variables declaration//GEN-END:variables

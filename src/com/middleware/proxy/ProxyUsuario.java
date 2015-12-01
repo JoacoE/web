@@ -74,7 +74,7 @@ public class ProxyUsuario {
                 throw new IllegalStateException("Couldn't create dir: " + folder);
             }
             cfgFolder = folder.getPath();
-            propertiesFile = "ProxyUsu.properties";
+            propertiesFile = "ProxyUsr.properties";
             prop = new Properties();
             input = null;
             if(!existCfgFile()){

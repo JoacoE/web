@@ -1,6 +1,7 @@
 package Mobile.Clases;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 public class ProdCarrito implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="ID_PCARR")
     private int idProdc;
     private String nomProd;
     private boolean promo;

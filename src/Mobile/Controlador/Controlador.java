@@ -2,7 +2,6 @@ package Mobile.Controlador;
 
 import Mobile.Clases.*;
 import static Mobile.Home.jDesktopPane1;
-//import com.middleware.dtos.*;
 import com.middleware.logic.Middleware;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,27 +69,77 @@ public class Controlador {
         this.peds = peds;
     }
 
+    public Usuarios getUsuarioOrNull(String nickRest){
+        for(Usuarios usr : rests){
+            if(usr.getNickRest().equals(nickRest)){
+                return usr;
+            }
+        }
+        return null;
+    }
+    
+    public boolean existeUsuario(String nickRest){
+        for(Usuarios usr : rests){
+            if(usr.getNickRest().equals(nickRest)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public boolean iniciarSesionWS(String user, String password) {
-        try {
+        try{
             for (DataRestaurante dr : mid.listaDataRestaurantes()) {
                 Usuarios u = new Usuarios();
                 u.setNickRest(dr.getNickname());
                 u.setPassRest(dr.getPwd());
                 u.setMailRest(dr.getEmail());
-                rests.add(u);
+                ArrayList<Pedidos> pdsUsr = new ArrayList<>();
+                for (DataPedido dp : mid.listarPedidos()) {
+                    Pedidos p = new Pedidos();
+                    String est = dp.getEstado().toString();
+                    p.setEstado(est);
+                    p.setNickUsr(dp.getNickUsr());
+                    DataCliente dc = mid.getUsuarioByNickname(dp.getNickUsr());
+                    p.setDireccion(dc.getDireccion());
+                    p.setFecha(dp.getFecha());
+                    p.setMailUsr(dp.getMailUsr());
+                    p.setNickRest(dp.getNickRest());
+                    p.setPrecio_total(dp.getPrecioTotal());
+                    peds.add(p);
+                    if (u.getNickRest().equals(p.getNickRest())) {
+                        pdsUsr.add(p);
+                    }
+                }
+                Usuarios exst = getUsuarioOrNull(u.getNickRest());
+                if(exst == null){
+                    for(Pedidos ped : pdsUsr){
+                        u.addPedido(ped);
+                    }
+                }else{
+                    for(Pedidos ped : pdsUsr){
+                        if(!exst.existePedido(ped.getId())){
+                            EntityManager em = getEntityManager();
+                            em.getTransaction().begin();
+                            exst.addPedido(ped);
+                            em.persist(ped);
+                            em.getTransaction().commit();
+                            em.close();
+                        }
+                    }
+                }
+                if(!existeUsuario(u.getNickRest())){
+                    rests.add(u);
+                }
                 EntityManager em = getEntityManager();
                 Usuarios usu = null;
                 usu = em.find(Usuarios.class, dr.getNickname());
-//                
                 if (usu == null) {
-//                em.
-//                if(!em.contains(u)){
                     em.getTransaction().begin();
                     em.persist(u);
                     em.getTransaction().commit();
                     em.close();
                 }
-
             }
             for (Usuarios r : rests) {
                 if (r.getNickRest().equals(user) || r.getMailRest().equals(user)) {
@@ -102,7 +151,7 @@ public class Controlador {
                     }
                 }
             }
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
@@ -115,11 +164,8 @@ public class Controlador {
         } else {
             boolean existe = false;
             EntityManager em = getEntityManager();
-//            Usuarios usu = null;
             try {
-//                    usu = em.find(Usuarios.class, user);
                 Query query = em.createQuery("SELECT u FROM Usuarios u", Usuarios.class);
-//                    Usuarios usu = (Usuarios)query.setParameter("nickname", user).getSingleResult();
                 List<Usuarios> usu = query.getResultList();
                 for (Usuarios u : usu) {
                     if (u.getNickRest().equals(user)) {
@@ -142,7 +188,6 @@ public class Controlador {
     public void cerrarSesion() {
         this.RestLog = "";
         this.peds.clear();
-//        this.rests = null;
     }
 
     public boolean extActEstadoPed(Pedidos p){
@@ -185,18 +230,14 @@ public class Controlador {
                 p.setMailUsr(dp.getMailUsr());
                 p.setNickRest(dp.getNickRest());
                 p.setPrecio_total(dp.getPrecioTotal());
-//                ArrayList<ProdCarrito> aux = new ArrayList<>();
                 for (DataCarrito dcarr : dp.getColCarrito()) {
                     ProdCarrito pc = new ProdCarrito();
                     pc.setNomProd(dcarr.getNomProd());
                     pc.setCantidad(dcarr.getCantidad());
                     pc.setPrecio(dcarr.getPrecio());
                     pc.setPromo(dcarr.isPromo());
-//                    aux.add(pc);
                     p.addProducto(pc);
                 }
-//                p.setColCarrito(aux);
-
                 if (p.getNickRest().equals(RestLog)) {
                     peds.add(p);
                 }
@@ -218,7 +259,6 @@ public class Controlador {
             Pedidos ped = null;
             List<Pedidos> lstped = null;
             try {
-                //falta recorrer todos los pedidos con ese restaurante
                 TypedQuery<Pedidos> q = em.createQuery("SELECT p FROM Pedidos p", Pedidos.class);
                 lstped = q.getResultList();
                 peds.clear();
@@ -256,7 +296,6 @@ public class Controlador {
                 if ((dp.getMailUsr().equals(p.getMailUsr())) && (dp.getNickRest().equals(p.getNickRest())) && (dp.getPrecioTotal() == p.getPrecio_total())) {
                     iddp = dp.getId();
                 }
-
             }    
             mid.actualizarEPedido(p.getNickUsr(), iddp, estado);
             EntityManager em = getEntityManager();
@@ -282,8 +321,6 @@ public class Controlador {
                     Pedidos pedido = em.find(Pedidos.class, p.getId());
                     em.getTransaction().begin();
                     pedido.setEstado(estado);
-
-//                    em.merge(est);
                     em.getTransaction().commit();
                     em.close();
                 }
@@ -324,5 +361,4 @@ public class Controlador {
             JOptionPane.showInternalMessageDialog(jDesktopPane1, "No hay conexion");
         }
     }
-
 }

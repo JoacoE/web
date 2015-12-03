@@ -1,26 +1,23 @@
 package Mobile.Clases;
 
-//import com.middleware.dtos.DataCarrito;
-//import com.middleware.dtos.Estados;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 @Entity
 public class Pedidos implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name="ID_PED")
     private int id;
     private String fecha; 
     private double precio_total;
@@ -31,7 +28,7 @@ public class Pedidos implements Serializable{
     private String nickRest;
     private String direccion;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="Ped_ID")
+    @JoinColumn(name="ID_PCARR")
     private ArrayList<ProdCarrito> ColCarrito;
 
     public Pedidos() {

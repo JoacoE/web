@@ -106,6 +106,14 @@ public class Controlador {
                     p.setMailUsr(dp.getMailUsr());
                     p.setNickRest(dp.getNickRest());
                     p.setPrecio_total(dp.getPrecioTotal());
+                    for (DataCarrito dcarr : dp.getColCarrito()) {
+                        ProdCarrito pc = new ProdCarrito();
+                        pc.setNomProd(dcarr.getNomProd());
+                        pc.setCantidad(dcarr.getCantidad());
+                        pc.setPrecio(dcarr.getPrecio());
+                        pc.setPromo(dcarr.isPromo());
+                        p.addProducto(pc);
+                    }
                     peds.add(p);
                     if (u.getNickRest().equals(p.getNickRest())) {
                         pdsUsr.add(p);
@@ -244,16 +252,16 @@ public class Controlador {
                 pedServer.add(p);
                 id++;
             }
-            for(Pedidos p : pedServer){
-                boolean existe = extActEstadoPed(p);
-                if(!existe){
-                    EntityManager em = getEntityManager();
-                    em.getTransaction().begin();
-                    em.persist(p);
-                    em.getTransaction().commit();
-                    em.close();
-                }
-            }
+//            for(Pedidos p : pedServer){
+//                boolean existe = extActEstadoPed(p);
+//                if(!existe){
+//                    EntityManager em = getEntityManager();
+//                    em.getTransaction().begin();
+//                    em.persist(p);
+//                    em.getTransaction().commit();
+//                    em.close();
+//                }
+//            }
         } catch (Exception ex) {
             EntityManager em = getEntityManager();
             Pedidos ped = null;

@@ -32,6 +32,7 @@ public class Pedidos implements Serializable{
     private ArrayList<ProdCarrito> ColCarrito;
 
     public Pedidos() {
+        this.ColCarrito = new ArrayList<>();
     }
 
     public Pedidos(int id, String fecha, double precio_total, String estado, String nickUsr, String mailUsr, String nickRest, ArrayList<ProdCarrito> ColCarrito) {
@@ -114,12 +115,12 @@ public class Pedidos implements Serializable{
     }
 
     public void setColCarrito(ArrayList<ProdCarrito> ColCarrito) {
-        this.ColCarrito = new ArrayList<>();
+//        this.ColCarrito = new ArrayList<>();
         this.ColCarrito.addAll(ColCarrito);
     }
     
     public void addProducto(ProdCarrito pc){
-        this.ColCarrito = new ArrayList<>();
+//        this.ColCarrito = new ArrayList<>();
         this.ColCarrito.add(pc);
     }
     

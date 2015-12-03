@@ -143,7 +143,7 @@
                                                         <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
                                                     </c:if>
                                                     <c:if test="${Imagen != ''}">
-                                                        <img src="data:image/png;charset=utf-8;base64,${promo.getDataImagen()}" alt="imagen">
+                                                        <img height="200" width="200" src="data:image/png;charset=utf-8;base64,${promo.getDataImagen()}" alt="imagen">
                                                     </c:if>
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${promo.getDataPrecio()}</h4>
@@ -164,10 +164,10 @@
                                                 <div class="thumbnail">
                                                     <c:set var="Imagen" value="${individ.getDataImagen()}"/>
                                                     <c:if test="${Imagen == ''}">
-                                                        <img src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
+                                                        <img height="200" width="200" src="<%=request.getContextPath()%>/Branding/img/NoImagen.jpeg" alt="no imagen">
                                                     </c:if>
                                                     <c:if test="${Imagen != ''}">
-                                                        <img src="data:image/png;charset=utf-8;base64,${individ.getDataImagen()}" alt="imagen">
+                                                        <img height="200" width="200" src="data:image/png;charset=utf-8;base64,${individ.getDataImagen()}" alt="imagen">
                                                     </c:if>
                                                     <div class="caption">
                                                         <h4 id="precio" class="pull-right">$${individ.getDataPrecio()}</h4>

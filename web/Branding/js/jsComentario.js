@@ -26,3 +26,4 @@ function test(){
         alert(result);
     e.preventDefault();
     });
+}

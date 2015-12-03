@@ -69,7 +69,7 @@
                                             <img src="<%=request.getContextPath()%>/Branding/img/defaultRes.jpeg"alt="no imagen">
                                         </c:if>
                                         <c:if test="${Imagen.get(0) != ''}">
-                                            <img src="data:image/png;charset=utf-8;base64,${Imagen.get(0)}" alt="imagen">
+                                            <img height="200" width="200" src="data:image/png;charset=utf-8;base64,${Imagen.get(0)}" alt="imagen">
                                         </c:if> 
                                             <option value="lista">
                                             <h3><a><c:out value="${listRestaurante.getNombre()}"/></a></h3>
